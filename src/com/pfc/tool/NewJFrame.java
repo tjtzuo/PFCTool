@@ -62,9 +62,9 @@ public class NewJFrame extends javax.swing.JFrame {
         try {
             SAXParserFactory saxParserFactory = SAXParserFactory.newInstance();
             SAXParser saxParser = saxParserFactory.newSAXParser();
-            saxParser.parse(new File("SBS.ini"), sbsHandler);
-            saxParser.parse(new File("DataFlash.ini"), dfHandler);
-            saxParser.parse(new File("Bits.ini"), bitsHandler);
+            saxParser.parse(new File("SBS.xml"), sbsHandler);
+            saxParser.parse(new File("DataFlash.xml"), dfHandler);
+            saxParser.parse(new File("Bits.xml"), bitsHandler);
         } catch (IOException | ParserConfigurationException | SAXException e) {
             System.out.println(e);
         }
@@ -153,10 +153,6 @@ public class NewJFrame extends javax.swing.JFrame {
         jButtonImport = new javax.swing.JButton();
         jProgressBar1 = new javax.swing.JProgressBar();
         jPanelCommand = new javax.swing.JPanel();
-        jToolBar1 = new javax.swing.JToolBar();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -195,17 +191,21 @@ public class NewJFrame extends javax.swing.JFrame {
             .addGroup(jPanelSBSLayout.createSequentialGroup()
                 .addGroup(jPanelSBSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelSBSLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPaneSBS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonRefresh))
-                    .addComponent(jScrollPaneBits, javax.swing.GroupLayout.PREFERRED_SIZE, 628, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(35, 35, 35)
+                        .addGroup(jPanelSBSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanelSBSLayout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(jLabelSOC)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jProgressBarSOC, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanelSBSLayout.createSequentialGroup()
+                                .addComponent(jScrollPaneSBS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButtonRefresh))))
                     .addGroup(jPanelSBSLayout.createSequentialGroup()
-                        .addGap(39, 39, 39)
-                        .addComponent(jLabelSOC)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jProgressBarSOC, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(189, Short.MAX_VALUE))
+                        .addContainerGap()
+                        .addComponent(jScrollPaneBits, javax.swing.GroupLayout.PREFERRED_SIZE, 599, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(106, Short.MAX_VALUE))
         );
         jPanelSBSLayout.setVerticalGroup(
             jPanelSBSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -213,14 +213,14 @@ public class NewJFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanelSBSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButtonRefresh)
-                    .addComponent(jScrollPaneSBS, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(jScrollPaneSBS, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelSBSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jProgressBarSOC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelSOC))
-                .addGap(24, 24, 24)
-                .addComponent(jScrollPaneBits, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                .addComponent(jScrollPaneBits, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         jTabbedPaneMain.addTab("SBS", jPanelSBS);
@@ -285,7 +285,7 @@ public class NewJFrame extends javax.swing.JFrame {
                             .addComponent(jButtonExport)
                             .addGap(38, 38, 38)
                             .addComponent(jButtonImport))))
-                .addContainerGap(288, Short.MAX_VALUE))
+                .addContainerGap(186, Short.MAX_VALUE))
         );
         jPanelDataFlashLayout.setVerticalGroup(
             jPanelDataFlashLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -310,43 +310,28 @@ public class NewJFrame extends javax.swing.JFrame {
         jPanelCommand.setLayout(jPanelCommandLayout);
         jPanelCommandLayout.setHorizontalGroup(
             jPanelCommandLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 817, Short.MAX_VALUE)
+            .addGap(0, 715, Short.MAX_VALUE)
         );
         jPanelCommandLayout.setVerticalGroup(
             jPanelCommandLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 496, Short.MAX_VALUE)
+            .addGap(0, 548, Short.MAX_VALUE)
         );
 
         jTabbedPaneMain.addTab("Command", jPanelCommand);
 
         jScrollPaneMain.setViewportView(jTabbedPaneMain);
 
-        jToolBar1.setRollover(true);
-
-        jMenu1.setText("File");
-        jMenuBar1.add(jMenu1);
-
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
-
-        setJMenuBar(jMenuBar1);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jScrollPaneMain, javax.swing.GroupLayout.DEFAULT_SIZE, 824, Short.MAX_VALUE)
+                .addComponent(jScrollPaneMain, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPaneMain))
+            .addComponent(jScrollPaneMain, javax.swing.GroupLayout.DEFAULT_SIZE, 594, Short.MAX_VALUE)
         );
 
         pack();
@@ -367,7 +352,7 @@ public class NewJFrame extends javax.swing.JFrame {
                     byte[] pByte = new byte[1];
                     if (usbSmb.readByte(cmd - 1, pByte)) {
                     //if (usbSmb.readByte(cmd, pByte)) {
-                        int len = Math.min(pByte[0], sbs.getSize());
+                        int len = Math.min(Byte.toUnsignedInt(pByte[0]), sbs.getSize());
                         byte[] name = new byte[len];
                         if (usbSmb.readBytes(cmd, len, name)) {
                         //if (usbSmb.readBytes(cmd + 1, len, name)) {
@@ -378,7 +363,7 @@ public class NewJFrame extends javax.swing.JFrame {
                     int size = sbs.getSize();
                     byte[] pByte = new byte[size + 1];
                     if (usbSmb.readBytes(cmd, size + 1, pByte)) {
-                        str = new String(pByte, 1, Math.min(pByte[0], size));
+                        str = new String(pByte, 1, Math.min(Byte.toUnsignedInt(pByte[0]), size));
                     }
                 }
             }
@@ -785,9 +770,6 @@ public class NewJFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButtonRefresh;
     private javax.swing.JButton jButtonWriteAll;
     private javax.swing.JLabel jLabelSOC;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanelCommand;
     private javax.swing.JPanel jPanelDataFlash;
     private javax.swing.JPanel jPanelSBS;
@@ -800,6 +782,5 @@ public class NewJFrame extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPaneMain;
     private javax.swing.JTable jTableBits;
     private javax.swing.JTable jTableSBS;
-    private javax.swing.JToolBar jToolBar1;
     // End of variables declaration//GEN-END:variables
 }
