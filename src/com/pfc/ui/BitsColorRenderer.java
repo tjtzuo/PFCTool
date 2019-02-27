@@ -5,10 +5,8 @@
  */
 package com.pfc.ui;
 
-import com.pfc.xml.BitField;
 import java.awt.Color;
 import java.awt.Component;
-import java.util.List;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;

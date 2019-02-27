@@ -1,4 +1,4 @@
-package com.pfc.tool;
+package com.pfc.ui;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -8,14 +8,8 @@ package com.pfc.tool;
 
 import com.pfc.lib.DllEntry;
 import com.pfc.lib.UsbSmb;
-import com.pfc.ui.*;
-import com.pfc.xml.BitField;
-import com.pfc.xml.SBS;
-import com.pfc.xml.sax.SBSHandler;
-import com.pfc.xml.Cluster;
-import com.pfc.xml.DataFlash;
-import com.pfc.xml.sax.BitsHandler;
-import com.pfc.xml.sax.DataFlashHandler;
+import com.pfc.xml.*;
+import com.pfc.xml.sax.*;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -54,7 +48,10 @@ public class NewJFrame extends javax.swing.JFrame {
      * Creates new form NewJFrame
      */
     public NewJFrame() {
-        socCmd = bNewSBS ? 0x2C: 0x0d;
+        if (bNewSBS) {
+            usbSmb.setAddr((byte)0xAA);
+        }
+        socCmd = bNewSBS ? 0x2C: 0x0D;
         stradr = bNewSBS ? 0x7600 : 0xB000;
         SBSHandler sbsHandler = new SBSHandler();
         BitsHandler bitsHandler = new BitsHandler();
