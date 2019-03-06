@@ -10,6 +10,7 @@ import com.pfc.lib.DllEntry;
 import com.pfc.lib.UsbSmb;
 import com.pfc.xml.*;
 import com.pfc.xml.sax.*;
+import java.awt.event.ItemEvent;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -63,7 +64,7 @@ public class NewJFrame extends javax.swing.JFrame {
             saxParser.parse(new File("DataFlash.xml"), dfHandler);
             saxParser.parse(new File("Bits.xml"), bitsHandler);
         } catch (IOException | ParserConfigurationException | SAXException e) {
-            System.out.println(e);
+            System.err.println(e);
         }
 
         //Get SBS list
@@ -150,6 +151,23 @@ public class NewJFrame extends javax.swing.JFrame {
         jButtonImport = new javax.swing.JButton();
         jProgressBar1 = new javax.swing.JProgressBar();
         jPanelCommand = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jTextFieldCommand = new javax.swing.JTextField();
+        jTextFieldData = new javax.swing.JTextField();
+        jTextFieldData2 = new javax.swing.JTextField();
+        jButtonReadWord = new javax.swing.JButton();
+        jButtonWriteWord = new javax.swing.JButton();
+        jButtonWriteWord2 = new javax.swing.JButton();
+        jButtonReadBlock = new javax.swing.JButton();
+        jTextFieldBlock = new javax.swing.JTextField();
+        jButtonWriteBlock = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextPaneMessage = new javax.swing.JTextPane();
+        jCheckBoxPEC = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -186,38 +204,38 @@ public class NewJFrame extends javax.swing.JFrame {
         jPanelSBSLayout.setHorizontalGroup(
             jPanelSBSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelSBSLayout.createSequentialGroup()
+                .addGap(35, 35, 35)
                 .addGroup(jPanelSBSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPaneBits, javax.swing.GroupLayout.PREFERRED_SIZE, 524, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanelSBSLayout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addGroup(jPanelSBSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanelSBSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanelSBSLayout.createSequentialGroup()
-                                .addGap(10, 10, 10)
                                 .addComponent(jLabelSOC)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jProgressBarSOC, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanelSBSLayout.createSequentialGroup()
-                                .addComponent(jScrollPaneSBS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButtonRefresh))))
-                    .addGroup(jPanelSBSLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPaneBits, javax.swing.GroupLayout.PREFERRED_SIZE, 599, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(106, Short.MAX_VALUE))
+                                .addComponent(jProgressBarSOC, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPaneSBS, javax.swing.GroupLayout.PREFERRED_SIZE, 464, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonRefresh)))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
         jPanelSBSLayout.setVerticalGroup(
             jPanelSBSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelSBSLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelSBSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButtonRefresh)
-                    .addComponent(jScrollPaneSBS, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPaneSBS, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanelSBSLayout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(jButtonRefresh)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelSBSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jProgressBarSOC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelSOC))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
-                .addComponent(jScrollPaneBits, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGroup(jPanelSBSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelSOC)
+                    .addGroup(jPanelSBSLayout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addComponent(jProgressBarSOC, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPaneBits, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(6, 6, 6))
         );
 
         jTabbedPaneMain.addTab("SBS", jPanelSBS);
@@ -267,51 +285,201 @@ public class NewJFrame extends javax.swing.JFrame {
         jPanelDataFlashLayout.setHorizontalGroup(
             jPanelDataFlashLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelDataFlashLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(14, 14, 14)
+                .addGroup(jPanelDataFlashLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jTabbedPaneDataFlash, javax.swing.GroupLayout.PREFERRED_SIZE, 507, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 392, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanelDataFlashLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTabbedPaneDataFlash, javax.swing.GroupLayout.PREFERRED_SIZE, 519, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanelDataFlashLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jProgressBar1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanelDataFlashLayout.createSequentialGroup()
-                            .addComponent(jButtonReadAll)
-                            .addGap(32, 32, 32)
-                            .addComponent(jButtonWriteAll)
-                            .addGap(34, 34, 34)
-                            .addComponent(jButtonDefault)
-                            .addGap(36, 36, 36)
-                            .addComponent(jButtonExport)
-                            .addGap(38, 38, 38)
-                            .addComponent(jButtonImport))))
-                .addContainerGap(186, Short.MAX_VALUE))
+                    .addComponent(jButtonWriteAll)
+                    .addComponent(jButtonReadAll)
+                    .addComponent(jButtonDefault)
+                    .addComponent(jButtonExport)
+                    .addComponent(jButtonImport))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelDataFlashLayout.setVerticalGroup(
             jPanelDataFlashLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelDataFlashLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jTabbedPaneDataFlash, javax.swing.GroupLayout.PREFERRED_SIZE, 434, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(82, 82, 82)
+                .addComponent(jButtonReadAll)
+                .addGap(32, 32, 32)
+                .addComponent(jButtonWriteAll)
+                .addGap(32, 32, 32)
+                .addComponent(jButtonDefault)
+                .addGap(28, 28, 28)
+                .addComponent(jButtonExport)
+                .addGap(45, 45, 45)
+                .addComponent(jButtonImport)
+                .addContainerGap(265, Short.MAX_VALUE))
+            .addGroup(jPanelDataFlashLayout.createSequentialGroup()
+                .addGap(42, 42, 42)
+                .addComponent(jTabbedPaneDataFlash)
                 .addGap(18, 18, 18)
-                .addGroup(jPanelDataFlashLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonReadAll)
-                    .addComponent(jButtonWriteAll)
-                    .addComponent(jButtonDefault)
-                    .addComponent(jButtonExport)
-                    .addComponent(jButtonImport))
-                .addGap(18, 18, 18)
-                .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(47, 47, 47))
         );
 
         jTabbedPaneMain.addTab("DataFlash", jPanelDataFlash);
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("SBS Command"));
+
+        jLabel1.setText("Command : (hex)");
+
+        jLabel2.setText("Word Data : (hex)");
+
+        jLabel3.setText("Word 2 : (hex)");
+
+        jLabel4.setText("Hex :");
+
+        jTextFieldCommand.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
+        jTextFieldCommand.setText("0");
+
+        jTextFieldData.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
+        jTextFieldData.setText("0");
+
+        jTextFieldData2.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
+        jTextFieldData2.setText("0");
+        jTextFieldData2.setToolTipText("");
+
+        jButtonReadWord.setText("Read Word");
+        jButtonReadWord.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonReadWordActionPerformed(evt);
+            }
+        });
+
+        jButtonWriteWord.setText("Write Word");
+        jButtonWriteWord.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonWriteWordActionPerformed(evt);
+            }
+        });
+
+        jButtonWriteWord2.setText("Write 2 Word");
+        jButtonWriteWord2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonWriteWord2ActionPerformed(evt);
+            }
+        });
+
+        jButtonReadBlock.setText("Read Block");
+        jButtonReadBlock.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonReadBlockActionPerformed(evt);
+            }
+        });
+
+        jButtonWriteBlock.setText("Write Block");
+        jButtonWriteBlock.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonWriteBlockActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(184, 184, 184)
+                        .addComponent(jButtonReadWord)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonReadBlock)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextFieldBlock))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jTextFieldCommand, javax.swing.GroupLayout.DEFAULT_SIZE, 53, Short.MAX_VALUE))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel2)
+                                            .addComponent(jLabel3))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(jTextFieldData2, javax.swing.GroupLayout.DEFAULT_SIZE, 53, Short.MAX_VALUE)
+                                            .addComponent(jTextFieldData))))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jButtonWriteWord)
+                                    .addComponent(jButtonWriteWord2))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonWriteBlock)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldCommand, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonReadWord)
+                    .addComponent(jButtonReadBlock))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jTextFieldData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonWriteWord))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jTextFieldData2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonWriteWord2))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextFieldBlock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonWriteBlock)
+                    .addComponent(jLabel4))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jTextPaneMessage.setEditable(false);
+        jTextPaneMessage.setBackground(java.awt.SystemColor.controlHighlight);
+        jTextPaneMessage.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        jScrollPane1.setViewportView(jTextPaneMessage);
+
+        jCheckBoxPEC.setText("Use PEC");
+        jCheckBoxPEC.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jCheckBoxPECItemStateChanged(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelCommandLayout = new javax.swing.GroupLayout(jPanelCommand);
         jPanelCommand.setLayout(jPanelCommandLayout);
         jPanelCommandLayout.setHorizontalGroup(
             jPanelCommandLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 715, Short.MAX_VALUE)
+            .addGroup(jPanelCommandLayout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addGroup(jPanelCommandLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jCheckBoxPEC)
+                .addContainerGap(211, Short.MAX_VALUE))
         );
         jPanelCommandLayout.setVerticalGroup(
             jPanelCommandLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 548, Short.MAX_VALUE)
+            .addGroup(jPanelCommandLayout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanelCommandLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCheckBoxPEC))
+                .addContainerGap(360, Short.MAX_VALUE))
         );
 
         jTabbedPaneMain.addTab("Command", jPanelCommand);
@@ -328,7 +496,7 @@ public class NewJFrame extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPaneMain, javax.swing.GroupLayout.DEFAULT_SIZE, 594, Short.MAX_VALUE)
+            .addComponent(jScrollPaneMain, javax.swing.GroupLayout.DEFAULT_SIZE, 659, Short.MAX_VALUE)
         );
 
         pack();
@@ -371,7 +539,7 @@ public class NewJFrame extends javax.swing.JFrame {
                     switch (sbs.getFormat()) {
                         case "Hex":
 //                            str = "0x" + Integer.toHexString(pwValue[0]);
-                            str = String.format("0x%1$04X", pwValue[0]);
+                            str = String.format("0x%04X", pwValue[0]);
                             break;
                         case "Date":
                             str = String.format("%1$d-%2$d-%3$d",
@@ -578,7 +746,7 @@ public class NewJFrame extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(this, "SUCCESS");
                 }
             } catch (IOException ex) {
-                System.out.println(ex);
+                System.err.println(ex);
             }
         }
     }//GEN-LAST:event_jButtonExportActionPerformed
@@ -692,7 +860,7 @@ public class NewJFrame extends javax.swing.JFrame {
                             value = Integer.parseInt(str);
                         }
                     } catch (NumberFormatException e) {
-                        System.out.println(e);
+                        System.err.println(e);
                     }
                     switch (type) {
                         case "S1":
@@ -718,6 +886,88 @@ public class NewJFrame extends javax.swing.JFrame {
             }
         }
     }
+
+    private void jButtonReadWordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonReadWordActionPerformed
+        int command = Integer.parseInt(jTextFieldCommand.getText(), 16);
+        short pwValue[] = new short[1];
+        if (usbSmb.readWord(command, pwValue)) {
+            jTextPaneMessage.setText(Integer.toHexString(Short.toUnsignedInt(pwValue[0])).toUpperCase());
+        } else {
+            jTextPaneMessage.setText("Read Fail");
+        }
+    }//GEN-LAST:event_jButtonReadWordActionPerformed
+
+    private void jButtonWriteWordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonWriteWordActionPerformed
+        int command = Integer.parseInt(jTextFieldCommand.getText(), 16);
+        int value = Integer.parseInt(jTextFieldData.getText(), 16);
+        if (usbSmb.writeWord(command, value)) {
+            jTextPaneMessage.setText("Write Success");
+        } else {
+            jTextPaneMessage.setText("Write Fail");
+        }
+    }//GEN-LAST:event_jButtonWriteWordActionPerformed
+
+    private void jButtonWriteWord2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonWriteWord2ActionPerformed
+        int command = Integer.parseInt(jTextFieldCommand.getText(), 16);
+        int value = Integer.parseInt(jTextFieldData.getText(), 16),
+            value2 = Integer.parseInt(jTextFieldData2.getText(), 16);
+        if (usbSmb.writeWord(command, value)) {
+            if (usbSmb.writeWord(command, value2)) {
+                jTextPaneMessage.setText("Write Success");
+                return;
+            }
+        }
+        jTextPaneMessage.setText("Write Fail");
+    }//GEN-LAST:event_jButtonWriteWord2ActionPerformed
+
+    private void jButtonReadBlockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonReadBlockActionPerformed
+        int command = Integer.parseInt(jTextFieldCommand.getText(), 16);
+        byte pValue[] = new byte[1];
+        if (usbSmb.readByte(command, pValue)) {
+            int count = Math.min(34, pValue[0]);
+            if (count > 0) {
+                byte[] buf = new byte[count];
+                if (usbSmb.readBlock(command, count, buf)) {
+                    StringBuilder result = new StringBuilder();
+                    for (byte b : buf) {
+                        result.append(String.format("%02X ", b));
+                    }
+                    jTextPaneMessage.setText(result.toString());
+                    return;
+                }
+            }
+        }
+        jTextPaneMessage.setText("Read Fail");
+    }//GEN-LAST:event_jButtonReadBlockActionPerformed
+
+    private void jCheckBoxPECItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCheckBoxPECItemStateChanged
+        if (evt.getStateChange() == ItemEvent.SELECTED) {
+            usbSmb.setPEC(true);
+        } else {
+            usbSmb.setPEC(false);
+        }
+    }//GEN-LAST:event_jCheckBoxPECItemStateChanged
+
+    private void jButtonWriteBlockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonWriteBlockActionPerformed
+        int command = Integer.parseInt(jTextFieldCommand.getText(), 16);
+        String hexData = jTextFieldBlock.getText();
+        int count = hexData.length() / 3;
+        if ((hexData.length() % 3) != 0)
+            count++;
+        byte[] buf = new byte[count];
+        for (int i = 0; i < count; i++) {
+            try {
+                buf[i] = (byte) Integer.parseInt(hexData.substring(i * 3, i * 3 + 2), 16);
+            } catch (NumberFormatException e) {
+                System.err.println(e);
+            }
+        }
+        if (usbSmb.writeBlock(command, count, buf)) {
+            jTextPaneMessage.setText("Write Success");
+        } else {
+            jTextPaneMessage.setText("Write Fail");
+        }
+    }//GEN-LAST:event_jButtonWriteBlockActionPerformed
     
     /**
      * @param args the command line arguments
@@ -764,14 +1014,26 @@ public class NewJFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButtonExport;
     private javax.swing.JButton jButtonImport;
     private javax.swing.JButton jButtonReadAll;
+    private javax.swing.JButton jButtonReadBlock;
+    private javax.swing.JButton jButtonReadWord;
     private javax.swing.JButton jButtonRefresh;
     private javax.swing.JButton jButtonWriteAll;
+    private javax.swing.JButton jButtonWriteBlock;
+    private javax.swing.JButton jButtonWriteWord;
+    private javax.swing.JButton jButtonWriteWord2;
+    private javax.swing.JCheckBox jCheckBoxPEC;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabelSOC;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanelCommand;
     private javax.swing.JPanel jPanelDataFlash;
     private javax.swing.JPanel jPanelSBS;
     private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JProgressBar jProgressBarSOC;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPaneBits;
     private javax.swing.JScrollPane jScrollPaneMain;
     private javax.swing.JScrollPane jScrollPaneSBS;
@@ -779,5 +1041,10 @@ public class NewJFrame extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPaneMain;
     private javax.swing.JTable jTableBits;
     private javax.swing.JTable jTableSBS;
+    private javax.swing.JTextField jTextFieldBlock;
+    private javax.swing.JTextField jTextFieldCommand;
+    private javax.swing.JTextField jTextFieldData;
+    private javax.swing.JTextField jTextFieldData2;
+    private javax.swing.JTextPane jTextPaneMessage;
     // End of variables declaration//GEN-END:variables
 }
