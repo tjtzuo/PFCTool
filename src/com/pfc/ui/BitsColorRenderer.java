@@ -27,16 +27,20 @@ public class BitsColorRenderer implements TableCellRenderer {
         if (column < 3) {
             c.setBackground(Color.WHITE);
         } else {
-            int val = Integer.decode((String) table.getValueAt(row, 2));
-            if ((val & (1<<(10-column))) != 0) {
-//                c.setBackground(Color.RED);
-                    c.setBackground(Color.PINK);
-            } else {
-                if (((String)value).equals("RSVD"))
-                    c.setBackground(Color.LIGHT_GRAY);
-                else
-//                    c.setBackground(new Color(0, 192, 0));
-                    c.setBackground(new Color(175, 255, 175));
+            try {
+                int val = Integer.decode((String) table.getValueAt(row, 2));
+                if ((val & (1<<(10-column))) != 0) {
+    //                c.setBackground(Color.RED);
+                        c.setBackground(Color.PINK);
+                } else {
+                    if (((String)value).equals("RSVD"))
+                        c.setBackground(Color.LIGHT_GRAY);
+                    else
+    //                    c.setBackground(new Color(0, 192, 0));
+                        c.setBackground(new Color(175, 255, 175));
+                }
+            } catch (NumberFormatException | NullPointerException e) {
+                System.err.println(e);                
             }
         }
 
