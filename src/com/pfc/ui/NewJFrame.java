@@ -165,9 +165,17 @@ public class NewJFrame extends javax.swing.JFrame {
         jButtonReadBlock = new javax.swing.JButton();
         jTextFieldBlock = new javax.swing.JTextField();
         jButtonWriteBlock = new javax.swing.JButton();
+        jCheckBoxPEC = new javax.swing.JCheckBox();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextPaneMessage = new javax.swing.JTextPane();
-        jCheckBoxPEC = new javax.swing.JCheckBox();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jTextFieldMReg = new javax.swing.JTextField();
+        jTextFieldByte = new javax.swing.JTextField();
+        jButtonReadMReg = new javax.swing.JButton();
+        jButtonWriteMReg = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -377,6 +385,13 @@ public class NewJFrame extends javax.swing.JFrame {
             }
         });
 
+        jCheckBoxPEC.setText("Use PEC");
+        jCheckBoxPEC.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jCheckBoxPECItemStateChanged(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -387,8 +402,7 @@ public class NewJFrame extends javax.swing.JFrame {
                         .addGap(184, 184, 184)
                         .addComponent(jButtonReadWord)
                         .addGap(18, 18, 18)
-                        .addComponent(jButtonReadBlock)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(jButtonReadBlock))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -415,7 +429,9 @@ public class NewJFrame extends javax.swing.JFrame {
                                     .addComponent(jButtonWriteWord)
                                     .addComponent(jButtonWriteWord2))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonWriteBlock)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButtonWriteBlock, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jCheckBoxPEC, javax.swing.GroupLayout.Alignment.TRAILING))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -427,12 +443,17 @@ public class NewJFrame extends javax.swing.JFrame {
                     .addComponent(jTextFieldCommand, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonReadWord)
                     .addComponent(jButtonReadBlock))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jTextFieldData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonWriteWord))
-                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(jTextFieldData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButtonWriteWord)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(jCheckBoxPEC)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jTextFieldData2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -450,12 +471,79 @@ public class NewJFrame extends javax.swing.JFrame {
         jTextPaneMessage.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         jScrollPane1.setViewportView(jTextPaneMessage);
 
-        jCheckBoxPEC.setText("Use PEC");
-        jCheckBoxPEC.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jCheckBoxPECItemStateChanged(evt);
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Mode Register"));
+
+        jLabel5.setText("Address : 10");
+
+        jLabel6.setText("Byte Data :");
+
+        jTextFieldMReg.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
+        jTextFieldMReg.setText("00");
+
+        jTextFieldByte.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
+        jTextFieldByte.setText("00");
+
+        jButtonReadMReg.setText("Read");
+        jButtonReadMReg.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonReadMRegActionPerformed(evt);
             }
         });
+
+        jButtonWriteMReg.setText("Write");
+        jButtonWriteMReg.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonWriteMRegActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 63, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jTextFieldByte)
+                    .addComponent(jTextFieldMReg, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButtonReadMReg)
+                    .addComponent(jButtonWriteMReg))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldMReg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonReadMReg))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldByte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonWriteMReg))
+                .addContainerGap(19, Short.MAX_VALUE))
+        );
+
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Boot Loader"));
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 398, Short.MAX_VALUE)
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 170, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout jPanelCommandLayout = new javax.swing.GroupLayout(jPanelCommand);
         jPanelCommand.setLayout(jPanelCommandLayout);
@@ -464,22 +552,29 @@ public class NewJFrame extends javax.swing.JFrame {
             .addGroup(jPanelCommandLayout.createSequentialGroup()
                 .addGap(33, 33, 33)
                 .addGroup(jPanelCommandLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jCheckBoxPEC)
-                .addContainerGap(211, Short.MAX_VALUE))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanelCommandLayout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(66, Short.MAX_VALUE))
         );
         jPanelCommandLayout.setVerticalGroup(
             jPanelCommandLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelCommandLayout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanelCommandLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jCheckBoxPEC))
-                .addContainerGap(360, Short.MAX_VALUE))
+                    .addGroup(jPanelCommandLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelCommandLayout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(148, Short.MAX_VALUE))
         );
 
         jTabbedPaneMain.addTab("Command", jPanelCommand);
@@ -538,8 +633,20 @@ public class NewJFrame extends javax.swing.JFrame {
                 if (usbSmb.readWord(cmd, pwValue)) {
                     switch (sbs.getFormat()) {
                         case "Hex":
+                            int size = sbs.getSize();
+                            if (size > Short.BYTES) {
+                                byte[] buf = new byte[size];
+                                if (usbSmb.readBlock(cmd, size, buf)) {
+                                    StringBuilder result = new StringBuilder();
+                                    for (byte b : buf) {
+                                        result.append(String.format("%02X ", b));
+                                    }
+                                    str = result.toString();
+                                }
+                            } else {
 //                            str = "0x" + Integer.toHexString(pwValue[0]);
-                            str = String.format("0x%04X", pwValue[0]);
+                                str = String.format("0x%04X", pwValue[0]);
+                            }
                             break;
                         case "Date":
                             str = String.format("%1$d-%2$d-%3$d",
@@ -954,20 +1061,47 @@ public class NewJFrame extends javax.swing.JFrame {
         int count = hexData.length() / 3;
         if ((hexData.length() % 3) != 0)
             count++;
-        byte[] buf = new byte[count];
-        for (int i = 0; i < count; i++) {
-            try {
-                buf[i] = (byte) Integer.parseInt(hexData.substring(i * 3, i * 3 + 2), 16);
-            } catch (NumberFormatException e) {
-                System.err.println(e);
+        if (count > 0) {
+            byte[] buf = new byte[count];
+            for (int i = 0; i < count; i++) {
+                try {
+                    buf[i] = (byte) Integer.parseInt(hexData.substring(i * 3, i * 3 + 2), 16);
+                } catch (NumberFormatException e) {
+                    System.err.println(e);
+                }
+            }
+            if (usbSmb.writeBlock(command, count, buf)) {
+                jTextPaneMessage.setText("Write Success");
+            } else {
+                jTextPaneMessage.setText("Write Fail");
             }
         }
-        if (usbSmb.writeBlock(command, count, buf)) {
+    }//GEN-LAST:event_jButtonWriteBlockActionPerformed
+
+    private void jButtonReadMRegActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonReadMRegActionPerformed
+        byte mreg = (byte)Integer.parseInt(jTextFieldMReg.getText(), 16);
+        byte[] bytes = { 0x10, mreg };
+        if (usbSmb.writeBytes(0xF5, bytes.length, bytes)) {
+            if (usbSmb.readBytes(0xF5, bytes.length, bytes)) {
+//                jTextFieldByte.setText(Integer.toHexString(Byte.toUnsignedInt(bytes[0])).toUpperCase());
+                jTextFieldByte.setText(String.format("%02X", bytes[0]));
+                jTextPaneMessage.setText("Read Success");
+                return;
+            }
+        }
+        jTextPaneMessage.setText("Read Fail");
+    }//GEN-LAST:event_jButtonReadMRegActionPerformed
+
+    private void jButtonWriteMRegActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonWriteMRegActionPerformed
+        byte mreg = (byte)Integer.parseInt(jTextFieldMReg.getText(), 16),
+             value = (byte)Integer.parseInt(jTextFieldByte.getText(), 16);
+        byte[] bytes = { mreg, value };
+        if (usbSmb.writeBytes(0xF4, bytes.length, bytes)) {
             jTextPaneMessage.setText("Write Success");
         } else {
             jTextPaneMessage.setText("Write Fail");
         }
-    }//GEN-LAST:event_jButtonWriteBlockActionPerformed
+    }//GEN-LAST:event_jButtonWriteMRegActionPerformed
     
     /**
      * @param args the command line arguments
@@ -1015,10 +1149,12 @@ public class NewJFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButtonImport;
     private javax.swing.JButton jButtonReadAll;
     private javax.swing.JButton jButtonReadBlock;
+    private javax.swing.JButton jButtonReadMReg;
     private javax.swing.JButton jButtonReadWord;
     private javax.swing.JButton jButtonRefresh;
     private javax.swing.JButton jButtonWriteAll;
     private javax.swing.JButton jButtonWriteBlock;
+    private javax.swing.JButton jButtonWriteMReg;
     private javax.swing.JButton jButtonWriteWord;
     private javax.swing.JButton jButtonWriteWord2;
     private javax.swing.JCheckBox jCheckBoxPEC;
@@ -1026,8 +1162,12 @@ public class NewJFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabelSOC;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanelCommand;
     private javax.swing.JPanel jPanelDataFlash;
     private javax.swing.JPanel jPanelSBS;
@@ -1042,9 +1182,11 @@ public class NewJFrame extends javax.swing.JFrame {
     private javax.swing.JTable jTableBits;
     private javax.swing.JTable jTableSBS;
     private javax.swing.JTextField jTextFieldBlock;
+    private javax.swing.JTextField jTextFieldByte;
     private javax.swing.JTextField jTextFieldCommand;
     private javax.swing.JTextField jTextFieldData;
     private javax.swing.JTextField jTextFieldData2;
+    private javax.swing.JTextField jTextFieldMReg;
     private javax.swing.JTextPane jTextPaneMessage;
     // End of variables declaration//GEN-END:variables
 }
