@@ -1371,15 +1371,76 @@ public class NewJFrame extends javax.swing.JFrame {
     private void jButtonProgramActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonProgramActionPerformed
         String path = jTextField1.getText();
         File file = new File(path);
-        if (file.exists() && file.length() < 65536) {
-            int len = (int)file.length();
-            byte[] writeBuf = new byte[len];
-            if (DllEntry.dec64(path, writeBuf) > 0) {
-                String str = new String(writeBuf, 0, 3);
-                System.out.println(str);
-            
+        if (!file.exists()) return;
+        int len = (int)file.length();
+        if (len > 65536) return;
+        byte[] writeBuf = new byte[len];
+        if (DllEntry.dec64(path, writeBuf) != len) return;
+        String str = new String(writeBuf, 0, 3);
+        System.out.println(str);
+        if (!str.equals("PFC")) return;
+        new Thread() {
+            @Override
+            public void run() {
+                try {
+                    jProgressBarBL.setMaximum(len);
+                    jProgressBarBL.setValue(0);
+                    byte[] buf = new byte[34];
+                    ByteBuffer bb = ByteBuffer.wrap(buf);
+                    jLabelStat.setText("Erase");
+                    bb.order(ByteOrder.LITTLE_ENDIAN);
+                    for (short block = 0; block < len; block += 2048)
+                    {
+                        bb.putShort(0, (short)-1);
+                        if (!usbSmb.writeBytes(0xFA, Short.BYTES, buf)) return;
+                        bb.putShort(0, block);
+                        if (!usbSmb.writeBytes(0xFC, Short.BYTES, buf)) return;
+                        sleep(100);
+                        if (!usbSmb.readBytes(0xFA, Short.BYTES, buf)) return;
+                        if (bb.getShort(0) != block) {
+                            jLabelStat.setText("Fail");
+                            return;
+                        }
+                        jProgressBarBL.setValue(block);
+                    }
+                    jLabelStat.setText("Writing");
+                    bb.order(ByteOrder.BIG_ENDIAN);
+                    final int WRITEBYTE = 32, ROMSIZE = 0xE00;
+                    for (int nWriteBytes, nPointer = WRITEBYTE; nPointer < len; nPointer += nWriteBytes) {
+                        nWriteBytes = Math.min(len - nPointer, WRITEBYTE);
+                        System.arraycopy(writeBuf, nPointer, buf, 2, nWriteBytes);
+                        Arrays.fill(buf, nWriteBytes + 2, WRITEBYTE + 2, (byte)-1);
+                        bb.putShort(0, (short) (ROMSIZE + nPointer));
+                        if (!usbSmb.writeBytes(0xF4, WRITEBYTE + 2, buf)) return;
+                        sleep(15);
+                        jProgressBarBL.setValue(nPointer);
+                    }
+                    System.arraycopy(writeBuf, 0, buf, 2, WRITEBYTE);
+                    bb.putShort(0, (short) ROMSIZE);
+                    if (!usbSmb.writeBytes(0xF4, WRITEBYTE + 2, buf)) return;
+                    sleep(10);
+                    jLabelStat.setText("Verify");
+                    bb.order(ByteOrder.LITTLE_ENDIAN);
+                    bb.putShort(0, (short) ROMSIZE);
+                    if (!usbSmb.writeBytes(0xFA, Short.BYTES, buf)) return;
+                    if (!usbSmb.readBytes(0xFA, Short.BYTES, buf)) return;
+                    if (bb.getShort(0) != ROMSIZE) return;
+                    for (int nReadBytes, i = 0; i < len; i += nReadBytes) {
+                        jProgressBarBL.setValue(i);
+                        nReadBytes = Math.min(len - i, WRITEBYTE);
+                        if (!usbSmb.readBytes(0xF5, WRITEBYTE, buf)) return;
+                        if (!Arrays.equals(Arrays.copyOfRange(writeBuf, i, i + nReadBytes),
+                                           Arrays.copyOfRange(buf, 0, nReadBytes))) {
+                            jLabelStat.setText("Verify Fail");
+                            return;
+                        }
+                    }
+                    jProgressBarBL.setValue(len);
+                    jLabelStat.setText("Success");
+                } catch (InterruptedException ex) {
+                }
             }
-        }
+        }.start();
     }//GEN-LAST:event_jButtonProgramActionPerformed
 
     private void jButtonReadFlashActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonReadFlashActionPerformed
@@ -1394,8 +1455,8 @@ public class NewJFrame extends javax.swing.JFrame {
             boolean success = false;
             for (int k = 0; k < 3; k++) {
                 bb.putShort(0, start);
-                if (usbSmb.writeBytes(0xFA, 2, buf)) {
-                    if (usbSmb.readBytes(0xFA, 2, buf)) {
+                if (usbSmb.writeBytes(0xFA, Short.BYTES, buf)) {
+                    if (usbSmb.readBytes(0xFA, Short.BYTES, buf)) {
                         if (bb.getShort(0) == start) {
                             success = true;
                             break;
@@ -1420,33 +1481,73 @@ public class NewJFrame extends javax.swing.JFrame {
     private void jButtonWriteFlashActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonWriteFlashActionPerformed
         String path = jTextField3.getText();
         File file = new File(path);
-        if (file.exists() && file.length() <= 2048) {
-            int len = (int)file.length();
-            if (DllEntry.dec128(path, dfBuf) == len) {
-                System.out.println(String.format("%02X%02X", dfBuf[0], dfBuf[1]));
-                jLabelStat.setText("Writing");
-                jProgressBarBL.setMaximum(len);
-                jProgressBarBL.setValue(0);
-		int nReadBytes = 32;
-                byte[] buf = new byte[32];
-                ByteBuffer bb = ByteBuffer.wrap(buf);
-                bb.order(ByteOrder.LITTLE_ENDIAN);
-                short start = 0x7600, offset = 0x400;
-                bb.putShort(0, (short) (start + offset));
-                if (usbSmb.writeBytes(0xFA, Short.BYTES, buf)) {
-                    if (usbSmb.readBytes(0xFA, Short.BYTES, buf)) {
-                        if (bb.getShort(0) == start + offset) {
-                            for (int i = 0; i < 96; i += nReadBytes) {
-                                if (usbSmb.readBytes(0xF5, nReadBytes, buf))
-                                    System.arraycopy(buf, 0, dfBuf, offset + i, nReadBytes);
-                            }
-                            
+        if (!file.exists()) return;
+        int len = (int)file.length();
+        if (len > 2048) return;
+        if (DllEntry.dec128(path, dfBuf) != len) return;
+        System.out.println(String.format("%02X%02X", dfBuf[0], dfBuf[1]));
+        new Thread() {
+            @Override
+            public void run() {
+                try {
+                    jProgressBarBL.setMaximum(len);
+                    jProgressBarBL.setValue(0);
+                    int nReadBytes = 32;
+                    byte[] buf = new byte[34];
+                    ByteBuffer bb = ByteBuffer.wrap(buf);
+                    bb.order(ByteOrder.LITTLE_ENDIAN);
+                    short start = 0x7600, offset = 0x400;
+                    bb.putShort(0, (short) (start + offset));
+                    if (!usbSmb.writeBytes(0xFA, Short.BYTES, buf)) return;
+                    if (!usbSmb.readBytes(0xFA, Short.BYTES, buf)) return;
+                    if (bb.getShort(0) != start + offset) return;
+                    for (int i = 0; i < 96; i += nReadBytes) {
+                        if (!usbSmb.readBytes(0xF5, nReadBytes, buf)) return;
+                        System.arraycopy(buf, 0, dfBuf, offset + i, nReadBytes);
+                    }
+                    jLabelStat.setText("Erase");
+                    short block = 0x6800;
+                    bb.putShort(0, (short)0);
+                    if (!usbSmb.writeBytes(0xFA, Short.BYTES, buf)) return;
+                    bb.putShort(0, block);
+                    if (!usbSmb.writeBytes(0xFC, Short.BYTES, buf)) return;
+                    sleep(100);
+                    if (!usbSmb.readBytes(0xFA, Short.BYTES, buf)) return;
+                    if (bb.getShort(0) != block) {
+                        jLabelStat.setText("Fail");
+                        return;
+                    }
+                    jLabelStat.setText("Writing");
+                    bb.order(ByteOrder.BIG_ENDIAN);
+                    for (int nWriteBytes, nPointer = 0; nPointer < len; nPointer += nWriteBytes) {
+                        jProgressBarBL.setValue(nPointer);
+                        nWriteBytes = Math.min(len - nPointer, 32);
+                        System.arraycopy(dfBuf, nPointer, buf, 2, nWriteBytes);
+                        bb.putShort(0, (short) (start + nPointer));
+                        if (!usbSmb.writeBytes(0xF4, nWriteBytes + 2, buf)) return;
+                        sleep(15);
+                    }
+                    jLabelStat.setText("Verify");
+                    bb.order(ByteOrder.LITTLE_ENDIAN);
+                    bb.putShort(0, start);
+                    if (!usbSmb.writeBytes(0xFA, Short.BYTES, buf)) return;
+                    if (!usbSmb.readBytes(0xFA, Short.BYTES, buf)) return;
+                    if (bb.getShort(0) != start) return;
+                    for (int i = 0; i < len; i += nReadBytes) {
+                        nReadBytes = Math.min(len - i, 32);
+                        if (!usbSmb.readBytes(0xF5, nReadBytes, buf)) return;
+                        if (!Arrays.equals(Arrays.copyOfRange(dfBuf, i, i + nReadBytes),
+                                           Arrays.copyOfRange(buf, 0, nReadBytes))) {
+                            jLabelStat.setText("Verify Fail");
+                            return;
                         }
                     }
+                    jProgressBarBL.setValue(len);
+                    jLabelStat.setText("Success");
+                } catch (InterruptedException ex) {
                 }
-                
             }
-        }
+        }.start();
     }//GEN-LAST:event_jButtonWriteFlashActionPerformed
     
     /**
