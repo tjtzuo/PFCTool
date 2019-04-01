@@ -10,6 +10,7 @@ import com.pfc.lib.DllEntry;
 import com.pfc.lib.UsbSmb;
 import com.pfc.xml.*;
 import com.pfc.xml.sax.*;
+import java.awt.Cursor;
 import java.awt.event.ItemEvent;
 import java.io.*;
 import java.nio.ByteBuffer;
@@ -807,6 +808,7 @@ public class NewJFrame extends javax.swing.JFrame {
         new Thread() {
             @Override
             public void run() {
+                setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                 final int retry_end = 3;
                 int retry_count;
                 if (bNewSBS) {
@@ -864,6 +866,7 @@ public class NewJFrame extends javax.swing.JFrame {
                             "Read DataFlash",
                             JOptionPane.ERROR_MESSAGE);
                 }
+                setCursor(Cursor.getDefaultCursor());
             }
         }.start();
     }//GEN-LAST:event_jButtonReadAllActionPerformed
@@ -891,6 +894,7 @@ public class NewJFrame extends javax.swing.JFrame {
                     }
                 }
 
+                setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                 int index;
                 for (index = 0; index < 8; index++) {
                     for (retry_count = 0; retry_count < retry_end; retry_count++) {
@@ -942,6 +946,7 @@ public class NewJFrame extends javax.swing.JFrame {
                             "Write DataFlash",
                             JOptionPane.ERROR_MESSAGE);
                 }
+                setCursor(Cursor.getDefaultCursor());
             }
         }.start();
         
@@ -1444,6 +1449,7 @@ public class NewJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonProgramActionPerformed
 
     private void jButtonReadFlashActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonReadFlashActionPerformed
+        setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         int len = 32768;
         String path = jTextField2.getText();
         try {
@@ -1475,6 +1481,8 @@ public class NewJFrame extends javax.swing.JFrame {
         
         } catch (IOException ex) {
             System.err.println(ex);
+        } finally {
+            setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_jButtonReadFlashActionPerformed
 
