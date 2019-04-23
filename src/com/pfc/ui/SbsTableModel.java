@@ -15,20 +15,21 @@ import javax.swing.table.AbstractTableModel;
  */
 public class SbsTableModel extends AbstractTableModel {
     boolean DEBUG = false;
-    String[] columnNames = {"Command", "Name", "Value", "Unit"};
+    String[] columnNames = {"Command", "Name", "Value", "Unit", "Log", "Scan"};
     Object[][] data = {};
 
     public SbsTableModel(List<SBS> sbsList) {
-//        columnNames = new String[]{"Command", "Name", "Value", "Unit"};
         if (sbsList != null) {
             int count = sbsList.size();
-            data = new String[count][columnNames.length];
+            data = new Object[count][columnNames.length];
             for (int i = 0; i < count; i++) {
                 SBS sbs = sbsList.get(i);
                 data[i][0] = Integer.toHexString(sbs.getCmd());
                 data[i][1] = sbs.getName();
                 data[i][2] = "";
                 data[i][3] = sbs.getUnit();
+                data[i][4] = true;
+                data[i][5] = true;
             }
         }
     }
@@ -72,7 +73,7 @@ public class SbsTableModel extends AbstractTableModel {
     public boolean isCellEditable(int row, int col) {
         //Note that the data/cell address is constant,
         //no matter where the cell appears onscreen.
-        return (row == 0 && col == 2);
+        return (row == 0 && col == 2) || col == 4 || col == 5;
     }
 
     /*
