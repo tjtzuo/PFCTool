@@ -28,6 +28,10 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
+import org.jfree.chart.ui.UIUtils;
+import org.jfree.data.xy.XYDataset;
+import org.jfree.data.xy.XYSeries;
+import org.jfree.data.xy.XYSeriesCollection;
 import org.xml.sax.SAXException;
 
 /**
@@ -249,6 +253,10 @@ public class NewJFrame extends javax.swing.JFrame {
         jPanelChem = new javax.swing.JPanel();
         jScrollPaneChem = new javax.swing.JScrollPane();
         jTableChem = new javax.swing.JTable();
+        jButtonPlot = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
+        jTextFieldChemID = new javax.swing.JTextField();
+        jButtonChange = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -815,7 +823,32 @@ public class NewJFrame extends javax.swing.JFrame {
         jTabbedPaneMain.addTab("Command", jPanelCommand);
 
         jTableChem.setModel(chemTableModel);
+        jTableChem.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jTableChem.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableChemMouseClicked(evt);
+            }
+        });
         jScrollPaneChem.setViewportView(jTableChem);
+
+        jButtonPlot.setText("View OCV Curve");
+        jButtonPlot.setEnabled(false);
+        jButtonPlot.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonPlotActionPerformed(evt);
+            }
+        });
+
+        jLabel9.setText("Chemisry ID:");
+
+        jTextFieldChemID.setEditable(false);
+
+        jButtonChange.setText("Change Chemistry");
+        jButtonChange.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonChangeActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelChemLayout = new javax.swing.GroupLayout(jPanelChem);
         jPanelChem.setLayout(jPanelChemLayout);
@@ -823,15 +856,33 @@ public class NewJFrame extends javax.swing.JFrame {
             jPanelChemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelChemLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPaneChem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(253, Short.MAX_VALUE))
+                .addComponent(jScrollPaneChem, javax.swing.GroupLayout.PREFERRED_SIZE, 543, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addGroup(jPanelChemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButtonPlot)
+                    .addGroup(jPanelChemLayout.createSequentialGroup()
+                        .addComponent(jLabel9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextFieldChemID, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButtonChange))
+                .addContainerGap())
         );
         jPanelChemLayout.setVerticalGroup(
             jPanelChemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelChemLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPaneChem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(201, Short.MAX_VALUE))
+                .addComponent(jScrollPaneChem, javax.swing.GroupLayout.DEFAULT_SIZE, 593, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(jPanelChemLayout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addGroup(jPanelChemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(jTextFieldChemID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24)
+                .addComponent(jButtonPlot)
+                .addGap(18, 18, 18)
+                .addComponent(jButtonChange)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPaneMain.addTab("Chemistry", jPanelChem);
@@ -1753,12 +1804,113 @@ public class NewJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonStopLogActionPerformed
 
     private void jTabbedPaneMainStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPaneMainStateChanged
-        if (jTabbedPaneMain.getSelectedIndex() > 0) {
+//        JTabbedPane jTabbedPane = (JTabbedPane)evt.getSource();
+        if (jCheckBox1.isSelected()) {
+            jTabbedPaneMain.setSelectedIndex(jTabbedPaneMain.indexOfTab("Command"));
+        } else {
             if (scanning) {
                 jCheckBoxScan.doClick();
             }
+            int index = jTabbedPaneMain.getSelectedIndex();
+//            if (index == 3) {
+            if (index == jTabbedPaneMain.indexOfTab("Chemistry")) {
+                if (usbSmb.writeWord(0, 8)) {
+                    short pwValue[] = new short[1];
+                    if (usbSmb.readWord(0, pwValue)) {
+                        String chemID = String.format("%04X", pwValue[0]);
+                        jTextFieldChemID.setText(chemID);
+                        for (int i = 0; i < jTableChem.getRowCount(); i++) {
+                            if (chemID.equals(jTableChem.getValueAt(i, 0))) {
+                                jTableChem.setRowSelectionInterval(i, i);
+                                jButtonPlot.setEnabled(true);
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
         }
     }//GEN-LAST:event_jTabbedPaneMainStateChanged
+
+    /**
+     * Creates a dataset, consisting of two series of monthly data.
+     *
+     * @return The dataset.
+     */
+    private static XYDataset createChemDataset(String chemID) {
+        XYSeriesCollection dataset = new XYSeriesCollection();
+        
+        String path = "../Chemistry/" + chemID + ".chm";
+        File file = new File(path);
+        if (file.exists()) {
+            if (file.length() == 256) {
+                byte[] buf = new byte[256];
+                if (DllEntry.dec128(path, buf) == 256) {
+//                    System.out.println(String.format("%02X%02X", buf[208], buf[209]));
+                    final int[] dod = { 100, 95, 90, 85, 80, 75, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25, 20,
+                                        19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0 };
+
+                    XYSeries s1 = new XYSeries(chemID);
+                    
+                    // set OCV table value
+                    for (int i = 36; i >= 0; i--)
+                    {
+                        int ocv = (Byte.toUnsignedInt(buf[i * 2]) << 8) | Byte.toUnsignedInt(buf[i * 2 + 1]);
+                        s1.add(dod[i], ocv);
+                    }
+
+                    dataset.addSeries(s1);
+                }
+            }
+        }
+
+        return dataset;
+    }
+
+    private void jButtonPlotActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPlotActionPerformed
+        int sel = jTableChem.getSelectedRow();
+        if (sel < 0) {
+//            JOptionPane.showMessageDialog(this, "Please Select a Chemistry ID");
+        }
+        else {
+            String id = (String)jTableChem.getValueAt(sel, 0);
+            ChemistryChart chart = new ChemistryChart("Chemistry ID: " + id);
+            chart.createChartPanel(createChemDataset(id));
+            chart.pack();
+            UIUtils.centerFrameOnScreen(chart);
+            chart.setVisible(true);
+        }
+    }//GEN-LAST:event_jButtonPlotActionPerformed
+
+    private void jTableChemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableChemMouseClicked
+        jButtonPlot.setEnabled(true);
+    }//GEN-LAST:event_jTableChemMouseClicked
+
+    private void jButtonChangeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonChangeActionPerformed
+        String chemID = (String)jTableChem.getValueAt(jTableChem.getSelectedRow(), 0);
+        String path = "../Chemistry/" + chemID + ".chm";
+        File file = new File(path);
+        if (file.exists()) {
+            if (file.length() == 256) {
+                byte[] buf = new byte[256];
+                if (DllEntry.dec128(path, buf) == 256) {
+                    System.arraycopy(buf, 0, dfBuf, 0x600, 256);
+                    setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                    int index = 6;
+                    if (bNewSBS) {
+                        usbSmb.writeByte(0x61, 0);
+                        usbSmb.writeByteVerify(0x3e, index);
+                    } else {
+                        usbSmb.writeWordVerify(0x77, index);
+                    }
+                    if (usbSmb.writeDataFlashSector(bNewSBS, buf)) {
+                        jTextFieldChemID.setText(chemID);
+                    }
+                    setCursor(Cursor.getDefaultCursor());
+                }
+            }
+        }
+    }//GEN-LAST:event_jButtonChangeActionPerformed
     
     /**
      * @param args the command line arguments
@@ -1804,9 +1956,11 @@ public class NewJFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButtonChange;
     private javax.swing.JButton jButtonDefault;
     private javax.swing.JButton jButtonExport;
     private javax.swing.JButton jButtonImport;
+    private javax.swing.JButton jButtonPlot;
     private javax.swing.JButton jButtonProgram;
     private javax.swing.JButton jButtonReadAll;
     private javax.swing.JButton jButtonReadBlock;
@@ -1833,6 +1987,7 @@ public class NewJFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabelSOC;
     private javax.swing.JLabel jLabelStat;
     private javax.swing.JPanel jPanel1;
@@ -1860,6 +2015,7 @@ public class NewJFrame extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextFieldBlock;
     private javax.swing.JTextField jTextFieldByte;
+    private javax.swing.JTextField jTextFieldChemID;
     private javax.swing.JTextField jTextFieldCommand;
     private javax.swing.JTextField jTextFieldData;
     private javax.swing.JTextField jTextFieldData2;
