@@ -878,11 +878,11 @@ public class NewJFrame extends javax.swing.JFrame {
                 .addGroup(jPanelChemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(jTextFieldChemID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(24, 24, 24)
-                .addComponent(jButtonPlot)
                 .addGap(18, 18, 18)
+                .addComponent(jButtonPlot)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButtonChange)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(27, 27, 27))
         );
 
         jTabbedPaneMain.addTab("Chemistry", jPanelChem);
@@ -1437,8 +1437,8 @@ public class NewJFrame extends javax.swing.JFrame {
                             byte[] buf = new byte[34];
 //                            buf[0] = 0x1c;  buf[1] = 0x0f;
                             buf[0] = 0x1e;  buf[1] = 0x00;
-                            usbSmb.setAddr((byte)0x16);
                             if (!usbSmb.writeBytes(0xF4, 2, buf)) return;
+                            usbSmb.setAddr((byte)0x16);
                             sleep(100);
                             if (!usbSmb.writeByte(0xFF, 0x09))  return;
                             sleep(100);
@@ -1524,7 +1524,9 @@ public class NewJFrame extends javax.swing.JFrame {
                         jProgressBarBL.setValue(10);
                         sleep(250);
                         jProgressBarBL.setValue(0);
-                        
+                        if (bNewSBS) {
+                            usbSmb.setAddr((byte)0xAA);
+                        }
                     } catch (InterruptedException ex) {
                     }
                 }
