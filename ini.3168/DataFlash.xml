@@ -3383,17 +3383,6 @@
 </element>
 
 <element>
-<name>EncryptKey</name>
-<stradr>0xB460</stradr>
-<type>U4</type>
-<default>0xFFFFFFFF</default>
-<unit>hex</unit>
-<description>-</description>
-<max_value>-</max_value>
-<min_value>-</min_value>
-</element>
-
-<element>
 <name>Lifetime Data</name>
 <stradr>0x0</stradr>
 <type>-</type>

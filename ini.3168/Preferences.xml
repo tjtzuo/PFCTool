@@ -5,7 +5,7 @@
     <map/>
     <node name="com/pfc/tool">
       <map>
-        <entry key="devName" value="2168"/>
+        <entry key="devName" value="3168"/>
         <entry key="newSbs" value="false"/>
         <entry key="socCmd" value="0x0d"/>
       </map>

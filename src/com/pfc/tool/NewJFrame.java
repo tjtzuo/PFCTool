@@ -57,6 +57,7 @@ public class NewJFrame extends javax.swing.JFrame {
     private boolean scanning, logging = false;
     private PrintWriter pwLog;
     ChemTableModel chemTableModel;
+    String devName;
 
     /**
      * Creates new form NewJFrame
@@ -69,6 +70,7 @@ public class NewJFrame extends javax.swing.JFrame {
             System.err.println(ex);
         }
         Preferences prefs = Preferences.userNodeForPackage(NewJFrame.class);
+        devName = prefs.get("devName", "");
         bNewSBS = prefs.getBoolean("newSbs", false);
         if (bNewSBS) {
             usbSmb.setAddr((byte)0xAA);
@@ -258,7 +260,15 @@ public class NewJFrame extends javax.swing.JFrame {
         jTextFieldChemID = new javax.swing.JTextField();
         jButtonChange = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jTabbedPaneMain.setToolTipText("");
         jTabbedPaneMain.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
@@ -354,7 +364,9 @@ public class NewJFrame extends javax.swing.JFrame {
                                     .addComponent(jButtonStartLog)
                                     .addComponent(jButtonStopLog))
                                 .addGap(0, 85, Short.MAX_VALUE))))
-                    .addComponent(jScrollPaneBits, javax.swing.GroupLayout.PREFERRED_SIZE, 524, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelSBSLayout.createSequentialGroup()
+                        .addComponent(jScrollPaneBits, javax.swing.GroupLayout.PREFERRED_SIZE, 605, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanelSBSLayout.setVerticalGroup(
@@ -775,17 +787,17 @@ public class NewJFrame extends javax.swing.JFrame {
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1)
                     .addComponent(jButtonProgram))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2)
-                    .addComponent(jButtonReadFlash))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton3)
                     .addComponent(jButtonWriteFlash))
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2)
+                    .addComponent(jButtonReadFlash))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jPanelCommandLayout = new javax.swing.GroupLayout(jPanelCommand);
@@ -878,11 +890,11 @@ public class NewJFrame extends javax.swing.JFrame {
                 .addGroup(jPanelChemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(jTextFieldChemID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(45, 45, 45)
                 .addComponent(jButtonPlot)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButtonChange)
-                .addGap(27, 27, 27))
+                .addGap(59, 59, 59))
         );
 
         jTabbedPaneMain.addTab("Chemistry", jPanelChem);
@@ -910,6 +922,7 @@ public class NewJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonRefreshActionPerformed
 
     private void refreshSBS() {
+        usbSmb.writeWord(0, 0);
         for (int i = 0; i < jTableSBS.getRowCount(); i++) {
             if (!(boolean)jTableSBS.getValueAt(i, 5))
                 continue;
@@ -1425,7 +1438,8 @@ public class NewJFrame extends javax.swing.JFrame {
         if (evt.getStateChange() == ItemEvent.SELECTED) {
             jProgressBarBL.setValue(0);
             try {
-                File file = new File("../ini/BootLoader_A1141.bin");
+//                File file = new File("../ini/BootLoader_A1141.bin");
+                File file = new File("../ini/BootLoader_A"+devName+".bin");
                 int len = (int) file.length();
                 byte blBuf[] = new byte[len];
                 new FileInputStream(file).read(blBuf);
@@ -1435,8 +1449,11 @@ public class NewJFrame extends javax.swing.JFrame {
                     public void run() {
                         try {
                             byte[] buf = new byte[34];
-//                            buf[0] = 0x1c;  buf[1] = 0x0f;
-                            buf[0] = 0x1e;  buf[1] = 0x00;
+                            if (devName.equals("2168")) {
+                                buf[0] = 0x1c;  buf[1] = 0x0f;
+                            } else {
+                                buf[0] = 0x1e;  buf[1] = 0x00;
+                            }
                             if (!usbSmb.writeBytes(0xF4, 2, buf)) return;
                             usbSmb.setAddr((byte)0x16);
                             sleep(100);
@@ -1499,8 +1516,14 @@ public class NewJFrame extends javax.swing.JFrame {
                     try {
                         jProgressBarBL.setValue(100);
                         byte[] buf = new byte[2];
-                        buf[0] = 0x00; buf[1] = 0x00;
-                        if (!usbSmb.writeBytes(0x1E, 2, buf)) return;
+                        buf[1] = 0x00;
+                        if (devName.equals("2168")) {
+                            buf[0] = 0x0F;
+                            if (!usbSmb.writeBytes(0x1C, 2, buf)) return;
+                        } else {
+                            buf[0] = 0x00;
+                            if (!usbSmb.writeBytes(0x1E, 2, buf)) return;
+                        }
                         sleep(50);
                         jProgressBarBL.setValue(90);
                         sleep(50);
@@ -1553,6 +1576,10 @@ public class NewJFrame extends javax.swing.JFrame {
             if (!file.getName().contains(".")) {
                 path += ".bin";
             }
+            if (file.exists()) {
+                if (JOptionPane.showConfirmDialog(this, "OverWrite Exist File !?") != JOptionPane.YES_OPTION)
+                    return;
+            }
             jTextField2.setText(path);
         }
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -1577,7 +1604,8 @@ public class NewJFrame extends javax.swing.JFrame {
         if (DllEntry.dec64(path, writeBuf) != len) return;
         String str = new String(writeBuf, 0, 3);
         System.out.println(str);
-        if (!str.equals("PFC")) return;
+        if (devName.equals("1141"))
+            if (!str.equals("PFC")) return;
         new Thread() {
             @Override
             public void run() {
@@ -1588,42 +1616,71 @@ public class NewJFrame extends javax.swing.JFrame {
                     ByteBuffer bb = ByteBuffer.wrap(buf);
                     jLabelStat.setText("Erase");
                     bb.order(ByteOrder.LITTLE_ENDIAN);
-                    for (short block = 0; block < len; block += 2048)
-                    {
-                        bb.putShort(0, (short)-1);
+                    if (devName.equals("2168")) {
+                        bb.putShort(0, (short)1);
                         if (!usbSmb.writeBytes(0xFA, Short.BYTES, buf)) return;
-                        bb.putShort(0, block);
-                        if (!usbSmb.writeBytes(0xFC, Short.BYTES, buf)) return;
                         sleep(100);
+                        bb.putShort(0, (short)0x204);
+                        if (!usbSmb.writeBytes(0xFC, Short.BYTES, buf)) return;
+                        sleep(1500);
                         if (!usbSmb.readBytes(0xFA, Short.BYTES, buf)) return;
-                        if (bb.getShort(0) != block) {
+                        if (bb.getShort(0) != 0) {
                             jLabelStat.setText("Fail");
                             return;
                         }
-                        jProgressBarBL.setValue(block);
+                    } else {
+                        for (short block = 0; block < len; block += 2048)
+                        {
+                            bb.putShort(0, (short)-1);
+                            if (!usbSmb.writeBytes(0xFA, Short.BYTES, buf)) return;
+                            bb.putShort(0, block);
+                            if (!usbSmb.writeBytes(0xFC, Short.BYTES, buf)) return;
+                            sleep(100);
+                            if (!usbSmb.readBytes(0xFA, Short.BYTES, buf)) return;
+                            if (bb.getShort(0) != block) {
+                                jLabelStat.setText("Fail");
+                                return;
+                            }
+                            jProgressBarBL.setValue(block);
+                        }
                     }
                     jLabelStat.setText("Writing");
                     bb.order(ByteOrder.BIG_ENDIAN);
                     final int WRITEBYTE = 32, ROMSIZE = 0xE00;
-                    for (int nWriteBytes, nPointer = WRITEBYTE; nPointer < len; nPointer += nWriteBytes) {
-                        nWriteBytes = Math.min(len - nPointer, WRITEBYTE);
-                        System.arraycopy(writeBuf, nPointer, buf, 2, nWriteBytes);
-                        Arrays.fill(buf, nWriteBytes + 2, WRITEBYTE + 2, (byte)-1);
-                        bb.putShort(0, (short) (ROMSIZE + nPointer));
+                    if (devName.equals("2168")) {
+                        for (int nWriteBytes, nPointer = 0; nPointer < len; nPointer += nWriteBytes) {
+                            nWriteBytes = Math.min(len - nPointer, WRITEBYTE);
+                            System.arraycopy(writeBuf, nPointer, buf, 2, nWriteBytes);
+                            Arrays.fill(buf, nWriteBytes + 2, WRITEBYTE + 2, (byte)-1);
+                            bb.putShort(0, (short)nPointer);
+                            if (!usbSmb.writeBytes(0xF4, WRITEBYTE + 2, buf)) return;
+                            sleep(10);
+                            jProgressBarBL.setValue(nPointer);
+                        }
+                        bb.order(ByteOrder.LITTLE_ENDIAN);
+                        bb.putShort(0, (short) 0);
+                        if (!usbSmb.writeBytes(0xF4, Short.BYTES, buf)) return;
+                    } else {
+                        for (int nWriteBytes, nPointer = WRITEBYTE; nPointer < len; nPointer += nWriteBytes) {
+                            nWriteBytes = Math.min(len - nPointer, WRITEBYTE);
+                            System.arraycopy(writeBuf, nPointer, buf, 2, nWriteBytes);
+                            Arrays.fill(buf, nWriteBytes + 2, WRITEBYTE + 2, (byte)-1);
+                            bb.putShort(0, (short) (ROMSIZE + nPointer));
+                            if (!usbSmb.writeBytes(0xF4, WRITEBYTE + 2, buf)) return;
+                            sleep(10);
+                            jProgressBarBL.setValue(nPointer);
+                        }
+                        System.arraycopy(writeBuf, 0, buf, 2, WRITEBYTE);
+                        bb.putShort(0, (short) ROMSIZE);
                         if (!usbSmb.writeBytes(0xF4, WRITEBYTE + 2, buf)) return;
-                        sleep(15);
-                        jProgressBarBL.setValue(nPointer);
+                        sleep(10);
+                        bb.order(ByteOrder.LITTLE_ENDIAN);
+                        bb.putShort(0, (short) ROMSIZE);
+                        if (!usbSmb.writeBytes(0xFA, Short.BYTES, buf)) return;
+                        if (!usbSmb.readBytes(0xFA, Short.BYTES, buf)) return;
+                        if (bb.getShort(0) != ROMSIZE) return;
                     }
-                    System.arraycopy(writeBuf, 0, buf, 2, WRITEBYTE);
-                    bb.putShort(0, (short) ROMSIZE);
-                    if (!usbSmb.writeBytes(0xF4, WRITEBYTE + 2, buf)) return;
-                    sleep(10);
                     jLabelStat.setText("Verify");
-                    bb.order(ByteOrder.LITTLE_ENDIAN);
-                    bb.putShort(0, (short) ROMSIZE);
-                    if (!usbSmb.writeBytes(0xFA, Short.BYTES, buf)) return;
-                    if (!usbSmb.readBytes(0xFA, Short.BYTES, buf)) return;
-                    if (bb.getShort(0) != ROMSIZE) return;
                     for (int nReadBytes, i = 0; i < len; i += nReadBytes) {
                         jProgressBarBL.setValue(i);
                         nReadBytes = Math.min(len - i, WRITEBYTE);
@@ -1644,40 +1701,60 @@ public class NewJFrame extends javax.swing.JFrame {
 
     private void jButtonReadFlashActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonReadFlashActionPerformed
         setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        int len = 32768;
-        String path = jTextField2.getText();
-        try {
-            FileOutputStream f = new FileOutputStream(path);
-            byte[] buf = new byte[32];
-            ByteBuffer bb = ByteBuffer.wrap(buf);
-            bb.order(ByteOrder.LITTLE_ENDIAN);
-            short start = 0;
-            boolean success = false;
-            for (int k = 0; k < 3; k++) {
-                bb.putShort(0, start);
-                if (usbSmb.writeBytes(0xFA, Short.BYTES, buf)) {
-                    if (usbSmb.readBytes(0xFA, Short.BYTES, buf)) {
-                        if (bb.getShort(0) == start) {
-                            success = true;
-                            break;
+        new Thread() {
+            @Override
+            public void run() {
+                int len = 0x8000;
+                short start = 0;
+                if (devName.equals("1141")) {
+                    len = 0x7000;
+                    start = 0xE00;
+                } else if (devName.equals("2168")) {
+                    len = 0xB000;
+                }
+                String path = jTextField2.getText();
+                try {
+                    FileOutputStream f = new FileOutputStream(path);
+                    byte[] buf = new byte[32];
+                    ByteBuffer bb = ByteBuffer.wrap(buf);
+                    bb.order(ByteOrder.LITTLE_ENDIAN);
+                    boolean success = false;
+                    for (int k = 0; k < 3; k++) {
+                        bb.putShort(0, start);
+                        if (usbSmb.writeBytes(0xFA, Short.BYTES, buf)) {
+                            if (usbSmb.readBytes(0xFA, Short.BYTES, buf)) {
+                                if (bb.getShort(0) == start) {
+                                    success = true;
+                                    break;
+                                }
+                            }
                         }
                     }
+                    if (success) {
+                        jProgressBarBL.setMaximum(len);
+                        for (int nReadBytes = 32, i = 0; i < len; i += nReadBytes)
+                        {
+                            jProgressBarBL.setValue(i);
+                            if (i == 0xA400) {
+                                assert(devName.equals("2168"));
+                                bb.putShort(0, (short) 0xB000);
+                                if (!usbSmb.writeBytes(0xFA, Short.BYTES, buf))
+                                    break;
+                            }
+                            if (!usbSmb.readBytes(0xF5, nReadBytes, buf))
+                                break;
+                            f.write(buf);
+                            System.out.println(String.format("%04X : %02X", i, buf[0]));
+                        }
+                        jProgressBarBL.setValue(len);
+                    }
+                } catch (IOException ex) {
+                    System.err.println(ex);
+                } finally {
+                    setCursor(Cursor.getDefaultCursor());
                 }
             }
-            if (success)
-            for (int nReadBytes = 32, i = 0; i < len; i += nReadBytes)
-            {
-                if (!usbSmb.readBytes(0xF5, nReadBytes, buf))
-                    break;
-                f.write(buf);
-                System.out.println(String.format("%04X : %02X", i, buf[0]));
-            }
-        
-        } catch (IOException ex) {
-            System.err.println(ex);
-        } finally {
-            setCursor(Cursor.getDefaultCursor());
-        }
+        }.start();
     }//GEN-LAST:event_jButtonReadFlashActionPerformed
 
     private void jButtonWriteFlashActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonWriteFlashActionPerformed
@@ -1692,34 +1769,54 @@ public class NewJFrame extends javax.swing.JFrame {
             @Override
             public void run() {
                 try {
-                    jProgressBarBL.setMaximum(len);
                     jProgressBarBL.setValue(0);
                     int nReadBytes = 32;
                     byte[] buf = new byte[34];
                     ByteBuffer bb = ByteBuffer.wrap(buf);
                     bb.order(ByteOrder.LITTLE_ENDIAN);
-                    short start = 0x7600, offset = 0x400;
+                    short start = 0, offset = 0x400;
+                    if (devName.equals("1141")) {
+                        start = 0x7600;
+                    } else if (devName.equals("2168")) {
+                        start = (short) 0xB000;
+                    }
                     bb.putShort(0, (short) (start + offset));
                     if (!usbSmb.writeBytes(0xFA, Short.BYTES, buf)) return;
                     if (!usbSmb.readBytes(0xFA, Short.BYTES, buf)) return;
                     if (bb.getShort(0) != start + offset) return;
-                    for (int i = 0; i < 96; i += nReadBytes) {
+//                    for (int i = 0; i < 96; i += nReadBytes) {
+                    for (int i = 0; i < 256; i += nReadBytes) {
                         if (!usbSmb.readBytes(0xF5, nReadBytes, buf)) return;
                         System.arraycopy(buf, 0, dfBuf, offset + i, nReadBytes);
                     }
                     jLabelStat.setText("Erase");
-                    short block = 0x6800;
-                    bb.putShort(0, (short)0);
-                    if (!usbSmb.writeBytes(0xFA, Short.BYTES, buf)) return;
-                    bb.putShort(0, block);
-                    if (!usbSmb.writeBytes(0xFC, Short.BYTES, buf)) return;
-                    sleep(100);
-                    if (!usbSmb.readBytes(0xFA, Short.BYTES, buf)) return;
-                    if (bb.getShort(0) != block) {
-                        jLabelStat.setText("Fail");
-                        return;
+                    jProgressBarBL.setMaximum(100);
+                    if (devName.equals("1141")) {
+                        short block = 0x6800;
+                        bb.putShort(0, (short)0);
+                        if (!usbSmb.writeBytes(0xFA, Short.BYTES, buf)) return;
+                        bb.putShort(0, block);
+                        if (!usbSmb.writeBytes(0xFC, Short.BYTES, buf)) return;
+                        sleep(100);
+                        if (!usbSmb.readBytes(0xFA, Short.BYTES, buf)) return;
+                        if (bb.getShort(0) != block) {
+                            jLabelStat.setText("Fail");
+                            return;
+                        }
+                    } else if (devName.equals("2168")) {
+                        for (int i = 0; i < 3; i++)	// sector 0~2
+                        {
+                            bb.putShort(0, (short) (0x308 + 0x40 * i));
+                            if (!usbSmb.writeBytes(0xFD, Short.BYTES, buf)) return;
+                            for (int j = 0; j < 11; j++)
+                            {
+                                jProgressBarBL.setValue(i*33+j*3+3);
+                                sleep(110);
+                            }
+                        }
                     }
                     jLabelStat.setText("Writing");
+                    jProgressBarBL.setMaximum(len);
                     bb.order(ByteOrder.BIG_ENDIAN);
                     for (int nWriteBytes, nPointer = 0; nPointer < len; nPointer += nWriteBytes) {
                         jProgressBarBL.setValue(nPointer);
@@ -1913,6 +2010,22 @@ public class NewJFrame extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_jButtonChangeActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        if (jCheckBox1.isSelected()) {
+            JOptionPane.showMessageDialog(this,
+                "Please Exit (UnCheck) Boot Loader !!",
+                "Window Closing",
+                JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            dispose();
+        }
+    }//GEN-LAST:event_formWindowClosing
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        System.out.println("Window Closed");
+        System.exit(0);
+    }//GEN-LAST:event_formWindowClosed
     
     /**
      * @param args the command line arguments
