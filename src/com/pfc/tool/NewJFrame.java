@@ -844,7 +844,6 @@ public class NewJFrame extends javax.swing.JFrame {
         jScrollPaneChem.setViewportView(jTableChem);
 
         jButtonPlot.setText("View OCV Curve");
-        jButtonPlot.setEnabled(false);
         jButtonPlot.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonPlotActionPerformed(evt);
@@ -856,6 +855,7 @@ public class NewJFrame extends javax.swing.JFrame {
         jTextFieldChemID.setEditable(false);
 
         jButtonChange.setText("Change Chemistry");
+        jButtonChange.setEnabled(false);
         jButtonChange.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonChangeActionPerformed(evt);
@@ -890,11 +890,11 @@ public class NewJFrame extends javax.swing.JFrame {
                 .addGroup(jPanelChemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(jTextFieldChemID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(45, 45, 45)
-                .addComponent(jButtonPlot)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(12, 12, 12)
                 .addComponent(jButtonChange)
-                .addGap(59, 59, 59))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButtonPlot)
+                .addGap(59, 492, Short.MAX_VALUE))
         );
 
         jTabbedPaneMain.addTab("Chemistry", jPanelChem);
@@ -1027,6 +1027,11 @@ public class NewJFrame extends javax.swing.JFrame {
                         }
                     }
                     if (retry_count == retry_end) {
+                        JOptionPane.showMessageDialog(null,
+                                "Please UnSeal !!",
+                                "Read DataFlash",
+                                JOptionPane.INFORMATION_MESSAGE);
+                        setCursor(null);
                         return;
                     }
                 }
@@ -1965,6 +1970,15 @@ public class NewJFrame extends javax.swing.JFrame {
 
         return dataset;
     }
+    
+    private void plotChemChart(int sel) {
+        String id = (String)jTableChem.getValueAt(sel, 0);
+        ChemistryChart chart = new ChemistryChart("Chemistry ID: " + id);
+        chart.createChartPanel(createChemDataset(id));
+        chart.pack();
+        UIUtils.centerFrameOnScreen(chart);
+        chart.setVisible(true);
+    }
 
     private void jButtonPlotActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPlotActionPerformed
         int sel = jTableChem.getSelectedRow();
@@ -1972,17 +1986,16 @@ public class NewJFrame extends javax.swing.JFrame {
 //            JOptionPane.showMessageDialog(this, "Please Select a Chemistry ID");
         }
         else {
-            String id = (String)jTableChem.getValueAt(sel, 0);
-            ChemistryChart chart = new ChemistryChart("Chemistry ID: " + id);
-            chart.createChartPanel(createChemDataset(id));
-            chart.pack();
-            UIUtils.centerFrameOnScreen(chart);
-            chart.setVisible(true);
+            plotChemChart(sel);
         }
     }//GEN-LAST:event_jButtonPlotActionPerformed
 
     private void jTableChemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableChemMouseClicked
-        jButtonPlot.setEnabled(true);
+        jButtonChange.setEnabled(true);
+        if (evt.getClickCount() == 2) {
+            System.out.println("double clicked");
+            plotChemChart(jTableChem.getSelectedRow());
+        }
     }//GEN-LAST:event_jTableChemMouseClicked
 
     private void jButtonChangeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonChangeActionPerformed
