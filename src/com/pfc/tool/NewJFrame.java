@@ -1502,8 +1502,10 @@ public class NewJFrame extends javax.swing.JFrame {
                             sleep(100);
                             if (!usbSmb.readBytes(0xFA, 2, buf))
                                 return;
-                            if ((buf[1]<<8|buf[0]) != 0x888)
+                            if ((Byte.toUnsignedInt(buf[1])<<8|Byte.toUnsignedInt(buf[0])) != 0x888)
                                 return;
+                            buf[0] = 1; buf[1] = 0;
+                            usbSmb.writeBytes(0x99, 2, buf);
                             jProgressBarBL.setValue(len * 2);
                         } catch (InterruptedException ex) {
                         }
@@ -1606,10 +1608,20 @@ public class NewJFrame extends javax.swing.JFrame {
         int len = (int)file.length();
         if (len > 65536) return;
         byte[] writeBuf = new byte[len];
-        if (DllEntry.dec64(path, writeBuf) != len) return;
+        if (path.toLowerCase().endsWith(".cod")) {
+            if (DllEntry.dec64(path, writeBuf) != len)
+                return;
+        } else {
+            try {
+                FileInputStream f = new FileInputStream(path);
+                f.read(writeBuf);
+            } catch (IOException ex) {
+                System.err.println(ex);
+            }
+        }
         String str = new String(writeBuf, 0, 3);
         System.out.println(str);
-        if (devName.equals("1141"))
+        if (devName.equals("1141") || devName.equals("3168"))
             if (!str.equals("PFC")) return;
         new Thread() {
             @Override
@@ -1630,6 +1642,18 @@ public class NewJFrame extends javax.swing.JFrame {
                         sleep(1500);
                         if (!usbSmb.readBytes(0xFA, Short.BYTES, buf)) return;
                         if (bb.getShort(0) != 0) {
+                            jLabelStat.setText("Fail");
+                            return;
+                        }
+                    } else if (devName.equals("3168")) {
+                        bb.putShort(0, (short)1);
+                        if (!usbSmb.writeBytes(0xFA, Short.BYTES, buf)) return;
+                        sleep(100);
+                        bb.putShort(0, (short)0x102);
+                        if (!usbSmb.writeBytes(0xFB, Short.BYTES, buf)) return;
+                        sleep(1000);
+                        if (!usbSmb.readBytes(0xFA, Short.BYTES, buf)) return;
+                        if (bb.getShort(0) != -1) {
                             jLabelStat.setText("Fail");
                             return;
                         }
@@ -1672,7 +1696,8 @@ public class NewJFrame extends javax.swing.JFrame {
                             Arrays.fill(buf, nWriteBytes + 2, WRITEBYTE + 2, (byte)-1);
                             bb.putShort(0, (short) (ROMSIZE + nPointer));
                             if (!usbSmb.writeBytes(0xF4, WRITEBYTE + 2, buf)) return;
-                            sleep(10);
+//                            sleep(10);
+                            sleep(15);
                             jProgressBarBL.setValue(nPointer);
                         }
                         System.arraycopy(writeBuf, 0, buf, 2, WRITEBYTE);
@@ -1716,6 +1741,9 @@ public class NewJFrame extends javax.swing.JFrame {
                     start = 0xE00;
                 } else if (devName.equals("2168")) {
                     len = 0xB000;
+                } else if (devName.equals("3168")) {
+                    len = 0xF000;
+                    start = 0xE00;
                 }
                 String path = jTextField2.getText();
                 try {
@@ -1740,12 +1768,12 @@ public class NewJFrame extends javax.swing.JFrame {
                         for (int nReadBytes = 32, i = 0; i < len; i += nReadBytes)
                         {
                             jProgressBarBL.setValue(i);
-                            if (i == 0xA400) {
-                                assert(devName.equals("2168"));
-                                bb.putShort(0, (short) 0xB000);
-                                if (!usbSmb.writeBytes(0xFA, Short.BYTES, buf))
-                                    break;
-                            }
+                            if (devName.equals("2168"))
+                                if (i == 0xA400) {
+                                    bb.putShort(0, (short) 0xB000);
+                                    if (!usbSmb.writeBytes(0xFA, Short.BYTES, buf))
+                                        break;
+                                }
                             if (!usbSmb.readBytes(0xF5, nReadBytes, buf))
                                 break;
                             f.write(buf);
