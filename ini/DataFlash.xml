@@ -1,3 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE DataFlash SYSTEM "DataFlash.dtd">
 <DataFlash>
 <cluster>
 <cluster_name>1st Level Safety</cluster_name>
@@ -1031,18 +1033,7 @@
 <element>
 <name>Mode Registors</name>
 <stradr>0x7A40</stradr>
-<type>U4</type>
-<default>-1</default>
-<unit>hex</unit>
-<description>-</description>
-<max_value>-</max_value>
-<min_value>-</min_value>
-</element>
-
-<element>
-<name>Mode Registors</name>
-<stradr>0x7A44</stradr>
-<type>U4</type>
+<type>U8</type>
 <default>-1</default>
 <unit>hex</unit>
 <description>-</description>

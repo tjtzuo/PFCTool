@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<!ELEMENT DataFlash (cluster)*>
+
+<!ELEMENT cluster (cluster_name|element)*>
+
+<!ELEMENT cluster_name (#PCDATA)>
+
+<!ELEMENT element (name|stradr|type|default|unit|description|max_value|min_value)*>
+
+<!ELEMENT name (#PCDATA)>
+
+<!ELEMENT stradr (#PCDATA)>
+
+<!ELEMENT type (#PCDATA)>
+
+<!ELEMENT default (#PCDATA)>
+
+<!ELEMENT unit (#PCDATA)>
+
+<!ELEMENT description (#PCDATA)>
+
+<!ELEMENT max_value (#PCDATA)>
+
+<!ELEMENT min_value (#PCDATA)>
