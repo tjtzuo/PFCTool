@@ -24,6 +24,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.Timer;
+import javax.swing.event.ChangeEvent;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
@@ -206,6 +207,7 @@ public class NewJFrame extends javax.swing.JFrame {
         jButtonStartLog = new javax.swing.JButton();
         jButtonStopLog = new javax.swing.JButton();
         jTextFieldLogFile = new javax.swing.JTextField();
+        jCheckBoxHDQ1 = new javax.swing.JCheckBox();
         jPanelDataFlash = new javax.swing.JPanel();
         jTabbedPaneDataFlash = new javax.swing.JTabbedPane();
         jButtonReadAll = new javax.swing.JButton();
@@ -214,6 +216,7 @@ public class NewJFrame extends javax.swing.JFrame {
         jButtonExport = new javax.swing.JButton();
         jButtonImport = new javax.swing.JButton();
         jProgressBarDF = new javax.swing.JProgressBar();
+        jCheckBoxHDQ2 = new javax.swing.JCheckBox();
         jPanelCommand = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -232,6 +235,8 @@ public class NewJFrame extends javax.swing.JFrame {
         jCheckBoxPEC = new javax.swing.JCheckBox();
         jTextFieldCount = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
+        jButtonReadByte = new javax.swing.JButton();
+        jButtonWriteByte = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextPaneMessage = new javax.swing.JTextPane();
         jPanel2 = new javax.swing.JPanel();
@@ -254,6 +259,7 @@ public class NewJFrame extends javax.swing.JFrame {
         jButtonProgram = new javax.swing.JButton();
         jButtonReadFlash = new javax.swing.JButton();
         jButtonWriteFlash = new javax.swing.JButton();
+        jCheckBoxHDQ3 = new javax.swing.JCheckBox();
         jPanelChem = new javax.swing.JPanel();
         jScrollPaneChem = new javax.swing.JScrollPane();
         jTableChem = new javax.swing.JTable();
@@ -263,6 +269,7 @@ public class NewJFrame extends javax.swing.JFrame {
         jButtonChange = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setTitle("PFC Tool v0.1");
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
                 formWindowClosed(evt);
@@ -336,6 +343,13 @@ public class NewJFrame extends javax.swing.JFrame {
         jTextFieldLogFile.setEditable(false);
         jTextFieldLogFile.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
 
+        jCheckBoxHDQ1.setText("HDQ");
+        jCheckBoxHDQ1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jCheckBoxHDQItemStateChanged(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelSBSLayout = new javax.swing.GroupLayout(jPanelSBS);
         jPanelSBS.setLayout(jPanelSBSLayout);
         jPanelSBSLayout.setHorizontalGroup(
@@ -344,18 +358,12 @@ public class NewJFrame extends javax.swing.JFrame {
                 .addGap(35, 35, 35)
                 .addGroup(jPanelSBSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelSBSLayout.createSequentialGroup()
-                        .addGroup(jPanelSBSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanelSBSLayout.createSequentialGroup()
-                                .addComponent(jLabelSOC)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jProgressBarSOC, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPaneSBS, javax.swing.GroupLayout.PREFERRED_SIZE, 464, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPaneSBS, javax.swing.GroupLayout.PREFERRED_SIZE, 464, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanelSBSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTextFieldLogFile)
                             .addGroup(jPanelSBSLayout.createSequentialGroup()
                                 .addGroup(jPanelSBSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButtonRefresh)
                                     .addComponent(jCheckBoxScan)
                                     .addGroup(jPanelSBSLayout.createSequentialGroup()
                                         .addComponent(jLabel7)
@@ -364,11 +372,21 @@ public class NewJFrame extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jLabel8))
                                     .addComponent(jButtonStartLog)
-                                    .addComponent(jButtonStopLog))
-                                .addGap(0, 85, Short.MAX_VALUE))))
+                                    .addComponent(jButtonStopLog)
+                                    .addComponent(jButtonRefresh))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelSBSLayout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jCheckBoxHDQ1)
+                                .addGap(16, 16, 16))))
                     .addGroup(jPanelSBSLayout.createSequentialGroup()
-                        .addComponent(jScrollPaneBits, javax.swing.GroupLayout.PREFERRED_SIZE, 605, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGroup(jPanelSBSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanelSBSLayout.createSequentialGroup()
+                                .addComponent(jLabelSOC)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jProgressBarSOC, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPaneBits, javax.swing.GroupLayout.PREFERRED_SIZE, 605, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 65, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanelSBSLayout.setVerticalGroup(
@@ -376,9 +394,9 @@ public class NewJFrame extends javax.swing.JFrame {
             .addGroup(jPanelSBSLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelSBSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPaneSBS, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanelSBSLayout.createSequentialGroup()
-                        .addGap(27, 27, 27)
+                        .addComponent(jCheckBoxHDQ1)
+                        .addGap(4, 4, 4)
                         .addComponent(jButtonRefresh)
                         .addGap(14, 14, 14)
                         .addComponent(jCheckBoxScan)
@@ -392,16 +410,15 @@ public class NewJFrame extends javax.swing.JFrame {
                         .addGap(9, 9, 9)
                         .addComponent(jTextFieldLogFile, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonStopLog)))
+                        .addComponent(jButtonStopLog))
+                    .addComponent(jScrollPaneSBS, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelSBSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelSOC)
-                    .addGroup(jPanelSBSLayout.createSequentialGroup()
-                        .addGap(1, 1, 1)
-                        .addComponent(jProgressBarSOC, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPaneBits, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(6, 6, 6))
+                .addGroup(jPanelSBSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jProgressBarSOC, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelSOC))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPaneBits, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jTabbedPaneMain.addTab("SBS", jPanelSBS);
@@ -446,6 +463,13 @@ public class NewJFrame extends javax.swing.JFrame {
 
         jProgressBarDF.setMaximum(2048);
 
+        jCheckBoxHDQ2.setText("HDQ");
+        jCheckBoxHDQ2.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jCheckBoxHDQItemStateChanged(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelDataFlashLayout = new javax.swing.GroupLayout(jPanelDataFlash);
         jPanelDataFlash.setLayout(jPanelDataFlashLayout);
         jPanelDataFlashLayout.setHorizontalGroup(
@@ -455,14 +479,20 @@ public class NewJFrame extends javax.swing.JFrame {
                 .addGroup(jPanelDataFlashLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jTabbedPaneDataFlash, javax.swing.GroupLayout.PREFERRED_SIZE, 507, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jProgressBarDF, javax.swing.GroupLayout.PREFERRED_SIZE, 392, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanelDataFlashLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButtonWriteAll)
-                    .addComponent(jButtonReadAll)
-                    .addComponent(jButtonDefault)
-                    .addComponent(jButtonExport)
-                    .addComponent(jButtonImport))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanelDataFlashLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanelDataFlashLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButtonWriteAll)
+                            .addComponent(jButtonReadAll)
+                            .addComponent(jButtonDefault)
+                            .addComponent(jButtonExport)
+                            .addComponent(jButtonImport))
+                        .addContainerGap(109, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelDataFlashLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jCheckBoxHDQ2)
+                        .addGap(27, 27, 27))))
         );
         jPanelDataFlashLayout.setVerticalGroup(
             jPanelDataFlashLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -477,13 +507,15 @@ public class NewJFrame extends javax.swing.JFrame {
                 .addComponent(jButtonExport)
                 .addGap(45, 45, 45)
                 .addComponent(jButtonImport)
-                .addContainerGap(265, Short.MAX_VALUE))
+                .addContainerGap(260, Short.MAX_VALUE))
             .addGroup(jPanelDataFlashLayout.createSequentialGroup()
-                .addGap(42, 42, 42)
-                .addComponent(jTabbedPaneDataFlash)
+                .addContainerGap(37, Short.MAX_VALUE)
+                .addGroup(jPanelDataFlashLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTabbedPaneDataFlash, javax.swing.GroupLayout.PREFERRED_SIZE, 524, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCheckBoxHDQ2))
                 .addGap(18, 18, 18)
                 .addComponent(jProgressBarDF, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(47, 47, 47))
+                .addGap(12, 12, 12))
         );
 
         jTabbedPaneMain.addTab("DataFlash", jPanelDataFlash);
@@ -554,53 +586,73 @@ public class NewJFrame extends javax.swing.JFrame {
 
         jLabel10.setText("Count :");
 
+        jButtonReadByte.setText("Read Byte");
+        jButtonReadByte.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonReadByteActionPerformed(evt);
+            }
+        });
+
+        jButtonWriteByte.setText("Write Byte");
+        jButtonWriteByte.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonWriteByteActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(184, 184, 184)
-                        .addComponent(jButtonReadWord)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonReadBlock))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel4)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jTextFieldBlock)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButtonWriteBlock))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(137, 137, 137)
+                                .addComponent(jButtonReadWord)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                                .addComponent(jButtonReadByte)
+                                .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jButtonReadBlock, javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jTextFieldBlock)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jButtonWriteBlock))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                        .addGap(0, 0, Short.MAX_VALUE)
                                         .addComponent(jLabel10)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jTextFieldCount, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jCheckBoxPEC)
+                                .addGap(28, 28, 28))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jTextFieldCommand, javax.swing.GroupLayout.DEFAULT_SIZE, 53, Short.MAX_VALUE))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel2)
-                                            .addComponent(jLabel3))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jTextFieldData2, javax.swing.GroupLayout.DEFAULT_SIZE, 53, Short.MAX_VALUE)
-                                            .addComponent(jTextFieldData))))
-                                .addGap(18, 18, 18)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                                .addComponent(jTextFieldCommand, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButtonWriteWord2)
-                                    .addComponent(jButtonWriteWord))
-                                .addGap(34, 34, 34)
-                                .addComponent(jCheckBoxPEC)))))
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel3))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jTextFieldData2, javax.swing.GroupLayout.DEFAULT_SIZE, 53, Short.MAX_VALUE)
+                                    .addComponent(jTextFieldData))))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButtonWriteWord2)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jButtonWriteWord)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jButtonWriteByte)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -612,20 +664,22 @@ public class NewJFrame extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTextFieldCommand, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButtonReadWord)))
+                            .addComponent(jButtonReadWord)
+                            .addComponent(jButtonReadByte)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jButtonReadBlock)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jTextFieldCount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel10))))
+                .addGap(3, 3, 3)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonWriteWord)
+                    .addComponent(jTextFieldData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2)
+                    .addComponent(jButtonWriteByte))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButtonWriteWord)
-                            .addComponent(jTextFieldData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))
                         .addGap(16, 16, 16)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
@@ -635,7 +689,7 @@ public class NewJFrame extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jCheckBoxPEC)
-                        .addGap(40, 40, 40)))
+                        .addGap(27, 27, 27)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldBlock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonWriteBlock)
@@ -678,25 +732,25 @@ public class NewJFrame extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 63, Short.MAX_VALUE))
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jTextFieldByte)
-                    .addComponent(jTextFieldMReg, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE))
+                    .addComponent(jTextFieldMReg, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButtonReadMReg)
                     .addComponent(jButtonWriteMReg))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(28, 28, 28)
+                .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextFieldMReg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -706,7 +760,7 @@ public class NewJFrame extends javax.swing.JFrame {
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextFieldByte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonWriteMReg))
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Boot Loader"));
@@ -774,7 +828,7 @@ public class NewJFrame extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jProgressBarBL, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabelStat, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE))
+                        .addComponent(jLabelStat, javax.swing.GroupLayout.DEFAULT_SIZE, 10, Short.MAX_VALUE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 276, Short.MAX_VALUE)
@@ -821,6 +875,13 @@ public class NewJFrame extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jCheckBoxHDQ3.setText("HDQ");
+        jCheckBoxHDQ3.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jCheckBoxHDQItemStateChanged(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelCommandLayout = new javax.swing.GroupLayout(jPanelCommand);
         jPanelCommand.setLayout(jPanelCommandLayout);
         jPanelCommandLayout.setHorizontalGroup(
@@ -829,28 +890,31 @@ public class NewJFrame extends javax.swing.JFrame {
                 .addGap(33, 33, 33)
                 .addGroup(jPanelCommandLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelCommandLayout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(66, Short.MAX_VALUE))
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(53, 53, 53)
+                        .addComponent(jCheckBoxHDQ3))
+                    .addGroup(jPanelCommandLayout.createSequentialGroup()
+                        .addGap(4, 4, 4)
+                        .addGroup(jPanelCommandLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(90, Short.MAX_VALUE))
         );
         jPanelCommandLayout.setVerticalGroup(
             jPanelCommandLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelCommandLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelCommandLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelCommandLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanelCommandLayout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCheckBoxHDQ3))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(151, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         jTabbedPaneMain.addTab("Command", jPanelCommand);
@@ -902,20 +966,21 @@ public class NewJFrame extends javax.swing.JFrame {
         );
         jPanelChemLayout.setVerticalGroup(
             jPanelChemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelChemLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPaneChem, javax.swing.GroupLayout.DEFAULT_SIZE, 593, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelChemLayout.createSequentialGroup()
+                .addGroup(jPanelChemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanelChemLayout.createSequentialGroup()
+                        .addGap(32, 32, 32)
+                        .addGroup(jPanelChemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel9)
+                            .addComponent(jTextFieldChemID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonChange)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonPlot))
+                    .addGroup(jPanelChemLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPaneChem, javax.swing.GroupLayout.DEFAULT_SIZE, 574, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(jPanelChemLayout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addGroup(jPanelChemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(jTextFieldChemID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jButtonChange)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButtonPlot)
-                .addGap(19, 19, 19))
         );
 
         jTabbedPaneMain.addTab("Chemistry", jPanelChem);
@@ -938,7 +1003,7 @@ public class NewJFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRefreshActionPerformed
+    private void jButtonRefreshActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButtonRefreshActionPerformed
         refreshSBS();
     }//GEN-LAST:event_jButtonRefreshActionPerformed
 
@@ -970,8 +1035,7 @@ public class NewJFrame extends javax.swing.JFrame {
                         str = new String(pByte, 1, Math.min(Byte.toUnsignedInt(pByte[0]), size));
                     }
                 }
-            }
-            else {
+            } else {
                 short[] pwValue = new short[1];
 //                if (usbSmb.ReadWord(Byte.decode("0x"+cmd), pwValue)) {
                 if (usbSmb.readWord(cmd, pwValue)) {
@@ -1030,7 +1094,7 @@ public class NewJFrame extends javax.swing.JFrame {
         jTableBits.repaint();
     }
 
-    private void jButtonReadAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonReadAllActionPerformed
+    private void jButtonReadAllActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButtonReadAllActionPerformed
         jProgressBarDF.setValue(0);
         new Thread() {
             @Override
@@ -1103,7 +1167,7 @@ public class NewJFrame extends javax.swing.JFrame {
         }.start();
     }//GEN-LAST:event_jButtonReadAllActionPerformed
 
-    private void jButtonWriteAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonWriteAllActionPerformed
+    private void jButtonWriteAllActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButtonWriteAllActionPerformed
         updateDataFlash();
         jProgressBarDF.setValue(0);
         new Thread() {
@@ -1184,14 +1248,14 @@ public class NewJFrame extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButtonWriteAllActionPerformed
 
-    private void jButtonDefaultActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDefaultActionPerformed
+    private void jButtonDefaultActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButtonDefaultActionPerformed
         int len = DllEntry.dec128("../ini/Default.ifi", dfBuf);
         if (len == 2048) {
             refreshDataFlash();
         }
     }//GEN-LAST:event_jButtonDefaultActionPerformed
 
-    private void jButtonExportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExportActionPerformed
+    private void jButtonExportActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButtonExportActionPerformed
         int returnVal = fcIfi.showSaveDialog(this);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             File file = fcIfi.getSelectedFile();
@@ -1216,7 +1280,7 @@ public class NewJFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonExportActionPerformed
 
-    private void jButtonImportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonImportActionPerformed
+    private void jButtonImportActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButtonImportActionPerformed
         int returnVal = fcIfi.showOpenDialog(this);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             File file = fcIfi.getSelectedFile();
@@ -1235,7 +1299,8 @@ public class NewJFrame extends javax.swing.JFrame {
             JTable jTableCluster = clusterTableList.get(i++);
             for (int j = 0; j < jTableCluster.getRowCount(); j++) {
                 DataFlash df = dfList.get(j);
-                int value = 0, addr = df.getStartAdr() - stradr;
+                int value = 0, value2 = 0,
+                    addr = df.getStartAdr() - stradr;
                 String str = "", type = df.getType();
                 switch (type) {
                     case "S1":
@@ -1252,6 +1317,12 @@ public class NewJFrame extends javax.swing.JFrame {
                         value = (Byte.toUnsignedInt(dfBuf[addr]) << 8)
                                 | Byte.toUnsignedInt(dfBuf[addr + 1]);
                         break;
+                    case "S8":
+                    case "U8":
+                        value2 = (dfBuf[addr+4] << 24)
+                                | (Byte.toUnsignedInt(dfBuf[addr + 5]) << 16)
+                                | (Byte.toUnsignedInt(dfBuf[addr + 6]) << 8)
+                                | Byte.toUnsignedInt(dfBuf[addr + 7]);
                     case "S4":
                     case "U4":
                         value = (dfBuf[addr] << 24)
@@ -1272,7 +1343,21 @@ public class NewJFrame extends javax.swing.JFrame {
                         assert (false);
                 }
                 if (df.getUnit().equals("hex")) {
-                    str = "0x" + Integer.toHexString(value);
+                    switch (type) {
+                        case "S1":
+                        case "U1":
+                        case "S2":
+                        case "U2":
+                        case "S4":
+                        case "U4":
+                            str = "0x" + Integer.toHexString(value);
+                            break;
+                        case "S8":
+                        case "U8":
+                            str = "0x" + Long.toHexString(((long)value << 32) | Integer.toUnsignedLong(value2));
+                            break;
+                        default:
+                    }
                 } else if (df.getUnit().equals("date")) {
                     str = String.format("%1$d-%2$d-%3$d", 1980+(value>>9), (value>>5)&0xF, value&0x1F);
                 } else {
@@ -1352,7 +1437,7 @@ public class NewJFrame extends javax.swing.JFrame {
         }
     }
 
-    private void jButtonReadWordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonReadWordActionPerformed
+    private void jButtonReadWordActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButtonReadWordActionPerformed
         int command = Integer.parseInt(jTextFieldCommand.getText(), 16);
         short pwValue[] = new short[1];
         if (usbSmb.readWord(command, pwValue)) {
@@ -1362,7 +1447,7 @@ public class NewJFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonReadWordActionPerformed
 
-    private void jButtonWriteWordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonWriteWordActionPerformed
+    private void jButtonWriteWordActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButtonWriteWordActionPerformed
         int command = Integer.parseInt(jTextFieldCommand.getText(), 16);
         int value = Integer.parseInt(jTextFieldData.getText(), 16);
         if (usbSmb.writeWord(command, value)) {
@@ -1372,11 +1457,20 @@ public class NewJFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonWriteWordActionPerformed
 
-    private void jButtonWriteWord2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonWriteWord2ActionPerformed
+    private void jButtonWriteWord2ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButtonWriteWord2ActionPerformed
         int command = Integer.parseInt(jTextFieldCommand.getText(), 16);
         int value = Integer.parseInt(jTextFieldData.getText(), 16),
             value2 = Integer.parseInt(jTextFieldData2.getText(), 16);
-        if (usbSmb.writeWord(command, value)) {
+        if (usbSmb.isHDQ()) {
+            if (usbSmb.writeByte(command, -1))
+                if (usbSmb.writeByte(command + 1, (byte)(value >> 8)))
+                    if (usbSmb.writeByte(command, (byte)value))
+                        if (usbSmb.writeByte(command + 1, (byte)(value2 >> 8)))
+                            if (usbSmb.writeByte(command, (byte)value2)) {
+                                jTextPaneMessage.setText("Write Success");
+                                return;
+                            }
+        } else if (usbSmb.writeWord(command, value)) {
             if (usbSmb.writeWord(command, value2)) {
                 jTextPaneMessage.setText("Write Success");
                 return;
@@ -1385,7 +1479,7 @@ public class NewJFrame extends javax.swing.JFrame {
         jTextPaneMessage.setText("Write Fail");
     }//GEN-LAST:event_jButtonWriteWord2ActionPerformed
 
-    private void jButtonReadBlockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonReadBlockActionPerformed
+    private void jButtonReadBlockActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButtonReadBlockActionPerformed
         int command = Integer.parseInt(jTextFieldCommand.getText(), 16);
         int count = Integer.parseInt(jTextFieldCount.getText());
 //        byte pValue[] = new byte[1];
@@ -1407,15 +1501,11 @@ public class NewJFrame extends javax.swing.JFrame {
         jTextPaneMessage.setText("Read Fail");
     }//GEN-LAST:event_jButtonReadBlockActionPerformed
 
-    private void jCheckBoxPECItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCheckBoxPECItemStateChanged
-        if (evt.getStateChange() == ItemEvent.SELECTED) {
-            usbSmb.setPEC(true);
-        } else {
-            usbSmb.setPEC(false);
-        }
+    private void jCheckBoxPECItemStateChanged(ItemEvent evt) {//GEN-FIRST:event_jCheckBoxPECItemStateChanged
+        usbSmb.setPEC(evt.getStateChange() == ItemEvent.SELECTED);
     }//GEN-LAST:event_jCheckBoxPECItemStateChanged
 
-    private void jButtonWriteBlockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonWriteBlockActionPerformed
+    private void jButtonWriteBlockActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButtonWriteBlockActionPerformed
         int command = Integer.parseInt(jTextFieldCommand.getText(), 16);
         String hexData = jTextFieldBlock.getText();
         int count = hexData.length() / 3;
@@ -1438,7 +1528,7 @@ public class NewJFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonWriteBlockActionPerformed
 
-    private void jButtonReadMRegActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonReadMRegActionPerformed
+    private void jButtonReadMRegActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButtonReadMRegActionPerformed
         byte mreg = (byte)Integer.parseInt(jTextFieldMReg.getText(), 16);
         byte[] bytes = { 0x10, mreg };
         if (usbSmb.writeBytes(0xF5, bytes.length, bytes)) {
@@ -1452,7 +1542,7 @@ public class NewJFrame extends javax.swing.JFrame {
         jTextPaneMessage.setText("Read Fail");
     }//GEN-LAST:event_jButtonReadMRegActionPerformed
 
-    private void jButtonWriteMRegActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonWriteMRegActionPerformed
+    private void jButtonWriteMRegActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButtonWriteMRegActionPerformed
         byte mreg = (byte)Integer.parseInt(jTextFieldMReg.getText(), 16),
              value = (byte)Integer.parseInt(jTextFieldByte.getText(), 16);
         byte[] bytes = { mreg, value };
@@ -1463,8 +1553,9 @@ public class NewJFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonWriteMRegActionPerformed
 
-    private void jCheckBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCheckBox1ItemStateChanged
+    private void jCheckBox1ItemStateChanged(ItemEvent evt) {//GEN-FIRST:event_jCheckBox1ItemStateChanged
         if (evt.getStateChange() == ItemEvent.SELECTED) {
+            jCheckBoxHDQ3.setSelected(false);
             jProgressBarBL.setValue(0);
             try {
 //                File file = new File("../ini/BootLoader_A1141.bin");
@@ -1589,7 +1680,7 @@ public class NewJFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jCheckBox1ItemStateChanged
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButton1ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         int returnVal = fcCod.showOpenDialog(this);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             File file = fcCod.getSelectedFile();
@@ -1599,7 +1690,7 @@ public class NewJFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jButton2ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         int returnVal = fcBin.showSaveDialog(this);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             File file = fcBin.getSelectedFile();
@@ -1615,7 +1706,7 @@ public class NewJFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void jButton3ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         int returnVal = fcIfi.showOpenDialog(this);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             File file = fcIfi.getSelectedFile();
@@ -1625,7 +1716,7 @@ public class NewJFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void jButtonProgramActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonProgramActionPerformed
+    private void jButtonProgramActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButtonProgramActionPerformed
         String path = jTextField1.getText();
         File file = new File(path);
         if (!file.exists()) return;
@@ -1753,7 +1844,7 @@ public class NewJFrame extends javax.swing.JFrame {
         }.start();
     }//GEN-LAST:event_jButtonProgramActionPerformed
 
-    private void jButtonReadFlashActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonReadFlashActionPerformed
+    private void jButtonReadFlashActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButtonReadFlashActionPerformed
         setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         new Thread() {
             @Override
@@ -1814,7 +1905,7 @@ public class NewJFrame extends javax.swing.JFrame {
         }.start();
     }//GEN-LAST:event_jButtonReadFlashActionPerformed
 
-    private void jButtonWriteFlashActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonWriteFlashActionPerformed
+    private void jButtonWriteFlashActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButtonWriteFlashActionPerformed
         String path = jTextField3.getText();
         File file = new File(path);
         if (!file.exists()) return;
@@ -1906,7 +1997,7 @@ public class NewJFrame extends javax.swing.JFrame {
         }.start();
     }//GEN-LAST:event_jButtonWriteFlashActionPerformed
 
-    private void jCheckBoxScanItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCheckBoxScanItemStateChanged
+    private void jCheckBoxScanItemStateChanged(ItemEvent evt) {//GEN-FIRST:event_jCheckBoxScanItemStateChanged
         if (evt.getStateChange() == ItemEvent.SELECTED) {
             scanning = true;
             timer.setDelay(Integer.parseInt(jTextFieldInterval.getText()));
@@ -1917,7 +2008,7 @@ public class NewJFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jCheckBoxScanItemStateChanged
 
-    private void jButtonStartLogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonStartLogActionPerformed
+    private void jButtonStartLogActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButtonStartLogActionPerformed
         if (fcLog.showSaveDialog(this) != JFileChooser.APPROVE_OPTION)
             return;
         try {
@@ -1951,7 +2042,7 @@ public class NewJFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonStartLogActionPerformed
 
-    private void jButtonStopLogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonStopLogActionPerformed
+    private void jButtonStopLogActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButtonStopLogActionPerformed
         pwLog.close();
         pwLog = null;
         jButtonStartLog.setEnabled(true);
@@ -1959,31 +2050,44 @@ public class NewJFrame extends javax.swing.JFrame {
         logging = false;
     }//GEN-LAST:event_jButtonStopLogActionPerformed
 
-    private void jTabbedPaneMainStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPaneMainStateChanged
+    private void jTabbedPaneMainStateChanged(ChangeEvent evt) {//GEN-FIRST:event_jTabbedPaneMainStateChanged
 //        JTabbedPane jTabbedPane = (JTabbedPane)evt.getSource();
         if (jCheckBox1.isSelected()) {
-            jTabbedPaneMain.setSelectedIndex(jTabbedPaneMain.indexOfTab("Command"));
+//            jTabbedPaneMain.setSelectedIndex(jTabbedPaneMain.indexOfTab("Command"));
+            jTabbedPaneMain.setSelectedIndex(2);
         } else {
             if (scanning) {
                 jCheckBoxScan.doClick();
             }
             int index = jTabbedPaneMain.getSelectedIndex();
-//            if (index == 3) {
-            if (index == jTabbedPaneMain.indexOfTab("Chemistry")) {
-                if (usbSmb.writeWord(0, 8)) {
-                    short pwValue[] = new short[1];
-                    if (usbSmb.readWord(0, pwValue)) {
-                        String chemID = String.format("%04X", pwValue[0]);
-                        jTextFieldChemID.setText(chemID);
-                        for (int i = 0; i < jTableChem.getRowCount(); i++) {
-                            if (chemID.equals(jTableChem.getValueAt(i, 0))) {
-                                jTableChem.setRowSelectionInterval(i, i);
-                                jButtonPlot.setEnabled(true);
-                                break;
+            switch (index)
+            {
+                case 0:
+                    jCheckBoxHDQ1.setSelected(usbSmb.isHDQ());
+                    break;
+                case 1:
+                    jCheckBoxHDQ2.setSelected(usbSmb.isHDQ());
+                    break;
+                case 2:
+                    jCheckBoxHDQ3.setSelected(usbSmb.isHDQ());
+                    break;
+                case 3:
+//                if (index == jTabbedPaneMain.indexOfTab("Chemistry")) {
+                    if (usbSmb.writeWord(0, 8)) {
+                        short pwValue[] = new short[1];
+                        if (usbSmb.readWord(0, pwValue)) {
+                            String chemID = String.format("%04X", pwValue[0]);
+                            jTextFieldChemID.setText(chemID);
+                            for (int i = 0; i < jTableChem.getRowCount(); i++) {
+                                if (chemID.equals(jTableChem.getValueAt(i, 0))) {
+                                    jTableChem.setRowSelectionInterval(i, i);
+                                    jButtonPlot.setEnabled(true);
+                                    break;
+                                }
                             }
                         }
                     }
-                }
+                    break;
             }
         }
     }//GEN-LAST:event_jTabbedPaneMainStateChanged
@@ -2032,7 +2136,7 @@ public class NewJFrame extends javax.swing.JFrame {
         chart.setVisible(true);
     }
 
-    private void jButtonPlotActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPlotActionPerformed
+    private void jButtonPlotActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButtonPlotActionPerformed
         int sel = jTableChem.getSelectedRow();
         if (sel < 0) {
 //            JOptionPane.showMessageDialog(this, "Please Select a Chemistry ID");
@@ -2042,7 +2146,7 @@ public class NewJFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonPlotActionPerformed
 
-    private void jTableChemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableChemMouseClicked
+    private void jTableChemMouseClicked(MouseEvent evt) {//GEN-FIRST:event_jTableChemMouseClicked
         jButtonChange.setEnabled(true);
         if (evt.getClickCount() == 2) {
             System.out.println("double clicked");
@@ -2050,7 +2154,7 @@ public class NewJFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jTableChemMouseClicked
 
-    private void jButtonChangeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonChangeActionPerformed
+    private void jButtonChangeActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButtonChangeActionPerformed
         String chemID = (String)jTableChem.getValueAt(jTableChem.getSelectedRow(), 0);
         String path = "../Chemistry/" + chemID + ".chm";
         File file = new File(path);
@@ -2076,7 +2180,7 @@ public class NewJFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonChangeActionPerformed
 
-    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+    private void formWindowClosing(WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         if (jCheckBox1.isSelected()) {
             JOptionPane.showMessageDialog(this,
                 "Please Exit (UnCheck) Boot Loader !!",
@@ -2087,10 +2191,34 @@ public class NewJFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_formWindowClosing
 
-    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+    private void formWindowClosed(WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         System.out.println("Window Closed");
         System.exit(0);
     }//GEN-LAST:event_formWindowClosed
+
+    private void jButtonReadByteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonReadByteActionPerformed
+        int command = Integer.parseInt(jTextFieldCommand.getText(), 16);
+        byte pValue[] = new byte[1];
+        if (usbSmb.readByte(command, pValue)) {
+            jTextPaneMessage.setText(Integer.toHexString(Byte.toUnsignedInt(pValue[0])).toUpperCase());
+        } else {
+            jTextPaneMessage.setText("Read Fail");
+        }
+    }//GEN-LAST:event_jButtonReadByteActionPerformed
+
+    private void jButtonWriteByteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonWriteByteActionPerformed
+        int command = Integer.parseInt(jTextFieldCommand.getText(), 16);
+        int value = Integer.parseInt(jTextFieldData.getText(), 16);
+        if (usbSmb.writeByte(command, value)) {
+            jTextPaneMessage.setText("Write Success");
+        } else {
+            jTextPaneMessage.setText("Write Fail");
+        }
+    }//GEN-LAST:event_jButtonWriteByteActionPerformed
+
+    private void jCheckBoxHDQItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCheckBoxHDQItemStateChanged
+        usbSmb.setHDQ(evt.getStateChange() == ItemEvent.SELECTED);
+    }//GEN-LAST:event_jCheckBoxHDQItemStateChanged
     
     /**
      * @param args the command line arguments
@@ -2144,6 +2272,7 @@ public class NewJFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButtonProgram;
     private javax.swing.JButton jButtonReadAll;
     private javax.swing.JButton jButtonReadBlock;
+    private javax.swing.JButton jButtonReadByte;
     private javax.swing.JButton jButtonReadFlash;
     private javax.swing.JButton jButtonReadMReg;
     private javax.swing.JButton jButtonReadWord;
@@ -2152,11 +2281,15 @@ public class NewJFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButtonStopLog;
     private javax.swing.JButton jButtonWriteAll;
     private javax.swing.JButton jButtonWriteBlock;
+    private javax.swing.JButton jButtonWriteByte;
     private javax.swing.JButton jButtonWriteFlash;
     private javax.swing.JButton jButtonWriteMReg;
     private javax.swing.JButton jButtonWriteWord;
     private javax.swing.JButton jButtonWriteWord2;
     private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JCheckBox jCheckBoxHDQ1;
+    private javax.swing.JCheckBox jCheckBoxHDQ2;
+    private javax.swing.JCheckBox jCheckBoxHDQ3;
     private javax.swing.JCheckBox jCheckBoxPEC;
     private javax.swing.JCheckBox jCheckBoxScan;
     private javax.swing.JLabel jLabel1;
