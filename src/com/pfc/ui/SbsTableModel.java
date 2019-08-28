@@ -15,7 +15,7 @@ import javax.swing.table.AbstractTableModel;
  */
 public class SbsTableModel extends AbstractTableModel {
     boolean DEBUG = false;
-    String[] columnNames = {"Command", "Name", "Value", "Unit", "Log", "Scan"};
+    String[] columnNames = {java.util.ResourceBundle.getBundle("com/pfc/ui/Bundle").getString("COMMAND"), java.util.ResourceBundle.getBundle("com/pfc/ui/Bundle").getString("NAME"), java.util.ResourceBundle.getBundle("com/pfc/ui/Bundle").getString("VALUE"), java.util.ResourceBundle.getBundle("com/pfc/ui/Bundle").getString("UNIT"), java.util.ResourceBundle.getBundle("com/pfc/ui/Bundle").getString("LOG"), java.util.ResourceBundle.getBundle("com/pfc/ui/Bundle").getString("SCAN")};
     Object[][] data = {};
 
     public SbsTableModel(List<SBS> sbsList) {

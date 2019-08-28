@@ -6,7 +6,6 @@
 package com.pfc.ui;
 
 import com.pfc.xml.BitField;
-import com.pfc.xml.SBS;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
@@ -16,8 +15,8 @@ import javax.swing.table.AbstractTableModel;
  */
 public class BitsTableModel extends AbstractTableModel {
     boolean DEBUG = false;
-    String[] columnNames = {"Cmd", "Name", "Value",
-        "Bit 7", "Bit 6", "Bit 5", "Bit 4", "Bit 3", "Bit 2", "Bit 1", "Bit 0"};
+    String[] columnNames = {java.util.ResourceBundle.getBundle("com/pfc/ui/Bundle").getString("CMD"), java.util.ResourceBundle.getBundle("com/pfc/ui/Bundle").getString("NAME"), java.util.ResourceBundle.getBundle("com/pfc/ui/Bundle").getString("VALUE"),
+        java.util.ResourceBundle.getBundle("com/pfc/ui/Bundle").getString("BIT 7"), java.util.ResourceBundle.getBundle("com/pfc/ui/Bundle").getString("BIT 6"), java.util.ResourceBundle.getBundle("com/pfc/ui/Bundle").getString("BIT 5"), java.util.ResourceBundle.getBundle("com/pfc/ui/Bundle").getString("BIT 4"), java.util.ResourceBundle.getBundle("com/pfc/ui/Bundle").getString("BIT 3"), java.util.ResourceBundle.getBundle("com/pfc/ui/Bundle").getString("BIT 2"), java.util.ResourceBundle.getBundle("com/pfc/ui/Bundle").getString("BIT 1"), java.util.ResourceBundle.getBundle("com/pfc/ui/Bundle").getString("BIT 0")};
     Object[][] data = {};
 
     public BitsTableModel(List<BitField> bfList) {

@@ -18,18 +18,18 @@ import org.ini4j.IniPreferences;
  */
 public class ChemTableModel extends AbstractTableModel {
     boolean DEBUG = false;
-    String[] columnNames = {"ID", "Manufacturer", "Model", "Description"};
+    String[] columnNames = {java.util.ResourceBundle.getBundle("com/pfc/ui/Bundle").getString("ID"), java.util.ResourceBundle.getBundle("com/pfc/ui/Bundle").getString("MANUFACTURER"), java.util.ResourceBundle.getBundle("com/pfc/ui/Bundle").getString("MODEL"), java.util.ResourceBundle.getBundle("com/pfc/ui/Bundle").getString("DESCRIPTION")};
     Object[][] data = {};
 
     public ChemTableModel() {
         int count = 0;
         try {
-            Ini ini = new Ini(new File("../Chemistry/Chem.ini"));
+            Ini ini = new Ini(new File("../Chemistry/Chem.ini")); //NOI18N
             Preferences prefs = new IniPreferences(ini);
 //        int num = Integer.parseInt(ini.get("Chemistry", "NumChemFiles"));
-            int num = prefs.node("Chemistry").getInt("NumChemFiles", 0);
+            int num = prefs.node("Chemistry").getInt("NumChemFiles", 0); //NOI18N
             for (Integer i = 1; i <= num; i++) {
-                Preferences section = prefs.node(i.toString() + "_Chem");
+                Preferences section = prefs.node(i.toString() + "_Chem"); //NOI18N
 //            System.out.println(section);
 //            try {
 //                for (String key : section.keys())
@@ -51,7 +51,7 @@ public class ChemTableModel extends AbstractTableModel {
                 }
 */
 //                System.out.println("Description : " + section.get("Description", null));
-                int n = section.getInt("NumKnownCells", 0);
+                int n = section.getInt("NumKnownCells", 0); //NOI18N
 //                for (Integer j = 1; j <= n; j++) {
 //                    System.out.println(section.get(j.toString(), null));
 //                }
@@ -60,10 +60,10 @@ public class ChemTableModel extends AbstractTableModel {
             data = new Object[count][columnNames.length];
             int k = 0;
             for (Integer i = 1; i <= num; i++) {
-                Preferences section = prefs.node(i.toString() + "_Chem");
-                String sChemID = section.get("ChemID", null),
-                        sDesc = section.get("Description", null);
-                int n = section.getInt("NumKnownCells", 0);
+                Preferences section = prefs.node(i.toString() + "_Chem"); //NOI18N
+                String sChemID = section.get("ChemID", null), //NOI18N
+                        sDesc = section.get("Description", null); //NOI18N
+                int n = section.getInt("NumKnownCells", 0); //NOI18N
                 for (Integer j = 1; j <= n; j++) {
                     data[k][0] = sChemID;
                     data[k][1] = "";

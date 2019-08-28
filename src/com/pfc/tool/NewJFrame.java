@@ -65,18 +65,18 @@ public class NewJFrame extends javax.swing.JFrame {
      */
     public NewJFrame() {
         try {
-            FileInputStream in = new FileInputStream("../ini/Preferences.xml");
+            FileInputStream in = new FileInputStream("../ini/Preferences.xml"); //NOI18N
             Preferences.importPreferences(in);
         } catch (IOException|InvalidPreferencesFormatException ex) {
             System.err.println(ex);
         }
         Preferences prefs = Preferences.userNodeForPackage(NewJFrame.class);
-        devName = prefs.get("devName", "");
-        bNewSBS = prefs.getBoolean("newSbs", false);
+        devName = prefs.get("devName", ""); //NOI18N
+        bNewSBS = prefs.getBoolean("newSbs", false); //NOI18N
         if (bNewSBS) {
             usbSmb.setAddr((byte)0xAA);
         }
-        socCmd = Integer.decode(prefs.get("socCmd", "0"));
+        socCmd = Integer.decode(prefs.get("socCmd", "0")); //NOI18N
         if (socCmd == 0)
             socCmd = bNewSBS ? 0x2C: 0x0D;
         stradr = bNewSBS ? 0x7600 : 0xB000;
@@ -86,9 +86,9 @@ public class NewJFrame extends javax.swing.JFrame {
         try {
             SAXParserFactory saxParserFactory = SAXParserFactory.newInstance();
             SAXParser saxParser = saxParserFactory.newSAXParser();
-            saxParser.parse(new File("../ini/SBS.xml"), sbsHandler);
-            saxParser.parse(new File("../ini/DataFlash.xml"), dfHandler);
-            saxParser.parse(new File("../ini/Bits.xml"), bitsHandler);
+            saxParser.parse(new File("../ini/SBS.xml"), sbsHandler); //NOI18N
+            saxParser.parse(new File("../ini/DataFlash.xml"), dfHandler); //NOI18N
+            saxParser.parse(new File("../ini/Bits.xml"), bitsHandler); //NOI18N
         } catch (IOException | ParserConfigurationException | SAXException e) {
             System.err.println(e);
         }
@@ -147,16 +147,16 @@ public class NewJFrame extends javax.swing.JFrame {
 
         //Create file choosers
         FileNameExtensionFilter filter;
-        filter = new FileNameExtensionFilter("DataFlash Files (*.ifi)", "ifi");
+        filter = new FileNameExtensionFilter(java.util.ResourceBundle.getBundle("com/pfc/tool/Bundle").getString("DATAFLASH FILES (*.IFI)"), "ifi"); //NOI18N
         fcIfi = new JFileChooser();
         fcIfi.setFileFilter(filter);
-        filter = new FileNameExtensionFilter("Code Binary Files (*.cod)", "cod");
+        filter = new FileNameExtensionFilter(java.util.ResourceBundle.getBundle("com/pfc/tool/Bundle").getString("CODE BINARY FILES (*.COD)"), "cod"); //NOI18N
         fcCod = new JFileChooser();
         fcCod.setFileFilter(filter);
-        filter = new FileNameExtensionFilter("Binary Files (*.bin)", "bin");
+        filter = new FileNameExtensionFilter(java.util.ResourceBundle.getBundle("com/pfc/tool/Bundle").getString("BINARY FILES (*.BIN)"), "bin"); //NOI18N
         fcBin = new JFileChooser();
         fcBin.setFileFilter(filter);
-        filter = new FileNameExtensionFilter("Log Files (*.log)", "log");
+        filter = new FileNameExtensionFilter(java.util.ResourceBundle.getBundle("com/pfc/tool/Bundle").getString("LOG FILES (*.LOG)"), "log"); //NOI18N
         fcLog = new JFileChooser();
         fcLog.setFileFilter(filter);
 
@@ -167,11 +167,11 @@ public class NewJFrame extends javax.swing.JFrame {
                 refreshSBS();
                 if (logging) {
                     Date date = new Date();
-                    pwLog.print(String.format("%tF", date));
-                    pwLog.print(String.format("\t%tT", date));
+                    pwLog.print(String.format("%tF", date)); //NOI18N
+                    pwLog.print(String.format("\t%tT", date)); //NOI18N
                     for (int i = 0; i < jTableSBS.getRowCount(); i++) {
                         if ((boolean) jTableSBS.getValueAt(i, 4)) {
-                            pwLog.print("\t");
+                            pwLog.print("\t"); //NOI18N
                             pwLog.print(jTableSBS.getValueAt(i, 2));
                         }
                     }
@@ -1030,11 +1030,11 @@ public class NewJFrame extends javax.swing.JFrame {
         for (int i = 0; i < jTableSBS.getRowCount(); i++) {
             if (!(boolean)jTableSBS.getValueAt(i, 5))
                 continue;
-            String str = "";
+            String str = ""; //NOI18N
             SBS sbs = sbsList.get(i);
             String format = sbs.getFormat();
             int cmd = sbs.getCmd();
-            if (format.equals("String")) {
+            if (format.equals("String")) { //NOI18N
                 if (bNewSBS) {
                     byte[] pByte = new byte[1];
                     if (usbSmb.readByte(cmd - 1, pByte)) {
@@ -1058,33 +1058,33 @@ public class NewJFrame extends javax.swing.JFrame {
 //                if (usbSmb.ReadWord(Byte.decode("0x"+cmd), pwValue)) {
                 if (usbSmb.readWord(cmd, pwValue)) {
                     switch (sbs.getFormat()) {
-                        case "Hex":
+                        case "Hex": //NOI18N
                             int size = sbs.getSize();
                             if (size > Short.BYTES) {
                                 byte[] buf = new byte[size];
                                 if (usbSmb.readBlock(cmd, size, buf)) {
                                     StringBuilder result = new StringBuilder();
                                     for (byte b : buf) {
-                                        result.append(String.format("%02X ", b));
+                                        result.append(String.format("%02X ", b)); //NOI18N
                                     }
                                     str = result.toString();
                                 }
                             } else {
 //                            str = "0x" + Integer.toHexString(pwValue[0]);
-                                str = String.format("0x%04X", pwValue[0]);
+                                str = String.format("0x%04X", pwValue[0]); //NOI18N
                             }
                             break;
-                        case "Date":
-                            str = String.format("%1$d-%2$d-%3$d",
+                        case "Date": //NOI18N
+                            str = String.format("%1$d-%2$d-%3$d", //NOI18N
                                     1980+(pwValue[0]>>9), (pwValue[0]>>5)&0xF, pwValue[0]&0x1F);
                             break;
-                        case "Temp":
-                            str = String.format("%1$5.1f", ((float)pwValue[0]-2731.5)/10.0);
+                        case "Temp": //NOI18N
+                            str = String.format("%1$5.1f", ((float)pwValue[0]-2731.5)/10.0); //NOI18N
                             break;
-                        case "UInt":
+                        case "UInt": //NOI18N
                             str = Integer.toString(Short.toUnsignedInt(pwValue[0]));
                             break;
-                        case "Int":
+                        case "Int": //NOI18N
                             str = Integer.toString(pwValue[0]);
                             break;
                         default:
@@ -1104,7 +1104,7 @@ public class NewJFrame extends javax.swing.JFrame {
                 int size = bf.getSize();
                 for (int j = 0; j < size; j++) {
                     byte val = (byte)(pwValue[0] >> ((size-1-j)*8));
-                    String str = String.format("0x%1$02X", val);
+                    String str = String.format("0x%1$02X", val); //NOI18N
                     jTableBits.setValueAt(str, i++, 2);
                 }
             }
@@ -1132,8 +1132,8 @@ public class NewJFrame extends javax.swing.JFrame {
                     }
                     if (retry_count == retry_end) {
                         JOptionPane.showMessageDialog(null,
-                                "Please UnSeal !!",
-                                "Read DataFlash",
+                                java.util.ResourceBundle.getBundle("com/pfc/tool/Bundle").getString("PLEASE UNSEAL !!"),
+                                java.util.ResourceBundle.getBundle("com/pfc/tool/Bundle").getString("READ DATAFLASH"),
                                 JOptionPane.INFORMATION_MESSAGE);
                         setCursor(null);
                         return;
@@ -1176,8 +1176,8 @@ public class NewJFrame extends javax.swing.JFrame {
                     refreshDataFlash();
                 } else {
                     JOptionPane.showMessageDialog(null,
-                            "Failed !!!",
-                            "Read DataFlash",
+                            java.util.ResourceBundle.getBundle("com/pfc/tool/Bundle").getString("FAILED !!!"),
+                            java.util.ResourceBundle.getBundle("com/pfc/tool/Bundle").getString("READ DATAFLASH"),
                             JOptionPane.ERROR_MESSAGE);
                 }
                 setCursor(Cursor.getDefaultCursor());
@@ -1250,14 +1250,14 @@ public class NewJFrame extends javax.swing.JFrame {
 
                 if (index == 8) {
                     JOptionPane.showMessageDialog(null,
-                            "Success",
-                            "Write DataFlash",
+                            java.util.ResourceBundle.getBundle("com/pfc/tool/Bundle").getString("SUCCESS"),
+                            java.util.ResourceBundle.getBundle("com/pfc/tool/Bundle").getString("WRITE DATAFLASH"),
                             JOptionPane.INFORMATION_MESSAGE);
                 } else {
                     usbSmb.writeWord(0, 0x43);
                     JOptionPane.showMessageDialog(null,
-                            "Failed !!!",
-                            "Write DataFlash",
+                            java.util.ResourceBundle.getBundle("com/pfc/tool/Bundle").getString("FAILED !!!"),
+                            java.util.ResourceBundle.getBundle("com/pfc/tool/Bundle").getString("WRITE DATAFLASH"),
                             JOptionPane.ERROR_MESSAGE);
                 }
                 setCursor(Cursor.getDefaultCursor());
@@ -1267,7 +1267,7 @@ public class NewJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonWriteAllActionPerformed
 
     private void jButtonDefaultActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButtonDefaultActionPerformed
-        int len = DllEntry.dec128("../ini/Default.ifi", dfBuf);
+        int len = DllEntry.dec128("../ini/Default.ifi", dfBuf); //NOI18N
         if (len == 2048) {
             refreshDataFlash();
         }
@@ -1278,8 +1278,8 @@ public class NewJFrame extends javax.swing.JFrame {
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             File file = fcIfi.getSelectedFile();
             String path = file.getPath();
-            if (!file.getName().contains(".")) {
-                path += ".ifi";
+            if (!file.getName().contains(".")) { //NOI18N
+                path += ".ifi"; //NOI18N
             }
             System.out.println("Saving: " + path);
 //            Path p = Paths.get(path);
@@ -1290,7 +1290,7 @@ public class NewJFrame extends javax.swing.JFrame {
                 FileOutputStream f = new FileOutputStream(path);
                 f.write(dfBuf);
                 if (DllEntry.cod128(path)) {
-                    JOptionPane.showMessageDialog(this, "SUCCESS");
+                    JOptionPane.showMessageDialog(this, java.util.ResourceBundle.getBundle("com/pfc/tool/Bundle").getString("SUCCESS"));
                 }
             } catch (IOException ex) {
                 System.err.println(ex);
@@ -1319,75 +1319,75 @@ public class NewJFrame extends javax.swing.JFrame {
                 DataFlash df = dfList.get(j);
                 int value = 0, value2 = 0,
                     addr = df.getStartAdr() - stradr;
-                String str = "", type = df.getType();
+                String str = "", type = df.getType(); //NOI18N
                 switch (type) {
-                    case "S1":
+                    case "S1": //NOI18N
                         value = dfBuf[addr];
                         break;
-                    case "U1":
+                    case "U1": //NOI18N
                         value = Byte.toUnsignedInt(dfBuf[addr]);
                         break;
-                    case "S2":
+                    case "S2": //NOI18N
                         value = (dfBuf[addr] << 8)
                                 | Byte.toUnsignedInt(dfBuf[addr + 1]);
                         break;
-                    case "U2":
+                    case "U2": //NOI18N
                         value = (Byte.toUnsignedInt(dfBuf[addr]) << 8)
                                 | Byte.toUnsignedInt(dfBuf[addr + 1]);
                         break;
-                    case "S8":
-                    case "U8":
+                    case "S8": //NOI18N
+                    case "U8": //NOI18N
                         value2 = (dfBuf[addr+4] << 24)
                                 | (Byte.toUnsignedInt(dfBuf[addr + 5]) << 16)
                                 | (Byte.toUnsignedInt(dfBuf[addr + 6]) << 8)
                                 | Byte.toUnsignedInt(dfBuf[addr + 7]);
-                    case "S4":
-                    case "U4":
+                    case "S4": //NOI18N
+                    case "U4": //NOI18N
                         value = (dfBuf[addr] << 24)
                                 | (Byte.toUnsignedInt(dfBuf[addr + 1]) << 16)
                                 | (Byte.toUnsignedInt(dfBuf[addr + 2]) << 8)
                                 | Byte.toUnsignedInt(dfBuf[addr + 3]);
                         break;
-                    case "string":
+                    case "string": //NOI18N
                         byte len = dfBuf[addr];
                         if (len > 0 && len < 32) {
                             str = new String(dfBuf, addr + 1, len);
                         }
                         break;
-                    case "-":
-                        str = "-";
+                    case "-": //NOI18N
+                        str = "-"; //NOI18N
                         break;
                     default:
                         assert (false);
                 }
-                if (df.getUnit().equals("hex")) {
+                if (df.getUnit().equals("hex")) { //NOI18N
                     switch (type) {
-                        case "S1":
-                        case "U1":
-                        case "S2":
-                        case "U2":
-                        case "S4":
-                        case "U4":
-                            str = "0x" + Integer.toHexString(value);
+                        case "S1": //NOI18N
+                        case "U1": //NOI18N
+                        case "S2": //NOI18N
+                        case "U2": //NOI18N
+                        case "S4": //NOI18N
+                        case "U4": //NOI18N
+                            str = "0x" + Integer.toHexString(value); //NOI18N
                             break;
-                        case "S8":
-                        case "U8":
-                            str = "0x" + Long.toHexString(((long)value << 32) | Integer.toUnsignedLong(value2));
+                        case "S8": //NOI18N
+                        case "U8": //NOI18N
+                            str = "0x" + Long.toHexString(((long)value << 32) | Integer.toUnsignedLong(value2)); //NOI18N
                             break;
                         default:
                     }
-                } else if (df.getUnit().equals("date")) {
-                    str = String.format("%1$d-%2$d-%3$d", 1980+(value>>9), (value>>5)&0xF, value&0x1F);
+                } else if (df.getUnit().equals("date")) { //NOI18N
+                    str = String.format("%1$d-%2$d-%3$d", 1980+(value>>9), (value>>5)&0xF, value&0x1F); //NOI18N
                 } else {
                     switch (type) {
-                        case "S1":
-                        case "U1":
-                        case "S2":
-                        case "U2":
-                        case "S4":
+                        case "S1": //NOI18N
+                        case "U1": //NOI18N
+                        case "S2": //NOI18N
+                        case "U2": //NOI18N
+                        case "S4": //NOI18N
                             str = Integer.toString(value);
                             break;
-                        case "U4":
+                        case "U4": //NOI18N
                             str = Integer.toUnsignedString(value);
                             break;
                         default:
@@ -1406,19 +1406,19 @@ public class NewJFrame extends javax.swing.JFrame {
                 DataFlash df = dfList.get(j);
                 int addr = df.getStartAdr() - stradr;
                 String type = df.getType(), str = (String) jTableCluster.getValueAt(j, 1);
-                if (type.equals("string")) {
+                if (type.equals("string")) { //NOI18N
                     byte[] bytes = str.getBytes();
                     dfBuf[addr] = (byte) Math.min(bytes.length, 10);
                     System.arraycopy(bytes, 0, dfBuf, addr + 1, dfBuf[addr]);
-                } else if (type.equals("-")) {
+                } else if (type.equals("-")) { //NOI18N
                 } else {
                     int value = 0;
                     try {
-                        if (df.getUnit().equals("hex")) {
+                        if (df.getUnit().equals("hex")) { //NOI18N
                             if (str.length() > 2) {
                                 value = Integer.parseUnsignedInt(str.substring(2), 16);
                             }
-                        } else if (df.getUnit().equals("date")) {
+                        } else if (df.getUnit().equals("date")) { //NOI18N
                             int dash1 = str.indexOf('-'), dash2 = str.lastIndexOf('-'),
                                 year = Integer.parseInt(str.substring(0, dash1)),
                                 month = Integer.parseInt(str.substring(dash1 + 1, dash2)),
@@ -1431,17 +1431,17 @@ public class NewJFrame extends javax.swing.JFrame {
                         System.err.println(e);
                     }
                     switch (type) {
-                        case "S1":
-                        case "U1":
+                        case "S1": //NOI18N
+                        case "U1": //NOI18N
                             dfBuf[addr] = (byte) value;
                             break;
-                        case "S2":
-                        case "U2":
+                        case "S2": //NOI18N
+                        case "U2": //NOI18N
                             dfBuf[addr] = (byte) (value >> 8);
                             dfBuf[addr + 1] = (byte) value;
                             break;
-                        case "S4":
-                        case "U4":
+                        case "S4": //NOI18N
+                        case "U4": //NOI18N
                             dfBuf[addr] = (byte) (value >> 24);
                             dfBuf[addr + 1] = (byte) (value >> 16);
                             dfBuf[addr + 2] = (byte) (value >> 8);
@@ -1461,7 +1461,7 @@ public class NewJFrame extends javax.swing.JFrame {
         if (usbSmb.readWord(command, pwValue)) {
             jTextPaneMessage.setText(Integer.toHexString(Short.toUnsignedInt(pwValue[0])).toUpperCase());
         } else {
-            jTextPaneMessage.setText("Read Fail");
+            jTextPaneMessage.setText(java.util.ResourceBundle.getBundle("com/pfc/tool/Bundle").getString("READ FAIL"));
         }
     }//GEN-LAST:event_jButtonReadWordActionPerformed
 
@@ -1469,9 +1469,9 @@ public class NewJFrame extends javax.swing.JFrame {
         int command = Integer.parseInt(jTextFieldCommand.getText(), 16);
         int value = Integer.parseInt(jTextFieldData.getText(), 16);
         if (usbSmb.writeWord(command, value)) {
-            jTextPaneMessage.setText("Write Success");
+            jTextPaneMessage.setText(java.util.ResourceBundle.getBundle("com/pfc/tool/Bundle").getString("WRITE SUCCESS"));
         } else {
-            jTextPaneMessage.setText("Write Fail");
+            jTextPaneMessage.setText(java.util.ResourceBundle.getBundle("com/pfc/tool/Bundle").getString("WRITE FAIL"));
         }
     }//GEN-LAST:event_jButtonWriteWordActionPerformed
 
@@ -1485,16 +1485,16 @@ public class NewJFrame extends javax.swing.JFrame {
                     if (usbSmb.writeByte(command, (byte)value))
                         if (usbSmb.writeByte(command + 1, (byte)(value2 >> 8)))
                             if (usbSmb.writeByte(command, (byte)value2)) {
-                                jTextPaneMessage.setText("Write Success");
+                                jTextPaneMessage.setText(java.util.ResourceBundle.getBundle("com/pfc/tool/Bundle").getString("WRITE SUCCESS"));
                                 return;
                             }
         } else if (usbSmb.writeWord(command, value)) {
             if (usbSmb.writeWord(command, value2)) {
-                jTextPaneMessage.setText("Write Success");
+                jTextPaneMessage.setText(java.util.ResourceBundle.getBundle("com/pfc/tool/Bundle").getString("WRITE SUCCESS"));
                 return;
             }
         }
-        jTextPaneMessage.setText("Write Fail");
+        jTextPaneMessage.setText(java.util.ResourceBundle.getBundle("com/pfc/tool/Bundle").getString("WRITE FAIL"));
     }//GEN-LAST:event_jButtonWriteWord2ActionPerformed
 
     private void jButtonReadBlockActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButtonReadBlockActionPerformed
@@ -1509,14 +1509,14 @@ public class NewJFrame extends javax.swing.JFrame {
                 if (usbSmb.readBytes(command, count, buf)) {
                     StringBuilder result = new StringBuilder();
                     for (byte b : buf) {
-                        result.append(String.format("%02X ", b));
+                        result.append(String.format("%02X ", b)); //NOI18N
                     }
                     jTextPaneMessage.setText(result.toString());
                     return;
                 }
             }
 //        }
-        jTextPaneMessage.setText("Read Fail");
+        jTextPaneMessage.setText(java.util.ResourceBundle.getBundle("com/pfc/tool/Bundle").getString("READ FAIL"));
     }//GEN-LAST:event_jButtonReadBlockActionPerformed
 
     private void jCheckBoxPECItemStateChanged(ItemEvent evt) {//GEN-FIRST:event_jCheckBoxPECItemStateChanged
@@ -1539,9 +1539,9 @@ public class NewJFrame extends javax.swing.JFrame {
                 }
             }
             if (usbSmb.writeBlock(command, count, buf)) {
-                jTextPaneMessage.setText("Write Success");
+                jTextPaneMessage.setText(java.util.ResourceBundle.getBundle("com/pfc/tool/Bundle").getString("WRITE SUCCESS"));
             } else {
-                jTextPaneMessage.setText("Write Fail");
+                jTextPaneMessage.setText(java.util.ResourceBundle.getBundle("com/pfc/tool/Bundle").getString("WRITE FAIL"));
             }
         }
     }//GEN-LAST:event_jButtonWriteBlockActionPerformed
@@ -1552,12 +1552,12 @@ public class NewJFrame extends javax.swing.JFrame {
         if (usbSmb.writeBytes(0xF5, bytes.length, bytes)) {
             if (usbSmb.readBytes(0xF5, bytes.length, bytes)) {
 //                jTextFieldByte.setText(Integer.toHexString(Byte.toUnsignedInt(bytes[0])).toUpperCase());
-                jTextFieldByte.setText(String.format("%02X", bytes[0]));
-                jTextPaneMessage.setText("Read Success");
+                jTextFieldByte.setText(String.format("%02X", bytes[0])); //NOI18N
+                jTextPaneMessage.setText(java.util.ResourceBundle.getBundle("com/pfc/tool/Bundle").getString("READ SUCCESS"));
                 return;
             }
         }
-        jTextPaneMessage.setText("Read Fail");
+        jTextPaneMessage.setText(java.util.ResourceBundle.getBundle("com/pfc/tool/Bundle").getString("READ FAIL"));
     }//GEN-LAST:event_jButtonReadMRegActionPerformed
 
     private void jButtonWriteMRegActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButtonWriteMRegActionPerformed
@@ -1565,9 +1565,9 @@ public class NewJFrame extends javax.swing.JFrame {
              value = (byte)Integer.parseInt(jTextFieldByte.getText(), 16);
         byte[] bytes = { mreg, value };
         if (usbSmb.writeBytes(0xF4, bytes.length, bytes)) {
-            jTextPaneMessage.setText("Write Success");
+            jTextPaneMessage.setText(java.util.ResourceBundle.getBundle("com/pfc/tool/Bundle").getString("WRITE SUCCESS"));
         } else {
-            jTextPaneMessage.setText("Write Fail");
+            jTextPaneMessage.setText(java.util.ResourceBundle.getBundle("com/pfc/tool/Bundle").getString("WRITE FAIL"));
         }
     }//GEN-LAST:event_jButtonWriteMRegActionPerformed
 
@@ -1577,7 +1577,7 @@ public class NewJFrame extends javax.swing.JFrame {
             jProgressBarBL.setValue(0);
             try {
 //                File file = new File("../ini/BootLoader_A1141.bin");
-                File file = new File("../ini/BootLoader_A"+devName+".bin");
+                File file = new File("../ini/BootLoader_A"+devName+".bin"); //NOI18N
                 int len = (int) file.length();
                 byte blBuf[] = new byte[len];
                 new FileInputStream(file).read(blBuf);
@@ -1587,7 +1587,7 @@ public class NewJFrame extends javax.swing.JFrame {
                     public void run() {
                         try {
                             byte[] buf = new byte[34];
-                            if (devName.equals("2168")) {
+                            if (devName.equals("2168")) { //NOI18N
                                 buf[0] = 0x1c;  buf[1] = 0x0f;
                             } else {
                                 buf[0] = 0x1e;  buf[1] = 0x00;
@@ -1657,7 +1657,7 @@ public class NewJFrame extends javax.swing.JFrame {
                         jProgressBarBL.setValue(100);
                         byte[] buf = new byte[2];
                         buf[1] = 0x00;
-                        if (devName.equals("2168")) {
+                        if (devName.equals("2168")) { //NOI18N
                             buf[0] = 0x0F;
                             if (!usbSmb.writeBytes(0x1C, 2, buf)) return;
                         } else {
@@ -1713,11 +1713,11 @@ public class NewJFrame extends javax.swing.JFrame {
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             File file = fcBin.getSelectedFile();
             String path = file.getPath();
-            if (!file.getName().contains(".")) {
-                path += ".bin";
+            if (!file.getName().contains(".")) { //NOI18N
+                path += ".bin"; //NOI18N
             }
             if (file.exists()) {
-                if (JOptionPane.showConfirmDialog(this, "OverWrite Exist File !?") != JOptionPane.YES_OPTION)
+                if (JOptionPane.showConfirmDialog(this, java.util.ResourceBundle.getBundle("com/pfc/tool/Bundle").getString("OVERWRITE EXIST FILE !?")) != JOptionPane.YES_OPTION)
                     return;
             }
             jTextField2.setText(path);
@@ -1741,7 +1741,7 @@ public class NewJFrame extends javax.swing.JFrame {
         int len = (int)file.length();
         if (len > 65536) return;
         byte[] writeBuf = new byte[len];
-        if (path.toLowerCase().endsWith(".cod")) {
+        if (path.toLowerCase().endsWith(".cod")) { //NOI18N
             if (DllEntry.dec64(path, writeBuf) != len)
                 return;
         } else {
@@ -1754,8 +1754,8 @@ public class NewJFrame extends javax.swing.JFrame {
         }
         String str = new String(writeBuf, 0, 3);
         System.out.println(str);
-        if (devName.equals("1141") || devName.equals("3168"))
-            if (!str.equals("PFC")) return;
+        if (devName.equals("1141") || devName.equals("3168")) //NOI18N
+            if (!str.equals("PFC")) return; //NOI18N
         new Thread() {
             @Override
             public void run() {
@@ -1764,9 +1764,9 @@ public class NewJFrame extends javax.swing.JFrame {
                     jProgressBarBL.setValue(0);
                     byte[] buf = new byte[34];
                     ByteBuffer bb = ByteBuffer.wrap(buf);
-                    jLabelStat.setText("Erase");
+                    jLabelStat.setText(java.util.ResourceBundle.getBundle("com/pfc/tool/Bundle").getString("ERASE"));
                     bb.order(ByteOrder.LITTLE_ENDIAN);
-                    if (devName.equals("2168")) {
+                    if (devName.equals("2168")) { //NOI18N
                         bb.putShort(0, (short)1);
                         if (!usbSmb.writeBytes(0xFA, Short.BYTES, buf)) return;
                         sleep(100);
@@ -1775,10 +1775,10 @@ public class NewJFrame extends javax.swing.JFrame {
                         sleep(1500);
                         if (!usbSmb.readBytes(0xFA, Short.BYTES, buf)) return;
                         if (bb.getShort(0) != 0) {
-                            jLabelStat.setText("Fail");
+                            jLabelStat.setText(java.util.ResourceBundle.getBundle("com/pfc/tool/Bundle").getString("FAIL"));
                             return;
                         }
-                    } else if (devName.equals("3168")) {
+                    } else if (devName.equals("3168")) { //NOI18N
                         bb.putShort(0, (short)1);
                         if (!usbSmb.writeBytes(0xFA, Short.BYTES, buf)) return;
                         sleep(100);
@@ -1787,7 +1787,7 @@ public class NewJFrame extends javax.swing.JFrame {
                         sleep(1000);
                         if (!usbSmb.readBytes(0xFA, Short.BYTES, buf)) return;
                         if (bb.getShort(0) != -1) {
-                            jLabelStat.setText("Fail");
+                            jLabelStat.setText(java.util.ResourceBundle.getBundle("com/pfc/tool/Bundle").getString("FAIL"));
                             return;
                         }
                     } else {
@@ -1800,16 +1800,16 @@ public class NewJFrame extends javax.swing.JFrame {
                             sleep(100);
                             if (!usbSmb.readBytes(0xFA, Short.BYTES, buf)) return;
                             if (bb.getShort(0) != block) {
-                                jLabelStat.setText("Fail");
+                                jLabelStat.setText(java.util.ResourceBundle.getBundle("com/pfc/tool/Bundle").getString("FAIL"));
                                 return;
                             }
                             jProgressBarBL.setValue(block);
                         }
                     }
-                    jLabelStat.setText("Writing");
+                    jLabelStat.setText(java.util.ResourceBundle.getBundle("com/pfc/tool/Bundle").getString("WRITING"));
                     bb.order(ByteOrder.BIG_ENDIAN);
                     final int WRITEBYTE = 32, ROMSIZE = 0xE00;
-                    if (devName.equals("2168")) {
+                    if (devName.equals("2168")) { //NOI18N
                         for (int nWriteBytes, nPointer = 0; nPointer < len; nPointer += nWriteBytes) {
                             nWriteBytes = Math.min(len - nPointer, WRITEBYTE);
                             System.arraycopy(writeBuf, nPointer, buf, 2, nWriteBytes);
@@ -1843,19 +1843,19 @@ public class NewJFrame extends javax.swing.JFrame {
                         if (!usbSmb.readBytes(0xFA, Short.BYTES, buf)) return;
                         if (bb.getShort(0) != ROMSIZE) return;
                     }
-                    jLabelStat.setText("Verify");
+                    jLabelStat.setText(java.util.ResourceBundle.getBundle("com/pfc/tool/Bundle").getString("VERIFY"));
                     for (int nReadBytes, i = 0; i < len; i += nReadBytes) {
                         jProgressBarBL.setValue(i);
                         nReadBytes = Math.min(len - i, WRITEBYTE);
                         if (!usbSmb.readBytes(0xF5, WRITEBYTE, buf)) return;
                         if (!Arrays.equals(Arrays.copyOfRange(writeBuf, i, i + nReadBytes),
                                            Arrays.copyOfRange(buf, 0, nReadBytes))) {
-                            jLabelStat.setText("Verify Fail");
+                            jLabelStat.setText(java.util.ResourceBundle.getBundle("com/pfc/tool/Bundle").getString("VERIFY FAIL"));
                             return;
                         }
                     }
                     jProgressBarBL.setValue(len);
-                    jLabelStat.setText("Success");
+                    jLabelStat.setText(java.util.ResourceBundle.getBundle("com/pfc/tool/Bundle").getString("SUCCESS"));
                 } catch (InterruptedException ex) {
                 }
             }
@@ -1869,12 +1869,12 @@ public class NewJFrame extends javax.swing.JFrame {
             public void run() {
                 int len = 0x8000;
                 short start = 0;
-                if (devName.equals("1141")) {
+                if (devName.equals("1141")) { //NOI18N
                     len = 0x7000;
                     start = 0xE00;
-                } else if (devName.equals("2168")) {
+                } else if (devName.equals("2168")) { //NOI18N
                     len = 0xB000;
-                } else if (devName.equals("3168")) {
+                } else if (devName.equals("3168")) { //NOI18N
                     len = 0xF000;
                     start = 0xE00;
                 }
@@ -1901,7 +1901,7 @@ public class NewJFrame extends javax.swing.JFrame {
                         for (int nReadBytes = 32, i = 0; i < len; i += nReadBytes)
                         {
                             jProgressBarBL.setValue(i);
-                            if (devName.equals("2168"))
+                            if (devName.equals("2168")) //NOI18N
                                 if (i == 0xA400) {
                                     bb.putShort(0, (short) 0xB000);
                                     if (!usbSmb.writeBytes(0xFA, Short.BYTES, buf))
@@ -1910,7 +1910,7 @@ public class NewJFrame extends javax.swing.JFrame {
                             if (!usbSmb.readBytes(0xF5, nReadBytes, buf))
                                 break;
                             f.write(buf);
-                            System.out.println(String.format("%04X : %02X", i, buf[0]));
+                            System.out.println(String.format("%04X : %02X", i, buf[0])); //NOI18N
                         }
                         jProgressBarBL.setValue(len);
                     }
@@ -1930,7 +1930,7 @@ public class NewJFrame extends javax.swing.JFrame {
         int len = (int)file.length();
         if (len > 2048) return;
         if (DllEntry.dec128(path, dfBuf) != len) return;
-        System.out.println(String.format("%02X%02X", dfBuf[0], dfBuf[1]));
+        System.out.println(String.format("%02X%02X", dfBuf[0], dfBuf[1])); //NOI18N
         new Thread() {
             @Override
             public void run() {
@@ -1941,9 +1941,9 @@ public class NewJFrame extends javax.swing.JFrame {
                     ByteBuffer bb = ByteBuffer.wrap(buf);
                     bb.order(ByteOrder.LITTLE_ENDIAN);
                     short start = 0, offset = 0x400;
-                    if (devName.equals("1141")) {
+                    if (devName.equals("1141")) { //NOI18N
                         start = 0x7600;
-                    } else if (devName.equals("2168")) {
+                    } else if (devName.equals("2168")) { //NOI18N
                         start = (short) 0xB000;
                     }
                     bb.putShort(0, (short) (start + offset));
@@ -1955,9 +1955,9 @@ public class NewJFrame extends javax.swing.JFrame {
                         if (!usbSmb.readBytes(0xF5, nReadBytes, buf)) return;
                         System.arraycopy(buf, 0, dfBuf, offset + i, nReadBytes);
                     }
-                    jLabelStat.setText("Erase");
+                    jLabelStat.setText(java.util.ResourceBundle.getBundle("com/pfc/tool/Bundle").getString("ERASE"));
                     jProgressBarBL.setMaximum(100);
-                    if (devName.equals("1141")) {
+                    if (devName.equals("1141")) { //NOI18N
                         short block = 0x6800;
                         bb.putShort(0, (short)0);
                         if (!usbSmb.writeBytes(0xFA, Short.BYTES, buf)) return;
@@ -1966,10 +1966,10 @@ public class NewJFrame extends javax.swing.JFrame {
                         sleep(100);
                         if (!usbSmb.readBytes(0xFA, Short.BYTES, buf)) return;
                         if (bb.getShort(0) != block) {
-                            jLabelStat.setText("Fail");
+                            jLabelStat.setText(java.util.ResourceBundle.getBundle("com/pfc/tool/Bundle").getString("FAIL"));
                             return;
                         }
-                    } else if (devName.equals("2168")) {
+                    } else if (devName.equals("2168")) { //NOI18N
                         for (int i = 0; i < 3; i++)	// sector 0~2
                         {
                             bb.putShort(0, (short) (0x308 + 0x40 * i));
@@ -1981,7 +1981,7 @@ public class NewJFrame extends javax.swing.JFrame {
                             }
                         }
                     }
-                    jLabelStat.setText("Writing");
+                    jLabelStat.setText(java.util.ResourceBundle.getBundle("com/pfc/tool/Bundle").getString("WRITING"));
                     jProgressBarBL.setMaximum(len);
                     bb.order(ByteOrder.BIG_ENDIAN);
                     for (int nWriteBytes, nPointer = 0; nPointer < len; nPointer += nWriteBytes) {
@@ -1992,7 +1992,7 @@ public class NewJFrame extends javax.swing.JFrame {
                         if (!usbSmb.writeBytes(0xF4, nWriteBytes + 2, buf)) return;
                         sleep(15);
                     }
-                    jLabelStat.setText("Verify");
+                    jLabelStat.setText(java.util.ResourceBundle.getBundle("com/pfc/tool/Bundle").getString("VERIFY"));
                     bb.order(ByteOrder.LITTLE_ENDIAN);
                     bb.putShort(0, start);
                     if (!usbSmb.writeBytes(0xFA, Short.BYTES, buf)) return;
@@ -2003,12 +2003,12 @@ public class NewJFrame extends javax.swing.JFrame {
                         if (!usbSmb.readBytes(0xF5, nReadBytes, buf)) return;
                         if (!Arrays.equals(Arrays.copyOfRange(dfBuf, i, i + nReadBytes),
                                            Arrays.copyOfRange(buf, 0, nReadBytes))) {
-                            jLabelStat.setText("Verify Fail");
+                            jLabelStat.setText(java.util.ResourceBundle.getBundle("com/pfc/tool/Bundle").getString("VERIFY FAIL"));
                             return;
                         }
                     }
                     jProgressBarBL.setValue(len);
-                    jLabelStat.setText("Success");
+                    jLabelStat.setText(java.util.ResourceBundle.getBundle("com/pfc/tool/Bundle").getString("SUCCESS"));
                 } catch (InterruptedException ex) {
                 }
             }
@@ -2032,19 +2032,19 @@ public class NewJFrame extends javax.swing.JFrame {
         try {
             File file = fcLog.getSelectedFile();
             String path = file.getPath();
-            if (!file.getName().contains(".")) {
-                path += ".log";
+            if (!file.getName().contains(".")) { //NOI18N
+                path += ".log"; //NOI18N
             }
 //            System.out.println("Logging: " + path);
             jTextFieldLogFile.setText(path);
             pwLog = new PrintWriter(new FileWriter(path), true);
-            pwLog.print("Date");
-            pwLog.print("\tTime");
+            pwLog.print(java.util.ResourceBundle.getBundle("com/pfc/tool/Bundle").getString("DATE"));
+            pwLog.print(java.util.ResourceBundle.getBundle("com/pfc/tool/Bundle").getString("\\TTIME"));
             for (int i = 0; i < jTableSBS.getRowCount(); i++) {
                 if ((boolean) jTableSBS.getValueAt(i, 4)) {
-                    pwLog.print("\t");
+                    pwLog.print("\t"); //NOI18N
                     pwLog.print(jTableSBS.getValueAt(i, 1));
-                    pwLog.print(String.format(" (%s)", jTableSBS.getValueAt(i, 0)));
+                    pwLog.print(String.format(" (%s)", jTableSBS.getValueAt(i, 0))); //NOI18N
                 }
             }
             pwLog.println();
@@ -2094,7 +2094,7 @@ public class NewJFrame extends javax.swing.JFrame {
                     if (usbSmb.writeWord(0, 8)) {
                         short pwValue[] = new short[1];
                         if (usbSmb.readWord(0, pwValue)) {
-                            String chemID = String.format("%04X", pwValue[0]);
+                            String chemID = String.format("%04X", pwValue[0]); //NOI18N
                             jTextFieldChemID.setText(chemID);
                             for (int i = 0; i < jTableChem.getRowCount(); i++) {
                                 if (chemID.equals(jTableChem.getValueAt(i, 0))) {
@@ -2118,7 +2118,7 @@ public class NewJFrame extends javax.swing.JFrame {
     private static XYDataset createChemDataset(String chemID) {
         XYSeriesCollection dataset = new XYSeriesCollection();
         
-        String path = "../Chemistry/" + chemID + ".chm";
+        String path = "../Chemistry/" + chemID + ".chm"; //NOI18N
         File file = new File(path);
         if (file.exists()) {
             if (file.length() == 256) {
@@ -2147,7 +2147,8 @@ public class NewJFrame extends javax.swing.JFrame {
     
     private void plotChemChart(int sel) {
         String id = (String)jTableChem.getValueAt(sel, 0);
-        ChemistryChart chart = new ChemistryChart("Chemistry ID: " + id);
+        ChemistryChart chart = new ChemistryChart(java.text.MessageFormat.format(java.util.ResourceBundle.getBundle("com/pfc/tool/Bundle").getString("CHEMISTRY ID: {0}"), new Object[] {id}));
+//        ChemistryChart chart = new ChemistryChart(java.util.ResourceBundle.getBundle("com/pfc/tool/Bundle").getString("CHEMISTRY ID: {0}"));
         chart.createChartPanel(createChemDataset(id));
         chart.pack();
         UIUtils.centerFrameOnScreen(chart);
@@ -2174,7 +2175,7 @@ public class NewJFrame extends javax.swing.JFrame {
 
     private void jButtonChangeActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButtonChangeActionPerformed
         String chemID = (String)jTableChem.getValueAt(jTableChem.getSelectedRow(), 0);
-        String path = "../Chemistry/" + chemID + ".chm";
+        String path = "../Chemistry/" + chemID + ".chm"; //NOI18N
         File file = new File(path);
         if (file.exists()) {
             if (file.length() == 256) {
@@ -2201,8 +2202,8 @@ public class NewJFrame extends javax.swing.JFrame {
     private void formWindowClosing(WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         if (jCheckBox1.isSelected()) {
             JOptionPane.showMessageDialog(this,
-                "Please Exit (UnCheck) Boot Loader !!",
-                "Window Closing",
+                java.util.ResourceBundle.getBundle("com/pfc/tool/Bundle").getString("PLEASE EXIT (UNCHECK) BOOT LOADER !!"),
+                java.util.ResourceBundle.getBundle("com/pfc/tool/Bundle").getString("WINDOW CLOSING"),
                 JOptionPane.INFORMATION_MESSAGE);
         } else {
             dispose();
@@ -2220,7 +2221,7 @@ public class NewJFrame extends javax.swing.JFrame {
         if (usbSmb.readByte(command, pValue)) {
             jTextPaneMessage.setText(Integer.toHexString(Byte.toUnsignedInt(pValue[0])).toUpperCase());
         } else {
-            jTextPaneMessage.setText("Read Fail");
+            jTextPaneMessage.setText(java.util.ResourceBundle.getBundle("com/pfc/tool/Bundle").getString("READ FAIL"));
         }
     }//GEN-LAST:event_jButtonReadByteActionPerformed
 
@@ -2228,9 +2229,9 @@ public class NewJFrame extends javax.swing.JFrame {
         int command = Integer.parseInt(jTextFieldCommand.getText(), 16);
         int value = Integer.parseInt(jTextFieldData.getText(), 16);
         if (usbSmb.writeByte(command, value)) {
-            jTextPaneMessage.setText("Write Success");
+            jTextPaneMessage.setText(java.util.ResourceBundle.getBundle("com/pfc/tool/Bundle").getString("WRITE SUCCESS"));
         } else {
-            jTextPaneMessage.setText("Write Fail");
+            jTextPaneMessage.setText(java.util.ResourceBundle.getBundle("com/pfc/tool/Bundle").getString("WRITE FAIL"));
         }
     }//GEN-LAST:event_jButtonWriteByteActionPerformed
 
@@ -2251,7 +2252,7 @@ public class NewJFrame extends javax.swing.JFrame {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
 //                if ("Nimbus".equals(info.getName())) {
 //                if ("Windows Classic".equals(info.getName())) {
-                if ("Windows".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) { //NOI18N
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }

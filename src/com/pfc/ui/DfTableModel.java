@@ -15,7 +15,7 @@ import javax.swing.table.AbstractTableModel;
  */
 public class DfTableModel extends AbstractTableModel {
     boolean DEBUG = false;
-    String[] columnNames = {"Name", "Value", "Unit"};
+    String[] columnNames = {java.util.ResourceBundle.getBundle("com/pfc/ui/Bundle").getString("NAME"), java.util.ResourceBundle.getBundle("com/pfc/ui/Bundle").getString("VALUE"), java.util.ResourceBundle.getBundle("com/pfc/ui/Bundle").getString("UNIT")};
     Object[][] data = {};
 
     public DfTableModel(List<DataFlash> dfList) {
