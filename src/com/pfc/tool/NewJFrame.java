@@ -269,7 +269,8 @@ public class NewJFrame extends javax.swing.JFrame {
         jButtonChange = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
-        setTitle("PFC Tool v0.1");
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("com/pfc/tool/Bundle"); // NOI18N
+        setTitle(bundle.getString("NewJFrame.title")); // NOI18N
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
                 formWindowClosed(evt);
@@ -279,8 +280,8 @@ public class NewJFrame extends javax.swing.JFrame {
             }
         });
 
-        jTabbedPaneMain.setToolTipText("");
-        jTabbedPaneMain.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
+        jTabbedPaneMain.setToolTipText(bundle.getString("NewJFrame.jTabbedPaneMain.toolTipText")); // NOI18N
+        jTabbedPaneMain.setFont(new java.awt.Font("SimSun", 1, 20)); // NOI18N
         jTabbedPaneMain.setPreferredSize(new java.awt.Dimension(720, 540));
         jTabbedPaneMain.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -295,7 +296,8 @@ public class NewJFrame extends javax.swing.JFrame {
         jTableSBS.getTableHeader().setReorderingAllowed(false);
         jScrollPaneSBS.setViewportView(jTableSBS);
 
-        jButtonRefresh.setText("Refresh");
+        jButtonRefresh.setFont(new java.awt.Font("SimSun", 0, 12)); // NOI18N
+        jButtonRefresh.setText(bundle.getString("NewJFrame.jButtonRefresh.text")); // NOI18N
         jButtonRefresh.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonRefreshActionPerformed(evt);
@@ -310,29 +312,35 @@ public class NewJFrame extends javax.swing.JFrame {
         jTableBits.getTableHeader().setReorderingAllowed(false);
         jScrollPaneBits.setViewportView(jTableBits);
 
-        jLabelSOC.setText("SOC :");
+        jLabelSOC.setText(bundle.getString("NewJFrame.jLabelSOC.text")); // NOI18N
 
-        jCheckBoxScan.setText("Keep Scanning");
+        jCheckBoxScan.setFont(new java.awt.Font("SimSun", 0, 12)); // NOI18N
+        jCheckBoxScan.setText(bundle.getString("NewJFrame.jCheckBoxScan.text")); // NOI18N
         jCheckBoxScan.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 jCheckBoxScanItemStateChanged(evt);
             }
         });
 
-        jLabel7.setText("Interval :");
+        jLabel7.setFont(new java.awt.Font("SimSun", 0, 12)); // NOI18N
+        jLabel7.setText(bundle.getString("NewJFrame.jLabel7.text")); // NOI18N
 
-        jTextFieldInterval.setText("2000");
+        jTextFieldInterval.setFont(new java.awt.Font("SimSun", 0, 12)); // NOI18N
+        jTextFieldInterval.setText(bundle.getString("NewJFrame.jTextFieldInterval.text")); // NOI18N
 
-        jLabel8.setText("ms");
+        jLabel8.setFont(new java.awt.Font("SimSun", 0, 12)); // NOI18N
+        jLabel8.setText(bundle.getString("NewJFrame.jLabel8.text")); // NOI18N
 
-        jButtonStartLog.setText("Start Log");
+        jButtonStartLog.setFont(new java.awt.Font("SimSun", 0, 12)); // NOI18N
+        jButtonStartLog.setText(bundle.getString("NewJFrame.jButtonStartLog.text")); // NOI18N
         jButtonStartLog.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonStartLogActionPerformed(evt);
             }
         });
 
-        jButtonStopLog.setText("Stop Log");
+        jButtonStopLog.setFont(new java.awt.Font("SimSun", 0, 12)); // NOI18N
+        jButtonStopLog.setText(bundle.getString("NewJFrame.jButtonStopLog.text")); // NOI18N
         jButtonStopLog.setEnabled(false);
         jButtonStopLog.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -343,7 +351,7 @@ public class NewJFrame extends javax.swing.JFrame {
         jTextFieldLogFile.setEditable(false);
         jTextFieldLogFile.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
 
-        jCheckBoxHDQ1.setText("HDQ");
+        jCheckBoxHDQ1.setText(bundle.getString("NewJFrame.jCheckBoxHDQ1.text")); // NOI18N
         jCheckBoxHDQ1.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 jCheckBoxHDQItemStateChanged(evt);
@@ -417,44 +425,44 @@ public class NewJFrame extends javax.swing.JFrame {
                     .addComponent(jProgressBarSOC, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelSOC))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPaneBits, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE)
+                .addComponent(jScrollPaneBits, javax.swing.GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        jTabbedPaneMain.addTab("SBS", jPanelSBS);
+        jTabbedPaneMain.addTab(bundle.getString("NewJFrame.jPanelSBS.TabConstraints.tabTitle"), jPanelSBS); // NOI18N
 
         jTabbedPaneDataFlash.setTabPlacement(javax.swing.JTabbedPane.LEFT);
         jTabbedPaneDataFlash.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
 
-        jButtonReadAll.setText("Read All");
+        jButtonReadAll.setText(bundle.getString("NewJFrame.jButtonReadAll.text")); // NOI18N
         jButtonReadAll.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonReadAllActionPerformed(evt);
             }
         });
 
-        jButtonWriteAll.setText("Write All");
+        jButtonWriteAll.setText(bundle.getString("NewJFrame.jButtonWriteAll.text")); // NOI18N
         jButtonWriteAll.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonWriteAllActionPerformed(evt);
             }
         });
 
-        jButtonDefault.setText("Default");
+        jButtonDefault.setText(bundle.getString("NewJFrame.jButtonDefault.text")); // NOI18N
         jButtonDefault.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonDefaultActionPerformed(evt);
             }
         });
 
-        jButtonExport.setText("Export");
+        jButtonExport.setText(bundle.getString("NewJFrame.jButtonExport.text")); // NOI18N
         jButtonExport.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonExportActionPerformed(evt);
             }
         });
 
-        jButtonImport.setText("Import");
+        jButtonImport.setText(bundle.getString("NewJFrame.jButtonImport.text")); // NOI18N
         jButtonImport.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonImportActionPerformed(evt);
@@ -463,7 +471,7 @@ public class NewJFrame extends javax.swing.JFrame {
 
         jProgressBarDF.setMaximum(2048);
 
-        jCheckBoxHDQ2.setText("HDQ");
+        jCheckBoxHDQ2.setText(bundle.getString("NewJFrame.jCheckBoxHDQ2.text")); // NOI18N
         jCheckBoxHDQ2.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 jCheckBoxHDQItemStateChanged(evt);
@@ -507,9 +515,9 @@ public class NewJFrame extends javax.swing.JFrame {
                 .addComponent(jButtonExport)
                 .addGap(45, 45, 45)
                 .addComponent(jButtonImport)
-                .addContainerGap(260, Short.MAX_VALUE))
+                .addContainerGap(285, Short.MAX_VALUE))
             .addGroup(jPanelDataFlashLayout.createSequentialGroup()
-                .addContainerGap(37, Short.MAX_VALUE)
+                .addContainerGap(43, Short.MAX_VALUE)
                 .addGroup(jPanelDataFlashLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTabbedPaneDataFlash, javax.swing.GroupLayout.PREFERRED_SIZE, 524, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jCheckBoxHDQ2))
@@ -518,82 +526,82 @@ public class NewJFrame extends javax.swing.JFrame {
                 .addGap(12, 12, 12))
         );
 
-        jTabbedPaneMain.addTab("DataFlash", jPanelDataFlash);
+        jTabbedPaneMain.addTab(bundle.getString("NewJFrame.jPanelDataFlash.TabConstraints.tabTitle"), jPanelDataFlash); // NOI18N
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("SBS Command"));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(bundle.getString("NewJFrame.jPanel1.border.title"))); // NOI18N
 
-        jLabel1.setText("Command : (hex)");
+        jLabel1.setText(bundle.getString("NewJFrame.jLabel1.text")); // NOI18N
 
-        jLabel2.setText("Word Data : (hex)");
+        jLabel2.setText(bundle.getString("NewJFrame.jLabel2.text")); // NOI18N
 
-        jLabel3.setText("Word 2 : (hex)");
+        jLabel3.setText(bundle.getString("NewJFrame.jLabel3.text")); // NOI18N
 
-        jLabel4.setText("Hex :");
+        jLabel4.setText(bundle.getString("NewJFrame.jLabel4.text")); // NOI18N
 
         jTextFieldCommand.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
-        jTextFieldCommand.setText("0");
+        jTextFieldCommand.setText(bundle.getString("NewJFrame.jTextFieldCommand.text")); // NOI18N
 
         jTextFieldData.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
-        jTextFieldData.setText("0");
+        jTextFieldData.setText(bundle.getString("NewJFrame.jTextFieldData.text")); // NOI18N
 
         jTextFieldData2.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
-        jTextFieldData2.setText("0");
-        jTextFieldData2.setToolTipText("");
+        jTextFieldData2.setText(bundle.getString("NewJFrame.jTextFieldData2.text")); // NOI18N
+        jTextFieldData2.setToolTipText(bundle.getString("NewJFrame.jTextFieldData2.toolTipText")); // NOI18N
 
-        jButtonReadWord.setText("Read Word");
+        jButtonReadWord.setText(bundle.getString("NewJFrame.jButtonReadWord.text")); // NOI18N
         jButtonReadWord.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonReadWordActionPerformed(evt);
             }
         });
 
-        jButtonWriteWord.setText("Write Word");
+        jButtonWriteWord.setText(bundle.getString("NewJFrame.jButtonWriteWord.text")); // NOI18N
         jButtonWriteWord.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonWriteWordActionPerformed(evt);
             }
         });
 
-        jButtonWriteWord2.setText("Write 2 Word");
+        jButtonWriteWord2.setText(bundle.getString("NewJFrame.jButtonWriteWord2.text")); // NOI18N
         jButtonWriteWord2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonWriteWord2ActionPerformed(evt);
             }
         });
 
-        jButtonReadBlock.setText("Read Block");
+        jButtonReadBlock.setText(bundle.getString("NewJFrame.jButtonReadBlock.text")); // NOI18N
         jButtonReadBlock.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonReadBlockActionPerformed(evt);
             }
         });
 
-        jButtonWriteBlock.setText("Write Block");
+        jButtonWriteBlock.setText(bundle.getString("NewJFrame.jButtonWriteBlock.text")); // NOI18N
         jButtonWriteBlock.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonWriteBlockActionPerformed(evt);
             }
         });
 
-        jCheckBoxPEC.setText("Use PEC");
+        jCheckBoxPEC.setText(bundle.getString("NewJFrame.jCheckBoxPEC.text")); // NOI18N
         jCheckBoxPEC.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 jCheckBoxPECItemStateChanged(evt);
             }
         });
 
-        jTextFieldCount.setText("32");
+        jTextFieldCount.setText(bundle.getString("NewJFrame.jTextFieldCount.text")); // NOI18N
 
-        jLabel10.setText("Count :");
+        jLabel10.setText(bundle.getString("NewJFrame.jLabel10.text")); // NOI18N
 
-        jButtonReadByte.setText("Read Byte");
+        jButtonReadByte.setText(bundle.getString("NewJFrame.jButtonReadByte.text")); // NOI18N
         jButtonReadByte.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonReadByteActionPerformed(evt);
             }
         });
 
-        jButtonWriteByte.setText("Write Byte");
+        jButtonWriteByte.setText(bundle.getString("NewJFrame.jButtonWriteByte.text")); // NOI18N
         jButtonWriteByte.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonWriteByteActionPerformed(evt);
@@ -702,26 +710,26 @@ public class NewJFrame extends javax.swing.JFrame {
         jTextPaneMessage.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         jScrollPane1.setViewportView(jTextPaneMessage);
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Mode Register"));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(bundle.getString("NewJFrame.jPanel2.border.title"))); // NOI18N
 
-        jLabel5.setText("Address : 10");
+        jLabel5.setText(bundle.getString("NewJFrame.jLabel5.text")); // NOI18N
 
-        jLabel6.setText("Byte Data :");
+        jLabel6.setText(bundle.getString("NewJFrame.jLabel6.text")); // NOI18N
 
         jTextFieldMReg.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
-        jTextFieldMReg.setText("00");
+        jTextFieldMReg.setText(bundle.getString("NewJFrame.jTextFieldMReg.text")); // NOI18N
 
         jTextFieldByte.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
-        jTextFieldByte.setText("00");
+        jTextFieldByte.setText(bundle.getString("NewJFrame.jTextFieldByte.text")); // NOI18N
 
-        jButtonReadMReg.setText("Read");
+        jButtonReadMReg.setText(bundle.getString("NewJFrame.jButtonReadMReg.text")); // NOI18N
         jButtonReadMReg.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonReadMRegActionPerformed(evt);
             }
         });
 
-        jButtonWriteMReg.setText("Write");
+        jButtonWriteMReg.setText(bundle.getString("NewJFrame.jButtonWriteMReg.text")); // NOI18N
         jButtonWriteMReg.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonWriteMRegActionPerformed(evt);
@@ -763,9 +771,9 @@ public class NewJFrame extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Boot Loader"));
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(bundle.getString("NewJFrame.jPanel3.border.title"))); // NOI18N
 
-        jCheckBox1.setText("Boot ROM Mode");
+        jCheckBox1.setText(bundle.getString("NewJFrame.jCheckBox1.text")); // NOI18N
         jCheckBox1.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 jCheckBox1ItemStateChanged(evt);
@@ -774,42 +782,42 @@ public class NewJFrame extends javax.swing.JFrame {
 
         jProgressBarBL.setStringPainted(true);
 
-        jButton1.setText("...");
+        jButton1.setText(bundle.getString("NewJFrame.jButton1.text")); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
-        jButton2.setText("...");
+        jButton2.setText(bundle.getString("NewJFrame.jButton2.text")); // NOI18N
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
 
-        jButton3.setText("...");
+        jButton3.setText(bundle.getString("NewJFrame.jButton3.text")); // NOI18N
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
             }
         });
 
-        jButtonProgram.setText("Program");
+        jButtonProgram.setText(bundle.getString("NewJFrame.jButtonProgram.text")); // NOI18N
         jButtonProgram.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonProgramActionPerformed(evt);
             }
         });
 
-        jButtonReadFlash.setText("Save to File");
+        jButtonReadFlash.setText(bundle.getString("NewJFrame.jButtonReadFlash.text")); // NOI18N
         jButtonReadFlash.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonReadFlashActionPerformed(evt);
             }
         });
 
-        jButtonWriteFlash.setText("Write to DF");
+        jButtonWriteFlash.setText(bundle.getString("NewJFrame.jButtonWriteFlash.text")); // NOI18N
         jButtonWriteFlash.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonWriteFlashActionPerformed(evt);
@@ -875,7 +883,7 @@ public class NewJFrame extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jCheckBoxHDQ3.setText("HDQ");
+        jCheckBoxHDQ3.setText(bundle.getString("NewJFrame.jCheckBoxHDQ3.text")); // NOI18N
         jCheckBoxHDQ3.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 jCheckBoxHDQItemStateChanged(evt);
@@ -914,10 +922,10 @@ public class NewJFrame extends javax.swing.JFrame {
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
-        jTabbedPaneMain.addTab("Command", jPanelCommand);
+        jTabbedPaneMain.addTab(bundle.getString("NewJFrame.jPanelCommand.TabConstraints.tabTitle"), jPanelCommand); // NOI18N
 
         jTableChem.setModel(chemTableModel);
         jTableChem.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -928,18 +936,18 @@ public class NewJFrame extends javax.swing.JFrame {
         });
         jScrollPaneChem.setViewportView(jTableChem);
 
-        jButtonPlot.setText("View OCV Curve");
+        jButtonPlot.setText(bundle.getString("NewJFrame.jButtonPlot.text")); // NOI18N
         jButtonPlot.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonPlotActionPerformed(evt);
             }
         });
 
-        jLabel9.setText("Chemisry ID:");
+        jLabel9.setText(bundle.getString("NewJFrame.jLabel9.text")); // NOI18N
 
         jTextFieldChemID.setEditable(false);
 
-        jButtonChange.setText("Change Chemistry");
+        jButtonChange.setText(bundle.getString("NewJFrame.jButtonChange.text")); // NOI18N
         jButtonChange.setEnabled(false);
         jButtonChange.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -979,11 +987,11 @@ public class NewJFrame extends javax.swing.JFrame {
                         .addComponent(jButtonPlot))
                     .addGroup(jPanelChemLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPaneChem, javax.swing.GroupLayout.DEFAULT_SIZE, 574, Short.MAX_VALUE)))
+                        .addComponent(jScrollPaneChem, javax.swing.GroupLayout.DEFAULT_SIZE, 599, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
-        jTabbedPaneMain.addTab("Chemistry", jPanelChem);
+        jTabbedPaneMain.addTab(bundle.getString("NewJFrame.jPanelChem.TabConstraints.tabTitle"), jPanelChem); // NOI18N
 
         jScrollPaneMain.setViewportView(jTabbedPaneMain);
 
