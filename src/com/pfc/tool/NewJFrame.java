@@ -434,7 +434,6 @@ public class NewJFrame extends javax.swing.JFrame {
         jTabbedPaneDataFlash.setTabPlacement(javax.swing.JTabbedPane.LEFT);
         jTabbedPaneDataFlash.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
 
-        jButtonReadAll.setFont(new java.awt.Font("SimSun", 0, 12)); // NOI18N
         jButtonReadAll.setText(bundle.getString("NewJFrame.jButtonReadAll.text")); // NOI18N
         jButtonReadAll.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -442,7 +441,6 @@ public class NewJFrame extends javax.swing.JFrame {
             }
         });
 
-        jButtonWriteAll.setFont(new java.awt.Font("SimSun", 0, 12)); // NOI18N
         jButtonWriteAll.setText(bundle.getString("NewJFrame.jButtonWriteAll.text")); // NOI18N
         jButtonWriteAll.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -450,7 +448,6 @@ public class NewJFrame extends javax.swing.JFrame {
             }
         });
 
-        jButtonDefault.setFont(new java.awt.Font("SimSun", 0, 12)); // NOI18N
         jButtonDefault.setText(bundle.getString("NewJFrame.jButtonDefault.text")); // NOI18N
         jButtonDefault.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -458,7 +455,6 @@ public class NewJFrame extends javax.swing.JFrame {
             }
         });
 
-        jButtonExport.setFont(new java.awt.Font("SimSun", 0, 12)); // NOI18N
         jButtonExport.setText(bundle.getString("NewJFrame.jButtonExport.text")); // NOI18N
         jButtonExport.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -466,7 +462,6 @@ public class NewJFrame extends javax.swing.JFrame {
             }
         });
 
-        jButtonImport.setFont(new java.awt.Font("SimSun", 0, 12)); // NOI18N
         jButtonImport.setText(bundle.getString("NewJFrame.jButtonImport.text")); // NOI18N
         jButtonImport.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -636,19 +631,7 @@ public class NewJFrame extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(jCheckBoxPEC)
-                                .addGap(28, 28, 28))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addGap(214, 214, 214)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButtonReadByte)
-                                    .addComponent(jButtonWriteByte))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButtonReadBlock, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel10)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jTextFieldCount, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                .addGap(28, 28, 28))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -662,14 +645,25 @@ public class NewJFrame extends javax.swing.JFrame {
                                 .addGap(21, 21, 21)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jButtonWriteWord2)
-                                    .addComponent(jButtonWriteWord)))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jButtonReadWord)
+                                            .addComponent(jButtonWriteWord))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jButtonReadByte)
+                                            .addComponent(jButtonWriteByte)))))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addGap(18, 18, 18)
-                                .addComponent(jTextFieldCommand, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButtonReadWord)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addComponent(jTextFieldCommand, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButtonReadBlock, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel10)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextFieldCount, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -917,7 +911,7 @@ public class NewJFrame extends javax.swing.JFrame {
                     .addGroup(jPanelCommandLayout.createSequentialGroup()
                         .addGap(43, 43, 43)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(75, Short.MAX_VALUE))
+                .addContainerGap(100, Short.MAX_VALUE))
         );
         jPanelCommandLayout.setVerticalGroup(
             jPanelCommandLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

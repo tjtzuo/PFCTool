@@ -73,7 +73,7 @@
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-                  <JTabbedPaneConstraints tabName="SBS&#x9875;">
+                  <JTabbedPaneConstraints tabName="SBS">
                     <Property name="tabTitle" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
                       <ResourceString bundle="com/pfc/tool/Bundle.properties" key="NewJFrame.jPanelSBS.TabConstraints.tabTitle" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
                     </Property>
@@ -329,7 +329,7 @@
             <Container class="javax.swing.JPanel" name="jPanelDataFlash">
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-                  <JTabbedPaneConstraints tabName="&#x95ea;&#x5b58;&#x6570;&#x636e;&#x8bbe;&#x7f6e;">
+                  <JTabbedPaneConstraints tabName="DataFlash">
                     <Property name="tabTitle" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
                       <ResourceString bundle="com/pfc/tool/Bundle.properties" key="NewJFrame.jPanelDataFlash.TabConstraints.tabTitle" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
                     </Property>
@@ -408,9 +408,6 @@
                 </Container>
                 <Component class="javax.swing.JButton" name="jButtonReadAll">
                   <Properties>
-                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="SimSun" size="12" style="0"/>
-                    </Property>
                     <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
                       <ResourceString bundle="com/pfc/tool/Bundle.properties" key="NewJFrame.jButtonReadAll.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
                     </Property>
@@ -421,9 +418,6 @@
                 </Component>
                 <Component class="javax.swing.JButton" name="jButtonWriteAll">
                   <Properties>
-                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="SimSun" size="12" style="0"/>
-                    </Property>
                     <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
                       <ResourceString bundle="com/pfc/tool/Bundle.properties" key="NewJFrame.jButtonWriteAll.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
                     </Property>
@@ -434,9 +428,6 @@
                 </Component>
                 <Component class="javax.swing.JButton" name="jButtonDefault">
                   <Properties>
-                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="SimSun" size="12" style="0"/>
-                    </Property>
                     <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
                       <ResourceString bundle="com/pfc/tool/Bundle.properties" key="NewJFrame.jButtonDefault.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
                     </Property>
@@ -447,9 +438,6 @@
                 </Component>
                 <Component class="javax.swing.JButton" name="jButtonExport">
                   <Properties>
-                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="SimSun" size="12" style="0"/>
-                    </Property>
                     <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
                       <ResourceString bundle="com/pfc/tool/Bundle.properties" key="NewJFrame.jButtonExport.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
                     </Property>
@@ -460,9 +448,6 @@
                 </Component>
                 <Component class="javax.swing.JButton" name="jButtonImport">
                   <Properties>
-                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="SimSun" size="12" style="0"/>
-                    </Property>
                     <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
                       <ResourceString bundle="com/pfc/tool/Bundle.properties" key="NewJFrame.jButtonImport.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
                     </Property>
@@ -491,7 +476,7 @@
             <Container class="javax.swing.JPanel" name="jPanelCommand">
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-                  <JTabbedPaneConstraints tabName="&#x547d;&#x4ee4;&#x9875;">
+                  <JTabbedPaneConstraints tabName="Command">
                     <Property name="tabTitle" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
                       <ResourceString bundle="com/pfc/tool/Bundle.properties" key="NewJFrame.jPanelCommand.TabConstraints.tabTitle" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
                     </Property>
@@ -526,7 +511,7 @@
                                   <Component id="jScrollPane1" min="-2" pref="399" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace pref="75" max="32767" attributes="0"/>
+                          <EmptySpace pref="100" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -574,7 +559,7 @@
                   <Properties>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                        <TitledBorder title="SBS &#x547d;&#x4ee4;">
+                        <TitledBorder title="SBS Command">
                           <ResourceString PropertyName="titleX" bundle="com/pfc/tool/Bundle.properties" key="NewJFrame.jPanel1.border.title" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
                           <Font PropertyName="font" name="SimSun" size="12" style="0"/>
                         </TitledBorder>
@@ -602,22 +587,6 @@
                                               <Component id="jCheckBoxPEC" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                                           </Group>
-                                          <Group type="102" alignment="1" attributes="0">
-                                              <EmptySpace min="-2" pref="214" max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="jButtonReadByte" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="jButtonWriteByte" min="-2" max="-2" attributes="0"/>
-                                              </Group>
-                                              <EmptySpace pref="43" max="32767" attributes="0"/>
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="jButtonReadBlock" alignment="1" min="-2" max="-2" attributes="0"/>
-                                                  <Group type="102" alignment="1" attributes="0">
-                                                      <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
-                                                      <EmptySpace max="-2" attributes="0"/>
-                                                      <Component id="jTextFieldCount" min="-2" pref="24" max="-2" attributes="0"/>
-                                                  </Group>
-                                              </Group>
-                                          </Group>
                                       </Group>
                                   </Group>
                                   <Group type="102" attributes="0">
@@ -635,18 +604,34 @@
                                               <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="0" attributes="0">
                                                   <Component id="jButtonWriteWord2" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="jButtonWriteWord" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  <Group type="102" alignment="0" attributes="0">
+                                                      <Group type="103" groupAlignment="1" attributes="0">
+                                                          <Component id="jButtonReadWord" min="-2" max="-2" attributes="0"/>
+                                                          <Component id="jButtonWriteWord" min="-2" max="-2" attributes="0"/>
+                                                      </Group>
+                                                      <EmptySpace max="-2" attributes="0"/>
+                                                      <Group type="103" groupAlignment="0" attributes="0">
+                                                          <Component id="jButtonReadByte" min="-2" max="-2" attributes="0"/>
+                                                          <Component id="jButtonWriteByte" min="-2" max="-2" attributes="0"/>
+                                                      </Group>
+                                                  </Group>
                                               </Group>
                                           </Group>
                                           <Group type="102" alignment="0" attributes="0">
                                               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Component id="jTextFieldCommand" min="-2" pref="53" max="-2" attributes="0"/>
-                                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Component id="jButtonReadWord" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jTextFieldCommand" min="-2" pref="47" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
-                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                      <EmptySpace pref="26" max="32767" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="jButtonReadBlock" alignment="1" min="-2" max="-2" attributes="0"/>
+                                          <Group type="102" alignment="1" attributes="0">
+                                              <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="jTextFieldCount" min="-2" pref="24" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
                                   </Group>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
@@ -866,7 +851,7 @@
                   <Properties>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                        <TitledBorder title="&#x6a21;&#x5f0f;&#x5bc4;&#x5b58;&#x5668;">
+                        <TitledBorder title="Mode Register">
                           <ResourceString PropertyName="titleX" bundle="com/pfc/tool/Bundle.properties" key="NewJFrame.jPanel2.border.title" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
                           <Font PropertyName="font" name="SimSun" size="12" style="0"/>
                         </TitledBorder>
@@ -976,7 +961,7 @@
                   <Properties>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                        <TitledBorder title="&#x5e95;&#x5c42;">
+                        <TitledBorder title="Boot Loader">
                           <ResourceString PropertyName="titleX" bundle="com/pfc/tool/Bundle.properties" key="NewJFrame.jPanel3.border.title" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
                           <Font PropertyName="font" name="SimSun" size="12" style="0"/>
                         </TitledBorder>
@@ -1154,7 +1139,7 @@
             <Container class="javax.swing.JPanel" name="jPanelChem">
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-                  <JTabbedPaneConstraints tabName="&#x7535;&#x82af;&#x5316;&#x5b66;&#x7279;&#x6027;&#x8868;">
+                  <JTabbedPaneConstraints tabName="Chemistry">
                     <Property name="tabTitle" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
                       <ResourceString bundle="com/pfc/tool/Bundle.properties" key="NewJFrame.jPanelChem.TabConstraints.tabTitle" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
                     </Property>
