@@ -1,3 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE DataFlash SYSTEM "DataFlash.dtd">
 <DataFlash>
 <cluster>
 <cluster_name>1st Level Safety</cluster_name>
@@ -1031,18 +1033,7 @@
 <element>
 <name>Mode Registors</name>
 <stradr>0x7A40</stradr>
-<type>U4</type>
-<default>-1</default>
-<unit>hex</unit>
-<description>-</description>
-<max_value>-</max_value>
-<min_value>-</min_value>
-</element>
-
-<element>
-<name>Mode Registors</name>
-<stradr>0x7A44</stradr>
-<type>U4</type>
+<type>U8</type>
 <default>-1</default>
 <unit>hex</unit>
 <description>-</description>
@@ -1298,11 +1289,429 @@
 <cluster_name>CELLOCVTBL</cluster_name>
 
 <element>
+<name>Chemistry ID</name>
+<stradr>0x7CD0</stradr>
+<type>U2</type>
+<default>0x100</default>
+<unit>hex</unit>
+<description>-</description>
+<max_value>-</max_value>
+<min_value>-</min_value>
+</element>
+
+<element>
 <name>OCV_A</name>
-<stradr>0x7C00</stradr>
+<stradr>0x0</stradr>
 <type>-</type>
 <default>-</default>
 <unit>-</unit>
+<description>-</description>
+<max_value>-</max_value>
+<min_value>-</min_value>
+</element>
+
+<element>
+<name>A 0</name>
+<stradr>0x7C00</stradr>
+<type>S2</type>
+<default>4196</default>
+<unit>mV</unit>
+<description>-</description>
+<max_value>-</max_value>
+<min_value>-</min_value>
+</element>
+
+<element>
+<name>A 1</name>
+<stradr>0x7C02</stradr>
+<type>S2</type>
+<default>4142</default>
+<unit>mV</unit>
+<description>-</description>
+<max_value>-</max_value>
+<min_value>-</min_value>
+</element>
+
+<element>
+<name>A 2</name>
+<stradr>0x7C04</stradr>
+<type>S2</type>
+<default>4091</default>
+<unit>mV</unit>
+<description>-</description>
+<max_value>-</max_value>
+<min_value>-</min_value>
+</element>
+
+<element>
+<name>A 3</name>
+<stradr>0x7C06</stradr>
+<type>S2</type>
+<default>4046</default>
+<unit>mV</unit>
+<description>-</description>
+<max_value>-</max_value>
+<min_value>-</min_value>
+</element>
+
+<element>
+<name>A 4</name>
+<stradr>0x7C08</stradr>
+<type>S2</type>
+<default>4006</default>
+<unit>mV</unit>
+<description>-</description>
+<max_value>-</max_value>
+<min_value>-</min_value>
+</element>
+
+<element>
+<name>A 5</name>
+<stradr>0x7C0A</stradr>
+<type>S2</type>
+<default>3968</default>
+<unit>mV</unit>
+<description>-</description>
+<max_value>-</max_value>
+<min_value>-</min_value>
+</element>
+
+<element>
+<name>A 6</name>
+<stradr>0x7C0C</stradr>
+<type>S2</type>
+<default>3934</default>
+<unit>mV</unit>
+<description>-</description>
+<max_value>-</max_value>
+<min_value>-</min_value>
+</element>
+
+<element>
+<name>A 7</name>
+<stradr>0x7C0E</stradr>
+<type>S2</type>
+<default>3903</default>
+<unit>mV</unit>
+<description>-</description>
+<max_value>-</max_value>
+<min_value>-</min_value>
+</element>
+
+<element>
+<name>A 8</name>
+<stradr>0x7C10</stradr>
+<type>S2</type>
+<default>3871</default>
+<unit>mV</unit>
+<description>-</description>
+<max_value>-</max_value>
+<min_value>-</min_value>
+</element>
+
+<element>
+<name>A 9</name>
+<stradr>0x7C12</stradr>
+<type>S2</type>
+<default>3840</default>
+<unit>mV</unit>
+<description>-</description>
+<max_value>-</max_value>
+<min_value>-</min_value>
+</element>
+
+<element>
+<name>A 10</name>
+<stradr>0x7C14</stradr>
+<type>S2</type>
+<default>3820</default>
+<unit>mV</unit>
+<description>-</description>
+<max_value>-</max_value>
+<min_value>-</min_value>
+</element>
+
+<element>
+<name>A 11</name>
+<stradr>0x7C16</stradr>
+<type>S2</type>
+<default>3804</default>
+<unit>mV</unit>
+<description>-</description>
+<max_value>-</max_value>
+<min_value>-</min_value>
+</element>
+
+<element>
+<name>A 12</name>
+<stradr>0x7C18</stradr>
+<type>S2</type>
+<default>3793</default>
+<unit>mV</unit>
+<description>-</description>
+<max_value>-</max_value>
+<min_value>-</min_value>
+</element>
+
+<element>
+<name>A 13</name>
+<stradr>0x7C1A</stradr>
+<type>S2</type>
+<default>3784</default>
+<unit>mV</unit>
+<description>-</description>
+<max_value>-</max_value>
+<min_value>-</min_value>
+</element>
+
+<element>
+<name>A 14</name>
+<stradr>0x7C1C</stradr>
+<type>S2</type>
+<default>3772</default>
+<unit>mV</unit>
+<description>-</description>
+<max_value>-</max_value>
+<min_value>-</min_value>
+</element>
+
+<element>
+<name>A 15</name>
+<stradr>0x7C1E</stradr>
+<type>S2</type>
+<default>3755</default>
+<unit>mV</unit>
+<description>-</description>
+<max_value>-</max_value>
+<min_value>-</min_value>
+</element>
+
+<element>
+<name>A 16</name>
+<stradr>0x7C20</stradr>
+<type>S2</type>
+<default>3732</default>
+<unit>mV</unit>
+<description>-</description>
+<max_value>-</max_value>
+<min_value>-</min_value>
+</element>
+
+<element>
+<name>A 17</name>
+<stradr>0x7C22</stradr>
+<type>S2</type>
+<default>3726</default>
+<unit>mV</unit>
+<description>-</description>
+<max_value>-</max_value>
+<min_value>-</min_value>
+</element>
+
+<element>
+<name>A 18</name>
+<stradr>0x7C24</stradr>
+<type>S2</type>
+<default>3720</default>
+<unit>mV</unit>
+<description>-</description>
+<max_value>-</max_value>
+<min_value>-</min_value>
+</element>
+
+<element>
+<name>A 19</name>
+<stradr>0x7C26</stradr>
+<type>S2</type>
+<default>3712</default>
+<unit>mV</unit>
+<description>-</description>
+<max_value>-</max_value>
+<min_value>-</min_value>
+</element>
+
+<element>
+<name>A 20</name>
+<stradr>0x7C28</stradr>
+<type>S2</type>
+<default>3704</default>
+<unit>mV</unit>
+<description>-</description>
+<max_value>-</max_value>
+<min_value>-</min_value>
+</element>
+
+<element>
+<name>A 21</name>
+<stradr>0x7C2A</stradr>
+<type>S2</type>
+<default>3696</default>
+<unit>mV</unit>
+<description>-</description>
+<max_value>-</max_value>
+<min_value>-</min_value>
+</element>
+
+<element>
+<name>A 22</name>
+<stradr>0x7C2C</stradr>
+<type>S2</type>
+<default>3687</default>
+<unit>mV</unit>
+<description>-</description>
+<max_value>-</max_value>
+<min_value>-</min_value>
+</element>
+
+<element>
+<name>A 23</name>
+<stradr>0x7C2E</stradr>
+<type>S2</type>
+<default>3677</default>
+<unit>mV</unit>
+<description>-</description>
+<max_value>-</max_value>
+<min_value>-</min_value>
+</element>
+
+<element>
+<name>A 24</name>
+<stradr>0x7C30</stradr>
+<type>S2</type>
+<default>3667</default>
+<unit>mV</unit>
+<description>-</description>
+<max_value>-</max_value>
+<min_value>-</min_value>
+</element>
+
+<element>
+<name>A 25</name>
+<stradr>0x7C32</stradr>
+<type>S2</type>
+<default>3662</default>
+<unit>mV</unit>
+<description>-</description>
+<max_value>-</max_value>
+<min_value>-</min_value>
+</element>
+
+<element>
+<name>A 26</name>
+<stradr>0x7C34</stradr>
+<type>S2</type>
+<default>3657</default>
+<unit>mV</unit>
+<description>-</description>
+<max_value>-</max_value>
+<min_value>-</min_value>
+</element>
+
+<element>
+<name>A 27</name>
+<stradr>0x7C36</stradr>
+<type>S2</type>
+<default>3652</default>
+<unit>mV</unit>
+<description>-</description>
+<max_value>-</max_value>
+<min_value>-</min_value>
+</element>
+
+<element>
+<name>A 28</name>
+<stradr>0x7C38</stradr>
+<type>S2</type>
+<default>3646</default>
+<unit>mV</unit>
+<description>-</description>
+<max_value>-</max_value>
+<min_value>-</min_value>
+</element>
+
+<element>
+<name>A 29</name>
+<stradr>0x7C3A</stradr>
+<type>S2</type>
+<default>3639</default>
+<unit>mV</unit>
+<description>-</description>
+<max_value>-</max_value>
+<min_value>-</min_value>
+</element>
+
+<element>
+<name>A 30</name>
+<stradr>0x7C3C</stradr>
+<type>S2</type>
+<default>3628</default>
+<unit>mV</unit>
+<description>-</description>
+<max_value>-</max_value>
+<min_value>-</min_value>
+</element>
+
+<element>
+<name>A 31</name>
+<stradr>0x7C3E</stradr>
+<type>S2</type>
+<default>3602</default>
+<unit>mV</unit>
+<description>-</description>
+<max_value>-</max_value>
+<min_value>-</min_value>
+</element>
+
+<element>
+<name>A 32</name>
+<stradr>0x7C40</stradr>
+<type>S2</type>
+<default>3555</default>
+<unit>mV</unit>
+<description>-</description>
+<max_value>-</max_value>
+<min_value>-</min_value>
+</element>
+
+<element>
+<name>A 33</name>
+<stradr>0x7C42</stradr>
+<type>S2</type>
+<default>3490</default>
+<unit>mV</unit>
+<description>-</description>
+<max_value>-</max_value>
+<min_value>-</min_value>
+</element>
+
+<element>
+<name>A 34</name>
+<stradr>0x7C44</stradr>
+<type>S2</type>
+<default>3402</default>
+<unit>mV</unit>
+<description>-</description>
+<max_value>-</max_value>
+<min_value>-</min_value>
+</element>
+
+<element>
+<name>A 35</name>
+<stradr>0x7C46</stradr>
+<type>S2</type>
+<default>3272</default>
+<unit>mV</unit>
+<description>-</description>
+<max_value>-</max_value>
+<min_value>-</min_value>
+</element>
+
+<element>
+<name>A 36</name>
+<stradr>0x7C48</stradr>
+<type>S2</type>
+<default>2925</default>
+<unit>mV</unit>
 <description>-</description>
 <max_value>-</max_value>
 <min_value>-</min_value>
@@ -1342,8 +1751,8 @@
 </element>
 
 <element>
-<name>Chemistry ID</name>
-<stradr>0x7CD0</stradr>
+<name>RaATTF</name>
+<stradr>0x7CD2</stradr>
 <type>-</type>
 <default>-</default>
 <unit>-</unit>
@@ -1352,12 +1761,193 @@
 <min_value>-</min_value>
 </element>
 
+</cluster>
+
+<cluster>
+<cluster_name>Ra Table</cluster_name>
+
 <element>
-<name>RaATTF</name>
-<stradr>0x7CD2</stradr>
-<type>-</type>
-<default>-</default>
-<unit>-</unit>
+<name>Cell 0 Ra Flag</name>
+<stradr>0x7759</stradr>
+<type>U2</type>
+<default>0</default>
+<unit>hex</unit>
+<description>-</description>
+<max_value>-</max_value>
+<min_value>-</min_value>
+</element>
+
+<element>
+<name>Cell 0 Ra0</name>
+<stradr>0x775B</stradr>
+<type>S2</type>
+<default>38</default>
+<unit>2^-10Ω</unit>
+<description>-</description>
+<max_value>-</max_value>
+<min_value>-</min_value>
+</element>
+
+<element>
+<name>Cell 0 Ra1</name>
+<stradr>0x775D</stradr>
+<type>S2</type>
+<default>41</default>
+<unit>2^-10Ω</unit>
+<description>-</description>
+<max_value>-</max_value>
+<min_value>-</min_value>
+</element>
+
+<element>
+<name>Cell 0 Ra2</name>
+<stradr>0x775F</stradr>
+<type>S2</type>
+<default>43</default>
+<unit>2^-10Ω</unit>
+<description>-</description>
+<max_value>-</max_value>
+<min_value>-</min_value>
+</element>
+
+<element>
+<name>Cell 0 Ra3</name>
+<stradr>0x7761</stradr>
+<type>S2</type>
+<default>44</default>
+<unit>2^-10Ω</unit>
+<description>-</description>
+<max_value>-</max_value>
+<min_value>-</min_value>
+</element>
+
+<element>
+<name>Cell 0 Ra4</name>
+<stradr>0x7763</stradr>
+<type>S2</type>
+<default>42</default>
+<unit>2^-10Ω</unit>
+<description>-</description>
+<max_value>-</max_value>
+<min_value>-</min_value>
+</element>
+
+<element>
+<name>Cell 0 Ra5</name>
+<stradr>0x7765</stradr>
+<type>S2</type>
+<default>42</default>
+<unit>2^-10Ω</unit>
+<description>-</description>
+<max_value>-</max_value>
+<min_value>-</min_value>
+</element>
+
+<element>
+<name>Cell 0 Ra6</name>
+<stradr>0x7767</stradr>
+<type>S2</type>
+<default>45</default>
+<unit>2^-10Ω</unit>
+<description>-</description>
+<max_value>-</max_value>
+<min_value>-</min_value>
+</element>
+
+<element>
+<name>Cell 0 Ra7</name>
+<stradr>0x7769</stradr>
+<type>S2</type>
+<default>48</default>
+<unit>2^-10Ω</unit>
+<description>-</description>
+<max_value>-</max_value>
+<min_value>-</min_value>
+</element>
+
+<element>
+<name>Cell 0 Ra8</name>
+<stradr>0x776B</stradr>
+<type>S2</type>
+<default>49</default>
+<unit>2^-10Ω</unit>
+<description>-</description>
+<max_value>-</max_value>
+<min_value>-</min_value>
+</element>
+
+<element>
+<name>Cell 0 Ra9</name>
+<stradr>0x776D</stradr>
+<type>S2</type>
+<default>52</default>
+<unit>2^-10Ω</unit>
+<description>-</description>
+<max_value>-</max_value>
+<min_value>-</min_value>
+</element>
+
+<element>
+<name>Cell 0 Ra10</name>
+<stradr>0x776F</stradr>
+<type>S2</type>
+<default>56</default>
+<unit>2^-10Ω</unit>
+<description>-</description>
+<max_value>-</max_value>
+<min_value>-</min_value>
+</element>
+
+<element>
+<name>Cell 0 Ra11</name>
+<stradr>0x7771</stradr>
+<type>S2</type>
+<default>65</default>
+<unit>2^-10Ω</unit>
+<description>-</description>
+<max_value>-</max_value>
+<min_value>-</min_value>
+</element>
+
+<element>
+<name>Cell 0 Ra12</name>
+<stradr>0x7773</stradr>
+<type>S2</type>
+<default>74</default>
+<unit>2^-10Ω</unit>
+<description>-</description>
+<max_value>-</max_value>
+<min_value>-</min_value>
+</element>
+
+<element>
+<name>Cell 0 Ra13</name>
+<stradr>0x7775</stradr>
+<type>S2</type>
+<default>128</default>
+<unit>2^-10Ω</unit>
+<description>-</description>
+<max_value>-</max_value>
+<min_value>-</min_value>
+</element>
+
+<element>
+<name>Cell 0 Ra14</name>
+<stradr>0x7777</stradr>
+<type>S2</type>
+<default>378</default>
+<unit>2^-10Ω</unit>
+<description>-</description>
+<max_value>-</max_value>
+<min_value>-</min_value>
+</element>
+
+<element>
+<name>Cell 1 Ra Flag</name>
+<stradr>0x7779</stradr>
+<type>U2</type>
+<default>0</default>
+<unit>hex</unit>
 <description>-</description>
 <max_value>-</max_value>
 <min_value>-</min_value>
