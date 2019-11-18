@@ -18,7 +18,7 @@
 
 <element>
 <name>LT COV Threshold</name>
-<stradr>0xB000</stradr>
+<stradr>0xEE00</stradr>
 <type>S2</type>
 <default>4300</default>
 <unit>mV</unit>
@@ -29,7 +29,7 @@
 
 <element>
 <name>LT COV Recovery</name>
-<stradr>0xB002</stradr>
+<stradr>0xEE02</stradr>
 <type>S2</type>
 <default>3900</default>
 <unit>mV</unit>
@@ -40,7 +40,7 @@
 
 <element>
 <name>ST COV Threshold</name>
-<stradr>0xB004</stradr>
+<stradr>0xEE04</stradr>
 <type>S2</type>
 <default>4500</default>
 <unit>mV</unit>
@@ -51,7 +51,7 @@
 
 <element>
 <name>ST COV Recovery</name>
-<stradr>0xB006</stradr>
+<stradr>0xEE06</stradr>
 <type>S2</type>
 <default>4100</default>
 <unit>mV</unit>
@@ -62,7 +62,7 @@
 
 <element>
 <name>HT COV Threshold</name>
-<stradr>0xB008</stradr>
+<stradr>0xEE08</stradr>
 <type>S2</type>
 <default>4400</default>
 <unit>mV</unit>
@@ -73,7 +73,7 @@
 
 <element>
 <name>HT COV Recovery</name>
-<stradr>0xB00A</stradr>
+<stradr>0xEE0A</stradr>
 <type>S2</type>
 <default>4000</default>
 <unit>mV</unit>
@@ -84,7 +84,7 @@
 
 <element>
 <name>COV Time</name>
-<stradr>0xB00C</stradr>
+<stradr>0xEE0C</stradr>
 <type>U1</type>
 <default>2</default>
 <unit>s</unit>
@@ -95,7 +95,7 @@
 
 <element>
 <name>CUV Threshold</name>
-<stradr>0xB00D</stradr>
+<stradr>0xEE0D</stradr>
 <type>S2</type>
 <default>2200</default>
 <unit>mV</unit>
@@ -106,7 +106,7 @@
 
 <element>
 <name>CUV Time</name>
-<stradr>0xB00F</stradr>
+<stradr>0xEE0F</stradr>
 <type>U1</type>
 <default>2</default>
 <unit>s</unit>
@@ -117,7 +117,7 @@
 
 <element>
 <name>CUV Recovery</name>
-<stradr>0xB010</stradr>
+<stradr>0xEE10</stradr>
 <type>S2</type>
 <default>3000</default>
 <unit>mV</unit>
@@ -139,7 +139,7 @@
 
 <element>
 <name>OC (1st Tier) Chg</name>
-<stradr>0xB012</stradr>
+<stradr>0xEE12</stradr>
 <type>S2</type>
 <default>6000</default>
 <unit>mA</unit>
@@ -150,7 +150,7 @@
 
 <element>
 <name>OC (1st Tier) Chg Time</name>
-<stradr>0xB014</stradr>
+<stradr>0xEE14</stradr>
 <type>U1</type>
 <default>2</default>
 <unit>s</unit>
@@ -161,7 +161,7 @@
 
 <element>
 <name>OC Chg Recovery</name>
-<stradr>0xB015</stradr>
+<stradr>0xEE15</stradr>
 <type>S2</type>
 <default>200</default>
 <unit>mA</unit>
@@ -172,7 +172,7 @@
 
 <element>
 <name>OC (1st Tier) Dsg</name>
-<stradr>0xB017</stradr>
+<stradr>0xEE17</stradr>
 <type>S2</type>
 <default>6000</default>
 <unit>mA</unit>
@@ -183,7 +183,7 @@
 
 <element>
 <name>OC (1st Tier) Dsg Time</name>
-<stradr>0xB019</stradr>
+<stradr>0xEE19</stradr>
 <type>U1</type>
 <default>2</default>
 <unit>s</unit>
@@ -194,7 +194,7 @@
 
 <element>
 <name>OC Dsg Recovery</name>
-<stradr>0xB01A</stradr>
+<stradr>0xEE1A</stradr>
 <type>S2</type>
 <default>200</default>
 <unit>mA</unit>
@@ -205,7 +205,7 @@
 
 <element>
 <name>OC (2nd Tier) Chg</name>
-<stradr>0xB01C</stradr>
+<stradr>0xEE1C</stradr>
 <type>S2</type>
 <default>8000</default>
 <unit>mA</unit>
@@ -216,7 +216,7 @@
 
 <element>
 <name>OC (2nd Tier) Chg Time</name>
-<stradr>0xB01E</stradr>
+<stradr>0xEE1E</stradr>
 <type>U1</type>
 <default>2</default>
 <unit>s</unit>
@@ -227,7 +227,7 @@
 
 <element>
 <name>OC (2nd Tier) Dsg</name>
-<stradr>0xB01F</stradr>
+<stradr>0xEE1F</stradr>
 <type>S2</type>
 <default>8000</default>
 <unit>mA</unit>
@@ -238,7 +238,7 @@
 
 <element>
 <name>OC (2nd Tier) Dsg Time</name>
-<stradr>0xB021</stradr>
+<stradr>0xEE21</stradr>
 <type>U1</type>
 <default>2</default>
 <unit>s</unit>
@@ -249,7 +249,7 @@
 
 <element>
 <name>Current Recovery Time</name>
-<stradr>0xB022</stradr>
+<stradr>0xEE22</stradr>
 <type>U1</type>
 <default>8</default>
 <unit>s</unit>
@@ -260,7 +260,7 @@
 
 <element>
 <name>AFE OC Dsg</name>
-<stradr>0xB023</stradr>
+<stradr>0xEE23</stradr>
 <type>U1</type>
 <default>0x12</default>
 <unit>hex</unit>
@@ -271,7 +271,7 @@
 
 <element>
 <name>AFE OC Dsg Time</name>
-<stradr>0xB024</stradr>
+<stradr>0xEE24</stradr>
 <type>U1</type>
 <default>0x0f</default>
 <unit>hex</unit>
@@ -282,7 +282,7 @@
 
 <element>
 <name>AFE OC Dsg Recovery</name>
-<stradr>0xB025</stradr>
+<stradr>0xEE25</stradr>
 <type>U2</type>
 <default>5</default>
 <unit>s</unit>
@@ -293,7 +293,7 @@
 
 <element>
 <name>AFE SC Chg Cfg</name>
-<stradr>0xB027</stradr>
+<stradr>0xEE27</stradr>
 <type>U1</type>
 <default>0x77</default>
 <unit>hex</unit>
@@ -304,7 +304,7 @@
 
 <element>
 <name>AFE SC Dsg Cfg</name>
-<stradr>0xB028</stradr>
+<stradr>0xEE28</stradr>
 <type>U1</type>
 <default>0x77</default>
 <unit>hex</unit>
@@ -326,7 +326,7 @@
 
 <element>
 <name>OT1 Chg Threshold</name>
-<stradr>0xB029</stradr>
+<stradr>0xEE29</stradr>
 <type>S2</type>
 <default>550</default>
 <unit>0.1℃</unit>
@@ -337,7 +337,7 @@
 
 <element>
 <name>OT1 Chg Time</name>
-<stradr>0xB02B</stradr>
+<stradr>0xEE2B</stradr>
 <type>U1</type>
 <default>2</default>
 <unit>s</unit>
@@ -348,7 +348,7 @@
 
 <element>
 <name>OT1 Chg Recovery</name>
-<stradr>0xB02C</stradr>
+<stradr>0xEE2C</stradr>
 <type>S2</type>
 <default>500</default>
 <unit>0.1℃</unit>
@@ -359,7 +359,7 @@
 
 <element>
 <name>OT2 Chg Threshold</name>
-<stradr>0xB02E</stradr>
+<stradr>0xEE2E</stradr>
 <type>S2</type>
 <default>550</default>
 <unit>0.1℃</unit>
@@ -370,7 +370,7 @@
 
 <element>
 <name>OT2 Chg Time</name>
-<stradr>0xB030</stradr>
+<stradr>0xEE30</stradr>
 <type>U1</type>
 <default>2</default>
 <unit>s</unit>
@@ -381,7 +381,7 @@
 
 <element>
 <name>OT2 Chg Recovery</name>
-<stradr>0xB031</stradr>
+<stradr>0xEE31</stradr>
 <type>S2</type>
 <default>500</default>
 <unit>0.1℃</unit>
@@ -392,7 +392,7 @@
 
 <element>
 <name>OT1 Dsg Threshold</name>
-<stradr>0xB033</stradr>
+<stradr>0xEE33</stradr>
 <type>S2</type>
 <default>600</default>
 <unit>0.1℃</unit>
@@ -403,7 +403,7 @@
 
 <element>
 <name>OT1 Dsg Time</name>
-<stradr>0xB035</stradr>
+<stradr>0xEE35</stradr>
 <type>U1</type>
 <default>2</default>
 <unit>s</unit>
@@ -414,7 +414,7 @@
 
 <element>
 <name>OT1 Dsg Recovery</name>
-<stradr>0xB036</stradr>
+<stradr>0xEE36</stradr>
 <type>S2</type>
 <default>550</default>
 <unit>0.1℃</unit>
@@ -425,7 +425,7 @@
 
 <element>
 <name>OT2 Dsg Threshold</name>
-<stradr>0xB038</stradr>
+<stradr>0xEE38</stradr>
 <type>S2</type>
 <default>600</default>
 <unit>0.1℃</unit>
@@ -436,7 +436,7 @@
 
 <element>
 <name>OT2 Dsg Time</name>
-<stradr>0xB03A</stradr>
+<stradr>0xEE3A</stradr>
 <type>U1</type>
 <default>2</default>
 <unit>s</unit>
@@ -447,7 +447,7 @@
 
 <element>
 <name>OT2 Dsg Recovery</name>
-<stradr>0xB03B</stradr>
+<stradr>0xEE3B</stradr>
 <type>S2</type>
 <default>550</default>
 <unit>0.1℃</unit>
@@ -458,7 +458,7 @@
 
 <element>
 <name>Hi Dsg Start Temp</name>
-<stradr>0xB03D</stradr>
+<stradr>0xEE3D</stradr>
 <type>S2</type>
 <default>600</default>
 <unit>0.1℃</unit>
@@ -485,7 +485,7 @@
 
 <element>
 <name>LT SOV Threshold</name>
-<stradr>0xB03F</stradr>
+<stradr>0xEE3F</stradr>
 <type>S2</type>
 <default>4400</default>
 <unit>mV</unit>
@@ -496,7 +496,7 @@
 
 <element>
 <name>ST SOV Threshold</name>
-<stradr>0xB041</stradr>
+<stradr>0xEE41</stradr>
 <type>S2</type>
 <default>4600</default>
 <unit>mV</unit>
@@ -507,7 +507,7 @@
 
 <element>
 <name>HT SOV Threshold</name>
-<stradr>0xB043</stradr>
+<stradr>0xEE43</stradr>
 <type>S2</type>
 <default>4500</default>
 <unit>mV</unit>
@@ -518,7 +518,7 @@
 
 <element>
 <name>SOV Time</name>
-<stradr>0xB045</stradr>
+<stradr>0xEE45</stradr>
 <type>U1</type>
 <default>0</default>
 <unit>s</unit>
@@ -529,7 +529,7 @@
 
 <element>
 <name>PF SOV Fuse Blow Delay</name>
-<stradr>0xB046</stradr>
+<stradr>0xEE46</stradr>
 <type>U2</type>
 <default>0</default>
 <unit>s</unit>
@@ -540,7 +540,7 @@
 
 <element>
 <name>SUV Threshold</name>
-<stradr>0xB048</stradr>
+<stradr>0xEE48</stradr>
 <type>S2</type>
 <default>2000</default>
 <unit>mV</unit>
@@ -551,7 +551,7 @@
 
 <element>
 <name>SUV Time</name>
-<stradr>0xB04A</stradr>
+<stradr>0xEE4A</stradr>
 <type>U1</type>
 <default>0</default>
 <unit>s</unit>
@@ -562,7 +562,7 @@
 
 <element>
 <name>Rest CIM Current</name>
-<stradr>0xB04B</stradr>
+<stradr>0xEE4B</stradr>
 <type>U1</type>
 <default>5</default>
 <unit>mA</unit>
@@ -573,7 +573,7 @@
 
 <element>
 <name>Rest CIM Fail Voltage</name>
-<stradr>0xB04C</stradr>
+<stradr>0xEE4C</stradr>
 <type>S2</type>
 <default>1000</default>
 <unit>mV</unit>
@@ -584,7 +584,7 @@
 
 <element>
 <name>Rest CIM Time</name>
-<stradr>0xB04E</stradr>
+<stradr>0xEE4E</stradr>
 <type>U1</type>
 <default>0</default>
 <unit>s</unit>
@@ -595,7 +595,7 @@
 
 <element>
 <name>CIM Battery Rest Time</name>
-<stradr>0xB04F</stradr>
+<stradr>0xEE4F</stradr>
 <type>U2</type>
 <default>1800</default>
 <unit>s</unit>
@@ -606,7 +606,7 @@
 
 <element>
 <name>Rest CIM Check Voltage</name>
-<stradr>0xB051</stradr>
+<stradr>0xEE51</stradr>
 <type>S2</type>
 <default>3000</default>
 <unit>mV</unit>
@@ -617,7 +617,7 @@
 
 <element>
 <name>Active CIM Fail Voltage</name>
-<stradr>0xB053</stradr>
+<stradr>0xEE53</stradr>
 <type>S2</type>
 <default>1000</default>
 <unit>mV</unit>
@@ -628,7 +628,7 @@
 
 <element>
 <name>Active CIM Time</name>
-<stradr>0xB055</stradr>
+<stradr>0xEE55</stradr>
 <type>U1</type>
 <default>0</default>
 <unit>s</unit>
@@ -639,7 +639,7 @@
 
 <element>
 <name>Active CIM Check Voltage</name>
-<stradr>0xB056</stradr>
+<stradr>0xEE56</stradr>
 <type>S2</type>
 <default>3000</default>
 <unit>mV</unit>
@@ -650,7 +650,7 @@
 
 <element>
 <name>PFIN Detect Time</name>
-<stradr>0xB058</stradr>
+<stradr>0xEE58</stradr>
 <type>U1</type>
 <default>0</default>
 <unit>-</unit>
@@ -661,7 +661,7 @@
 
 <element>
 <name>PF Min Fuse Blow Voltage</name>
-<stradr>0xB059</stradr>
+<stradr>0xEE59</stradr>
 <type>S2</type>
 <default>8000</default>
 <unit>mV</unit>
@@ -683,7 +683,7 @@
 
 <element>
 <name>SOC Chg</name>
-<stradr>0xB05B</stradr>
+<stradr>0xEE5B</stradr>
 <type>S2</type>
 <default>10000</default>
 <unit>mA</unit>
@@ -694,7 +694,7 @@
 
 <element>
 <name>SOC Chg Time</name>
-<stradr>0xB05D</stradr>
+<stradr>0xEE5D</stradr>
 <type>U1</type>
 <default>0</default>
 <unit>s</unit>
@@ -705,7 +705,7 @@
 
 <element>
 <name>SOC Dsg</name>
-<stradr>0xB05E</stradr>
+<stradr>0xEE5E</stradr>
 <type>S2</type>
 <default>10000</default>
 <unit>mA</unit>
@@ -716,7 +716,7 @@
 
 <element>
 <name>SOC Dsg Time</name>
-<stradr>0xB060</stradr>
+<stradr>0xEE60</stradr>
 <type>U1</type>
 <default>0</default>
 <unit>s</unit>
@@ -738,7 +738,7 @@
 
 <element>
 <name>SOT1 Chg Threshold</name>
-<stradr>0xB061</stradr>
+<stradr>0xEE61</stradr>
 <type>S2</type>
 <default>550</default>
 <unit>0.1℃</unit>
@@ -749,7 +749,7 @@
 
 <element>
 <name>SOT1 Chg Time</name>
-<stradr>0xB063</stradr>
+<stradr>0xEE63</stradr>
 <type>U1</type>
 <default>0</default>
 <unit>s</unit>
@@ -760,7 +760,7 @@
 
 <element>
 <name>SOT2 Chg Threshold</name>
-<stradr>0xB064</stradr>
+<stradr>0xEE64</stradr>
 <type>S2</type>
 <default>550</default>
 <unit>0.1℃</unit>
@@ -771,7 +771,7 @@
 
 <element>
 <name>SOT2 Chg Time</name>
-<stradr>0xB066</stradr>
+<stradr>0xEE66</stradr>
 <type>U1</type>
 <default>0</default>
 <unit>s</unit>
@@ -782,7 +782,7 @@
 
 <element>
 <name>SOT1 Dsg Threshold</name>
-<stradr>0xB067</stradr>
+<stradr>0xEE67</stradr>
 <type>S2</type>
 <default>550</default>
 <unit>0.1℃</unit>
@@ -793,7 +793,7 @@
 
 <element>
 <name>SOT1 Dsg Time</name>
-<stradr>0xB069</stradr>
+<stradr>0xEE69</stradr>
 <type>U1</type>
 <default>0</default>
 <unit>s</unit>
@@ -804,7 +804,7 @@
 
 <element>
 <name>SOT2 Dsg Threshold</name>
-<stradr>0xB06A</stradr>
+<stradr>0xEE6A</stradr>
 <type>S2</type>
 <default>550</default>
 <unit>0.1℃</unit>
@@ -815,7 +815,7 @@
 
 <element>
 <name>SOT2 Dsg Time</name>
-<stradr>0xB06C</stradr>
+<stradr>0xEE6C</stradr>
 <type>U1</type>
 <default>0</default>
 <unit>s</unit>
@@ -837,7 +837,7 @@
 
 <element>
 <name>FET Fail Limit</name>
-<stradr>0xB06D</stradr>
+<stradr>0xEE6D</stradr>
 <type>S2</type>
 <default>20</default>
 <unit>-</unit>
@@ -848,7 +848,7 @@
 
 <element>
 <name>FET Fail Time</name>
-<stradr>0xB06F</stradr>
+<stradr>0xEE6F</stradr>
 <type>U1</type>
 <default>0</default>
 <unit>s</unit>
@@ -875,7 +875,7 @@
 
 <element>
 <name>JT1</name>
-<stradr>0xB073</stradr>
+<stradr>0xEE73</stradr>
 <type>S2</type>
 <default>0</default>
 <unit>0.1℃</unit>
@@ -886,7 +886,7 @@
 
 <element>
 <name>JT2</name>
-<stradr>0xB075</stradr>
+<stradr>0xEE75</stradr>
 <type>S2</type>
 <default>120</default>
 <unit>0.1℃</unit>
@@ -897,7 +897,7 @@
 
 <element>
 <name>JT2a</name>
-<stradr>0xB077</stradr>
+<stradr>0xEE77</stradr>
 <type>S2</type>
 <default>300</default>
 <unit>0.1℃</unit>
@@ -908,7 +908,7 @@
 
 <element>
 <name>JT3</name>
-<stradr>0xB079</stradr>
+<stradr>0xEE79</stradr>
 <type>S2</type>
 <default>450</default>
 <unit>0.1℃</unit>
@@ -919,7 +919,7 @@
 
 <element>
 <name>JT4</name>
-<stradr>0xB07B</stradr>
+<stradr>0xEE7B</stradr>
 <type>S2</type>
 <default>550</default>
 <unit>0.1℃</unit>
@@ -930,7 +930,7 @@
 
 <element>
 <name>Temp Hys</name>
-<stradr>0xB07D</stradr>
+<stradr>0xEE7D</stradr>
 <type>S2</type>
 <default>10</default>
 <unit>0.1℃</unit>
@@ -952,7 +952,7 @@
 
 <element>
 <name>Pre-chg Voltage Threshold</name>
-<stradr>0xB07F</stradr>
+<stradr>0xEE7F</stradr>
 <type>S2</type>
 <default>3000</default>
 <unit>mV</unit>
@@ -963,7 +963,7 @@
 
 <element>
 <name>Pre-chg Recovery Voltage</name>
-<stradr>0xB081</stradr>
+<stradr>0xEE81</stradr>
 <type>S2</type>
 <default>3100</default>
 <unit>mV</unit>
@@ -974,7 +974,7 @@
 
 <element>
 <name>Pre-chg Current</name>
-<stradr>0xB083</stradr>
+<stradr>0xEE83</stradr>
 <type>S2</type>
 <default>250</default>
 <unit>mA</unit>
@@ -996,7 +996,7 @@
 
 <element>
 <name>LT Chg Voltage</name>
-<stradr>0xB085</stradr>
+<stradr>0xEE85</stradr>
 <type>S2</type>
 <default>12000</default>
 <unit>mV</unit>
@@ -1007,7 +1007,7 @@
 
 <element>
 <name>LT Chg Current1</name>
-<stradr>0xB087</stradr>
+<stradr>0xEE87</stradr>
 <type>S2</type>
 <default>2000</default>
 <unit>mA</unit>
@@ -1018,7 +1018,7 @@
 
 <element>
 <name>LT Chg Current2</name>
-<stradr>0xB089</stradr>
+<stradr>0xEE89</stradr>
 <type>S2</type>
 <default>2000</default>
 <unit>mA</unit>
@@ -1029,7 +1029,7 @@
 
 <element>
 <name>LT Chg Current3</name>
-<stradr>0xB08B</stradr>
+<stradr>0xEE8B</stradr>
 <type>S2</type>
 <default>2000</default>
 <unit>mA</unit>
@@ -1040,7 +1040,7 @@
 
 <element>
 <name>ST1 Chg Voltage</name>
-<stradr>0xB08D</stradr>
+<stradr>0xEE8D</stradr>
 <type>S2</type>
 <default>16800</default>
 <unit>mV</unit>
@@ -1051,7 +1051,7 @@
 
 <element>
 <name>ST1 Chg Current1</name>
-<stradr>0xB08F</stradr>
+<stradr>0xEE8F</stradr>
 <type>S2</type>
 <default>4000</default>
 <unit>mA</unit>
@@ -1062,7 +1062,7 @@
 
 <element>
 <name>ST1 Chg Current2</name>
-<stradr>0xB091</stradr>
+<stradr>0xEE91</stradr>
 <type>S2</type>
 <default>4000</default>
 <unit>mA</unit>
@@ -1073,7 +1073,7 @@
 
 <element>
 <name>ST1 Chg Current3</name>
-<stradr>0xB093</stradr>
+<stradr>0xEE93</stradr>
 <type>S2</type>
 <default>4000</default>
 <unit>mA</unit>
@@ -1084,7 +1084,7 @@
 
 <element>
 <name>ST2 Chg Voltage</name>
-<stradr>0xB095</stradr>
+<stradr>0xEE95</stradr>
 <type>S2</type>
 <default>16800</default>
 <unit>mV</unit>
@@ -1095,7 +1095,7 @@
 
 <element>
 <name>ST2 Chg Current1</name>
-<stradr>0xB097</stradr>
+<stradr>0xEE97</stradr>
 <type>S2</type>
 <default>4000</default>
 <unit>mA</unit>
@@ -1106,7 +1106,7 @@
 
 <element>
 <name>ST2 Chg Current2</name>
-<stradr>0xB099</stradr>
+<stradr>0xEE99</stradr>
 <type>S2</type>
 <default>4000</default>
 <unit>mA</unit>
@@ -1117,7 +1117,7 @@
 
 <element>
 <name>ST2 Chg Current3</name>
-<stradr>0xB09B</stradr>
+<stradr>0xEE9B</stradr>
 <type>S2</type>
 <default>4000</default>
 <unit>mA</unit>
@@ -1128,7 +1128,7 @@
 
 <element>
 <name>HT Chg Voltage</name>
-<stradr>0xB09D</stradr>
+<stradr>0xEE9D</stradr>
 <type>S2</type>
 <default>16760</default>
 <unit>mV</unit>
@@ -1139,7 +1139,7 @@
 
 <element>
 <name>HT Chg Current1</name>
-<stradr>0xB09F</stradr>
+<stradr>0xEE9F</stradr>
 <type>S2</type>
 <default>3800</default>
 <unit>mA</unit>
@@ -1150,7 +1150,7 @@
 
 <element>
 <name>HT Chg Current2</name>
-<stradr>0xB0A1</stradr>
+<stradr>0xEEA1</stradr>
 <type>S2</type>
 <default>3800</default>
 <unit>mA</unit>
@@ -1161,7 +1161,7 @@
 
 <element>
 <name>HT Chg Current3</name>
-<stradr>0xB0A3</stradr>
+<stradr>0xEEA3</stradr>
 <type>S2</type>
 <default>3800</default>
 <unit>mA</unit>
@@ -1172,7 +1172,7 @@
 
 <element>
 <name>Cell Voltage Threshold1</name>
-<stradr>0xB0A5</stradr>
+<stradr>0xEEA5</stradr>
 <type>S2</type>
 <default>3900</default>
 <unit>mV</unit>
@@ -1183,7 +1183,7 @@
 
 <element>
 <name>Cell Voltage Threshold2</name>
-<stradr>0xB0A7</stradr>
+<stradr>0xEEA7</stradr>
 <type>S2</type>
 <default>4000</default>
 <unit>mV</unit>
@@ -1194,7 +1194,7 @@
 
 <element>
 <name>Cell Voltage Thresh Hyst</name>
-<stradr>0xB0A9</stradr>
+<stradr>0xEEA9</stradr>
 <type>S2</type>
 <default>10</default>
 <unit>mV</unit>
@@ -1216,7 +1216,7 @@
 
 <element>
 <name>Maintenance Current</name>
-<stradr>0xB0AB</stradr>
+<stradr>0xEEAB</stradr>
 <type>S2</type>
 <default>0</default>
 <unit>mA</unit>
@@ -1227,7 +1227,7 @@
 
 <element>
 <name>Taper Current</name>
-<stradr>0xB0AD</stradr>
+<stradr>0xEEAD</stradr>
 <type>S2</type>
 <default>250</default>
 <unit>mA</unit>
@@ -1238,7 +1238,7 @@
 
 <element>
 <name>Taper Voltage</name>
-<stradr>0xB0AF</stradr>
+<stradr>0xEEAF</stradr>
 <type>S2</type>
 <default>75</default>
 <unit>mV</unit>
@@ -1249,7 +1249,7 @@
 
 <element>
 <name>Current Taper Window</name>
-<stradr>0xB0B1</stradr>
+<stradr>0xEEB1</stradr>
 <type>U1</type>
 <default>40</default>
 <unit>s</unit>
@@ -1260,7 +1260,7 @@
 
 <element>
 <name>TCA Set</name>
-<stradr>0xB0B2</stradr>
+<stradr>0xEEB2</stradr>
 <type>S1</type>
 <default>-1</default>
 <unit>%</unit>
@@ -1271,7 +1271,7 @@
 
 <element>
 <name>TCA Clear</name>
-<stradr>0xB0B3</stradr>
+<stradr>0xEEB3</stradr>
 <type>S1</type>
 <default>95</default>
 <unit>%</unit>
@@ -1282,7 +1282,7 @@
 
 <element>
 <name>FC Set</name>
-<stradr>0xB0B4</stradr>
+<stradr>0xEEB4</stradr>
 <type>S1</type>
 <default>-1</default>
 <unit>%</unit>
@@ -1293,7 +1293,7 @@
 
 <element>
 <name>FC Clear</name>
-<stradr>0xB0B5</stradr>
+<stradr>0xEEB5</stradr>
 <type>S1</type>
 <default>98</default>
 <unit>%</unit>
@@ -1315,7 +1315,7 @@
 
 <element>
 <name>Cb Threshold</name>
-<stradr>0xB0B8</stradr>
+<stradr>0xEEB8</stradr>
 <type>S2</type>
 <default>3900</default>
 <unit>mV</unit>
@@ -1326,7 +1326,7 @@
 
 <element>
 <name>Cb On Voltage</name>
-<stradr>0xB0BA</stradr>
+<stradr>0xEEBA</stradr>
 <type>S2</type>
 <default>40</default>
 <unit>mV</unit>
@@ -1337,7 +1337,7 @@
 
 <element>
 <name>Cb Chk Interval</name>
-<stradr>0xB0BC</stradr>
+<stradr>0xEEBC</stradr>
 <type>U1</type>
 <default>0</default>
 <unit>-</unit>
@@ -1348,7 +1348,7 @@
 
 <element>
 <name>Cb Off Voltage</name>
-<stradr>0xB0BD</stradr>
+<stradr>0xEEBD</stradr>
 <type>S2</type>
 <default>10</default>
 <unit>mV</unit>
@@ -1370,7 +1370,7 @@
 
 <element>
 <name>Over Charge Capacity</name>
-<stradr>0xB0BF</stradr>
+<stradr>0xEEBF</stradr>
 <type>S2</type>
 <default>300</default>
 <unit>mAh</unit>
@@ -1381,7 +1381,7 @@
 
 <element>
 <name>FC-MTO</name>
-<stradr>0xB0C3</stradr>
+<stradr>0xEEC3</stradr>
 <type>U2</type>
 <default>10800</default>
 <unit>s</unit>
@@ -1392,7 +1392,7 @@
 
 <element>
 <name>PC-MTO</name>
-<stradr>0xB0C5</stradr>
+<stradr>0xEEC5</stradr>
 <type>U2</type>
 <default>3600</default>
 <unit>s</unit>
@@ -1403,7 +1403,7 @@
 
 <element>
 <name>Charge Fault Cfg</name>
-<stradr>0xB0C7</stradr>
+<stradr>0xEEC7</stradr>
 <type>U1</type>
 <default>0x0</default>
 <unit>hex</unit>
@@ -1430,7 +1430,7 @@
 
 <element>
 <name>Operation Cfg A</name>
-<stradr>0xB0C8</stradr>
+<stradr>0xEEC8</stradr>
 <type>U2</type>
 <default>0x3a9</default>
 <unit>hex</unit>
@@ -1441,7 +1441,7 @@
 
 <element>
 <name>Operation Cfg B</name>
-<stradr>0xB0CA</stradr>
+<stradr>0xEECA</stradr>
 <type>U2</type>
 <default>0x440</default>
 <unit>hex</unit>
@@ -1452,7 +1452,7 @@
 
 <element>
 <name>Operation Cfg C</name>
-<stradr>0xB0CC</stradr>
+<stradr>0xEECC</stradr>
 <type>U2</type>
 <default>0x100</default>
 <unit>hex</unit>
@@ -1463,7 +1463,7 @@
 
 <element>
 <name>Permanent Fail Cfg1</name>
-<stradr>0xB0CE</stradr>
+<stradr>0xEECE</stradr>
 <type>U2</type>
 <default>0</default>
 <unit>hex</unit>
@@ -1474,7 +1474,7 @@
 
 <element>
 <name>Permanent Fail Cfg2</name>
-<stradr>0xB0D0</stradr>
+<stradr>0xEED0</stradr>
 <type>U2</type>
 <default>0</default>
 <unit>hex</unit>
@@ -1485,7 +1485,7 @@
 
 <element>
 <name>Non-Removable Cfg</name>
-<stradr>0xB0D2</stradr>
+<stradr>0xEED2</stradr>
 <type>U2</type>
 <default>0x3007</default>
 <unit>hex</unit>
@@ -1512,7 +1512,7 @@
 
 <element>
 <name>Flash Update OK Voltage</name>
-<stradr>0xB0D5</stradr>
+<stradr>0xEED5</stradr>
 <type>S2</type>
 <default>6000</default>
 <unit>mV</unit>
@@ -1523,7 +1523,7 @@
 
 <element>
 <name>Shutdown Voltage</name>
-<stradr>0xB0D7</stradr>
+<stradr>0xEED7</stradr>
 <type>S2</type>
 <default>5000</default>
 <unit>mV</unit>
@@ -1534,7 +1534,7 @@
 
 <element>
 <name>Shutdown Time</name>
-<stradr>0xB0D9</stradr>
+<stradr>0xEED9</stradr>
 <type>U1</type>
 <default>10</default>
 <unit>s</unit>
@@ -1545,7 +1545,7 @@
 
 <element>
 <name>Cell Shutdown Voltage</name>
-<stradr>0xB0DA</stradr>
+<stradr>0xEEDA</stradr>
 <type>S2</type>
 <default>1750</default>
 <unit>mV</unit>
@@ -1556,7 +1556,7 @@
 
 <element>
 <name>Charger Present</name>
-<stradr>0xB0DD</stradr>
+<stradr>0xEEDD</stradr>
 <type>S2</type>
 <default>3000</default>
 <unit>mV</unit>
@@ -1567,7 +1567,7 @@
 
 <element>
 <name>Sleep Current</name>
-<stradr>0xB0DF</stradr>
+<stradr>0xEEDF</stradr>
 <type>S2</type>
 <default>10</default>
 <unit>mA</unit>
@@ -1578,7 +1578,7 @@
 
 <element>
 <name>Bus Low Time</name>
-<stradr>0xB0E1</stradr>
+<stradr>0xEEE1</stradr>
 <type>U1</type>
 <default>5</default>
 <unit>s</unit>
@@ -1589,7 +1589,7 @@
 
 <element>
 <name>Sleep Voltage Time</name>
-<stradr>0xB0E6</stradr>
+<stradr>0xEEE6</stradr>
 <type>U1</type>
 <default>5</default>
 <unit>s</unit>
@@ -1600,7 +1600,7 @@
 
 <element>
 <name>Sleep Current Time</name>
-<stradr>0xB0E7</stradr>
+<stradr>0xEEE7</stradr>
 <type>U1</type>
 <default>20</default>
 <unit>s</unit>
@@ -1611,7 +1611,7 @@
 
 <element>
 <name>Sealed Ship Delay</name>
-<stradr>0xB0E9</stradr>
+<stradr>0xEEE9</stradr>
 <type>U1</type>
 <default>10</default>
 <unit>s</unit>
@@ -1638,7 +1638,7 @@
 
 <element>
 <name>Rem Cap Alarm</name>
-<stradr>0xB0FE</stradr>
+<stradr>0xEEFE</stradr>
 <type>S2</type>
 <default>300</default>
 <unit>mAh</unit>
@@ -1649,7 +1649,7 @@
 
 <element>
 <name>Rem Energy Alarm</name>
-<stradr>0xB100</stradr>
+<stradr>0xEF00</stradr>
 <type>S2</type>
 <default>432</default>
 <unit>10mWh</unit>
@@ -1660,7 +1660,7 @@
 
 <element>
 <name>Rem Time Alarm</name>
-<stradr>0xB102</stradr>
+<stradr>0xEF02</stradr>
 <type>U2</type>
 <default>10</default>
 <unit>min</unit>
@@ -1671,7 +1671,7 @@
 
 <element>
 <name>Init Battery Mode</name>
-<stradr>0xB104</stradr>
+<stradr>0xEF04</stradr>
 <type>U2</type>
 <default>0x81</default>
 <unit>hex</unit>
@@ -1682,7 +1682,7 @@
 
 <element>
 <name>Design Voltage</name>
-<stradr>0xB106</stradr>
+<stradr>0xEF06</stradr>
 <type>S2</type>
 <default>14400</default>
 <unit>mV</unit>
@@ -1693,7 +1693,7 @@
 
 <element>
 <name>Spec Info</name>
-<stradr>0xB108</stradr>
+<stradr>0xEF08</stradr>
 <type>U2</type>
 <default>0x31</default>
 <unit>hex</unit>
@@ -1704,7 +1704,7 @@
 
 <element>
 <name>Manuf Date</name>
-<stradr>0xB10A</stradr>
+<stradr>0xEF0A</stradr>
 <type>S2</type>
 <default>2017-9-12</default>
 <unit>date</unit>
@@ -1715,7 +1715,7 @@
 
 <element>
 <name>Ser. Num.</name>
-<stradr>0xB10C</stradr>
+<stradr>0xEF0C</stradr>
 <type>U2</type>
 <default>0x1</default>
 <unit>hex</unit>
@@ -1726,7 +1726,7 @@
 
 <element>
 <name>Op Status</name>
-<stradr>0xB10E</stradr>
+<stradr>0xEF0E</stradr>
 <type>U2</type>
 <default>0</default>
 <unit>hex</unit>
@@ -1737,7 +1737,7 @@
 
 <element>
 <name>CC Threshold</name>
-<stradr>0xB110</stradr>
+<stradr>0xEF10</stradr>
 <type>S2</type>
 <default>4400</default>
 <unit>mAh</unit>
@@ -1748,7 +1748,7 @@
 
 <element>
 <name>CF MaxError Limit</name>
-<stradr>0xB113</stradr>
+<stradr>0xEF13</stradr>
 <type>U1</type>
 <default>100</default>
 <unit>%</unit>
@@ -1759,7 +1759,7 @@
 
 <element>
 <name>Design Capacity</name>
-<stradr>0xB114</stradr>
+<stradr>0xEF14</stradr>
 <type>S2</type>
 <default>4400</default>
 <unit>mAh</unit>
@@ -1770,7 +1770,7 @@
 
 <element>
 <name>Design Energy</name>
-<stradr>0xB116</stradr>
+<stradr>0xEF16</stradr>
 <type>S2</type>
 <default>6336</default>
 <unit>10mWh</unit>
@@ -1781,7 +1781,7 @@
 
 <element>
 <name>Manuf Name</name>
-<stradr>0xB118</stradr>
+<stradr>0xEF18</stradr>
 <type>string</type>
 <default>PFC</default>
 <unit>-</unit>
@@ -1792,7 +1792,7 @@
 
 <element>
 <name>Device Name</name>
-<stradr>0xB12D</stradr>
+<stradr>0xEF2D</stradr>
 <type>string</type>
 <default>A2168</default>
 <unit>-</unit>
@@ -1803,7 +1803,7 @@
 
 <element>
 <name>Device Chemistry</name>
-<stradr>0xB142</stradr>
+<stradr>0xEF42</stradr>
 <type>string</type>
 <default>LION</default>
 <unit>-</unit>
@@ -1814,7 +1814,7 @@
 
 <element>
 <name>Deterioration Warn Limit</name>
-<stradr>0xB147</stradr>
+<stradr>0xEF47</stradr>
 <type>U1</type>
 <default>50</default>
 <unit>%</unit>
@@ -1825,7 +1825,7 @@
 
 <element>
 <name>Deterioration Fault Limit</name>
-<stradr>0xB148</stradr>
+<stradr>0xEF48</stradr>
 <type>U1</type>
 <default>30</default>
 <unit>%</unit>
@@ -1836,7 +1836,7 @@
 
 <element>
 <name>Cell Life Limit</name>
-<stradr>0xB149</stradr>
+<stradr>0xEF49</stradr>
 <type>U1</type>
 <default>20</default>
 <unit>%</unit>
@@ -1858,7 +1858,7 @@
 
 <element>
 <name>Cycle Count</name>
-<stradr>0xB312</stradr>
+<stradr>0xF112</stradr>
 <type>S2</type>
 <default>0</default>
 <unit>-</unit>
@@ -1869,7 +1869,7 @@
 
 <element>
 <name>Reset Data</name>
-<stradr>0xB314</stradr>
+<stradr>0xF114</stradr>
 <type>S2</type>
 <default>0</default>
 <unit>-</unit>
@@ -1880,7 +1880,7 @@
 
 <element>
 <name>WD Reset Data</name>
-<stradr>0xB316</stradr>
+<stradr>0xF116</stradr>
 <type>S2</type>
 <default>0</default>
 <unit>-</unit>
@@ -1902,7 +1902,7 @@
 
 <element>
 <name>TDA Set</name>
-<stradr>0xB14A</stradr>
+<stradr>0xEF4A</stradr>
 <type>S1</type>
 <default>6</default>
 <unit>%</unit>
@@ -1913,7 +1913,7 @@
 
 <element>
 <name>TDA Clear</name>
-<stradr>0xB14B</stradr>
+<stradr>0xEF4B</stradr>
 <type>S1</type>
 <default>8</default>
 <unit>%</unit>
@@ -1924,7 +1924,7 @@
 
 <element>
 <name>FD Set</name>
-<stradr>0xB14C</stradr>
+<stradr>0xEF4C</stradr>
 <type>S1</type>
 <default>2</default>
 <unit>%</unit>
@@ -1935,7 +1935,7 @@
 
 <element>
 <name>FD Clear</name>
-<stradr>0xB14D</stradr>
+<stradr>0xEF4D</stradr>
 <type>S1</type>
 <default>5</default>
 <unit>%</unit>
@@ -1946,7 +1946,7 @@
 
 <element>
 <name>TDA Set Volt Threshold</name>
-<stradr>0xB14E</stradr>
+<stradr>0xEF4E</stradr>
 <type>S2</type>
 <default>5000</default>
 <unit>mV</unit>
@@ -1957,7 +1957,7 @@
 
 <element>
 <name>TDA Set Volt Time</name>
-<stradr>0xB150</stradr>
+<stradr>0xEF50</stradr>
 <type>U1</type>
 <default>5</default>
 <unit>s</unit>
@@ -1968,7 +1968,7 @@
 
 <element>
 <name>TDA Clear Volt</name>
-<stradr>0xB151</stradr>
+<stradr>0xEF51</stradr>
 <type>S2</type>
 <default>5500</default>
 <unit>mV</unit>
@@ -1990,7 +1990,7 @@
 
 <element>
 <name>UnSealKey</name>
-<stradr>0xB1C7</stradr>
+<stradr>0xEFC7</stradr>
 <type>S4</type>
 <default>0x12345678</default>
 <unit>hex</unit>
@@ -2001,7 +2001,7 @@
 
 <element>
 <name>FullAccessKey</name>
-<stradr>0xB1CB</stradr>
+<stradr>0xEFCB</stradr>
 <type>S4</type>
 <default>0x22345678</default>
 <unit>hex</unit>
@@ -2012,7 +2012,7 @@
 
 <element>
 <name>PFKey</name>
-<stradr>0xB1CF</stradr>
+<stradr>0xEFCF</stradr>
 <type>S4</type>
 <default>0x32345678</default>
 <unit>hex</unit>
@@ -2023,7 +2023,7 @@
 
 <element>
 <name>AuthenKey3</name>
-<stradr>0xB1D3</stradr>
+<stradr>0xEFD3</stradr>
 <type>S4</type>
 <default>0x1234567</default>
 <unit>hex</unit>
@@ -2034,7 +2034,7 @@
 
 <element>
 <name>AuthenKey2</name>
-<stradr>0xB1D7</stradr>
+<stradr>0xEFD7</stradr>
 <type>S4</type>
 <default>0x89abcdef</default>
 <unit>hex</unit>
@@ -2045,7 +2045,7 @@
 
 <element>
 <name>AuthenKey1</name>
-<stradr>0xB1DB</stradr>
+<stradr>0xEFDB</stradr>
 <type>S4</type>
 <default>0xfedcba98</default>
 <unit>hex</unit>
@@ -2056,7 +2056,7 @@
 
 <element>
 <name>AuthenKey0</name>
-<stradr>0xB1DF</stradr>
+<stradr>0xEFDF</stradr>
 <type>S4</type>
 <default>0x76543210</default>
 <unit>hex</unit>
@@ -2083,7 +2083,7 @@
 
 <element>
 <name>CC Gain.m</name>
-<stradr>0xB1E3</stradr>
+<stradr>0xEFE3</stradr>
 <type>S2</type>
 <default>1</default>
 <unit>-</unit>
@@ -2094,7 +2094,7 @@
 
 <element>
 <name>CC Gain.d</name>
-<stradr>0xB1E5</stradr>
+<stradr>0xEFE5</stradr>
 <type>S2</type>
 <default>1</default>
 <unit>-</unit>
@@ -2105,7 +2105,7 @@
 
 <element>
 <name>AFE Pack Gain.m</name>
-<stradr>0xB1E7</stradr>
+<stradr>0xEFE7</stradr>
 <type>S2</type>
 <default>1</default>
 <unit>-</unit>
@@ -2116,7 +2116,7 @@
 
 <element>
 <name>AFE Pack Gain.d</name>
-<stradr>0xB1E9</stradr>
+<stradr>0xEFE9</stradr>
 <type>S2</type>
 <default>1</default>
 <unit>-</unit>
@@ -2127,7 +2127,7 @@
 
 <element>
 <name>Ref Voltage</name>
-<stradr>0xB1EB</stradr>
+<stradr>0xEFEB</stradr>
 <type>S2</type>
 <default>16400</default>
 <unit>mV</unit>
@@ -2138,7 +2138,7 @@
 
 <element>
 <name>AFE Pack Offset</name>
-<stradr>0xB1ED</stradr>
+<stradr>0xEFED</stradr>
 <type>S2</type>
 <default>0</default>
 <unit>mV</unit>
@@ -2149,7 +2149,7 @@
 
 <element>
 <name>CC Offset</name>
-<stradr>0xB1EF</stradr>
+<stradr>0xEFEF</stradr>
 <type>S2</type>
 <default>0</default>
 <unit>mA</unit>
@@ -2160,7 +2160,7 @@
 
 <element>
 <name>Board Offset</name>
-<stradr>0xB1F1</stradr>
+<stradr>0xEFF1</stradr>
 <type>S2</type>
 <default>0</default>
 <unit>-</unit>
@@ -2171,7 +2171,7 @@
 
 <element>
 <name>Int Temp Offset</name>
-<stradr>0xB1F3</stradr>
+<stradr>0xEFF3</stradr>
 <type>S1</type>
 <default>0</default>
 <unit>0.1℃</unit>
@@ -2182,7 +2182,7 @@
 
 <element>
 <name>Ext1 Temp Offset</name>
-<stradr>0xB1F4</stradr>
+<stradr>0xEFF4</stradr>
 <type>S1</type>
 <default>0</default>
 <unit>0.1℃</unit>
@@ -2193,7 +2193,7 @@
 
 <element>
 <name>Ext2 Temp Offset</name>
-<stradr>0xB1F5</stradr>
+<stradr>0xEFF5</stradr>
 <type>S1</type>
 <default>0</default>
 <unit>0.1℃</unit>
@@ -2204,7 +2204,7 @@
 
 <element>
 <name>Cell 0 Voltage Offset</name>
-<stradr>0xB1F6</stradr>
+<stradr>0xEFF6</stradr>
 <type>S2</type>
 <default>0</default>
 <unit>-</unit>
@@ -2215,7 +2215,7 @@
 
 <element>
 <name>Cell 1 Voltage Offset</name>
-<stradr>0xB1F8</stradr>
+<stradr>0xEFF8</stradr>
 <type>S2</type>
 <default>0</default>
 <unit>-</unit>
@@ -2226,7 +2226,7 @@
 
 <element>
 <name>Cell 2 Voltage Offset</name>
-<stradr>0xB1FA</stradr>
+<stradr>0xEFFA</stradr>
 <type>S2</type>
 <default>0</default>
 <unit>-</unit>
@@ -2237,7 +2237,7 @@
 
 <element>
 <name>Cell 3 Voltage Offset</name>
-<stradr>0xB1FC</stradr>
+<stradr>0xEFFC</stradr>
 <type>S2</type>
 <default>0</default>
 <unit>-</unit>
@@ -2248,7 +2248,7 @@
 
 <element>
 <name>Cell 0 Voltage Gain.m</name>
-<stradr>0xB1FE</stradr>
+<stradr>0xEFFE</stradr>
 <type>S2</type>
 <default>1</default>
 <unit>-</unit>
@@ -2259,7 +2259,7 @@
 
 <element>
 <name>Cell 0 Voltage Gain.d</name>
-<stradr>0xB200</stradr>
+<stradr>0xF000</stradr>
 <type>S2</type>
 <default>1</default>
 <unit>-</unit>
@@ -2270,7 +2270,7 @@
 
 <element>
 <name>Cell 1 Voltage Gain.m</name>
-<stradr>0xB202</stradr>
+<stradr>0xF002</stradr>
 <type>S2</type>
 <default>1</default>
 <unit>-</unit>
@@ -2281,7 +2281,7 @@
 
 <element>
 <name>Cell 1 Voltage Gain.d</name>
-<stradr>0xB204</stradr>
+<stradr>0xF004</stradr>
 <type>S2</type>
 <default>1</default>
 <unit>-</unit>
@@ -2292,7 +2292,7 @@
 
 <element>
 <name>Cell 2 Voltage Gain.m</name>
-<stradr>0xB206</stradr>
+<stradr>0xF006</stradr>
 <type>S2</type>
 <default>1</default>
 <unit>-</unit>
@@ -2303,7 +2303,7 @@
 
 <element>
 <name>Cell 2 Voltage Gain.d</name>
-<stradr>0xB208</stradr>
+<stradr>0xF008</stradr>
 <type>S2</type>
 <default>1</default>
 <unit>-</unit>
@@ -2314,7 +2314,7 @@
 
 <element>
 <name>Cell 3 Voltage Gain.m</name>
-<stradr>0xB20A</stradr>
+<stradr>0xF00A</stradr>
 <type>S2</type>
 <default>1</default>
 <unit>-</unit>
@@ -2325,7 +2325,7 @@
 
 <element>
 <name>Cell 3 Voltage Gain.d</name>
-<stradr>0xB20C</stradr>
+<stradr>0xF00C</stradr>
 <type>S2</type>
 <default>1</default>
 <unit>-</unit>
@@ -2347,7 +2347,7 @@
 
 <element>
 <name>Ext Coef 1</name>
-<stradr>0xB220</stradr>
+<stradr>0xF020</stradr>
 <type>S2</type>
 <default>-17259</default>
 <unit>-</unit>
@@ -2358,7 +2358,7 @@
 
 <element>
 <name>Ext Coef 2</name>
-<stradr>0xB222</stradr>
+<stradr>0xF022</stradr>
 <type>S2</type>
 <default>15218</default>
 <unit>-</unit>
@@ -2369,7 +2369,7 @@
 
 <element>
 <name>Ext Coef 3</name>
-<stradr>0xB224</stradr>
+<stradr>0xF024</stradr>
 <type>S2</type>
 <default>-6445</default>
 <unit>-</unit>
@@ -2380,7 +2380,7 @@
 
 <element>
 <name>Ext Coef 4</name>
-<stradr>0xB226</stradr>
+<stradr>0xF026</stradr>
 <type>S2</type>
 <default>1260</default>
 <unit>-</unit>
@@ -2391,7 +2391,7 @@
 
 <element>
 <name>Ext Min AD</name>
-<stradr>0xB228</stradr>
+<stradr>0xF028</stradr>
 <type>S2</type>
 <default>0</default>
 <unit>-</unit>
@@ -2402,7 +2402,7 @@
 
 <element>
 <name>Ext Max Temp</name>
-<stradr>0xB22A</stradr>
+<stradr>0xF02A</stradr>
 <type>S2</type>
 <default>3990</default>
 <unit>0.1K</unit>
@@ -2413,7 +2413,7 @@
 
 <element>
 <name>Int Coef 1</name>
-<stradr>0xB22C</stradr>
+<stradr>0xF02C</stradr>
 <type>S2</type>
 <default>1705</default>
 <unit>-</unit>
@@ -2424,7 +2424,7 @@
 
 <element>
 <name>Int Coef 2</name>
-<stradr>0xB22E</stradr>
+<stradr>0xF02E</stradr>
 <type>S2</type>
 <default>-16940</default>
 <unit>-</unit>
@@ -2435,7 +2435,7 @@
 
 <element>
 <name>Int Coef 3</name>
-<stradr>0xB230</stradr>
+<stradr>0xF030</stradr>
 <type>S2</type>
 <default>12329</default>
 <unit>-</unit>
@@ -2446,7 +2446,7 @@
 
 <element>
 <name>Int Coef 4</name>
-<stradr>0xB232</stradr>
+<stradr>0xF032</stradr>
 <type>S2</type>
 <default>-4645</default>
 <unit>-</unit>
@@ -2457,7 +2457,7 @@
 
 <element>
 <name>Int Min AD</name>
-<stradr>0xB234</stradr>
+<stradr>0xF034</stradr>
 <type>S2</type>
 <default>0</default>
 <unit>-</unit>
@@ -2468,7 +2468,7 @@
 
 <element>
 <name>Int Max Temp</name>
-<stradr>0xB236</stradr>
+<stradr>0xF036</stradr>
 <type>S2</type>
 <default>5990</default>
 <unit>0.1K</unit>
@@ -2490,7 +2490,7 @@
 
 <element>
 <name>Filter</name>
-<stradr>0xB238</stradr>
+<stradr>0xF038</stradr>
 <type>U1</type>
 <default>239</default>
 <unit>-</unit>
@@ -2501,7 +2501,7 @@
 
 <element>
 <name>Deadband</name>
-<stradr>0xB239</stradr>
+<stradr>0xF039</stradr>
 <type>U1</type>
 <default>3</default>
 <unit>mA</unit>
@@ -2528,7 +2528,7 @@
 
 <element>
 <name>Load Select</name>
-<stradr>0xB23B</stradr>
+<stradr>0xF03B</stradr>
 <type>U1</type>
 <default>3</default>
 <unit>-</unit>
@@ -2539,7 +2539,7 @@
 
 <element>
 <name>Load Mode</name>
-<stradr>0xB23C</stradr>
+<stradr>0xF03C</stradr>
 <type>U1</type>
 <default>0</default>
 <unit>-</unit>
@@ -2550,7 +2550,7 @@
 
 <element>
 <name>Term Voltage</name>
-<stradr>0xB23D</stradr>
+<stradr>0xF03D</stradr>
 <type>S2</type>
 <default>12000</default>
 <unit>mV</unit>
@@ -2561,7 +2561,7 @@
 
 <element>
 <name>User Rate-mA</name>
-<stradr>0xB23F</stradr>
+<stradr>0xF03F</stradr>
 <type>S2</type>
 <default>0</default>
 <unit>mA</unit>
@@ -2572,7 +2572,7 @@
 
 <element>
 <name>User Rate-mW</name>
-<stradr>0xB241</stradr>
+<stradr>0xF041</stradr>
 <type>S2</type>
 <default>0</default>
 <unit>10mW</unit>
@@ -2583,7 +2583,7 @@
 
 <element>
 <name>Reserve Cap-mAh</name>
-<stradr>0xB243</stradr>
+<stradr>0xF043</stradr>
 <type>S2</type>
 <default>0</default>
 <unit>mAh</unit>
@@ -2594,7 +2594,7 @@
 
 <element>
 <name>Reserve Cap-mWh</name>
-<stradr>0xB245</stradr>
+<stradr>0xF045</stradr>
 <type>S2</type>
 <default>0</default>
 <unit>10mWh</unit>
@@ -2616,7 +2616,7 @@
 
 <element>
 <name>Dsg Current Threshold</name>
-<stradr>0xB247</stradr>
+<stradr>0xF047</stradr>
 <type>S2</type>
 <default>100</default>
 <unit>mA</unit>
@@ -2627,7 +2627,7 @@
 
 <element>
 <name>Chg Current Threshold</name>
-<stradr>0xB249</stradr>
+<stradr>0xF049</stradr>
 <type>S2</type>
 <default>50</default>
 <unit>mA</unit>
@@ -2638,7 +2638,7 @@
 
 <element>
 <name>Quit Current</name>
-<stradr>0xB24B</stradr>
+<stradr>0xF04B</stradr>
 <type>S2</type>
 <default>10</default>
 <unit>mA</unit>
@@ -2649,7 +2649,7 @@
 
 <element>
 <name>Dsg Relax Time</name>
-<stradr>0xB24D</stradr>
+<stradr>0xF04D</stradr>
 <type>U1</type>
 <default>1</default>
 <unit>s</unit>
@@ -2660,7 +2660,7 @@
 
 <element>
 <name>Chg Relax Time</name>
-<stradr>0xB24E</stradr>
+<stradr>0xF04E</stradr>
 <type>U1</type>
 <default>1</default>
 <unit>s</unit>
@@ -2682,7 +2682,7 @@
 
 <element>
 <name>Update Status</name>
-<stradr>0xB24F</stradr>
+<stradr>0xF04F</stradr>
 <type>U1</type>
 <default>0x06</default>
 <unit>hex</unit>
@@ -2693,7 +2693,7 @@
 
 <element>
 <name>Avg I Last Run</name>
-<stradr>0xB258</stradr>
+<stradr>0xF058</stradr>
 <type>S2</type>
 <default>-2000</default>
 <unit>mA</unit>
@@ -2704,7 +2704,7 @@
 
 <element>
 <name>Avg P Last Run</name>
-<stradr>0xB25A</stradr>
+<stradr>0xF05A</stradr>
 <type>S2</type>
 <default>-3022</default>
 <unit>10mW</unit>
@@ -2715,7 +2715,7 @@
 
 <element>
 <name>Delta Voltage</name>
-<stradr>0xB25C</stradr>
+<stradr>0xF05C</stradr>
 <type>S2</type>
 <default>0</default>
 <unit>-</unit>
@@ -2726,7 +2726,7 @@
 
 <element>
 <name>Max Avg I Last Run</name>
-<stradr>0xB25E</stradr>
+<stradr>0xF05E</stradr>
 <type>S2</type>
 <default>-2000</default>
 <unit>mA</unit>
@@ -2737,7 +2737,7 @@
 
 <element>
 <name>Max Avg P Last Run</name>
-<stradr>0xB260</stradr>
+<stradr>0xF060</stradr>
 <type>S2</type>
 <default>-3022</default>
 <unit>10mW</unit>
@@ -2748,7 +2748,7 @@
 
 <element>
 <name>Qmax Pack</name>
-<stradr>0xB262</stradr>
+<stradr>0xF062</stradr>
 <type>S2</type>
 <default>4400</default>
 <unit>mAh</unit>
@@ -2759,7 +2759,7 @@
 
 <element>
 <name>Qmax Cell 0</name>
-<stradr>0xB264</stradr>
+<stradr>0xF064</stradr>
 <type>S2</type>
 <default>4400</default>
 <unit>mAh</unit>
@@ -2770,7 +2770,7 @@
 
 <element>
 <name>Qmax Cell 1</name>
-<stradr>0xB266</stradr>
+<stradr>0xF066</stradr>
 <type>S2</type>
 <default>4400</default>
 <unit>mAh</unit>
@@ -2781,7 +2781,7 @@
 
 <element>
 <name>Qmax Cell 2</name>
-<stradr>0xB268</stradr>
+<stradr>0xF068</stradr>
 <type>S2</type>
 <default>4400</default>
 <unit>mAh</unit>
@@ -2792,7 +2792,7 @@
 
 <element>
 <name>Qmax Cell 3</name>
-<stradr>0xB26A</stradr>
+<stradr>0xF06A</stradr>
 <type>S2</type>
 <default>4400</default>
 <unit>mAh</unit>
@@ -2808,7 +2808,7 @@
 
 <element>
 <name>Cell 0 Ra Flag</name>
-<stradr>0xB26C</stradr>
+<stradr>0xF06C</stradr>
 <type>U2</type>
 <default>0</default>
 <unit>hex</unit>
@@ -2819,7 +2819,7 @@
 
 <element>
 <name>Cell 0 Ra0</name>
-<stradr>0xB26E</stradr>
+<stradr>0xF06E</stradr>
 <type>S2</type>
 <default>38</default>
 <unit>2^-10Ω</unit>
@@ -2830,7 +2830,7 @@
 
 <element>
 <name>Cell 0 Ra1</name>
-<stradr>0xB270</stradr>
+<stradr>0xF070</stradr>
 <type>S2</type>
 <default>41</default>
 <unit>2^-10Ω</unit>
@@ -2841,7 +2841,7 @@
 
 <element>
 <name>Cell 0 Ra2</name>
-<stradr>0xB272</stradr>
+<stradr>0xF072</stradr>
 <type>S2</type>
 <default>43</default>
 <unit>2^-10Ω</unit>
@@ -2852,7 +2852,7 @@
 
 <element>
 <name>Cell 0 Ra3</name>
-<stradr>0xB274</stradr>
+<stradr>0xF074</stradr>
 <type>S2</type>
 <default>44</default>
 <unit>2^-10Ω</unit>
@@ -2863,7 +2863,7 @@
 
 <element>
 <name>Cell 0 Ra4</name>
-<stradr>0xB276</stradr>
+<stradr>0xF076</stradr>
 <type>S2</type>
 <default>42</default>
 <unit>2^-10Ω</unit>
@@ -2874,7 +2874,7 @@
 
 <element>
 <name>Cell 0 Ra5</name>
-<stradr>0xB278</stradr>
+<stradr>0xF078</stradr>
 <type>S2</type>
 <default>42</default>
 <unit>2^-10Ω</unit>
@@ -2885,7 +2885,7 @@
 
 <element>
 <name>Cell 0 Ra6</name>
-<stradr>0xB27A</stradr>
+<stradr>0xF07A</stradr>
 <type>S2</type>
 <default>45</default>
 <unit>2^-10Ω</unit>
@@ -2896,7 +2896,7 @@
 
 <element>
 <name>Cell 0 Ra7</name>
-<stradr>0xB27C</stradr>
+<stradr>0xF07C</stradr>
 <type>S2</type>
 <default>48</default>
 <unit>2^-10Ω</unit>
@@ -2907,7 +2907,7 @@
 
 <element>
 <name>Cell 0 Ra8</name>
-<stradr>0xB27E</stradr>
+<stradr>0xF07E</stradr>
 <type>S2</type>
 <default>49</default>
 <unit>2^-10Ω</unit>
@@ -2918,7 +2918,7 @@
 
 <element>
 <name>Cell 0 Ra9</name>
-<stradr>0xB280</stradr>
+<stradr>0xF080</stradr>
 <type>S2</type>
 <default>52</default>
 <unit>2^-10Ω</unit>
@@ -2929,7 +2929,7 @@
 
 <element>
 <name>Cell 0 Ra10</name>
-<stradr>0xB282</stradr>
+<stradr>0xF082</stradr>
 <type>S2</type>
 <default>56</default>
 <unit>2^-10Ω</unit>
@@ -2940,7 +2940,7 @@
 
 <element>
 <name>Cell 0 Ra11</name>
-<stradr>0xB284</stradr>
+<stradr>0xF084</stradr>
 <type>S2</type>
 <default>65</default>
 <unit>2^-10Ω</unit>
@@ -2951,7 +2951,7 @@
 
 <element>
 <name>Cell 0 Ra12</name>
-<stradr>0xB286</stradr>
+<stradr>0xF086</stradr>
 <type>S2</type>
 <default>74</default>
 <unit>2^-10Ω</unit>
@@ -2962,7 +2962,7 @@
 
 <element>
 <name>Cell 0 Ra13</name>
-<stradr>0xB288</stradr>
+<stradr>0xF088</stradr>
 <type>S2</type>
 <default>128</default>
 <unit>2^-10Ω</unit>
@@ -2973,7 +2973,7 @@
 
 <element>
 <name>Cell 0 Ra14</name>
-<stradr>0xB28A</stradr>
+<stradr>0xF08A</stradr>
 <type>S2</type>
 <default>378</default>
 <unit>2^-10Ω</unit>
@@ -2984,7 +2984,7 @@
 
 <element>
 <name>Cell 1 Ra Flag</name>
-<stradr>0xB28C</stradr>
+<stradr>0xF08C</stradr>
 <type>U2</type>
 <default>0</default>
 <unit>hex</unit>
@@ -2995,7 +2995,7 @@
 
 <element>
 <name>Cell 1 Ra</name>
-<stradr>0xB28E</stradr>
+<stradr>0xF08E</stradr>
 <type>S2</type>
 <default>38</default>
 <unit>2^-10Ω</unit>
@@ -3006,7 +3006,7 @@
 
 <element>
 <name>Cell 2 Ra Flag</name>
-<stradr>0xB2AC</stradr>
+<stradr>0xF0AC</stradr>
 <type>U2</type>
 <default>0</default>
 <unit>hex</unit>
@@ -3017,7 +3017,7 @@
 
 <element>
 <name>Cell 2 Ra</name>
-<stradr>0xB2AE</stradr>
+<stradr>0xF0AE</stradr>
 <type>S2</type>
 <default>38</default>
 <unit>-</unit>
@@ -3028,7 +3028,7 @@
 
 <element>
 <name>Cell 3 Ra Flag</name>
-<stradr>0xB2CC</stradr>
+<stradr>0xF0CC</stradr>
 <type>U2</type>
 <default>0</default>
 <unit>hex</unit>
@@ -3039,7 +3039,7 @@
 
 <element>
 <name>Cell 3 Ra</name>
-<stradr>0xB2CE</stradr>
+<stradr>0xF0CE</stradr>
 <type>S2</type>
 <default>38</default>
 <unit>-</unit>
@@ -3066,7 +3066,7 @@
 
 <element>
 <name>Saved PF Flags 1</name>
-<stradr>0xB2EC</stradr>
+<stradr>0xF0EC</stradr>
 <type>U2</type>
 <default>0</default>
 <unit>hex</unit>
@@ -3077,7 +3077,7 @@
 
 <element>
 <name>Saved PF Flags 2</name>
-<stradr>0xB2EE</stradr>
+<stradr>0xF0EE</stradr>
 <type>U2</type>
 <default>0</default>
 <unit>hex</unit>
@@ -3088,7 +3088,7 @@
 
 <element>
 <name>Saved 1st PF Flags 1</name>
-<stradr>0xB2F0</stradr>
+<stradr>0xF0F0</stradr>
 <type>U2</type>
 <default>0</default>
 <unit>hex</unit>
@@ -3099,7 +3099,7 @@
 
 <element>
 <name>Saved 1st PF Flags 2</name>
-<stradr>0xB2F2</stradr>
+<stradr>0xF0F2</stradr>
 <type>U2</type>
 <default>0</default>
 <unit>hex</unit>
@@ -3126,7 +3126,7 @@
 
 <element>
 <name>Manuf. Info 0</name>
-<stradr>0xB153</stradr>
+<stradr>0xEF53</stradr>
 <type>string</type>
 <default>0123456789abcdef0123456789abcde</default>
 <unit>-</unit>
@@ -3137,7 +3137,7 @@
 
 <element>
 <name>Manuf. Info 1</name>
-<stradr>0xB173</stradr>
+<stradr>0xEF73</stradr>
 <type>string</type>
 <default>0123456789abcdef012</default>
 <unit>-</unit>
@@ -3148,7 +3148,7 @@
 
 <element>
 <name>Manuf. Info 2</name>
-<stradr>0xB188</stradr>
+<stradr>0xEF88</stradr>
 <type>string</type>
 <default>0123456789abcdef012</default>
 <unit>-</unit>
@@ -3159,7 +3159,7 @@
 
 <element>
 <name>Manuf. Info 3</name>
-<stradr>0xB19D</stradr>
+<stradr>0xEF9D</stradr>
 <type>string</type>
 <default>0123456789abcdef012</default>
 <unit>-</unit>
@@ -3170,7 +3170,7 @@
 
 <element>
 <name>Manuf. Info 4</name>
-<stradr>0xB1B2</stradr>
+<stradr>0xEFB2</stradr>
 <type>string</type>
 <default>0123456789abcdef012</default>
 <unit>-</unit>
@@ -3192,7 +3192,7 @@
 
 <element>
 <name>Max Temp 1</name>
-<stradr>0xB2F4</stradr>
+<stradr>0xF0F4</stradr>
 <type>S2</type>
 <default>300</default>
 <unit>0.1℃</unit>
@@ -3203,7 +3203,7 @@
 
 <element>
 <name>Min Temp 1</name>
-<stradr>0xB2F6</stradr>
+<stradr>0xF0F6</stradr>
 <type>S2</type>
 <default>200</default>
 <unit>0.1℃</unit>
@@ -3214,7 +3214,7 @@
 
 <element>
 <name>Max Temp 2</name>
-<stradr>0xB31A</stradr>
+<stradr>0xF11A</stradr>
 <type>S2</type>
 <default>300</default>
 <unit>0.1℃</unit>
@@ -3225,7 +3225,7 @@
 
 <element>
 <name>Min Temp 2</name>
-<stradr>0xB31C</stradr>
+<stradr>0xF11C</stradr>
 <type>S2</type>
 <default>200</default>
 <unit>0.1℃</unit>
@@ -3236,7 +3236,7 @@
 
 <element>
 <name>Max Cell 1 Voltage</name>
-<stradr>0xB2F8</stradr>
+<stradr>0xF0F8</stradr>
 <type>S2</type>
 <default>3500</default>
 <unit>mV</unit>
@@ -3247,7 +3247,7 @@
 
 <element>
 <name>Max Cell 2 Voltage</name>
-<stradr>0xB31E</stradr>
+<stradr>0xF11E</stradr>
 <type>S2</type>
 <default>3500</default>
 <unit>mV</unit>
@@ -3258,7 +3258,7 @@
 
 <element>
 <name>Max Cell 3 Voltage</name>
-<stradr>0xB320</stradr>
+<stradr>0xF120</stradr>
 <type>S2</type>
 <default>3500</default>
 <unit>mV</unit>
@@ -3269,7 +3269,7 @@
 
 <element>
 <name>Max Cell 4 Voltage</name>
-<stradr>0xB322</stradr>
+<stradr>0xF122</stradr>
 <type>S2</type>
 <default>3500</default>
 <unit>mV</unit>
@@ -3280,7 +3280,7 @@
 
 <element>
 <name>Min Cell 1 Voltage</name>
-<stradr>0xB2FA</stradr>
+<stradr>0xF0FA</stradr>
 <type>S2</type>
 <default>3200</default>
 <unit>mV</unit>
@@ -3291,7 +3291,7 @@
 
 <element>
 <name>Min Cell 2 Voltage</name>
-<stradr>0xB324</stradr>
+<stradr>0xF124</stradr>
 <type>S2</type>
 <default>3200</default>
 <unit>mV</unit>
@@ -3302,7 +3302,7 @@
 
 <element>
 <name>Min Cell 3 Voltage</name>
-<stradr>0xB326</stradr>
+<stradr>0xF126</stradr>
 <type>S2</type>
 <default>3200</default>
 <unit>mV</unit>
@@ -3313,7 +3313,7 @@
 
 <element>
 <name>Min Cell 4 Voltage</name>
-<stradr>0xB328</stradr>
+<stradr>0xF128</stradr>
 <type>S2</type>
 <default>3200</default>
 <unit>mV</unit>
@@ -3324,7 +3324,7 @@
 
 <element>
 <name>Max Pack Voltage</name>
-<stradr>0xB2FC</stradr>
+<stradr>0xF0FC</stradr>
 <type>S2</type>
 <default>14000</default>
 <unit>mV</unit>
@@ -3335,7 +3335,7 @@
 
 <element>
 <name>Min Pack Voltage</name>
-<stradr>0xB2FE</stradr>
+<stradr>0xF0FE</stradr>
 <type>S2</type>
 <default>12800</default>
 <unit>mV</unit>
@@ -3346,7 +3346,7 @@
 
 <element>
 <name>Max Chg Current</name>
-<stradr>0xB300</stradr>
+<stradr>0xF100</stradr>
 <type>S2</type>
 <default>1500</default>
 <unit>mA</unit>
@@ -3357,7 +3357,7 @@
 
 <element>
 <name>Max Dsg Current</name>
-<stradr>0xB302</stradr>
+<stradr>0xF102</stradr>
 <type>S2</type>
 <default>-3000</default>
 <unit>mA</unit>
@@ -3368,7 +3368,7 @@
 
 <element>
 <name>Max Chg Power</name>
-<stradr>0xB304</stradr>
+<stradr>0xF104</stradr>
 <type>S2</type>
 <default>1500</default>
 <unit>10mW</unit>
@@ -3379,7 +3379,7 @@
 
 <element>
 <name>Max Dsg Power</name>
-<stradr>0xB306</stradr>
+<stradr>0xF106</stradr>
 <type>S2</type>
 <default>-1500</default>
 <unit>10mW</unit>
@@ -3390,7 +3390,7 @@
 
 <element>
 <name>Max Avg Dsg Current</name>
-<stradr>0xB308</stradr>
+<stradr>0xF108</stradr>
 <type>S2</type>
 <default>-1000</default>
 <unit>mA</unit>
@@ -3401,7 +3401,7 @@
 
 <element>
 <name>Max Avg Dsg Power</name>
-<stradr>0xB30A</stradr>
+<stradr>0xF10A</stradr>
 <type>S2</type>
 <default>-1500</default>
 <unit>10mW</unit>
@@ -3412,7 +3412,7 @@
 
 <element>
 <name>Avg Temp</name>
-<stradr>0xB30C</stradr>
+<stradr>0xF10C</stradr>
 <type>S2</type>
 <default>250</default>
 <unit>0.1℃</unit>
@@ -3434,7 +3434,7 @@
 
 <element>
 <name>LT Temp Samples</name>
-<stradr>0xB30E</stradr>
+<stradr>0xF10E</stradr>
 <type>S4</type>
 <default>0</default>
 <unit>-</unit>
@@ -3456,7 +3456,7 @@
 
 <element>
 <name>Max Error</name>
-<stradr>0xB318</stradr>
+<stradr>0xF118</stradr>
 <type>S2</type>
 <default>100</default>
 <unit>%</unit>
@@ -3472,7 +3472,7 @@
 
 <element>
 <name>Chemistry ID</name>
-<stradr>0xB6D0</stradr>
+<stradr>0xF4D0</stradr>
 <type>U2</type>
 <default>0x100</default>
 <unit>hex</unit>
@@ -3494,7 +3494,7 @@
 
 <element>
 <name>A 0</name>
-<stradr>0xB600</stradr>
+<stradr>0xF400</stradr>
 <type>S2</type>
 <default>4196</default>
 <unit>mV</unit>
@@ -3505,7 +3505,7 @@
 
 <element>
 <name>A 1</name>
-<stradr>0xB602</stradr>
+<stradr>0xF402</stradr>
 <type>S2</type>
 <default>4142</default>
 <unit>mV</unit>
@@ -3516,7 +3516,7 @@
 
 <element>
 <name>A 2</name>
-<stradr>0xB604</stradr>
+<stradr>0xF404</stradr>
 <type>S2</type>
 <default>4091</default>
 <unit>mV</unit>
@@ -3527,7 +3527,7 @@
 
 <element>
 <name>A 3</name>
-<stradr>0xB606</stradr>
+<stradr>0xF406</stradr>
 <type>S2</type>
 <default>4046</default>
 <unit>mV</unit>
@@ -3538,7 +3538,7 @@
 
 <element>
 <name>A 4</name>
-<stradr>0xB608</stradr>
+<stradr>0xF408</stradr>
 <type>S2</type>
 <default>4006</default>
 <unit>mV</unit>
@@ -3549,7 +3549,7 @@
 
 <element>
 <name>A 5</name>
-<stradr>0xB60A</stradr>
+<stradr>0xF40A</stradr>
 <type>S2</type>
 <default>3968</default>
 <unit>mV</unit>
@@ -3560,7 +3560,7 @@
 
 <element>
 <name>A 6</name>
-<stradr>0xB60C</stradr>
+<stradr>0xF40C</stradr>
 <type>S2</type>
 <default>3934</default>
 <unit>mV</unit>
@@ -3571,7 +3571,7 @@
 
 <element>
 <name>A 7</name>
-<stradr>0xB60E</stradr>
+<stradr>0xF40E</stradr>
 <type>S2</type>
 <default>3903</default>
 <unit>mV</unit>
@@ -3582,7 +3582,7 @@
 
 <element>
 <name>A 8</name>
-<stradr>0xB610</stradr>
+<stradr>0xF410</stradr>
 <type>S2</type>
 <default>3871</default>
 <unit>mV</unit>
@@ -3593,7 +3593,7 @@
 
 <element>
 <name>A 9</name>
-<stradr>0xB612</stradr>
+<stradr>0xF412</stradr>
 <type>S2</type>
 <default>3840</default>
 <unit>mV</unit>
@@ -3604,7 +3604,7 @@
 
 <element>
 <name>A 10</name>
-<stradr>0xB614</stradr>
+<stradr>0xF414</stradr>
 <type>S2</type>
 <default>3820</default>
 <unit>mV</unit>
@@ -3615,7 +3615,7 @@
 
 <element>
 <name>A 11</name>
-<stradr>0xB616</stradr>
+<stradr>0xF416</stradr>
 <type>S2</type>
 <default>3804</default>
 <unit>mV</unit>
@@ -3626,7 +3626,7 @@
 
 <element>
 <name>A 12</name>
-<stradr>0xB618</stradr>
+<stradr>0xF418</stradr>
 <type>S2</type>
 <default>3793</default>
 <unit>mV</unit>
@@ -3637,7 +3637,7 @@
 
 <element>
 <name>A 13</name>
-<stradr>0xB61A</stradr>
+<stradr>0xF41A</stradr>
 <type>S2</type>
 <default>3784</default>
 <unit>mV</unit>
@@ -3648,7 +3648,7 @@
 
 <element>
 <name>A 14</name>
-<stradr>0xB61C</stradr>
+<stradr>0xF41C</stradr>
 <type>S2</type>
 <default>3772</default>
 <unit>mV</unit>
@@ -3659,7 +3659,7 @@
 
 <element>
 <name>A 15</name>
-<stradr>0xB61E</stradr>
+<stradr>0xF41E</stradr>
 <type>S2</type>
 <default>3755</default>
 <unit>mV</unit>
@@ -3670,7 +3670,7 @@
 
 <element>
 <name>A 16</name>
-<stradr>0xB620</stradr>
+<stradr>0xF420</stradr>
 <type>S2</type>
 <default>3732</default>
 <unit>mV</unit>
@@ -3681,7 +3681,7 @@
 
 <element>
 <name>A 17</name>
-<stradr>0xB622</stradr>
+<stradr>0xF422</stradr>
 <type>S2</type>
 <default>3726</default>
 <unit>mV</unit>
@@ -3692,7 +3692,7 @@
 
 <element>
 <name>A 18</name>
-<stradr>0xB624</stradr>
+<stradr>0xF424</stradr>
 <type>S2</type>
 <default>3720</default>
 <unit>mV</unit>
@@ -3703,7 +3703,7 @@
 
 <element>
 <name>A 19</name>
-<stradr>0xB626</stradr>
+<stradr>0xF426</stradr>
 <type>S2</type>
 <default>3712</default>
 <unit>mV</unit>
@@ -3714,7 +3714,7 @@
 
 <element>
 <name>A 20</name>
-<stradr>0xB628</stradr>
+<stradr>0xF428</stradr>
 <type>S2</type>
 <default>3704</default>
 <unit>mV</unit>
@@ -3725,7 +3725,7 @@
 
 <element>
 <name>A 21</name>
-<stradr>0xB62A</stradr>
+<stradr>0xF42A</stradr>
 <type>S2</type>
 <default>3696</default>
 <unit>mV</unit>
@@ -3736,7 +3736,7 @@
 
 <element>
 <name>A 22</name>
-<stradr>0xB62C</stradr>
+<stradr>0xF42C</stradr>
 <type>S2</type>
 <default>3687</default>
 <unit>mV</unit>
@@ -3747,7 +3747,7 @@
 
 <element>
 <name>A 23</name>
-<stradr>0xB62E</stradr>
+<stradr>0xF42E</stradr>
 <type>S2</type>
 <default>3677</default>
 <unit>mV</unit>
@@ -3758,7 +3758,7 @@
 
 <element>
 <name>A 24</name>
-<stradr>0xB630</stradr>
+<stradr>0xF430</stradr>
 <type>S2</type>
 <default>3667</default>
 <unit>mV</unit>
@@ -3769,7 +3769,7 @@
 
 <element>
 <name>A 25</name>
-<stradr>0xB632</stradr>
+<stradr>0xF432</stradr>
 <type>S2</type>
 <default>3662</default>
 <unit>mV</unit>
@@ -3780,7 +3780,7 @@
 
 <element>
 <name>A 26</name>
-<stradr>0xB634</stradr>
+<stradr>0xF434</stradr>
 <type>S2</type>
 <default>3657</default>
 <unit>mV</unit>
@@ -3791,7 +3791,7 @@
 
 <element>
 <name>A 27</name>
-<stradr>0xB636</stradr>
+<stradr>0xF436</stradr>
 <type>S2</type>
 <default>3652</default>
 <unit>mV</unit>
@@ -3802,7 +3802,7 @@
 
 <element>
 <name>A 28</name>
-<stradr>0xB638</stradr>
+<stradr>0xF438</stradr>
 <type>S2</type>
 <default>3646</default>
 <unit>mV</unit>
@@ -3813,7 +3813,7 @@
 
 <element>
 <name>A 29</name>
-<stradr>0xB63A</stradr>
+<stradr>0xF43A</stradr>
 <type>S2</type>
 <default>3639</default>
 <unit>mV</unit>
@@ -3824,7 +3824,7 @@
 
 <element>
 <name>A 30</name>
-<stradr>0xB63C</stradr>
+<stradr>0xF43C</stradr>
 <type>S2</type>
 <default>3628</default>
 <unit>mV</unit>
@@ -3835,7 +3835,7 @@
 
 <element>
 <name>A 31</name>
-<stradr>0xB63E</stradr>
+<stradr>0xF43E</stradr>
 <type>S2</type>
 <default>3602</default>
 <unit>mV</unit>
@@ -3846,7 +3846,7 @@
 
 <element>
 <name>A 32</name>
-<stradr>0xB640</stradr>
+<stradr>0xF440</stradr>
 <type>S2</type>
 <default>3555</default>
 <unit>mV</unit>
@@ -3857,7 +3857,7 @@
 
 <element>
 <name>A 33</name>
-<stradr>0xB642</stradr>
+<stradr>0xF442</stradr>
 <type>S2</type>
 <default>3490</default>
 <unit>mV</unit>
@@ -3868,7 +3868,7 @@
 
 <element>
 <name>A 34</name>
-<stradr>0xB644</stradr>
+<stradr>0xF444</stradr>
 <type>S2</type>
 <default>3402</default>
 <unit>mV</unit>
@@ -3879,7 +3879,7 @@
 
 <element>
 <name>A 35</name>
-<stradr>0xB646</stradr>
+<stradr>0xF446</stradr>
 <type>S2</type>
 <default>3272</default>
 <unit>mV</unit>
@@ -3890,7 +3890,7 @@
 
 <element>
 <name>A 36</name>
-<stradr>0xB648</stradr>
+<stradr>0xF448</stradr>
 <type>S2</type>
 <default>2925</default>
 <unit>mV</unit>
@@ -3912,7 +3912,7 @@
 
 <element>
 <name>B 0</name>
-<stradr>0xB64A</stradr>
+<stradr>0xF44A</stradr>
 <type>S2</type>
 <default>0</default>
 <unit>-</unit>
@@ -3923,7 +3923,7 @@
 
 <element>
 <name>B 1</name>
-<stradr>0xB64C</stradr>
+<stradr>0xF44C</stradr>
 <type>S2</type>
 <default>0</default>
 <unit>-</unit>
@@ -3934,7 +3934,7 @@
 
 <element>
 <name>B 2</name>
-<stradr>0xB64E</stradr>
+<stradr>0xF44E</stradr>
 <type>S2</type>
 <default>0</default>
 <unit>-</unit>
@@ -3945,7 +3945,7 @@
 
 <element>
 <name>B 3</name>
-<stradr>0xB650</stradr>
+<stradr>0xF450</stradr>
 <type>S2</type>
 <default>0</default>
 <unit>-</unit>
@@ -3956,7 +3956,7 @@
 
 <element>
 <name>B 4</name>
-<stradr>0xB652</stradr>
+<stradr>0xF452</stradr>
 <type>S2</type>
 <default>0</default>
 <unit>-</unit>
@@ -3967,7 +3967,7 @@
 
 <element>
 <name>B 5</name>
-<stradr>0xB654</stradr>
+<stradr>0xF454</stradr>
 <type>S2</type>
 <default>0</default>
 <unit>-</unit>
@@ -3978,7 +3978,7 @@
 
 <element>
 <name>B 6</name>
-<stradr>0xB656</stradr>
+<stradr>0xF456</stradr>
 <type>S2</type>
 <default>0</default>
 <unit>-</unit>
@@ -3989,7 +3989,7 @@
 
 <element>
 <name>B 7</name>
-<stradr>0xB658</stradr>
+<stradr>0xF458</stradr>
 <type>S2</type>
 <default>0</default>
 <unit>-</unit>
@@ -4000,7 +4000,7 @@
 
 <element>
 <name>B 8</name>
-<stradr>0xB65A</stradr>
+<stradr>0xF45A</stradr>
 <type>S2</type>
 <default>0</default>
 <unit>-</unit>
@@ -4011,7 +4011,7 @@
 
 <element>
 <name>B 9</name>
-<stradr>0xB65C</stradr>
+<stradr>0xF45C</stradr>
 <type>S2</type>
 <default>0</default>
 <unit>-</unit>
@@ -4022,7 +4022,7 @@
 
 <element>
 <name>B 10</name>
-<stradr>0xB65E</stradr>
+<stradr>0xF45E</stradr>
 <type>S2</type>
 <default>0</default>
 <unit>-</unit>
@@ -4033,7 +4033,7 @@
 
 <element>
 <name>B 11</name>
-<stradr>0xB660</stradr>
+<stradr>0xF460</stradr>
 <type>S2</type>
 <default>0</default>
 <unit>-</unit>
@@ -4044,7 +4044,7 @@
 
 <element>
 <name>B 12</name>
-<stradr>0xB662</stradr>
+<stradr>0xF462</stradr>
 <type>S2</type>
 <default>0</default>
 <unit>-</unit>
@@ -4055,7 +4055,7 @@
 
 <element>
 <name>B 13</name>
-<stradr>0xB664</stradr>
+<stradr>0xF464</stradr>
 <type>S2</type>
 <default>0</default>
 <unit>-</unit>
@@ -4066,7 +4066,7 @@
 
 <element>
 <name>B 14</name>
-<stradr>0xB666</stradr>
+<stradr>0xF466</stradr>
 <type>S2</type>
 <default>0</default>
 <unit>-</unit>
@@ -4077,7 +4077,7 @@
 
 <element>
 <name>B 15</name>
-<stradr>0xB668</stradr>
+<stradr>0xF468</stradr>
 <type>S2</type>
 <default>0</default>
 <unit>-</unit>
@@ -4088,7 +4088,7 @@
 
 <element>
 <name>B 16</name>
-<stradr>0xB66A</stradr>
+<stradr>0xF46A</stradr>
 <type>S2</type>
 <default>0</default>
 <unit>-</unit>
@@ -4099,7 +4099,7 @@
 
 <element>
 <name>B 17</name>
-<stradr>0xB66C</stradr>
+<stradr>0xF46C</stradr>
 <type>S2</type>
 <default>0</default>
 <unit>-</unit>
@@ -4110,7 +4110,7 @@
 
 <element>
 <name>B 18</name>
-<stradr>0xB66E</stradr>
+<stradr>0xF46E</stradr>
 <type>S2</type>
 <default>0</default>
 <unit>-</unit>
@@ -4121,7 +4121,7 @@
 
 <element>
 <name>B 19</name>
-<stradr>0xB670</stradr>
+<stradr>0xF470</stradr>
 <type>S2</type>
 <default>0</default>
 <unit>-</unit>
@@ -4132,7 +4132,7 @@
 
 <element>
 <name>B 20</name>
-<stradr>0xB672</stradr>
+<stradr>0xF472</stradr>
 <type>S2</type>
 <default>0</default>
 <unit>-</unit>
@@ -4143,7 +4143,7 @@
 
 <element>
 <name>B 21</name>
-<stradr>0xB674</stradr>
+<stradr>0xF474</stradr>
 <type>S2</type>
 <default>0</default>
 <unit>-</unit>
@@ -4154,7 +4154,7 @@
 
 <element>
 <name>B 22</name>
-<stradr>0xB676</stradr>
+<stradr>0xF476</stradr>
 <type>S2</type>
 <default>0</default>
 <unit>-</unit>
@@ -4165,7 +4165,7 @@
 
 <element>
 <name>B 23</name>
-<stradr>0xB678</stradr>
+<stradr>0xF478</stradr>
 <type>S2</type>
 <default>0</default>
 <unit>-</unit>
@@ -4176,7 +4176,7 @@
 
 <element>
 <name>B 24</name>
-<stradr>0xB67A</stradr>
+<stradr>0xF47A</stradr>
 <type>S2</type>
 <default>0</default>
 <unit>-</unit>
@@ -4187,7 +4187,7 @@
 
 <element>
 <name>B 25</name>
-<stradr>0xB67C</stradr>
+<stradr>0xF47C</stradr>
 <type>S2</type>
 <default>0</default>
 <unit>-</unit>
@@ -4198,7 +4198,7 @@
 
 <element>
 <name>B 26</name>
-<stradr>0xB67E</stradr>
+<stradr>0xF47E</stradr>
 <type>S2</type>
 <default>0</default>
 <unit>-</unit>
@@ -4209,7 +4209,7 @@
 
 <element>
 <name>B 27</name>
-<stradr>0xB680</stradr>
+<stradr>0xF480</stradr>
 <type>S2</type>
 <default>0</default>
 <unit>-</unit>
@@ -4220,7 +4220,7 @@
 
 <element>
 <name>B 28</name>
-<stradr>0xB682</stradr>
+<stradr>0xF482</stradr>
 <type>S2</type>
 <default>0</default>
 <unit>-</unit>
@@ -4231,7 +4231,7 @@
 
 <element>
 <name>B 29</name>
-<stradr>0xB684</stradr>
+<stradr>0xF484</stradr>
 <type>S2</type>
 <default>0</default>
 <unit>-</unit>
@@ -4242,7 +4242,7 @@
 
 <element>
 <name>B 30</name>
-<stradr>0xB686</stradr>
+<stradr>0xF486</stradr>
 <type>S2</type>
 <default>0</default>
 <unit>-</unit>
@@ -4253,7 +4253,7 @@
 
 <element>
 <name>B 31</name>
-<stradr>0xB688</stradr>
+<stradr>0xF488</stradr>
 <type>S2</type>
 <default>0</default>
 <unit>-</unit>
@@ -4264,7 +4264,7 @@
 
 <element>
 <name>B 32</name>
-<stradr>0xB68A</stradr>
+<stradr>0xF48A</stradr>
 <type>S2</type>
 <default>0</default>
 <unit>-</unit>
@@ -4275,7 +4275,7 @@
 
 <element>
 <name>B 33</name>
-<stradr>0xB68C</stradr>
+<stradr>0xF48C</stradr>
 <type>S2</type>
 <default>0</default>
 <unit>-</unit>
@@ -4286,7 +4286,7 @@
 
 <element>
 <name>B 34</name>
-<stradr>0xB68E</stradr>
+<stradr>0xF48E</stradr>
 <type>S2</type>
 <default>0</default>
 <unit>-</unit>
@@ -4297,7 +4297,7 @@
 
 <element>
 <name>B 35</name>
-<stradr>0xB690</stradr>
+<stradr>0xF490</stradr>
 <type>S2</type>
 <default>0</default>
 <unit>-</unit>
@@ -4308,7 +4308,7 @@
 
 <element>
 <name>B 36</name>
-<stradr>0xB692</stradr>
+<stradr>0xF492</stradr>
 <type>S2</type>
 <default>0</default>
 <unit>-</unit>
@@ -4330,7 +4330,7 @@
 
 <element>
 <name>GP 0</name>
-<stradr>0xB694</stradr>
+<stradr>0xF494</stradr>
 <type>S2</type>
 <default>0</default>
 <unit>-</unit>
@@ -4341,7 +4341,7 @@
 
 <element>
 <name>GP 1</name>
-<stradr>0xB696</stradr>
+<stradr>0xF496</stradr>
 <type>S2</type>
 <default>1110</default>
 <unit>-</unit>
@@ -4352,7 +4352,7 @@
 
 <element>
 <name>GP 2</name>
-<stradr>0xB698</stradr>
+<stradr>0xF498</stradr>
 <type>S2</type>
 <default>2220</default>
 <unit>-</unit>
@@ -4363,7 +4363,7 @@
 
 <element>
 <name>GP 3</name>
-<stradr>0xB69A</stradr>
+<stradr>0xF49A</stradr>
 <type>S2</type>
 <default>3330</default>
 <unit>-</unit>
@@ -4374,7 +4374,7 @@
 
 <element>
 <name>GP 4</name>
-<stradr>0xB69C</stradr>
+<stradr>0xF49C</stradr>
 <type>S2</type>
 <default>4440</default>
 <unit>-</unit>
@@ -4385,7 +4385,7 @@
 
 <element>
 <name>GP 5</name>
-<stradr>0xB69E</stradr>
+<stradr>0xF49E</stradr>
 <type>S2</type>
 <default>5550</default>
 <unit>-</unit>
@@ -4396,7 +4396,7 @@
 
 <element>
 <name>GP 6</name>
-<stradr>0xB6A0</stradr>
+<stradr>0xF4A0</stradr>
 <type>S2</type>
 <default>6660</default>
 <unit>-</unit>
@@ -4407,7 +4407,7 @@
 
 <element>
 <name>GP 7</name>
-<stradr>0xB6A2</stradr>
+<stradr>0xF4A2</stradr>
 <type>S2</type>
 <default>7770</default>
 <unit>-</unit>
@@ -4418,7 +4418,7 @@
 
 <element>
 <name>GP 8</name>
-<stradr>0xB6A4</stradr>
+<stradr>0xF4A4</stradr>
 <type>S2</type>
 <default>8100</default>
 <unit>-</unit>
@@ -4429,7 +4429,7 @@
 
 <element>
 <name>GP 9</name>
-<stradr>0xB6A6</stradr>
+<stradr>0xF4A6</stradr>
 <type>S2</type>
 <default>8430</default>
 <unit>-</unit>
@@ -4440,7 +4440,7 @@
 
 <element>
 <name>GP 10</name>
-<stradr>0xB6A8</stradr>
+<stradr>0xF4A8</stradr>
 <type>S2</type>
 <default>8760</default>
 <unit>-</unit>
@@ -4451,7 +4451,7 @@
 
 <element>
 <name>GP 11</name>
-<stradr>0xB6AA</stradr>
+<stradr>0xF4AA</stradr>
 <type>S2</type>
 <default>9090</default>
 <unit>-</unit>
@@ -4462,7 +4462,7 @@
 
 <element>
 <name>GP 12</name>
-<stradr>0xB6AC</stradr>
+<stradr>0xF4AC</stradr>
 <type>S2</type>
 <default>9420</default>
 <unit>-</unit>
@@ -4473,7 +4473,7 @@
 
 <element>
 <name>GP 13</name>
-<stradr>0xB6AE</stradr>
+<stradr>0xF4AE</stradr>
 <type>S2</type>
 <default>9750</default>
 <unit>-</unit>
@@ -4484,7 +4484,7 @@
 
 <element>
 <name>GP 14</name>
-<stradr>0xB6B0</stradr>
+<stradr>0xF4B0</stradr>
 <type>S2</type>
 <default>10000</default>
 <unit>-</unit>
@@ -4506,7 +4506,7 @@
 
 <element>
 <name>Ra 0</name>
-<stradr>0xB6B2</stradr>
+<stradr>0xF4B2</stradr>
 <type>S2</type>
 <default>38</default>
 <unit>2^-10Ω</unit>
@@ -4528,7 +4528,7 @@
 
 <element>
 <name>Ra 0</name>
-<stradr>0xB6D2</stradr>
+<stradr>0xF4D2</stradr>
 <type>S2</type>
 <default>38</default>
 <unit>2^-10Ω</unit>
