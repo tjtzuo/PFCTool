@@ -41,6 +41,8 @@ import org.xml.sax.SAXException;
  */
 public class NewJFrame extends javax.swing.JFrame {
     boolean DEBUG = false;
+//    static Logger logger;
+    static Preferences prefs;
     public static UsbSmb usbSmb;
     SbsTableModel sbsTableModel;
     BitsTableModel bitsTableModel;
@@ -64,13 +66,6 @@ public class NewJFrame extends javax.swing.JFrame {
      * Creates new form NewJFrame
      */
     public NewJFrame() {
-        try {
-            FileInputStream in = new FileInputStream("../ini/Preferences.xml"); //NOI18N
-            Preferences.importPreferences(in);
-        } catch (IOException|InvalidPreferencesFormatException ex) {
-            System.err.println(ex);
-        }
-        Preferences prefs = Preferences.userNodeForPackage(NewJFrame.class);
         devName = prefs.get("devName", ""); //NOI18N
         bNewSBS = prefs.getBoolean("newSbs", false); //NOI18N
         if (bNewSBS) {
@@ -1571,17 +1566,17 @@ public class NewJFrame extends javax.swing.JFrame {
     private void jCheckBoxBootLoaderItemStateChanged(ItemEvent evt) {//GEN-FIRST:event_jCheckBoxBootLoaderItemStateChanged
         if (evt.getStateChange() == ItemEvent.SELECTED) {
             jCheckBox3.setSelected(false);
-            if (usbSmb.writeWord(0, 0x0F00)) {
-                if (usbSmb.writeWord(0xFA, 0x888)) {
-                    short pwValue[] = new short[1];
-                    if (usbSmb.readWord(0xFA, pwValue)) {
-                        if (pwValue[0] == 0x888) {
-                            jProgressBarBL.setValue(jProgressBarBL.getMaximum());
-                            return;
-                        }
-                    }
-                }
+            /*if (usbSmb.writeWord(0, 0x0F00)) {
+            if (usbSmb.writeWord(0xFA, 0x888)) {
+            short pwValue[] = new short[1];
+            if (usbSmb.readWord(0xFA, pwValue)) {
+            if (pwValue[0] == 0x888) {
+            jProgressBarBL.setValue(jProgressBarBL.getMaximum());
+            return;
             }
+            }
+            }
+            }*/
             jProgressBarBL.setValue(0);
             try {
 //                File file = new File("../ini/BootLoader_A1141.bin");
@@ -2317,6 +2312,34 @@ public class NewJFrame extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+/*
+        logger = Logger.getLogger(NewJFrame.class.getName());
+        try {
+            logger.addHandler(new FileHandler("error.xml"));
+        } catch (IOException|SecurityException ex) {
+            System.err.println(ex);
+        }
+*/
+        try {
+            FileInputStream in = new FileInputStream("../ini/Preferences.xml"); //NOI18N
+            Preferences.importPreferences(in);
+        } catch (IOException|InvalidPreferencesFormatException ex) {
+            System.err.println(ex);
+        }
+        prefs = Preferences.userNodeForPackage(NewJFrame.class);
+        if (prefs.getBoolean("debugLog", false)) { //NOI18N
+            try {
+                PrintStream out = new PrintStream(new FileOutputStream("debug.log")); //NOI18N
+                System.setOut(out);
+                System.setErr(out);
+            } catch (IOException ex) {
+                System.err.println(ex);
+            }
+        }
+
+        usbSmb = new UsbSmb();
+        System.out.println("USB SMBus Version: " + Integer.toHexString(usbSmb.getVersion()));
+
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -2341,9 +2364,6 @@ public class NewJFrame extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
-        usbSmb = new UsbSmb();
-        System.out.println("USB SMBus Version: " + Integer.toHexString(usbSmb.getVersion()));
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {

@@ -1,60 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
+<!DOCTYPE SBS SYSTEM "SBS.dtd">
 <SBS>
-
 <element>
+<Pre_cmd>-1</Pre_cmd>
+<sub_cmd>-1</sub_cmd>
 <cmd>0x00</cmd>
-<name>Manufacturer Access</name>
+<name>ManufacturerAccess</name>
 <size>2</size>
 <value>-</value>
 <unit>-</unit>
-<RWbit>RW</RWbit>
+<RWbit>R</RWbit>
 <Format>Hex</Format>
 </element>
 
 <element>
-<cmd>0x01</cmd>
-<name>Remaining Capacity Alarm</name>
-<size>2</size>
-<value>-</value>
-<unit>mAh</unit>
-<RWbit>RW</RWbit>
-<Format>UInt</Format>
-</element>
-
-<element>
+<Pre_cmd>-1</Pre_cmd>
+<sub_cmd>-1</sub_cmd>
 <cmd>0x02</cmd>
-<name>Remaining Time Alarm</name>
-<size>2</size>
-<value>-</value>
-<unit>min</unit>
-<RWbit>RW</RWbit>
-<Format>UInt</Format>
-</element>
-
-<element>
-<cmd>0x03</cmd>
-<name>Battery Mode</name>
-<size>2</size>
-<value>-</value>
-<unit>-</unit>
-<RWbit>RW</RWbit>
-<Format>Hex</Format>
-</element>
-
-<element>
-<cmd>0x04</cmd>
-<name>At Rate</name>
+<name>AtRate</name>
 <size>2</size>
 <value>-</value>
 <unit>mA</unit>
-<RWbit>RW</RWbit>
-<Format>Int</Format>
+<RWbit>R</RWbit>
+<Format>UInt</Format>
 </element>
 
 <element>
-<cmd>0x05</cmd>
-<name>At Rate Time To Full</name>
+<Pre_cmd>-1</Pre_cmd>
+<sub_cmd>-1</sub_cmd>
+<cmd>0x04</cmd>
+<name>AtRateTimeToEmpty</name>
 <size>2</size>
 <value>-</value>
 <unit>min</unit>
@@ -63,27 +38,9 @@
 </element>
 
 <element>
+<Pre_cmd>-1</Pre_cmd>
+<sub_cmd>-1</sub_cmd>
 <cmd>0x06</cmd>
-<name>At Rate Time To Empty</name>
-<size>2</size>
-<value>-</value>
-<unit>min</unit>
-<RWbit>R</RWbit>
-<Format>UInt</Format>
-</element>
-
-<element>
-<cmd>0x07</cmd>
-<name>At Rate OK</name>
-<size>2</size>
-<value>-</value>
-<unit>-</unit>
-<RWbit>R</RWbit>
-<Format>Int</Format>
-</element>
-
-<element>
-<cmd>0x08</cmd>
 <name>Temperature</name>
 <size>2</size>
 <value>-</value>
@@ -93,7 +50,9 @@
 </element>
 
 <element>
-<cmd>0x09</cmd>
+<Pre_cmd>-1</Pre_cmd>
+<sub_cmd>-1</sub_cmd>
+<cmd>0x08</cmd>
 <name>Voltage</name>
 <size>2</size>
 <value>-</value>
@@ -103,127 +62,9 @@
 </element>
 
 <element>
+<Pre_cmd>-1</Pre_cmd>
+<sub_cmd>-1</sub_cmd>
 <cmd>0x0a</cmd>
-<name>Current</name>
-<size>2</size>
-<value>-</value>
-<unit>mA</unit>
-<RWbit>R</RWbit>
-<Format>Int</Format>
-</element>
-
-<element>
-<cmd>0x0b</cmd>
-<name>Average Current</name>
-<size>2</size>
-<value>-</value>
-<unit>mA</unit>
-<RWbit>R</RWbit>
-<Format>Int</Format>
-</element>
-
-<element>
-<cmd>0x0c</cmd>
-<name>Max Error</name>
-<size>2</size>
-<value>-</value>
-<unit>%</unit>
-<RWbit>R</RWbit>
-<Format>UInt</Format>
-</element>
-
-<element>
-<cmd>0x0d</cmd>
-<name>Relative State Of Charge</name>
-<size>2</size>
-<value>-</value>
-<unit>%</unit>
-<RWbit>R</RWbit>
-<Format>UInt</Format>
-</element>
-
-<element>
-<cmd>0x0e</cmd>
-<name>Absolute State Of Charge</name>
-<size>2</size>
-<value>-</value>
-<unit>%</unit>
-<RWbit>R</RWbit>
-<Format>UInt</Format>
-</element>
-
-<element>
-<cmd>0x0f</cmd>
-<name>Remaining Capacity</name>
-<size>2</size>
-<value>-</value>
-<unit>mAh</unit>
-<RWbit>RW</RWbit>
-<Format>UInt</Format>
-</element>
-
-<element>
-<cmd>0x10</cmd>
-<name>Full Charge Capacity</name>
-<size>2</size>
-<value>-</value>
-<unit>mAh</unit>
-<RWbit>R</RWbit>
-<Format>UInt</Format>
-</element>
-
-<element>
-<cmd>0x11</cmd>
-<name>Run Time To Empty</name>
-<size>2</size>
-<value>-</value>
-<unit>min</unit>
-<RWbit>R</RWbit>
-<Format>UInt</Format>
-</element>
-
-<element>
-<cmd>0x12</cmd>
-<name>Average Time To Empty</name>
-<size>2</size>
-<value>-</value>
-<unit>min</unit>
-<RWbit>R</RWbit>
-<Format>UInt</Format>
-</element>
-
-<element>
-<cmd>0x13</cmd>
-<name>Average Time To Full</name>
-<size>2</size>
-<value>-</value>
-<unit>min</unit>
-<RWbit>R</RWbit>
-<Format>UInt</Format>
-</element>
-
-<element>
-<cmd>0x14</cmd>
-<name>Charging Current</name>
-<size>2</size>
-<value>-</value>
-<unit>mA</unit>
-<RWbit>R</RWbit>
-<Format>UInt</Format>
-</element>
-
-<element>
-<cmd>0x15</cmd>
-<name>Charging Voltage</name>
-<size>2</size>
-<value>-</value>
-<unit>mV</unit>
-<RWbit>R</RWbit>
-<Format>UInt</Format>
-</element>
-
-<element>
-<cmd>0x16</cmd>
 <name>Battery Status</name>
 <size>2</size>
 <value>-</value>
@@ -233,18 +74,10 @@
 </element>
 
 <element>
-<cmd>0x17</cmd>
-<name>Cycle Count</name>
-<size>2</size>
-<value>-</value>
-<unit>-</unit>
-<RWbit>R</RWbit>
-<Format>UInt</Format>
-</element>
-
-<element>
-<cmd>0x18</cmd>
-<name>Design Capacity</name>
+<Pre_cmd>-1</Pre_cmd>
+<sub_cmd>-1</sub_cmd>
+<cmd>0x0c</cmd>
+<name>NomAvailableCapacity</name>
 <size>2</size>
 <value>-</value>
 <unit>mAh</unit>
@@ -253,128 +86,178 @@
 </element>
 
 <element>
-<cmd>0x19</cmd>
-<name>Design Voltage</name>
+<Pre_cmd>-1</Pre_cmd>
+<sub_cmd>-1</sub_cmd>
+<cmd>0x0e</cmd>
+<name>FullAvailableCapacity</name>
 <size>2</size>
 <value>-</value>
-<unit>mV</unit>
+<unit>mAh</unit>
 <RWbit>R</RWbit>
 <Format>UInt</Format>
 </element>
 
 <element>
+<Pre_cmd>-1</Pre_cmd>
+<sub_cmd>-1</sub_cmd>
+<cmd>0x10</cmd>
+<name>RemainingCapacity</name>
+<size>2</size>
+<value>-</value>
+<unit>mAh</unit>
+<RWbit>R</RWbit>
+<Format>UInt</Format>
+</element>
+
+<element>
+<Pre_cmd>-1</Pre_cmd>
+<sub_cmd>-1</sub_cmd>
+<cmd>0x12</cmd>
+<name>FullChargeCapacity</name>
+<size>2</size>
+<value>-</value>
+<unit>mAh or 10mWh</unit>
+<RWbit>R</RWbit>
+<Format>UInt</Format>
+</element>
+
+<element>
+<Pre_cmd>-1</Pre_cmd>
+<sub_cmd>-1</sub_cmd>
+<cmd>0x14</cmd>
+<name>AverageCurrent</name>
+<size>2</size>
+<value>-</value>
+<unit>mA</unit>
+<RWbit>R</RWbit>
+<Format>Int</Format>
+</element>
+
+<element>
+<Pre_cmd>-1</Pre_cmd>
+<sub_cmd>-1</sub_cmd>
+<cmd>0x16</cmd>
+<name>TimeToEmpty</name>
+<size>2</size>
+<value>-</value>
+<unit>min</unit>
+<RWbit>R</RWbit>
+<Format>UInt</Format>
+</element>
+
+<element>
+<Pre_cmd>-1</Pre_cmd>
+<sub_cmd>-1</sub_cmd>
+<cmd>0x18</cmd>
+<name>TimeToFull</name>
+<size>2</size>
+<value>-</value>
+<unit>min</unit>
+<RWbit>R</RWbit>
+<Format>UInt</Format>
+</element>
+
+<element>
+<Pre_cmd>-1</Pre_cmd>
+<sub_cmd>-1</sub_cmd>
 <cmd>0x1a</cmd>
-<name>Specification Info</name>
+<name>StandbyCurrent</name>
 <size>2</size>
 <value>-</value>
-<unit>-</unit>
+<unit>mA</unit>
 <RWbit>R</RWbit>
-<Format>Hex</Format>
+<Format>Int</Format>
 </element>
 
 <element>
-<cmd>0x1b</cmd>
-<name>Manufacture Date</name>
-<size>2</size>
-<value>-</value>
-<unit>-</unit>
-<RWbit>R</RWbit>
-<Format>Date</Format>
-</element>
-
-<element>
+<Pre_cmd>-1</Pre_cmd>
+<sub_cmd>-1</sub_cmd>
 <cmd>0x1c</cmd>
-<name>Serial Number</name>
+<name>STTE</name>
 <size>2</size>
 <value>-</value>
-<unit>-</unit>
+<unit>min</unit>
 <RWbit>R</RWbit>
 <Format>UInt</Format>
 </element>
 
 <element>
+<Pre_cmd>-1</Pre_cmd>
+<sub_cmd>-1</sub_cmd>
+<cmd>0x1e</cmd>
+<name>MaxLoadCurrent</name>
+<size>2</size>
+<value>-</value>
+<unit>mA</unit>
+<RWbit>R</RWbit>
+<Format>Int</Format>
+</element>
+
+<element>
+<Pre_cmd>-1</Pre_cmd>
+<sub_cmd>-1</sub_cmd>
 <cmd>0x20</cmd>
-<name>Manufacturer Name</name>
-<size>20</size>
+<name>MLTTE</name>
+<size>2</size>
 <value>-</value>
-<unit>-</unit>
+<unit>min</unit>
 <RWbit>R</RWbit>
-<Format>String</Format>
+<Format>UInt</Format>
 </element>
 
 <element>
-<cmd>0x21</cmd>
-<name>Device Name</name>
-<size>20</size>
-<value>-</value>
-<unit>-</unit>
-<RWbit>R</RWbit>
-<Format>String</Format>
-</element>
-
-<element>
+<Pre_cmd>-1</Pre_cmd>
+<sub_cmd>-1</sub_cmd>
 <cmd>0x22</cmd>
-<name>Device Chemistry</name>
-<size>4</size>
+<name>Avail Energy</name>
+<size>2</size>
+<value>-</value>
+<unit>mWh</unit>
+<RWbit>R</RWbit>
+<Format>UInt</Format>
+</element>
+
+<element>
+<Pre_cmd>-1</Pre_cmd>
+<sub_cmd>-1</sub_cmd>
+<cmd>0x24</cmd>
+<name>Average Power</name>
+<size>2</size>
+<value>-</value>
+<unit>mW</unit>
+<RWbit>R</RWbit>
+<Format>UInt</Format>
+</element>
+
+<element>
+<Pre_cmd>-1</Pre_cmd>
+<sub_cmd>-1</sub_cmd>
+<cmd>0x28</cmd>
+<name>InternalTemperature</name>
+<size>2</size>
+<value>-</value>
+<unit>℃</unit>
+<RWbit>R</RWbit>
+<Format>Temp</Format>
+</element>
+
+<element>
+<Pre_cmd>-1</Pre_cmd>
+<sub_cmd>-1</sub_cmd>
+<cmd>0x2a</cmd>
+<name>CycleCount</name>
+<size>2</size>
 <value>-</value>
 <unit>-</unit>
 <RWbit>R</RWbit>
-<Format>String</Format>
-</element>
-
-<element>
-<cmd>0x23</cmd>
-<name>Manufacturer Data</name>
-<size>14</size>
-<value>-</value>
-<unit>-</unit>
-<RWbit>R</RWbit>
-<Format>Hex</Format>
-</element>
-
-<element>
-<cmd>0x3c</cmd>
-<name>Cell Voltage 4</name>
-<size>2</size>
-<value>-</value>
-<unit>mV</unit>
-<RWbit>R</RWbit>
 <Format>UInt</Format>
 </element>
 
 <element>
-<cmd>0x3d</cmd>
-<name>Cell Voltage 3</name>
-<size>2</size>
-<value>-</value>
-<unit>mV</unit>
-<RWbit>R</RWbit>
-<Format>UInt</Format>
-</element>
-
-<element>
-<cmd>0x3e</cmd>
-<name>Cell Voltage 2</name>
-<size>2</size>
-<value>-</value>
-<unit>mV</unit>
-<RWbit>R</RWbit>
-<Format>UInt</Format>
-</element>
-
-<element>
-<cmd>0x3f</cmd>
-<name>Cell Voltage 1</name>
-<size>2</size>
-<value>-</value>
-<unit>mV</unit>
-<RWbit>R</RWbit>
-<Format>UInt</Format>
-</element>
-
-<element>
-<cmd>0x4f</cmd>
-<name>State Of Health</name>
+<Pre_cmd>-1</Pre_cmd>
+<sub_cmd>-1</sub_cmd>
+<cmd>0x2c</cmd>
+<name>StateOfCharge</name>
 <size>2</size>
 <value>-</value>
 <unit>%</unit>
@@ -383,43 +266,87 @@
 </element>
 
 <element>
-<cmd>0x5a</cmd>
-<name>Pack Voltage</name>
+<Pre_cmd>-1</Pre_cmd>
+<sub_cmd>-1</sub_cmd>
+<cmd>0x2e</cmd>
+<name>StateOfHealth</name>
 <size>2</size>
 <value>-</value>
-<unit>mV</unit>
+<unit>%</unit>
 <RWbit>R</RWbit>
 <Format>UInt</Format>
 </element>
 
 <element>
-<cmd>0x5e</cmd>
-<name>TS1 Temperature</name>
+<Pre_cmd>-1</Pre_cmd>
+<sub_cmd>-1</sub_cmd>
+<cmd>0x34</cmd>
+<name>PassedCharge</name>
 <size>2</size>
 <value>-</value>
-<unit>℃</unit>
+<unit>mAh</unit>
 <RWbit>R</RWbit>
-<Format>Temp</Format>
+<Format>Int</Format>
 </element>
 
 <element>
-<cmd>0x5f</cmd>
-<name>TS2 Temperature</name>
+<Pre_cmd>-1</Pre_cmd>
+<sub_cmd>-1</sub_cmd>
+<cmd>0x36</cmd>
+<name>DOD0</name>
 <size>2</size>
 <value>-</value>
-<unit>℃</unit>
+<unit>-</unit>
 <RWbit>R</RWbit>
-<Format>Temp</Format>
+<Format>UInt</Format>
+</element>
+
+
+<element>
+<Pre_cmd>-1</Pre_cmd>
+<sub_cmd>-1</sub_cmd>
+<cmd>0x26</cmd>
+<name>TTECP</name>
+<size>2</size>
+<value>-</value>
+<unit>min</unit>
+<RWbit>R</RWbit>
+<Format>UInt</Format>
 </element>
 
 <element>
-<cmd>0x6a</cmd>
-<name>Internal Temperature</name>
+<Pre_cmd>-1</Pre_cmd>
+<sub_cmd>-1</sub_cmd>
+<cmd>0x3A</cmd>
+<name>Pack Configure</name>
 <size>2</size>
 <value>-</value>
-<unit>℃</unit>
+<unit>-</unit>
 <RWbit>R</RWbit>
-<Format>Temp</Format>
+<Format>Hex</Format>
 </element>
 
+<element>
+<Pre_cmd>-1</Pre_cmd>
+<sub_cmd>-1</sub_cmd>
+<cmd>0x3C</cmd>
+<name>DesignCapacity</name>
+<size>2</size>
+<value>-</value>
+<unit>mAh</unit>
+<RWbit>R</RWbit>
+<Format>UInt</Format>
+</element>
+
+<element>
+<Pre_cmd>-1</Pre_cmd>
+<sub_cmd>-1</sub_cmd>
+<cmd>0x63</cmd>
+<name>DeviceName</name>
+<size>10</size>
+<value>-</value>
+<unit>-</unit>
+<RWbit>R</RWbit>
+<Format>String</Format>
+</element>
 </SBS>

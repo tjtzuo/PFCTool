@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<!ELEMENT SBS (element)*>
+
+<!ELEMENT element (Pre_cmd|sub_cmd|cmd|name|size|value|unit|RWbit|Format)*>
+
+<!ELEMENT Pre_cmd (#PCDATA)>
+
+<!ELEMENT sub_cmd (#PCDATA)>
+
+<!ELEMENT cmd (#PCDATA)>
+
+<!ELEMENT name (#PCDATA)>
+
+<!ELEMENT size (#PCDATA)>
+
+<!ELEMENT value (#PCDATA)>
+
+<!ELEMENT unit (#PCDATA)>
+
+<!ELEMENT RWbit (#PCDATA)>
+
+<!ELEMENT Format (#PCDATA)>
