@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE DataFlash SYSTEM "DataFlash.dtd">
-<DataFlash>
+
+<DataFlash start_addr="0x7600">
 <cluster>
 <cluster_name>1st Level Safety</cluster_name>
 

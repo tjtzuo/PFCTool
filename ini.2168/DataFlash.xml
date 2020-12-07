@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<DataFlash>
+<DataFlash start_addr="0xB000">
 
 <cluster>
 <cluster_name>1st Level Safety</cluster_name>
@@ -3377,17 +3377,6 @@
 <type>string</type>
 <default>0123456789abcdef012</default>
 <unit>-</unit>
-<description>-</description>
-<max_value>-</max_value>
-<min_value>-</min_value>
-</element>
-
-<element>
-<name>EncryptKey</name>
-<stradr>0xB460</stradr>
-<type>U4</type>
-<default>0xFFFFFFFF</default>
-<unit>hex</unit>
 <description>-</description>
 <max_value>-</max_value>
 <min_value>-</min_value>

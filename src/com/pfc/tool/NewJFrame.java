@@ -85,6 +85,9 @@ public class NewJFrame extends javax.swing.JFrame {
             case "3168": //NOI18N
                 stradr = 0xEE00;
                 break;
+            case "1168": //NOI18N
+                stradr = 0xF000;
+                break;
             default:
                 stradr = 0;
                 break;
