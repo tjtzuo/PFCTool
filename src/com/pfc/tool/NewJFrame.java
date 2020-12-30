@@ -5,8 +5,8 @@ package com.pfc.tool;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 import com.pfc.lib.DllEntry;
+import com.pfc.lib.ReadWriteDF;
 import com.pfc.lib.UsbSmb;
 import com.pfc.ui.*;
 import com.pfc.xml.*;
@@ -40,6 +40,7 @@ import org.xml.sax.SAXException;
  * @author Joseph
  */
 public class NewJFrame extends javax.swing.JFrame {
+
     boolean DEBUG = false;
 //    static Logger logger;
     static Preferences prefs;
@@ -55,7 +56,7 @@ public class NewJFrame extends javax.swing.JFrame {
     int socCmd;
     int stradr;
     boolean bNewSBS;
-    Timer timer, timerCalib;
+    Timer timerSBS, timerCalib;
     final int ONE_SECOND = 1000;
     private boolean scanning, logging = false;
     private PrintWriter pwLog;
@@ -184,7 +185,7 @@ public class NewJFrame extends javax.swing.JFrame {
         fcLog.setFileFilter(filter);
 
         //Create a timer.
-        timer = new Timer(ONE_SECOND, new ActionListener() {
+        timerSBS = new Timer(ONE_SECOND, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
                 refreshSBS();
@@ -202,10 +203,35 @@ public class NewJFrame extends javax.swing.JFrame {
                 }
             }
         });
-        timerCalib = new Timer(ONE_SECOND, new ActionListener() {
+        timerCalib = new Timer(ONE_SECOND * 2, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
-
+                byte cmdCurr = 0x0A, cmdTemp = 0x08, cmdVolt = 0x3F;
+                short pwValue[] = new short[1];
+                if (usbSmb.readWord(cmdCurr, pwValue)) {
+                    jTextFieldCurrM.setText(Short.toString(pwValue[0]));
+                }
+                if (usbSmb.readWord(cmdTemp, pwValue)) {
+                    jTextFieldTempM.setText(String.format("%1$5.1f", ((float) pwValue[0] - 2731.5) / 10.0));
+                }
+                for (int i = 0; i < 4; i++) {
+                    if (usbSmb.readWord(cmdVolt - i, pwValue)) {
+                        switch (i) {
+                            case 0:
+                                jTextFieldVCell1M.setText(Short.toString(pwValue[0]));
+                                break;
+                            case 1:
+                                jTextFieldVCell2M.setText(Short.toString(pwValue[0]));
+                                break;
+                            case 2:
+                                jTextFieldVCell3M.setText(Short.toString(pwValue[0]));
+                                break;
+                            case 3:
+                                jTextFieldVCell4M.setText(Short.toString(pwValue[0]));
+                                break;
+                        }
+                    }
+                }
             }
         });
     }
@@ -331,8 +357,8 @@ public class NewJFrame extends javax.swing.JFrame {
         jTextFieldCellN = new javax.swing.JTextField();
         jPanel8 = new javax.swing.JPanel();
         jButtonCalibCC2 = new javax.swing.JButton();
-        jTextFieldTempM1 = new javax.swing.JTextField();
-        jTextFieldTempA1 = new javax.swing.JTextField();
+        jTextFieldCurrM = new javax.swing.JTextField();
+        jTextFieldCurrA = new javax.swing.JTextField();
         jLabel32 = new javax.swing.JLabel();
         jLabel33 = new javax.swing.JLabel();
         jLabel34 = new javax.swing.JLabel();
@@ -449,30 +475,28 @@ public class NewJFrame extends javax.swing.JFrame {
                             .addGroup(jPanelSBSLayout.createSequentialGroup()
                                 .addComponent(jLabelSOC)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jProgressBarSOC, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jProgressBarSOC, javax.swing.GroupLayout.PREFERRED_SIZE, 424, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPaneBits, javax.swing.GroupLayout.PREFERRED_SIZE, 605, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(75, Short.MAX_VALUE))
                     .addGroup(jPanelSBSLayout.createSequentialGroup()
                         .addComponent(jScrollPaneSBS, javax.swing.GroupLayout.PREFERRED_SIZE, 464, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanelSBSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextFieldLogFile)
                             .addGroup(jPanelSBSLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanelSBSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextFieldLogFile)
+                                    .addComponent(jCheckBoxScan)
                                     .addGroup(jPanelSBSLayout.createSequentialGroup()
-                                        .addGroup(jPanelSBSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jCheckBoxScan)
-                                            .addGroup(jPanelSBSLayout.createSequentialGroup()
-                                                .addComponent(jLabel7)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jTextFieldInterval, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jLabel8))
-                                            .addComponent(jButtonStartLog)
-                                            .addComponent(jButtonStopLog)
-                                            .addComponent(jButtonRefresh))
-                                        .addGap(0, 0, Short.MAX_VALUE))))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelSBSLayout.createSequentialGroup()
+                                        .addComponent(jLabel7)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jTextFieldInterval, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel8))
+                                    .addComponent(jButtonStartLog)
+                                    .addComponent(jButtonStopLog)
+                                    .addComponent(jButtonRefresh))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(jPanelSBSLayout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jCheckBox1)
                                 .addGap(48, 48, 48))))))
@@ -499,13 +523,13 @@ public class NewJFrame extends javax.swing.JFrame {
                         .addComponent(jTextFieldLogFile, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButtonStopLog))
-                    .addComponent(jScrollPaneSBS, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPaneSBS, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelSBSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jProgressBarSOC, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelSOC))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPaneBits, javax.swing.GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE)
+                .addComponent(jScrollPaneBits, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -580,7 +604,7 @@ public class NewJFrame extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelDataFlashLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jCheckBox2)
-                        .addGap(45, 45, 45))))
+                        .addGap(41, 41, 41))))
         );
         jPanelDataFlashLayout.setVerticalGroup(
             jPanelDataFlashLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -595,12 +619,14 @@ public class NewJFrame extends javax.swing.JFrame {
                 .addComponent(jButtonExport)
                 .addGap(33, 33, 33)
                 .addComponent(jButtonImport)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(297, Short.MAX_VALUE))
             .addGroup(jPanelDataFlashLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
                 .addGroup(jPanelDataFlashLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jCheckBox2)
-                    .addComponent(jTabbedPaneDataFlash, javax.swing.GroupLayout.PREFERRED_SIZE, 536, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTabbedPaneDataFlash)
+                    .addGroup(jPanelDataFlashLayout.createSequentialGroup()
+                        .addComponent(jCheckBox2)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jProgressBarDF, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(8, 8, 8))
@@ -1001,6 +1027,11 @@ public class NewJFrame extends javax.swing.JFrame {
 
         jButtonCalibCC1.setFont(new java.awt.Font("SimSun", 0, 12)); // NOI18N
         jButtonCalibCC1.setText(bundle.getString("NewJFrame.jButtonCalibCC1.text")); // NOI18N
+        jButtonCalibCC1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCalibCC1ActionPerformed(evt);
+            }
+        });
 
         jLabel12.setBackground(java.awt.Color.yellow);
         jLabel12.setFont(new java.awt.Font("SimSun", 0, 12)); // NOI18N
@@ -1032,6 +1063,11 @@ public class NewJFrame extends javax.swing.JFrame {
 
         jButtonCalibVT.setFont(new java.awt.Font("SimSun", 0, 12)); // NOI18N
         jButtonCalibVT.setText(bundle.getString("NewJFrame.jButtonCalibVT.text")); // NOI18N
+        jButtonCalibVT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCalibVTActionPerformed(evt);
+            }
+        });
 
         jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(null, bundle.getString("NewJFrame.jPanel6.border.title"), javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("SimSun", 0, 12))); // NOI18N
 
@@ -1324,13 +1360,18 @@ public class NewJFrame extends javax.swing.JFrame {
 
         jButtonCalibCC2.setFont(new java.awt.Font("SimSun", 0, 12)); // NOI18N
         jButtonCalibCC2.setText(bundle.getString("NewJFrame.jButtonCalibCC2.text")); // NOI18N
+        jButtonCalibCC2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCalibCC2ActionPerformed(evt);
+            }
+        });
 
-        jTextFieldTempM1.setEditable(false);
-        jTextFieldTempM1.setFont(new java.awt.Font("SimSun", 0, 12)); // NOI18N
-        jTextFieldTempM1.setText(bundle.getString("NewJFrame.jTextFieldTempM1.text")); // NOI18N
+        jTextFieldCurrM.setEditable(false);
+        jTextFieldCurrM.setFont(new java.awt.Font("SimSun", 0, 12)); // NOI18N
+        jTextFieldCurrM.setText(bundle.getString("NewJFrame.jTextFieldCurrM.text")); // NOI18N
 
-        jTextFieldTempA1.setFont(new java.awt.Font("SimSun", 0, 12)); // NOI18N
-        jTextFieldTempA1.setText(bundle.getString("NewJFrame.jTextFieldTempA1.text")); // NOI18N
+        jTextFieldCurrA.setFont(new java.awt.Font("SimSun", 0, 12)); // NOI18N
+        jTextFieldCurrA.setText(bundle.getString("NewJFrame.jTextFieldCurrA.text")); // NOI18N
 
         jLabel32.setFont(new java.awt.Font("SimSun", 0, 12)); // NOI18N
         jLabel32.setText(bundle.getString("NewJFrame.jLabel32.text")); // NOI18N
@@ -1374,14 +1415,14 @@ public class NewJFrame extends javax.swing.JFrame {
                                 .addGap(11, 11, 11)
                                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel8Layout.createSequentialGroup()
-                                        .addComponent(jTextFieldTempM1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jTextFieldCurrM, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jLabel32))
                                     .addComponent(jLabel34))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel8Layout.createSequentialGroup()
-                                        .addComponent(jTextFieldTempA1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jTextFieldCurrA, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jLabel33))
                                     .addComponent(jLabel35))))
@@ -1401,10 +1442,10 @@ public class NewJFrame extends javax.swing.JFrame {
                             .addComponent(jLabel35))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextFieldTempM1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextFieldCurrM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel32)))
                     .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTextFieldTempA1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextFieldCurrA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel33)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1433,15 +1474,15 @@ public class NewJFrame extends javax.swing.JFrame {
         jPanelCalibLayout.setVerticalGroup(
             jPanelCalibLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelCalibLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(23, 23, 23)
                 .addComponent(jLabel11)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(42, 42, 42)
                 .addGroup(jPanelCalibLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(89, Short.MAX_VALUE))
+                .addGap(31, 31, 31))
         );
 
         jTabbedPaneMain.addTab(bundle.getString("NewJFrame.jPanelCalib.TabConstraints.tabTitle"), jPanelCalib); // NOI18N
@@ -1627,7 +1668,6 @@ public class NewJFrame extends javax.swing.JFrame {
         new Thread() {
             @Override
             public void run() {
-                setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                 final int retry_end = 3;
                 int retry_count;
                 if (bNewSBS) {
@@ -1649,41 +1689,37 @@ public class NewJFrame extends javax.swing.JFrame {
                         return;
                     }
                 }
+
+                setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                 int index;
                 for (index = 0; index < 8; index++) {
-                    for (retry_count = 0; retry_count < retry_end; retry_count++) {
-                        if (bNewSBS) {
+                    if (bNewSBS) {
+                        for (retry_count = 0; retry_count < retry_end; retry_count++) {
                             if (usbSmb.writeByteVerify(0x3e, index)) {
-                                break;
-                            }
-                        } else {
-                            if (usbSmb.writeWordVerify(0x77, index)) {
+//                            if (usbSmb.writeWordVerify(0x77, index)) {
                                 break;
                             }
                         }
-                        try {
-                            sleep(10);
-                        } catch (InterruptedException ex) {
+                        if (retry_count == retry_end) {
+                            break;
                         }
-                    }
-                    if (retry_count == retry_end) {
-                        break;
                     }
                     for (retry_count = 0; retry_count < retry_end; retry_count++) {
                         byte[] sector_buf = new byte[256];
-                        if (usbSmb.readDataFlashSector(bNewSBS, sector_buf)) {
+                        boolean success;
+                        if (bNewSBS) {
+                            success = usbSmb.readDataFlashSector(bNewSBS, sector_buf);
+                        } else {
+                            success = ReadWriteDF.readDataFlash(0, index, sector_buf, usbSmb.isPEC());
+                        }
+                        if (success) {
                             System.arraycopy(sector_buf, 0, dfBuf, index * 256, sector_buf.length);
                             break;
-                        }
-                        try {
-                            sleep(10);
-                        } catch (InterruptedException ex) {
                         }
                     }
                     if (retry_count == retry_end) {
                         break;
                     }
-
                     jProgressBarDF.setValue(256 * (index + 1));
                 }
                 if (index == 8) {
@@ -1725,13 +1761,10 @@ public class NewJFrame extends javax.swing.JFrame {
                 setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                 int index;
                 for (index = 0; index < 8; index++) {
-                    for (retry_count = 0; retry_count < retry_end; retry_count++) {
-                        if (bNewSBS) {
+                    if (bNewSBS) {
+                        for (retry_count = 0; retry_count < retry_end; retry_count++) {
                             if (usbSmb.writeByteVerify(0x3e, index)) {
-                                break;
-                            }
-                        } else {
-                            if (usbSmb.writeWordVerify(0x77, index)) {
+//                            if (usbSmb.writeWordVerify(0x77, index)) {
                                 break;
                             }
                         }
@@ -1739,24 +1772,34 @@ public class NewJFrame extends javax.swing.JFrame {
                             sleep(10);
                         } catch (InterruptedException ex) {
                         }
-                    }
-                    if (retry_count == retry_end) {
-                        break;
+                        if (retry_count == retry_end) {
+                            break;
+                        }
                     }
 
                     for (retry_count = 0; retry_count < retry_end; retry_count++) {
                         byte[] sector_buf = new byte[256];
                         System.arraycopy(dfBuf, index * 256, sector_buf, 0, sector_buf.length);
-                        if (usbSmb.writeDataFlashSector(bNewSBS, sector_buf)) {
-                            break;
+                        if (bNewSBS) {
+                            if (usbSmb.writeDataFlashSector(bNewSBS, sector_buf)) {
+                                break;
+                            }
+                        } else {
+                            if (ReadWriteDF.writeDataFlash(0, index, sector_buf, usbSmb.isPEC())) {
+                                break;
+                            }
                         }
-                        try {
-                            sleep(10);
-                        } catch (InterruptedException ex) {
-                        }
+                    }
+                    try {
+                        sleep(10);
+                    } catch (InterruptedException ex) {
                     }
                     if (retry_count == retry_end) {
                         break;
+                    }
+
+                    if (devName.equals("1168") && index == 3) {
+                        index = 7;
                     }
 
                     jProgressBarDF.setValue(256 * (index + 1));
@@ -1777,7 +1820,6 @@ public class NewJFrame extends javax.swing.JFrame {
                 setCursor(Cursor.getDefaultCursor());
             }
         }.start();
-
     }//GEN-LAST:event_jButtonWriteAllActionPerformed
 
     private void jButtonDefaultActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButtonDefaultActionPerformed
@@ -2712,10 +2754,10 @@ public class NewJFrame extends javax.swing.JFrame {
     private void jCheckBoxScanItemStateChanged(ItemEvent evt) {//GEN-FIRST:event_jCheckBoxScanItemStateChanged
         if (evt.getStateChange() == ItemEvent.SELECTED) {
             scanning = true;
-            timer.setDelay(Integer.parseInt(jTextFieldInterval.getText()));
-            timer.start();
+            timerSBS.setDelay(Integer.parseInt(jTextFieldInterval.getText()));
+            timerSBS.start();
         } else {
-            timer.stop();
+            timerSBS.stop();
             scanning = false;
         }
     }//GEN-LAST:event_jCheckBoxScanItemStateChanged
@@ -2774,9 +2816,11 @@ public class NewJFrame extends javax.swing.JFrame {
             }
             int index = jTabbedPaneMain.getSelectedIndex();
             if (index == 3) {
-
+                timerCalib.start();
             } else {
-
+                if (timerCalib != null) {
+                    timerCalib.stop();
+                }
                 switch (index) {
                     case 0:
                         if (bNewSBS) {
@@ -2951,6 +2995,226 @@ public class NewJFrame extends javax.swing.JFrame {
             usbSmb.setPEC(evt.getStateChange() == ItemEvent.SELECTED);
         }
     }//GEN-LAST:event_jCheckBoxItemStateChanged
+
+    /* Calibration Start Command Flag */
+    final int CAL_CC_OFFSET         = 0x0001;// Bit 0 Coulomb Counter Offset 
+    final int CAL_VCELL_OFFSET      = 0x0002;// Bit 1 VCell Offset 
+    final int CAL_TEMPINT_OFFSET    = 0x0008;// Bit 3 Temperature, Internal 
+    final int CAL_TEMPEXT1_OFFSET   = 0x0010;// Bit 4 Temperature, External 1 
+    final int CAL_TEMPEXT2_OFFSET   = 0x0020;// Bit 5 Temperature, External 2 
+    final int CAL_CURRENT           = 0x0040;// Bit 6 Current 
+    final int CAL_ADC_CONT          = 0x4000;// Bit 14 Run ADC Task Continuously 
+    final int CAL_CC_CONT           = 0x8000;// Bit 15 Run CC Task Continuously 
+
+    /* Calibration Command */
+    final byte CAL_START_CMD    = 0x51;
+    final byte CAL_POLL_CMD     = 0x52;
+    final byte CAL_VC1_CMD      = 0x66;
+    final byte CAL_VC2_CMD      = 0x67;
+    final byte CAL_VC3_CMD      = 0x68;
+    final byte CAL_VC4_CMD      = 0x69;
+    final byte CAL_DF_CMD       = 0x72;
+    final byte CAL_EXIT_CMD     = 0x73;
+
+    private void jButtonCalibCC1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCalibCC1ActionPerformed
+        new Thread() {
+            @Override
+            public void run() {
+                timerCalib.stop();
+                setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                try {
+                    short[] pwValue = new short[1];
+                    for (int i = 0; i < 5; i++) {
+                        if (usbSmb.writeWord(0, 0x40)) {
+                            if (usbSmb.readWord(0x50, pwValue)) {
+                                if (pwValue[0] == 0x4C7A) {//Lz
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    usbSmb.writeWord(CAL_START_CMD, CAL_CC_OFFSET | CAL_ADC_CONT | CAL_CC_CONT);
+                    for (int i = 0; i < 5; i++) {
+                        if (usbSmb.readWord(CAL_POLL_CMD, pwValue)) {
+                            if ((pwValue[0] & 0xFF) == 0) {
+                                if (usbSmb.readWord(0x53, pwValue)) {
+                                    if (pwValue[0] == 0) {
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                        sleep(300);
+                    }
+                    usbSmb.sendByte(CAL_DF_CMD);
+                    for (int i = 0; i < 5; i++) {
+                        sleep(500);
+                        if (usbSmb.writeWord(0x54, 0)) {
+                            if (usbSmb.readWord(0x50, pwValue)) {
+                                if (pwValue[0] == 0x4C7A) {//Lz
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    for (int i = 0; i < 3; i++) {
+                        if (usbSmb.sendByte(CAL_EXIT_CMD)) {
+                            if (usbSmb.readWord(0x50, pwValue)) {
+                                if (pwValue[0] == 0) {
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                } catch (Exception ex) {
+                    System.err.println(ex);
+                }
+                setCursor(Cursor.getDefaultCursor());
+                timerCalib.start();
+            }
+        }.start();
+    }//GEN-LAST:event_jButtonCalibCC1ActionPerformed
+
+    private void jButtonCalibVTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCalibVTActionPerformed
+        new Thread() {
+            @Override
+            public void run() {
+                timerCalib.stop();
+                setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                try {
+                    short[] pwValue = new short[1];
+                    for (int i = 0; i < 5; i++) {
+                        if (usbSmb.writeWord(0, 0x40)) {
+                            if (usbSmb.readWord(0x50, pwValue)) {
+                                if (pwValue[0] == 0x4C7A) {//Lz
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    int wCmdFlags = 0;
+                    byte[] buf = new byte[7];
+                    if (jCheckBoxTemp.isSelected()) {
+                        wCmdFlags |= CAL_TEMPEXT1_OFFSET | CAL_TEMPEXT2_OFFSET | CAL_TEMPINT_OFFSET;
+			/* WRITE THE ACTUAL TEMPERATURE */
+                        int nCalTemp = (int) (Float.parseFloat(jTextFieldTempA.getText()) * 10 + 0.5);
+                        buf[4] = (byte) nCalTemp;
+                        buf[5] = (byte) (nCalTemp >> 8);
+                    }
+                    buf[6] = Byte.parseByte(jTextFieldCellN.getText());
+                    usbSmb.writeBlock(0x58, buf.length, buf);
+                    if (jCheckBoxVolt.isSelected()) {
+                        wCmdFlags |= CAL_VCELL_OFFSET;
+                        usbSmb.writeWord(CAL_VC1_CMD, Integer.parseInt(jTextFieldVCell1A.getText()));
+                        usbSmb.writeWord(CAL_VC2_CMD, Integer.parseInt(jTextFieldVCell2A.getText()));
+                        usbSmb.writeWord(CAL_VC3_CMD, Integer.parseInt(jTextFieldVCell3A.getText()));
+                        usbSmb.writeWord(CAL_VC4_CMD, Integer.parseInt(jTextFieldVCell4A.getText()));
+                    }
+                    usbSmb.writeWord(CAL_START_CMD, wCmdFlags | CAL_ADC_CONT | CAL_CC_CONT);
+                    for (int i = 0; i < 5; i++) {
+                        if (usbSmb.readWord(CAL_POLL_CMD, pwValue)) {
+                            if ((pwValue[0] & 0xFF) == 0) {
+                                if (usbSmb.readWord(0x53, pwValue)) {
+                                    if (pwValue[0] == 0) {
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                        sleep(300);
+                    }
+                    usbSmb.sendByte(CAL_DF_CMD);
+                    for (int i = 0; i < 5; i++) {
+                        sleep(500);
+                        if (usbSmb.writeWord(0x54, 0)) {
+                            if (usbSmb.readWord(0x50, pwValue)) {
+                                if (pwValue[0] == 0x4C7A) {//Lz
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    for (int i = 0; i < 3; i++) {
+                        if (usbSmb.sendByte(CAL_EXIT_CMD)) {
+                            if (usbSmb.readWord(0x50, pwValue)) {
+                                if (pwValue[0] == 0) {
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                } catch (Exception ex) {
+                    System.err.println(ex);
+                }
+                setCursor(Cursor.getDefaultCursor());
+                timerCalib.start();
+            }
+        }.start();
+    }//GEN-LAST:event_jButtonCalibVTActionPerformed
+
+    private void jButtonCalibCC2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCalibCC2ActionPerformed
+        new Thread() {
+            @Override
+            public void run() {
+                timerCalib.stop();
+                setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                try {
+                    short[] pwValue = new short[1];
+                    for (int i = 0; i < 5; i++) {
+                        if (usbSmb.writeWord(0, 0x40)) {
+                            if (usbSmb.readWord(0x50, pwValue)) {
+                                if (pwValue[0] == 0x4C7A) {//Lz
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    byte[] buf = new byte[7];
+                    int nCurr = Integer.parseInt(jTextFieldCurrA.getText());
+                    buf[0] = (byte) nCurr;
+                    buf[1] = (byte) (nCurr >> 8);
+                    usbSmb.writeBlock(0x58, buf.length, buf);
+                    usbSmb.writeWord(CAL_START_CMD, CAL_CURRENT | CAL_ADC_CONT | CAL_CC_CONT);
+                    for (int i = 0; i < 5; i++) {
+                        if (usbSmb.readWord(CAL_POLL_CMD, pwValue)) {
+                            if ((pwValue[0] & 0xFF) == 0) {
+                                if (usbSmb.readWord(0x53, pwValue)) {
+                                    if (pwValue[0] == 0) {
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                        sleep(300);
+                    }
+                    usbSmb.sendByte(CAL_DF_CMD);
+                    for (int i = 0; i < 5; i++) {
+                        sleep(500);
+                        if (usbSmb.writeWord(0x54, 0)) {
+                            if (usbSmb.readWord(0x50, pwValue)) {
+                                if (pwValue[0] == 0x4C7A) {//Lz
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    for (int i = 0; i < 3; i++) {
+                        if (usbSmb.sendByte(CAL_EXIT_CMD)) {
+                            if (usbSmb.readWord(0x50, pwValue)) {
+                                if (pwValue[0] == 0) {
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                } catch (Exception ex) {
+                    System.err.println(ex);
+                }
+                setCursor(Cursor.getDefaultCursor());
+                timerCalib.start();
+            }
+        }.start();
+    }//GEN-LAST:event_jButtonCalibCC2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -3127,15 +3391,15 @@ public class NewJFrame extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldChemID;
     private javax.swing.JTextField jTextFieldCommand;
     private javax.swing.JTextField jTextFieldCount;
+    private javax.swing.JTextField jTextFieldCurrA;
+    private javax.swing.JTextField jTextFieldCurrM;
     private javax.swing.JTextField jTextFieldData;
     private javax.swing.JTextField jTextFieldData2;
     private javax.swing.JTextField jTextFieldInterval;
     private javax.swing.JTextField jTextFieldLogFile;
     private javax.swing.JTextField jTextFieldMReg;
     private javax.swing.JTextField jTextFieldTempA;
-    private javax.swing.JTextField jTextFieldTempA1;
     private javax.swing.JTextField jTextFieldTempM;
-    private javax.swing.JTextField jTextFieldTempM1;
     private javax.swing.JTextField jTextFieldVCell1A;
     private javax.swing.JTextField jTextFieldVCell1M;
     private javax.swing.JTextField jTextFieldVCell2A;
