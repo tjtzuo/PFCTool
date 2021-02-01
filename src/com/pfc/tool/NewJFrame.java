@@ -26,6 +26,7 @@ import javax.swing.JTable;
 import javax.swing.Timer;
 import javax.swing.event.ChangeEvent;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.table.TableColumn;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
@@ -144,6 +145,18 @@ public class NewJFrame extends javax.swing.JFrame {
         // Set custom color renderer
         BitsColorRenderer colorRenderer = new BitsColorRenderer();
         jTableBits.setDefaultRenderer(String.class, colorRenderer);
+
+        TableColumn column = null;
+        for (int i = 0; i < jTableSBS.getColumnCount(); i++) {
+            column = jTableSBS.getColumnModel().getColumn(i);
+            if (i == 1) {
+                column.setPreferredWidth(150); //name
+            } else if (i == 2) {
+                column.setPreferredWidth(75); //value
+            } else {
+                column.setPreferredWidth(25);
+            }
+        }
 
         refreshSBS();
 
@@ -468,23 +481,28 @@ public class NewJFrame extends javax.swing.JFrame {
         jPanelSBSLayout.setHorizontalGroup(
             jPanelSBSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelSBSLayout.createSequentialGroup()
-                .addGap(35, 35, 35)
+                .addContainerGap()
+                .addComponent(jScrollPaneSBS, javax.swing.GroupLayout.DEFAULT_SIZE, 404, Short.MAX_VALUE)
                 .addGroup(jPanelSBSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelSBSLayout.createSequentialGroup()
-                        .addGroup(jPanelSBSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanelSBSLayout.createSequentialGroup()
-                                .addComponent(jLabelSOC)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jProgressBarSOC, javax.swing.GroupLayout.PREFERRED_SIZE, 424, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPaneBits, javax.swing.GroupLayout.PREFERRED_SIZE, 605, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(75, Short.MAX_VALUE))
-                    .addGroup(jPanelSBSLayout.createSequentialGroup()
-                        .addComponent(jScrollPaneSBS, javax.swing.GroupLayout.PREFERRED_SIZE, 464, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanelSBSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextFieldLogFile)
-                            .addGroup(jPanelSBSLayout.createSequentialGroup()
+                            .addComponent(jScrollPaneBits, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelSBSLayout.createSequentialGroup()
+                                .addComponent(jLabelSOC)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jProgressBarSOC, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addContainerGap())))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelSBSLayout.createSequentialGroup()
+                        .addGap(18, 70, Short.MAX_VALUE)
+                        .addGroup(jPanelSBSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelSBSLayout.createSequentialGroup()
+                                .addComponent(jCheckBox1)
+                                .addGap(108, 108, 108))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelSBSLayout.createSequentialGroup()
                                 .addGroup(jPanelSBSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jButtonStopLog)
+                                    .addComponent(jButtonRefresh)
                                     .addComponent(jCheckBoxScan)
                                     .addGroup(jPanelSBSLayout.createSequentialGroup()
                                         .addComponent(jLabel7)
@@ -493,44 +511,38 @@ public class NewJFrame extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jLabel8))
                                     .addComponent(jButtonStartLog)
-                                    .addComponent(jButtonStopLog)
-                                    .addComponent(jButtonRefresh))
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(jPanelSBSLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jCheckBox1)
-                                .addGap(48, 48, 48))))))
+                                    .addComponent(jTextFieldLogFile, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addContainerGap())))))
         );
         jPanelSBSLayout.setVerticalGroup(
             jPanelSBSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelSBSLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelSBSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPaneSBS, javax.swing.GroupLayout.DEFAULT_SIZE, 627, Short.MAX_VALUE)
                     .addGroup(jPanelSBSLayout.createSequentialGroup()
                         .addComponent(jCheckBox1)
-                        .addGap(4, 4, 4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButtonRefresh)
-                        .addGap(14, 14, 14)
+                        .addGap(18, 18, 18)
                         .addComponent(jCheckBoxScan)
                         .addGap(9, 9, 9)
                         .addGroup(jPanelSBSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7)
                             .addComponent(jTextFieldInterval, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel8))
-                        .addGap(18, 18, 18)
+                        .addGap(17, 17, 17)
                         .addComponent(jButtonStartLog)
-                        .addGap(9, 9, 9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jTextFieldLogFile, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonStopLog))
-                    .addComponent(jScrollPaneSBS, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelSBSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jProgressBarSOC, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelSOC))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPaneBits, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
-                .addContainerGap())
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButtonStopLog)
+                        .addGap(22, 22, 22)
+                        .addGroup(jPanelSBSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jProgressBarSOC, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelSOC))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPaneBits, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
         );
 
         jTabbedPaneMain.addTab(bundle.getString("NewJFrame.jPanelSBS.TabConstraints.tabTitle"), jPanelSBS); // NOI18N
@@ -600,7 +612,7 @@ public class NewJFrame extends javax.swing.JFrame {
                             .addComponent(jButtonDefault)
                             .addComponent(jButtonExport)
                             .addComponent(jButtonImport))
-                        .addContainerGap(109, Short.MAX_VALUE))
+                        .addContainerGap(199, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelDataFlashLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jCheckBox2)
@@ -619,7 +631,7 @@ public class NewJFrame extends javax.swing.JFrame {
                 .addComponent(jButtonExport)
                 .addGap(33, 33, 33)
                 .addComponent(jButtonImport)
-                .addContainerGap(297, Short.MAX_VALUE))
+                .addContainerGap(315, Short.MAX_VALUE))
             .addGroup(jPanelDataFlashLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelDataFlashLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1000,7 +1012,7 @@ public class NewJFrame extends javax.swing.JFrame {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(106, 106, 106)
                         .addComponent(jCheckBox3)))
-                .addContainerGap(124, Short.MAX_VALUE))
+                .addContainerGap(214, Short.MAX_VALUE))
         );
         jPanelCommandLayout.setVerticalGroup(
             jPanelCommandLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1469,14 +1481,14 @@ public class NewJFrame extends javax.swing.JFrame {
                                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(29, 29, 29)
                                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(125, Short.MAX_VALUE))
         );
         jPanelCalibLayout.setVerticalGroup(
             jPanelCalibLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelCalibLayout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addComponent(jLabel11)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(42, 42, 42)
                 .addGroup(jPanelCalibLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1522,7 +1534,7 @@ public class NewJFrame extends javax.swing.JFrame {
             .addGroup(jPanelChemLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPaneChem, javax.swing.GroupLayout.PREFERRED_SIZE, 543, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 118, Short.MAX_VALUE)
                 .addGroup(jPanelChemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelChemLayout.createSequentialGroup()
                         .addComponent(jLabel9)
@@ -1547,7 +1559,7 @@ public class NewJFrame extends javax.swing.JFrame {
                         .addComponent(jButtonPlot))
                     .addGroup(jPanelChemLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPaneChem, javax.swing.GroupLayout.DEFAULT_SIZE, 599, Short.MAX_VALUE)))
+                        .addComponent(jScrollPaneChem, javax.swing.GroupLayout.DEFAULT_SIZE, 617, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -1559,13 +1571,11 @@ public class NewJFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPaneMain, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jScrollPaneMain, javax.swing.GroupLayout.DEFAULT_SIZE, 812, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPaneMain, javax.swing.GroupLayout.DEFAULT_SIZE, 659, Short.MAX_VALUE)
+            .addComponent(jScrollPaneMain, javax.swing.GroupLayout.DEFAULT_SIZE, 677, Short.MAX_VALUE)
         );
 
         pack();
@@ -2816,6 +2826,8 @@ public class NewJFrame extends javax.swing.JFrame {
             }
             int index = jTabbedPaneMain.getSelectedIndex();
             if (index == 3) {
+                usbSmb.setHDQ(false);
+                usbSmb.setPEC(false);
                 timerCalib.start();
             } else {
                 if (timerCalib != null) {
@@ -3111,7 +3123,8 @@ public class NewJFrame extends javax.swing.JFrame {
                         usbSmb.writeWord(CAL_VC4_CMD, Integer.parseInt(jTextFieldVCell4A.getText()));
                     }
                     usbSmb.writeWord(CAL_START_CMD, wCmdFlags | CAL_ADC_CONT | CAL_CC_CONT);
-                    for (int i = 0; i < 5; i++) {
+                    for (int i = 0; i < 3; i++) {
+                        sleep(1000);
                         if (usbSmb.readWord(CAL_POLL_CMD, pwValue)) {
                             if ((pwValue[0] & 0xFF) == 0) {
                                 if (usbSmb.readWord(0x53, pwValue)) {
@@ -3121,11 +3134,10 @@ public class NewJFrame extends javax.swing.JFrame {
                                 }
                             }
                         }
-                        sleep(300);
                     }
                     usbSmb.sendByte(CAL_DF_CMD);
-                    for (int i = 0; i < 5; i++) {
-                        sleep(500);
+                    for (int i = 0; i < 3; i++) {
+                        sleep(1000);
                         if (usbSmb.writeWord(0x54, 0)) {
                             if (usbSmb.readWord(0x50, pwValue)) {
                                 if (pwValue[0] == 0x4C7A) {//Lz
