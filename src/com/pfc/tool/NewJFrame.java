@@ -142,6 +142,10 @@ public class NewJFrame extends javax.swing.JFrame {
         jCheckBox2.setText(checkBoxText);
         jCheckBox3.setText(checkBoxText);
 
+        if (devName.equals("1168")) {
+            jPanel2.setVisible(false);
+        }
+
         // Set custom color renderer
         BitsColorRenderer colorRenderer = new BitsColorRenderer();
         jTableBits.setDefaultRenderer(String.class, colorRenderer);
@@ -906,6 +910,7 @@ public class NewJFrame extends javax.swing.JFrame {
         });
 
         jButtonProgram.setText(bundle.getString("NewJFrame.jButtonProgram.text")); // NOI18N
+        jButtonProgram.setEnabled(false);
         jButtonProgram.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonProgramActionPerformed(evt);
@@ -913,6 +918,7 @@ public class NewJFrame extends javax.swing.JFrame {
         });
 
         jButtonReadFlash.setText(bundle.getString("NewJFrame.jButtonReadFlash.text")); // NOI18N
+        jButtonReadFlash.setEnabled(false);
         jButtonReadFlash.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonReadFlashActionPerformed(evt);
@@ -920,6 +926,7 @@ public class NewJFrame extends javax.swing.JFrame {
         });
 
         jButtonWriteFlash.setText(bundle.getString("NewJFrame.jButtonWriteFlash.text")); // NOI18N
+        jButtonWriteFlash.setEnabled(false);
         jButtonWriteFlash.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonWriteFlashActionPerformed(evt);
@@ -2141,18 +2148,42 @@ public class NewJFrame extends javax.swing.JFrame {
     private void jCheckBoxBootLoaderItemStateChanged(ItemEvent evt) {//GEN-FIRST:event_jCheckBoxBootLoaderItemStateChanged
         if (evt.getStateChange() == ItemEvent.SELECTED) {
             jCheckBox3.setSelected(false);
-            /*if (usbSmb.writeWord(0, 0x0F00)) {
-            if (usbSmb.writeWord(0xFA, 0x888)) {
-            short pwValue[] = new short[1];
-            if (usbSmb.readWord(0xFA, pwValue)) {
-            if (pwValue[0] == 0x888) {
-            jProgressBarBL.setValue(jProgressBarBL.getMaximum());
-            return;
-            }
-            }
-            }
-            }*/
             jProgressBarBL.setValue(0);
+            if (devName.equals("1168")) { //NOI18N
+                setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                new Thread() {
+                    @Override
+                    public void run() {
+                        try {
+                            if (usbSmb.writeWord(0, 0x0F00)) {
+                                short pwValue[] = new short[1];
+                                for (int i = 0; i < 10; i++) {
+                                    sleep(100);
+                                    if (usbSmb.readWord(0, pwValue)) {
+                                        if (pwValue[0] == 0x000F) {
+                                            break;
+                                        }
+                                    }
+                                }
+                                if (usbSmb.writeWord(0xFA, 0x888)) {
+                                    if (usbSmb.readWord(0xFA, pwValue)) {
+                                        if (pwValue[0] == 0x888) {
+                                            jProgressBarBL.setValue(jProgressBarBL.getMaximum());
+                                            jButtonProgram.setEnabled(true);
+                                            jButtonWriteFlash.setEnabled(true);
+                                            jButtonReadFlash.setEnabled(true);
+                                        }
+                                    }
+                                }
+                            }
+                        } catch (Exception ex) {
+                            System.err.println(ex);
+                        } finally {
+                            setCursor(Cursor.getDefaultCursor());
+                        }
+                    }
+                }.start();
+            } else {
             try {
 //                File file = new File("../ini/BootLoader_A1141.bin");
                 File file = new File("../ini/BootLoader_A" + devName + ".bin"); //NOI18N
@@ -2245,6 +2276,9 @@ public class NewJFrame extends javax.swing.JFrame {
                             buf[1] = 0;
                             usbSmb.writeBytes(0x99, 2, buf);
                             jProgressBarBL.setValue(len * 2);
+                            jButtonProgram.setEnabled(true);
+                            jButtonWriteFlash.setEnabled(true);
+                            jButtonReadFlash.setEnabled(true);
                         } catch (InterruptedException ex) {
                         }
                     }
@@ -2252,7 +2286,7 @@ public class NewJFrame extends javax.swing.JFrame {
             } catch (IOException ex) {
                 System.err.println(ex);
             }
-
+            }
         } else {
             jProgressBarBL.setMaximum(100);
             new Thread() {
@@ -2260,6 +2294,25 @@ public class NewJFrame extends javax.swing.JFrame {
                 public void run() {
                     try {
                         jProgressBarBL.setValue(100);
+                        if (devName.equals("1168")) { //NOI18N
+                            if (!usbSmb.writeWord(0xFF, 0x888)) {
+                                if (!usbSmb.writeWord(0xFF, 0x888)) {
+                                    return;
+                                }
+                            }
+                            sleep(333);
+                            jProgressBarBL.setValue(90);
+                            sleep(333);
+                            jProgressBarBL.setValue(80);
+                            sleep(333);
+                            jProgressBarBL.setValue(70);
+                            sleep(333);
+                            jProgressBarBL.setValue(60);
+                            sleep(333);
+                            jProgressBarBL.setValue(50);
+                            sleep(333);
+                            jProgressBarBL.setValue(40);
+                        } else {
                         byte[] buf = new byte[2];
                         buf[1] = 0x00;
                         if (devName.equals("2168")) { //NOI18N
@@ -2294,22 +2347,26 @@ public class NewJFrame extends javax.swing.JFrame {
                         if (!usbSmb.writeByte(0xFF, 0x09)) {
                             return;
                         }
-                        sleep(250);
-                        jProgressBarBL.setValue(30);
-                        sleep(250);
-                        jProgressBarBL.setValue(20);
-                        sleep(250);
-                        jProgressBarBL.setValue(10);
-                        sleep(250);
-                        jProgressBarBL.setValue(0);
-                        if (bNewSBS) {
-                            usbSmb.setAddr((byte) 0xAA);
                         }
+                        sleep(500);
+                        jProgressBarBL.setValue(30);
+                        sleep(500);
+                        jProgressBarBL.setValue(20);
+                        sleep(500);
+                        jProgressBarBL.setValue(10);
+                        sleep(500);
                     } catch (InterruptedException ex) {
                     }
+                    jProgressBarBL.setValue(0);
+                    if (bNewSBS) {
+                        usbSmb.setAddr((byte) 0xAA);
+                    }
+                    jButtonProgram.setEnabled(false);
+                    jButtonWriteFlash.setEnabled(false);
+                    jButtonReadFlash.setEnabled(false);
+                    jLabelStat.setText("");
                 }
             }.start();
-
         }
     }//GEN-LAST:event_jCheckBoxBootLoaderItemStateChanged
 
@@ -2467,7 +2524,7 @@ public class NewJFrame extends javax.swing.JFrame {
                             jProgressBarBL.setValue(addr);
                             }*/
                         }
-                    } else {
+                    } else if (devName.equals("1141")) {
                         for (short block = 0; block < len; block += 2048) {
                             bb.putShort(0, (short) -1);
                             if (!usbSmb.writeBytes(0xFA, Short.BYTES, buf)) {
@@ -2487,11 +2544,101 @@ public class NewJFrame extends javax.swing.JFrame {
                             }
                             jProgressBarBL.setValue(block);
                         }
+                    } else if (devName.equals("1168")) {
+                        /*bb.order(ByteOrder.BIG_ENDIAN);
+                        Arrays.fill(buf, 2, WRITEBYTE + 2, (byte) 0);
+                        bb.putShort(0, (short) 0xEFE0);
+                        if (!usbSmb.writeBytes(0xF4, WRITEBYTE + 2, buf)) {
+                        return;
+                        }
+                        sleep(10);
+                        bb.order(ByteOrder.LITTLE_ENDIAN);
+                        for (int addr = 1024; addr < len; addr += 1024) {
+                        bb.putShort(0, (short) -1);
+                        if (!usbSmb.writeBytes(0xFA, Short.BYTES, buf)) {
+                        return;
+                        }
+                        bb.putShort(0, (short)addr);
+                        if (!usbSmb.writeBytes(0xFC, Short.BYTES, buf)) {
+                        return;
+                        }
+                        sleep(100);
+                        if (!usbSmb.readBytes(0xFA, Short.BYTES, buf)) {
+                        return;
+                        }
+                        if (bb.getShort(0) != 0) {
+                        jLabelStat.setText(java.util.ResourceBundle.getBundle("com/pfc/tool/Bundle").getString("FAIL"));
+                        return;
+                        }
+                        jProgressBarBL.setValue(addr);
+                        }*/
+                        bb.putShort(0, (short) 1);
+                        if (!usbSmb.writeBytes(0xFA, Short.BYTES, buf)) {
+                            return;
+                        }
+//                        sleep(10);
+                        bb.putShort(0, (short) 0x102);
+                        if (!usbSmb.writeBytes(0xFB, Short.BYTES, buf)) {
+                            return;
+                        }
+                        for (int i = 0; i < 3; i++) {
+                            sleep(1000);
+                            if (usbSmb.readBytes(0xFA, Short.BYTES, buf)) {
+                                if (bb.getShort(0) == -1) {
+                                    break;
+                                }
+                            }
+                        }
+                        if (bb.getShort(0) != -1) {
+                            jLabelStat.setText(java.util.ResourceBundle.getBundle("com/pfc/tool/Bundle").getString("FAIL"));
+                            return;
+                        }
                     }
                     jProgressBarBL.setValue(0);
                     jLabelStat.setText(java.util.ResourceBundle.getBundle("com/pfc/tool/Bundle").getString("WRITING"));
                     bb.order(ByteOrder.BIG_ENDIAN);
-                    if (devName.equals("2168")) { //NOI18N
+                    if (devName.equals("1168")) { //NOI18N
+                        for (int nWriteBytes, nPointer = 1024; nPointer < len; nPointer += nWriteBytes) {
+                            nWriteBytes = Math.min(len - nPointer, WRITEBYTE);
+                            System.arraycopy(writeBuf, nPointer, buf, 2, nWriteBytes);
+                            Arrays.fill(buf, nWriteBytes + 2, WRITEBYTE + 2, (byte) -1);
+                            bb.putShort(0, (short) nPointer);
+                            if (!usbSmb.writeBytes(0xF4, WRITEBYTE + 2, buf)) {
+                                return;
+                            }
+                            sleep(2);
+                            jProgressBarBL.setValue(nPointer - 1024);
+                        }
+                        bb.order(ByteOrder.LITTLE_ENDIAN);
+                        bb.putShort(0, (short) 1);
+                        if (!usbSmb.writeBytes(0xFA, Short.BYTES, buf)) {
+                            return;
+                        }
+                        bb.putShort(0, (short)0);
+                        if (!usbSmb.writeBytes(0xFC, Short.BYTES, buf)) {
+                            return;
+                        }
+                        sleep(50);
+                        if (!usbSmb.readBytes(0xFA, Short.BYTES, buf)) {
+                            return;
+                        }
+                        if (bb.getShort(0) != 0) {
+                            return;
+                        }
+                        bb.order(ByteOrder.BIG_ENDIAN);
+                        for (int nPointer = 1024 - WRITEBYTE; nPointer >= 0; nPointer -= WRITEBYTE) {
+                            System.arraycopy(writeBuf, nPointer, buf, 2, WRITEBYTE);
+                            bb.putShort(0, (short) nPointer);
+                            usbSmb.writeBytes(0xF4, WRITEBYTE + 2, buf);
+                            sleep(2);
+                            jProgressBarBL.setValue(len - nPointer);
+                        }
+                        bb.order(ByteOrder.LITTLE_ENDIAN);
+                        bb.putShort(0, (short) 0);
+                        if (!usbSmb.writeBytes(0xFA, Short.BYTES, buf)) {
+                            return;
+                        }
+                    } else if (devName.equals("2168")) { //NOI18N
                         for (int nWriteBytes, nPointer = 0; nPointer < len; nPointer += nWriteBytes) {
                             nWriteBytes = Math.min(len - nPointer, WRITEBYTE);
                             System.arraycopy(writeBuf, nPointer, buf, 2, nWriteBytes);
@@ -2540,13 +2687,18 @@ public class NewJFrame extends javax.swing.JFrame {
                         }
                     }
                     jLabelStat.setText(java.util.ResourceBundle.getBundle("com/pfc/tool/Bundle").getString("VERIFY"));
-                    for (int nReadBytes, i = 0; i < len; i += nReadBytes) {
-                        jProgressBarBL.setValue(i);
-                        nReadBytes = Math.min(len - i, WRITEBYTE);
+                    int addr = 0;
+//                    if (devName.equals("1168")) { //NOI18N
+//                        addr = 1024;
+//                    }
+                    for (int nReadBytes; addr < len; addr += nReadBytes) {
+                        jProgressBarBL.setValue(addr);
+                        nReadBytes = Math.min(len - addr, WRITEBYTE);
                         if (!usbSmb.readBytes(0xF5, WRITEBYTE, buf)) {
                             return;
                         }
-                        if (!Arrays.equals(Arrays.copyOfRange(writeBuf, i, i + nReadBytes),
+                        if (!Arrays.equals(
+                                Arrays.copyOfRange(writeBuf, addr, addr + nReadBytes),
                                 Arrays.copyOfRange(buf, 0, nReadBytes))) {
                             jLabelStat.setText(java.util.ResourceBundle.getBundle("com/pfc/tool/Bundle").getString("VERIFY FAIL"));
                             return;
@@ -2611,11 +2763,12 @@ public class NewJFrame extends javax.swing.JFrame {
                                 break;
                             }
                             f.write(buf);
-                            System.out.println(String.format("%04X : %02X", i, buf[0])); //NOI18N
+//                            System.out.println(String.format("%04X : %02X", i, buf[0])); //NOI18N
                         }
                         jProgressBarBL.setValue(len);
                     }
-                } catch (IOException ex) {
+//                } catch (IOException ex) {
+                } catch (Exception ex) {
                     System.err.println(ex);
                 } finally {
                     setCursor(Cursor.getDefaultCursor());
@@ -2634,8 +2787,17 @@ public class NewJFrame extends javax.swing.JFrame {
         if (len > 2048) {
             return;
         }
-        if (DllEntry.dec128(path, dfBuf) != len) {
-            return;
+        if (path.toLowerCase().endsWith(".ifi")) { //NOI18N
+            if (DllEntry.dec128(path, dfBuf) != len) {
+                return;
+            }
+        } else {
+            try {
+                FileInputStream f = new FileInputStream(path);
+                f.read(dfBuf);
+            } catch (IOException ex) {
+                System.err.println(ex);
+            }
         }
         System.out.println(String.format("%02X%02X", dfBuf[0], dfBuf[1])); //NOI18N
         new Thread() {
@@ -2647,23 +2809,26 @@ public class NewJFrame extends javax.swing.JFrame {
                     byte[] buf = new byte[34];
                     ByteBuffer bb = ByteBuffer.wrap(buf);
                     bb.order(ByteOrder.LITTLE_ENDIAN);
-                    short offset = 0x400, start = (short) stradr;
-                    bb.putShort(0, (short) (start + offset));
-                    if (!usbSmb.writeBytes(0xFA, Short.BYTES, buf)) {
-                        return;
-                    }
-                    if (!usbSmb.readBytes(0xFA, Short.BYTES, buf)) {
-                        return;
-                    }
-                    if (bb.getShort(0) != start + offset) {
-                        return;
-                    }
-//                    for (int i = 0; i < 96; i += nReadBytes) {
-                    for (int i = 0; i < 256; i += nReadBytes) {
-                        if (!usbSmb.readBytes(0xF5, nReadBytes, buf)) {
+                    short offset = 0x400, start = 0;
+                    if (!devName.equals("1168")) { //NOI18N
+                        start = (short) stradr;
+                        bb.putShort(0, (short) (start + offset));
+                        if (!usbSmb.writeBytes(0xFA, Short.BYTES, buf)) {
                             return;
                         }
-                        System.arraycopy(buf, 0, dfBuf, offset + i, nReadBytes);
+                        if (!usbSmb.readBytes(0xFA, Short.BYTES, buf)) {
+                            return;
+                        }
+                        if (bb.getShort(0) != start + offset) {
+                            return;
+                        }
+//                    for (int i = 0; i < 96; i += nReadBytes) {
+                        for (int i = 0; i < 256; i += nReadBytes) {
+                            if (!usbSmb.readBytes(0xF5, nReadBytes, buf)) {
+                                return;
+                            }
+                            System.arraycopy(buf, 0, dfBuf, offset + i, nReadBytes);
+                        }
                     }
                     jLabelStat.setText(java.util.ResourceBundle.getBundle("com/pfc/tool/Bundle").getString("ERASE"));
                     jProgressBarBL.setMaximum(100);
@@ -2702,6 +2867,7 @@ public class NewJFrame extends javax.swing.JFrame {
                             }
                             break;
                         case "3168": //NOI18N
+                        case "1168": //NOI18N
                             for (int i = 0; i < 8; i++) {
                                 bb.putShort(0, (short) (0x308 + 0x10 * i));
                                 if (!usbSmb.writeBytes(0xFD, Short.BYTES, buf)) {
@@ -2725,8 +2891,14 @@ public class NewJFrame extends javax.swing.JFrame {
                         nWriteBytes = Math.min(len - nPointer, 32);
                         System.arraycopy(dfBuf, nPointer, buf, 2, nWriteBytes);
                         bb.putShort(0, (short) (start + nPointer));
-                        if (!usbSmb.writeBytes(0xF4, nWriteBytes + 2, buf)) {
-                            return;
+                        if (devName.equals("1168")) { //NOI18N
+                            if (!usbSmb.writeBytes(0xF6, nWriteBytes + 2, buf)) {
+                                return;
+                            }
+                        } else {
+                            if (!usbSmb.writeBytes(0xF4, nWriteBytes + 2, buf)) {
+                                return;
+                            }
                         }
                         sleep(15);
                     }
@@ -2744,8 +2916,14 @@ public class NewJFrame extends javax.swing.JFrame {
                     }
                     for (int i = 0; i < len; i += nReadBytes) {
                         nReadBytes = Math.min(len - i, 32);
-                        if (!usbSmb.readBytes(0xF5, nReadBytes, buf)) {
-                            return;
+                        if (devName.equals("1168")) { //NOI18N
+                            if (!usbSmb.readBytes(0xF7, nReadBytes, buf)) {
+                                return;
+                            }
+                        } else {
+                            if (!usbSmb.readBytes(0xF5, nReadBytes, buf)) {
+                                return;
+                            }
                         }
                         if (!Arrays.equals(Arrays.copyOfRange(dfBuf, i, i + nReadBytes),
                                 Arrays.copyOfRange(buf, 0, nReadBytes))) {
