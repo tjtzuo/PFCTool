@@ -1981,7 +1981,7 @@ public class NewJFrame extends javax.swing.JFrame {
                 String type = df.getType(), str = (String) jTableCluster.getValueAt(j, 1);
                 if (type.equals("string")) { //NOI18N
                     byte[] bytes = str.getBytes();
-                    dfBuf[addr] = (byte) Math.min(bytes.length, 10);
+                    dfBuf[addr] = (byte) Math.min(bytes.length, 32);
                     System.arraycopy(bytes, 0, dfBuf, addr + 1, dfBuf[addr]);
                 } else if (type.equals("-")) { //NOI18N
                 } else {
@@ -2300,17 +2300,17 @@ public class NewJFrame extends javax.swing.JFrame {
                                     return;
                                 }
                             }
-                            sleep(333);
+                            sleep(250);
                             jProgressBarBL.setValue(90);
-                            sleep(333);
+                            sleep(250);
                             jProgressBarBL.setValue(80);
-                            sleep(333);
+                            sleep(250);
                             jProgressBarBL.setValue(70);
-                            sleep(333);
+                            sleep(250);
                             jProgressBarBL.setValue(60);
-                            sleep(333);
+                            sleep(250);
                             jProgressBarBL.setValue(50);
-                            sleep(333);
+                            sleep(250);
                             jProgressBarBL.setValue(40);
                         } else {
                         byte[] buf = new byte[2];
@@ -2348,13 +2348,13 @@ public class NewJFrame extends javax.swing.JFrame {
                             return;
                         }
                         }
-                        sleep(500);
+                        sleep(250);
                         jProgressBarBL.setValue(30);
-                        sleep(500);
+                        sleep(250);
                         jProgressBarBL.setValue(20);
-                        sleep(500);
+                        sleep(250);
                         jProgressBarBL.setValue(10);
-                        sleep(500);
+                        sleep(250);
                     } catch (InterruptedException ex) {
                     }
                     jProgressBarBL.setValue(0);
@@ -2783,35 +2783,33 @@ public class NewJFrame extends javax.swing.JFrame {
         if (!file.exists()) {
             return;
         }
-        int len = (int) file.length();
-        if (len > 2048) {
-            return;
-        }
-        if (path.toLowerCase().endsWith(".ifi")) { //NOI18N
-            if (DllEntry.dec128(path, dfBuf) != len) {
-                return;
-            }
-        } else {
-            try {
-                FileInputStream f = new FileInputStream(path);
-                f.read(dfBuf);
-            } catch (IOException ex) {
-                System.err.println(ex);
-            }
-        }
-        System.out.println(String.format("%02X%02X", dfBuf[0], dfBuf[1])); //NOI18N
         new Thread() {
             @Override
             public void run() {
                 try {
+                    int len = (int) file.length();
+                    if (len > 2048) {
+                        return;
+                    }
+                    if (path.toLowerCase().endsWith(".ifi")) { //NOI18N
+                        if (DllEntry.dec128(path, dfBuf) != len) {
+                            return;
+                        }
+                    } else {
+                        FileInputStream f = new FileInputStream(path);
+                        f.read(dfBuf);
+                    }
+//        System.out.println(String.format("%02X%02X", dfBuf[0], dfBuf[1])); //NOI18N
+                    if (devName.equals("1168")) { //NOI18N
+                        len = 1024;
+                    }
                     jProgressBarBL.setValue(0);
                     int nReadBytes = 32;
                     byte[] buf = new byte[34];
                     ByteBuffer bb = ByteBuffer.wrap(buf);
                     bb.order(ByteOrder.LITTLE_ENDIAN);
-                    short offset = 0x400, start = 0;
+                    short offset = 0x400, start = (short) stradr;
                     if (!devName.equals("1168")) { //NOI18N
-                        start = (short) stradr;
                         bb.putShort(0, (short) (start + offset));
                         if (!usbSmb.writeBytes(0xFA, Short.BYTES, buf)) {
                             return;
@@ -2867,7 +2865,6 @@ public class NewJFrame extends javax.swing.JFrame {
                             }
                             break;
                         case "3168": //NOI18N
-                        case "1168": //NOI18N
                             for (int i = 0; i < 8; i++) {
                                 bb.putShort(0, (short) (0x308 + 0x10 * i));
                                 if (!usbSmb.writeBytes(0xFD, Short.BYTES, buf)) {
@@ -2879,8 +2876,25 @@ public class NewJFrame extends javax.swing.JFrame {
                                 }
                             }
                             break;
+                        case "1168": //NOI18N
+                            bb.putShort(0, (short) 1);
+                            if (!usbSmb.writeBytes(0xFA, Short.BYTES, buf)) {
+                                return;
+                            }
+                            bb.putShort(0, (short) stradr);
+                            if (!usbSmb.writeBytes(0xFC, Short.BYTES, buf)) {
+                                return;
+                            }
+                            sleep(100);
+                            if (!usbSmb.readBytes(0xFA, Short.BYTES, buf)) {
+                                return;
+                            }
+                            if (bb.getShort(0) != 0) {
+                                jLabelStat.setText(java.util.ResourceBundle.getBundle("com/pfc/tool/Bundle").getString("FAIL"));
+                                return;
+                            }
+                            break;
                         default:
-//                            break;
                             return;
                     }
                     jLabelStat.setText(java.util.ResourceBundle.getBundle("com/pfc/tool/Bundle").getString("WRITING"));
@@ -2891,15 +2905,15 @@ public class NewJFrame extends javax.swing.JFrame {
                         nWriteBytes = Math.min(len - nPointer, 32);
                         System.arraycopy(dfBuf, nPointer, buf, 2, nWriteBytes);
                         bb.putShort(0, (short) (start + nPointer));
-                        if (devName.equals("1168")) { //NOI18N
-                            if (!usbSmb.writeBytes(0xF6, nWriteBytes + 2, buf)) {
-                                return;
-                            }
-                        } else {
+//                        if (devName.equals("1168")) { //NOI18N
+//                            if (!usbSmb.writeBytes(0xF6, nWriteBytes + 2, buf)) {
+//                                return;
+//                            }
+//                        } else {
                             if (!usbSmb.writeBytes(0xF4, nWriteBytes + 2, buf)) {
                                 return;
                             }
-                        }
+//                        }
                         sleep(15);
                     }
                     jLabelStat.setText(java.util.ResourceBundle.getBundle("com/pfc/tool/Bundle").getString("VERIFY"));
@@ -2916,15 +2930,15 @@ public class NewJFrame extends javax.swing.JFrame {
                     }
                     for (int i = 0; i < len; i += nReadBytes) {
                         nReadBytes = Math.min(len - i, 32);
-                        if (devName.equals("1168")) { //NOI18N
-                            if (!usbSmb.readBytes(0xF7, nReadBytes, buf)) {
-                                return;
-                            }
-                        } else {
+//                        if (devName.equals("1168")) { //NOI18N
+//                            if (!usbSmb.readBytes(0xF7, nReadBytes, buf)) {
+//                                return;
+//                            }
+//                        } else {
                             if (!usbSmb.readBytes(0xF5, nReadBytes, buf)) {
                                 return;
                             }
-                        }
+//                        }
                         if (!Arrays.equals(Arrays.copyOfRange(dfBuf, i, i + nReadBytes),
                                 Arrays.copyOfRange(buf, 0, nReadBytes))) {
                             jLabelStat.setText(java.util.ResourceBundle.getBundle("com/pfc/tool/Bundle").getString("VERIFY FAIL"));
@@ -2933,7 +2947,8 @@ public class NewJFrame extends javax.swing.JFrame {
                     }
                     jProgressBarBL.setValue(len);
                     jLabelStat.setText(java.util.ResourceBundle.getBundle("com/pfc/tool/Bundle").getString("SUCCESS"));
-                } catch (InterruptedException ex) {
+                } catch (Exception ex) {
+                    System.err.println(ex);
                 }
             }
         }.start();
