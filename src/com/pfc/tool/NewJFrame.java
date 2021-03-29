@@ -289,6 +289,7 @@ public class NewJFrame extends javax.swing.JFrame {
         jButtonImport = new javax.swing.JButton();
         jProgressBarDF = new javax.swing.JProgressBar();
         jCheckBox2 = new javax.swing.JCheckBox();
+        jCheckBoxPCM = new javax.swing.JCheckBox();
         jPanelCommand = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextPaneMessage = new javax.swing.JTextPane();
@@ -598,6 +599,8 @@ public class NewJFrame extends javax.swing.JFrame {
             }
         });
 
+        jCheckBoxPCM.setText(bundle.getString("NewJFrame.jCheckBoxPCM.text")); // NOI18N
+
         javax.swing.GroupLayout jPanelDataFlashLayout = new javax.swing.GroupLayout(jPanelDataFlash);
         jPanelDataFlash.setLayout(jPanelDataFlashLayout);
         jPanelDataFlashLayout.setHorizontalGroup(
@@ -611,12 +614,15 @@ public class NewJFrame extends javax.swing.JFrame {
                     .addGroup(jPanelDataFlashLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanelDataFlashLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButtonWriteAll)
+                            .addGroup(jPanelDataFlashLayout.createSequentialGroup()
+                                .addComponent(jButtonWriteAll)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jCheckBoxPCM))
                             .addComponent(jButtonReadAll)
                             .addComponent(jButtonDefault)
                             .addComponent(jButtonExport)
                             .addComponent(jButtonImport))
-                        .addContainerGap(199, Short.MAX_VALUE))
+                        .addContainerGap(80, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelDataFlashLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jCheckBox2)
@@ -628,7 +634,9 @@ public class NewJFrame extends javax.swing.JFrame {
                 .addGap(82, 82, 82)
                 .addComponent(jButtonReadAll)
                 .addGap(32, 32, 32)
-                .addComponent(jButtonWriteAll)
+                .addGroup(jPanelDataFlashLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonWriteAll)
+                    .addComponent(jCheckBoxPCM))
                 .addGap(32, 32, 32)
                 .addComponent(jButtonDefault)
                 .addGap(28, 28, 28)
@@ -1752,8 +1760,87 @@ public class NewJFrame extends javax.swing.JFrame {
         }.start();
     }//GEN-LAST:event_jButtonReadAllActionPerformed
 
+    /****************************************************************************/
+    /**
+    *   Calculates the CRC-8 used as part of SMBus over a block of memory.
+    */
+    int Crc8( int inCrc, int inData)
+    {
+        int data = inCrc ^ inData;
+        for (int i = 0; i < 8; i++ )
+        {
+            if (( data & 0x80 ) != 0 )
+            {
+                data <<= 1;
+                data ^= 0x07;
+            }
+            else
+            {
+                data <<= 1;
+            }
+        }
+        return (data & 0xFF);
+    } // Crc8
+    int Crc8Block( int inCrc, byte[] data, int len )
+    {
+        int crc = inCrc;
+        for (int i = 0; i < len; i++)
+        {
+            crc = Crc8( crc, data[i] );
+        }
+        return (crc & 0xFF);
+    } // Crc8Block
+
     private void jButtonWriteAllActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButtonWriteAllActionPerformed
         updateDataFlash();
+
+        if (jCheckBoxPCM.isSelected())
+        {
+            JFileChooser fc = new JFileChooser();
+            fc.setFileFilter(new FileNameExtensionFilter("PCM Flash File (*.pcm)", "pcm"));
+//            fc.setAcceptAllFileFilterUsed(false);
+            int returnVal = fc.showSaveDialog(this);
+            if (returnVal == JFileChooser.APPROVE_OPTION) {
+                File file = fc.getSelectedFile();
+                String path = file.getPath();
+                if (!file.getName().contains(".")) { //NOI18N
+                    path += ".pcm"; //NOI18N
+                }
+                if (new File(path).exists()) {
+                    if (JOptionPane.showConfirmDialog(this, java.util.ResourceBundle.getBundle("com/pfc/tool/Bundle").getString("OVERWRITE EXIST FILE !?")) != JOptionPane.YES_OPTION) {
+                        return;
+                    }
+                }
+                try {
+                    PrintWriter pw = new PrintWriter(new FileWriter(path));
+                    for (int i = 0; i < 8; i++) {
+                        pw.printf("16 77 0%d 00", i);
+                        if (usbSmb.isPEC()) {
+                            pw.printf(" %02x", Crc8(Crc8(Crc8(Crc8(0, 0x16), 0x77), i), 0));
+                        }
+                        pw.println();
+                        for (int j = 0; j < 8; j++) {
+                            int crc = Crc8(Crc8(Crc8(0, 0x16), 0x78+j), 0x20);
+                            pw.printf("16 %2x 20", 0x78+j);
+                            for (int k = 0; k < 32; k++) {
+                                byte data = dfBuf[i*256+j*32+k];
+                                pw.printf(" %02x", data);
+                                crc = Crc8(crc, data);
+                            }
+                            if (usbSmb.isPEC()) {
+                                pw.printf(" %02x", crc);
+                            }
+                            pw.println();
+                        }
+                    }
+                    pw.close();
+                } catch (IOException ex) {
+                    System.err.println(ex);
+                }
+            }
+            return;
+        }
+
         jProgressBarDF.setValue(0);
         new Thread() {
             @Override
@@ -1862,6 +1949,7 @@ public class NewJFrame extends javax.swing.JFrame {
 //                FileOutputStream f = new FileOutputStream(file);
                 FileOutputStream f = new FileOutputStream(path);
                 f.write(dfBuf);
+                f.close();
                 if (DllEntry.cod128(path)) {
                     JOptionPane.showMessageDialog(this, java.util.ResourceBundle.getBundle("com/pfc/tool/Bundle").getString("SUCCESS"));
                 }
@@ -2388,7 +2476,7 @@ public class NewJFrame extends javax.swing.JFrame {
             if (!file.getName().contains(".")) { //NOI18N
                 path += ".bin"; //NOI18N
             }
-            if (file.exists()) {
+            if (new File(path).exists()) {
                 if (JOptionPane.showConfirmDialog(this, java.util.ResourceBundle.getBundle("com/pfc/tool/Bundle").getString("OVERWRITE EXIST FILE !?")) != JOptionPane.YES_OPTION) {
                     return;
                 }
@@ -2767,6 +2855,7 @@ public class NewJFrame extends javax.swing.JFrame {
                         }
                         jProgressBarBL.setValue(len);
                     }
+                    f.close();
 //                } catch (IOException ex) {
                 } catch (Exception ex) {
                     System.err.println(ex);
@@ -3519,6 +3608,7 @@ public class NewJFrame extends javax.swing.JFrame {
     private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JCheckBox jCheckBox3;
     private javax.swing.JCheckBox jCheckBoxBootLoader;
+    private javax.swing.JCheckBox jCheckBoxPCM;
     private javax.swing.JCheckBox jCheckBoxScan;
     private javax.swing.JCheckBox jCheckBoxTemp;
     private javax.swing.JCheckBox jCheckBoxVolt;
