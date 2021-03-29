@@ -332,6 +332,8 @@ public class NewJFrame extends javax.swing.JFrame {
         jButtonReadFlash = new javax.swing.JButton();
         jButtonWriteFlash = new javax.swing.JButton();
         jCheckBox3 = new javax.swing.JCheckBox();
+        jButtonReset = new javax.swing.JButton();
+        jButtonGasGauge = new javax.swing.JButton();
         jPanelCalib = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
@@ -1007,6 +1009,20 @@ public class NewJFrame extends javax.swing.JFrame {
             }
         });
 
+        jButtonReset.setText(bundle.getString("NewJFrame.jButtonReset.text")); // NOI18N
+        jButtonReset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonResetActionPerformed(evt);
+            }
+        });
+
+        jButtonGasGauge.setText(bundle.getString("NewJFrame.jButtonGasGauge.text")); // NOI18N
+        jButtonGasGauge.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonGasGaugeActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelCommandLayout = new javax.swing.GroupLayout(jPanelCommand);
         jPanelCommand.setLayout(jPanelCommandLayout);
         jPanelCommandLayout.setHorizontalGroup(
@@ -1016,7 +1032,12 @@ public class NewJFrame extends javax.swing.JFrame {
                     .addGroup(jPanelCommandLayout.createSequentialGroup()
                         .addGap(33, 33, 33)
                         .addGroup(jPanelCommandLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanelCommandLayout.createSequentialGroup()
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(57, 57, 57)
+                                .addGroup(jPanelCommandLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jButtonReset)
+                                    .addComponent(jButtonGasGauge)))
                             .addGroup(jPanelCommandLayout.createSequentialGroup()
                                 .addGap(4, 4, 4)
                                 .addGroup(jPanelCommandLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1027,7 +1048,7 @@ public class NewJFrame extends javax.swing.JFrame {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(106, 106, 106)
                         .addComponent(jCheckBox3)))
-                .addContainerGap(214, Short.MAX_VALUE))
+                .addContainerGap(138, Short.MAX_VALUE))
         );
         jPanelCommandLayout.setVerticalGroup(
             jPanelCommandLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1036,8 +1057,15 @@ public class NewJFrame extends javax.swing.JFrame {
                 .addGroup(jPanelCommandLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jCheckBox3, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanelCommandLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelCommandLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelCommandLayout.createSequentialGroup()
+                        .addGap(51, 51, 51)
+                        .addComponent(jButtonReset)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonGasGauge)))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -3510,6 +3538,24 @@ public class NewJFrame extends javax.swing.JFrame {
         }.start();
     }//GEN-LAST:event_jButtonCalibCC2ActionPerformed
 
+    private void jButtonResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonResetActionPerformed
+        if (usbSmb.writeWord(0, 0x41)) {
+            jTextPaneMessage.setText(java.util.ResourceBundle.getBundle("com/pfc/tool/Bundle").getString("WRITE SUCCESS"));
+            JOptionPane.showMessageDialog(this, "IC Reset", "Command", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            jTextPaneMessage.setText(java.util.ResourceBundle.getBundle("com/pfc/tool/Bundle").getString("WRITE FAIL"));
+        }
+    }//GEN-LAST:event_jButtonResetActionPerformed
+
+    private void jButtonGasGaugeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGasGaugeActionPerformed
+        if (usbSmb.writeWord(0, 0x21)) {
+            jTextPaneMessage.setText(java.util.ResourceBundle.getBundle("com/pfc/tool/Bundle").getString("WRITE SUCCESS"));
+            JOptionPane.showMessageDialog(this, "Enable Gas Gauge", "Command", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            jTextPaneMessage.setText(java.util.ResourceBundle.getBundle("com/pfc/tool/Bundle").getString("WRITE FAIL"));
+        }
+    }//GEN-LAST:event_jButtonGasGaugeActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -3585,6 +3631,7 @@ public class NewJFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButtonChange;
     private javax.swing.JButton jButtonDefault;
     private javax.swing.JButton jButtonExport;
+    private javax.swing.JButton jButtonGasGauge;
     private javax.swing.JButton jButtonImport;
     private javax.swing.JButton jButtonPlot;
     private javax.swing.JButton jButtonProgram;
@@ -3595,6 +3642,7 @@ public class NewJFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButtonReadMReg;
     private javax.swing.JButton jButtonReadWord;
     private javax.swing.JButton jButtonRefresh;
+    private javax.swing.JButton jButtonReset;
     private javax.swing.JButton jButtonStartLog;
     private javax.swing.JButton jButtonStopLog;
     private javax.swing.JButton jButtonWriteAll;
