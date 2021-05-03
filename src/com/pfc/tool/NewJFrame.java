@@ -63,6 +63,7 @@ public class NewJFrame extends javax.swing.JFrame {
     private PrintWriter pwLog;
     ChemTableModel chemTableModel;
     String devName;
+    final String strEncfile = "encrypt.enc";
 
     /**
      * Creates new form NewJFrame
@@ -142,8 +143,30 @@ public class NewJFrame extends javax.swing.JFrame {
         jCheckBox2.setText(checkBoxText);
         jCheckBox3.setText(checkBoxText);
 
+        if (bNewSBS) {
+            jCheckBoxPCM.setVisible(false);
+            jPanelCalib.setVisible(false);
+        } else {
+            jButtonReadByte.setVisible(false);
+            jButtonWriteByte.setVisible(false);
+        }
+
         if (devName.equals("1168")) {
             jPanel2.setVisible(false);
+        }
+
+        File file = new File("../ini/" + strEncfile);
+        if (file.exists()) {
+            try {
+                Scanner fileScanner = new Scanner(file);
+                while (fileScanner.hasNextLine()) {
+                    jComboBox1.addItem(fileScanner.nextLine());
+                }
+            } catch (Exception ex) {
+                System.err.println(ex);
+            }
+        } else {
+            jPanel9.setVisible(false);
         }
 
         // Set custom color renderer
@@ -280,6 +303,12 @@ public class NewJFrame extends javax.swing.JFrame {
         jButtonStopLog = new javax.swing.JButton();
         jTextFieldLogFile = new javax.swing.JTextField();
         jCheckBox1 = new javax.swing.JCheckBox();
+        jPanel9 = new javax.swing.JPanel();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jTextField4 = new javax.swing.JTextField();
+        jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
         jPanelDataFlash = new javax.swing.JPanel();
         jTabbedPaneDataFlash = new javax.swing.JTabbedPane();
         jButtonReadAll = new javax.swing.JButton();
@@ -483,33 +512,87 @@ public class NewJFrame extends javax.swing.JFrame {
             }
         });
 
+        jPanel9.setBorder(javax.swing.BorderFactory.createTitledBorder(bundle.getString("NewJFrame.jPanel9.border.title"))); // NOI18N
+
+        jTextField4.setEditable(false);
+        jTextField4.setText(bundle.getString("NewJFrame.jTextField4.text")); // NOI18N
+
+        jButton4.setText(bundle.getString("NewJFrame.jButton4.text")); // NOI18N
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
+        jButton5.setText(bundle.getString("NewJFrame.jButton5.text")); // NOI18N
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
+        jButton6.setText(bundle.getString("NewJFrame.jButton6.text")); // NOI18N
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
+        jPanel9.setLayout(jPanel9Layout);
+        jPanel9Layout.setHorizontalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton6)
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton4)))
+                .addContainerGap(45, Short.MAX_VALUE))
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPanel9Layout.setVerticalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton5))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton6))
+        );
+
         javax.swing.GroupLayout jPanelSBSLayout = new javax.swing.GroupLayout(jPanelSBS);
         jPanelSBS.setLayout(jPanelSBSLayout);
         jPanelSBSLayout.setHorizontalGroup(
             jPanelSBSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelSBSLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPaneSBS, javax.swing.GroupLayout.DEFAULT_SIZE, 404, Short.MAX_VALUE)
+                .addComponent(jScrollPaneSBS, javax.swing.GroupLayout.DEFAULT_SIZE, 391, Short.MAX_VALUE)
                 .addGroup(jPanelSBSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelSBSLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanelSBSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPaneBits, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelSBSLayout.createSequentialGroup()
-                                .addComponent(jLabelSOC)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jProgressBarSOC, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addContainerGap())))
+                        .addComponent(jScrollPaneBits, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelSBSLayout.createSequentialGroup()
-                        .addGap(18, 70, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jCheckBox1)
+                        .addGap(108, 108, 108))
+                    .addGroup(jPanelSBSLayout.createSequentialGroup()
+                        .addGap(30, 30, 30)
                         .addGroup(jPanelSBSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelSBSLayout.createSequentialGroup()
-                                .addComponent(jCheckBox1)
-                                .addGap(108, 108, 108))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelSBSLayout.createSequentialGroup()
+                            .addComponent(jButtonStopLog)
+                            .addGroup(jPanelSBSLayout.createSequentialGroup()
                                 .addGroup(jPanelSBSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButtonStopLog)
-                                    .addComponent(jButtonRefresh)
                                     .addComponent(jCheckBoxScan)
                                     .addGroup(jPanelSBSLayout.createSequentialGroup()
                                         .addComponent(jLabel7)
@@ -517,9 +600,18 @@ public class NewJFrame extends javax.swing.JFrame {
                                         .addComponent(jTextFieldInterval, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jLabel8))
-                                    .addComponent(jButtonStartLog)
-                                    .addComponent(jTextFieldLogFile, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addContainerGap())))))
+                                    .addComponent(jButtonRefresh)
+                                    .addComponent(jButtonStartLog))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTextFieldLogFile, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelSBSLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabelSOC)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jProgressBarSOC, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())))
         );
         jPanelSBSLayout.setVerticalGroup(
             jPanelSBSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -529,26 +621,29 @@ public class NewJFrame extends javax.swing.JFrame {
                     .addComponent(jScrollPaneSBS, javax.swing.GroupLayout.DEFAULT_SIZE, 627, Short.MAX_VALUE)
                     .addGroup(jPanelSBSLayout.createSequentialGroup()
                         .addComponent(jCheckBox1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonRefresh)
-                        .addGap(18, 18, 18)
-                        .addComponent(jCheckBoxScan)
-                        .addGap(9, 9, 9)
-                        .addGroup(jPanelSBSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel7)
-                            .addComponent(jTextFieldInterval, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel8))
-                        .addGap(17, 17, 17)
-                        .addComponent(jButtonStartLog)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanelSBSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanelSBSLayout.createSequentialGroup()
+                                .addComponent(jButtonRefresh)
+                                .addGap(18, 18, 18)
+                                .addComponent(jCheckBoxScan)
+                                .addGap(9, 9, 9)
+                                .addGroup(jPanelSBSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel7)
+                                    .addComponent(jTextFieldInterval, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel8))
+                                .addGap(19, 19, 19)
+                                .addComponent(jButtonStartLog))
+                            .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
                         .addComponent(jTextFieldLogFile, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButtonStopLog)
-                        .addGap(22, 22, 22)
+                        .addGap(21, 21, 21)
                         .addGroup(jPanelSBSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jProgressBarSOC, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabelSOC))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPaneBits, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
         );
 
@@ -1714,6 +1809,17 @@ public class NewJFrame extends javax.swing.JFrame {
             }
         }
         jTableBits.repaint();
+
+        if (jPanel9.isVisible()) {
+            short[] pwEncryptIndex = new short[1];
+            if (usbSmb.readWord(0xF1, pwEncryptIndex)) {
+                if (pwEncryptIndex[0] == 0xFF) {
+                    pwEncryptIndex[0] = 0;
+                }
+                jTextField4.setText(Short.toString(pwEncryptIndex[0]));
+                jComboBox1.setSelectedIndex(pwEncryptIndex[0]);
+            }
+        }
     }
 
     private void jButtonReadAllActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButtonReadAllActionPerformed
@@ -3556,6 +3662,33 @@ public class NewJFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonGasGaugeActionPerformed
 
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        short[] pwEncryptIndex = new short[1];
+        if (usbSmb.readWord(0xF1, pwEncryptIndex)) {
+            if (pwEncryptIndex[0] == 0xFF)
+                pwEncryptIndex[0] = 0;
+            jTextField4.setText(Short.toString(pwEncryptIndex[0]));
+            jComboBox1.setSelectedIndex(pwEncryptIndex[0]);
+        } else {
+            JOptionPane.showMessageDialog(this, java.util.ResourceBundle.getBundle("com/pfc/tool/Bundle").getString("READ FAIL"), "Encrypt", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        int nEncrypSel = jComboBox1.getSelectedIndex();
+        if (!usbSmb.writeWord(0xF1, nEncrypSel)) {
+            JOptionPane.showMessageDialog(this, java.util.ResourceBundle.getBundle("com/pfc/tool/Bundle").getString("WRITE FAIL"), "Encrypt", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        int nEncrypSel = 0;
+        jComboBox1.setSelectedIndex(nEncrypSel);
+        if (!usbSmb.writeWord(0xF1, nEncrypSel)) {
+            JOptionPane.showMessageDialog(this, java.util.ResourceBundle.getBundle("com/pfc/tool/Bundle").getString("WRITE FAIL"), "Encrypt", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jButton6ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -3625,6 +3758,9 @@ public class NewJFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JButton jButtonCalibCC1;
     private javax.swing.JButton jButtonCalibCC2;
     private javax.swing.JButton jButtonCalibVT;
@@ -3660,6 +3796,7 @@ public class NewJFrame extends javax.swing.JFrame {
     private javax.swing.JCheckBox jCheckBoxScan;
     private javax.swing.JCheckBox jCheckBoxTemp;
     private javax.swing.JCheckBox jCheckBoxVolt;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -3705,6 +3842,7 @@ public class NewJFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
     private javax.swing.JPanel jPanelCalib;
     private javax.swing.JPanel jPanelChem;
     private javax.swing.JPanel jPanelCommand;
@@ -3728,6 +3866,7 @@ public class NewJFrame extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextFieldBlock;
     private javax.swing.JTextField jTextFieldByte;
     private javax.swing.JTextField jTextFieldCellN;
