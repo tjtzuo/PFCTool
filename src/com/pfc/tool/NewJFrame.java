@@ -1813,7 +1813,7 @@ public class NewJFrame extends javax.swing.JFrame {
         if (jPanel9.isVisible()) {
             short[] pwEncryptIndex = new short[1];
             if (usbSmb.readWord(0xF1, pwEncryptIndex)) {
-                if (pwEncryptIndex[0] == 0xFF) {
+                if (pwEncryptIndex[0] < -1 || pwEncryptIndex[0] >= jComboBox1.getItemCount()) {
                     pwEncryptIndex[0] = 0;
                 }
                 jTextField4.setText(Short.toString(pwEncryptIndex[0]));
@@ -3665,7 +3665,7 @@ public class NewJFrame extends javax.swing.JFrame {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         short[] pwEncryptIndex = new short[1];
         if (usbSmb.readWord(0xF1, pwEncryptIndex)) {
-            if (pwEncryptIndex[0] == 0xFF)
+            if (pwEncryptIndex[0] < -1 || pwEncryptIndex[0] >= jComboBox1.getItemCount())
                 pwEncryptIndex[0] = 0;
             jTextField4.setText(Short.toString(pwEncryptIndex[0]));
             jComboBox1.setSelectedIndex(pwEncryptIndex[0]);
