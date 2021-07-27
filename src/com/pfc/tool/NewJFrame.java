@@ -378,6 +378,7 @@ public class NewJFrame extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
+        jCheckBoxTemp2 = new javax.swing.JCheckBox();
         jPanel7 = new javax.swing.JPanel();
         jCheckBoxVolt = new javax.swing.JCheckBox();
         jLabel17 = new javax.swing.JLabel();
@@ -1223,6 +1224,11 @@ public class NewJFrame extends javax.swing.JFrame {
 
         jCheckBoxTemp.setFont(new java.awt.Font("SimSun", 0, 12)); // NOI18N
         jCheckBoxTemp.setText(bundle.getString("NewJFrame.jCheckBoxTemp.text")); // NOI18N
+        jCheckBoxTemp.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jCheckBoxTempItemStateChanged(evt);
+            }
+        });
 
         jTextFieldTempM.setEditable(false);
         jTextFieldTempM.setFont(new java.awt.Font("SimSun", 0, 12)); // NOI18N
@@ -1243,13 +1249,19 @@ public class NewJFrame extends javax.swing.JFrame {
         jLabel16.setFont(new java.awt.Font("SimSun", 0, 12)); // NOI18N
         jLabel16.setText(bundle.getString("NewJFrame.jLabel16.text")); // NOI18N
 
+        jCheckBoxTemp2.setFont(new java.awt.Font("SimSun", 0, 12)); // NOI18N
+        jCheckBoxTemp2.setText(bundle.getString("NewJFrame.jCheckBoxTemp2.text")); // NOI18N
+        jCheckBoxTemp2.setEnabled(false);
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addComponent(jCheckBoxTemp)
+                .addContainerGap()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jCheckBoxTemp)
+                    .addComponent(jCheckBoxTemp2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel6Layout.createSequentialGroup()
@@ -1266,25 +1278,28 @@ public class NewJFrame extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel14))
                     .addComponent(jLabel16))
-                .addGap(2, 2, 2))
+                .addGap(8, 8, 8))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                .addGap(0, 4, Short.MAX_VALUE)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel16))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextFieldTempM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldTempA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel13)
-                    .addComponent(jLabel14))
-                .addContainerGap())
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jCheckBoxTemp)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addComponent(jCheckBoxTemp)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jCheckBoxTemp2))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel16))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTextFieldTempM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextFieldTempA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel13)
+                            .addComponent(jLabel14))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -1500,8 +1515,8 @@ public class NewJFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jButtonCalibVT)
                 .addGap(18, 18, 18)
-                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -3522,8 +3537,11 @@ public class NewJFrame extends javax.swing.JFrame {
                     }
                     int wCmdFlags = 0;
                     byte[] buf = new byte[7];
+                    if (jCheckBoxTemp2.isSelected()) {
+                        wCmdFlags |= CAL_TEMPEXT2_OFFSET;
+                    }
                     if (jCheckBoxTemp.isSelected()) {
-                        wCmdFlags |= CAL_TEMPEXT1_OFFSET | CAL_TEMPEXT2_OFFSET | CAL_TEMPINT_OFFSET;
+                        wCmdFlags |= CAL_TEMPEXT1_OFFSET | CAL_TEMPINT_OFFSET;
 			/* WRITE THE ACTUAL TEMPERATURE */
                         int nCalTemp = (int) (Float.parseFloat(jTextFieldTempA.getText()) * 10 + 0.5);
                         buf[4] = (byte) nCalTemp;
@@ -3689,6 +3707,10 @@ public class NewJFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton6ActionPerformed
 
+    private void jCheckBoxTempItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCheckBoxTempItemStateChanged
+        jCheckBoxTemp2.setEnabled(evt.getStateChange() == ItemEvent.SELECTED);
+    }//GEN-LAST:event_jCheckBoxTempItemStateChanged
+
     /**
      * @param args the command line arguments
      */
@@ -3795,6 +3817,7 @@ public class NewJFrame extends javax.swing.JFrame {
     private javax.swing.JCheckBox jCheckBoxPCM;
     private javax.swing.JCheckBox jCheckBoxScan;
     private javax.swing.JCheckBox jCheckBoxTemp;
+    private javax.swing.JCheckBox jCheckBoxTemp2;
     private javax.swing.JCheckBox jCheckBoxVolt;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
