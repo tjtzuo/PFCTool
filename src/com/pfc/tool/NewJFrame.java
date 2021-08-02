@@ -14,9 +14,12 @@ import com.pfc.xml.sax.*;
 import java.awt.Cursor;
 import java.awt.event.*;
 import java.io.*;
+import java.lang.reflect.Field;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.prefs.InvalidPreferencesFormatException;
 import java.util.prefs.Preferences;
 import javax.swing.JFileChooser;
@@ -3738,6 +3741,19 @@ public class NewJFrame extends javax.swing.JFrame {
             } catch (IOException ex) {
                 System.err.println(ex);
             }
+        }
+        String bits = System.getProperty("sun.arch.data.model");
+        System.setProperty("java.library.path", ".;.\\" + bits);
+        System.out.println(System.getProperties());
+
+        try {
+            //set sys_paths to null so that java.library.path will be reevalueted next time it is needed
+            final Field sysPathsField;
+            sysPathsField = ClassLoader.class.getDeclaredField("sys_paths");
+            sysPathsField.setAccessible(true);
+            sysPathsField.set(null, null);
+        } catch (Exception ex) {
+            System.err.println(ex);
         }
 
         usbSmb = new UsbSmb();
