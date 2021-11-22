@@ -329,7 +329,7 @@
 <value>-</value>
 <unit>-</unit>
 <RWbit>R</RWbit>
-<Format>Hex</Format>
+<Format>String</Format>
 </element>
 
 <element>
