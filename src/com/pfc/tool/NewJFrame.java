@@ -146,7 +146,10 @@ public class NewJFrame extends javax.swing.JFrame {
 
         if (bNewSBS) {
             jCheckBoxPCM.setVisible(false);
-            jPanelCalib.setVisible(false);
+            jCheckBoxTemp2.setVisible(false);
+            jCheckBoxLenovo.setVisible(false);
+            jTextFieldCellN.setText("1");
+            jTextFieldCellN.setEnabled(false);
         } else {
             jButtonReadByte.setVisible(false);
             jButtonWriteByte.setVisible(false);
@@ -248,6 +251,13 @@ public class NewJFrame extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent evt) {
                 byte cmdCurr = 0x0A, cmdTemp = 0x08, cmdVolt = 0x3F;
+                if (bNewSBS) {
+                    cmdCurr = 0x14;
+                    cmdTemp = 0x06;
+                    cmdVolt = 0x08;
+                } else if (devName.equals("1141")) {
+                    cmdVolt = 0x09;
+                }
                 short pwValue[] = new short[1];
                 if (usbSmb.readWord(cmdCurr, pwValue)) {
                     jTextFieldCurrM.setText(Short.toString(pwValue[0]));
@@ -255,12 +265,13 @@ public class NewJFrame extends javax.swing.JFrame {
                 if (usbSmb.readWord(cmdTemp, pwValue)) {
                     jTextFieldTempM.setText(String.format("%1$5.1f", ((float) pwValue[0] - 2731.5) / 10.0));
                 }
+                int cellN = Math.min(Byte.parseByte(jTextFieldCellN.getText()), 4);
                 if (jCheckBoxLenovo.isSelected()) {
                     byte[] buf = new byte[16];
                     if (usbSmb.readBlock(0x23, buf.length, buf)) {
                         ByteBuffer bb = ByteBuffer.wrap(buf);
                         bb.order(ByteOrder.LITTLE_ENDIAN);
-                        for (int i = 0; i < 4; i++) {
+                        for (int i = 0; i < cellN; i++) {
                             switch (i) {
                                 case 0:
                                     jTextFieldVCell1M.setText(Short.toString(bb.getShort(10)));
@@ -278,7 +289,7 @@ public class NewJFrame extends javax.swing.JFrame {
                         }
                     }
                 } else {
-                    for (int i = 0; i < 4; i++) {
+                    for (int i = 0; i < cellN; i++) {
                         if (usbSmb.readWord(cmdVolt - i, pwValue)) {
                             switch (i) {
                                 case 0:
@@ -3486,6 +3497,7 @@ public class NewJFrame extends javax.swing.JFrame {
     final int CAL_TEMPEXT1_OFFSET   = 0x0010;// Bit 4 Temperature, External 1 
     final int CAL_TEMPEXT2_OFFSET   = 0x0020;// Bit 5 Temperature, External 2 
     final int CAL_CURRENT           = 0x0040;// Bit 6 Current 
+    final int CAL_VOLTAGE           = 0x0080;// Bit 7 Voltage 
     final int CAL_ADC_CONT          = 0x4000;// Bit 14 Run ADC Task Continuously 
     final int CAL_CC_CONT           = 0x8000;// Bit 15 Run CC Task Continuously 
 
@@ -3506,20 +3518,29 @@ public class NewJFrame extends javax.swing.JFrame {
                 timerCalib.stop();
                 setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                 try {
+                    byte cmdBegin = 0x50, cmdStart = CAL_START_CMD, cmdPoll = CAL_POLL_CMD;
+                    if (devName.equals("1141")) {
+                        cmdBegin = 0;
+                        cmdStart = 2;
+                        cmdPoll = 4;
+                    }
                     short[] pwValue = new short[1];
                     for (int i = 0; i < 5; i++) {
                         if (usbSmb.writeWord(0, 0x40)) {
-                            if (usbSmb.readWord(0x50, pwValue)) {
+                            if (usbSmb.readWord(cmdBegin, pwValue)) {
                                 if (pwValue[0] == 0x4C7A) {//Lz
                                     break;
                                 }
                             }
                         }
                     }
-                    usbSmb.writeWord(CAL_START_CMD, CAL_CC_OFFSET | CAL_ADC_CONT | CAL_CC_CONT);
+                    usbSmb.writeWord(cmdStart, CAL_CC_OFFSET | CAL_ADC_CONT | CAL_CC_CONT);
                     for (int i = 0; i < 5; i++) {
-                        if (usbSmb.readWord(CAL_POLL_CMD, pwValue)) {
+                        if (usbSmb.readWord(cmdPoll, pwValue)) {
                             if ((pwValue[0] & 0xFF) == 0) {
+                                if (devName.equals("1141")) {
+                                    break;
+                                }
                                 if (usbSmb.readWord(0x53, pwValue)) {
                                     if (pwValue[0] == 0) {
                                         break;
@@ -3529,22 +3550,43 @@ public class NewJFrame extends javax.swing.JFrame {
                         }
                         sleep(300);
                     }
-                    usbSmb.sendByte(CAL_DF_CMD);
-                    for (int i = 0; i < 5; i++) {
-                        sleep(500);
-                        if (usbSmb.writeWord(0x54, 0)) {
-                            if (usbSmb.readWord(0x50, pwValue)) {
+                    if (devName.equals("1141")) {
+                        for (int i = 0; i < 3; i++) {
+                            if (usbSmb.writeWord(0x20, CAL_DF_CMD)) {
+                                break;
+                            }
+                        }
+                        for (int i = 0; i < 5; i++) {
+                            sleep(100);
+                            if (usbSmb.readWord(0, pwValue)) {
                                 if (pwValue[0] == 0x4C7A) {//Lz
                                     break;
                                 }
                             }
                         }
-                    }
-                    for (int i = 0; i < 3; i++) {
-                        if (usbSmb.sendByte(CAL_EXIT_CMD)) {
-                            if (usbSmb.readWord(0x50, pwValue)) {
-                                if (pwValue[0] == 0) {
-                                    break;
+                        for (int i = 0; i < 3; i++) {
+                            if (usbSmb.writeWord(0x20, CAL_EXIT_CMD)) {
+                                break;
+                            }
+                        }
+                    } else {
+                        usbSmb.sendByte(CAL_DF_CMD);
+                        for (int i = 0; i < 5; i++) {
+                            sleep(500);
+                            if (usbSmb.writeWord(0x54, 0)) {
+                                if (usbSmb.readWord(0x50, pwValue)) {
+                                    if (pwValue[0] == 0x4C7A) {//Lz
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                        for (int i = 0; i < 3; i++) {
+                            if (usbSmb.sendByte(CAL_EXIT_CMD)) {
+                                if (usbSmb.readWord(0x50, pwValue)) {
+                                    if (pwValue[0] == 0) {
+                                        break;
+                                    }
                                 }
                             }
                         }
@@ -3565,10 +3607,16 @@ public class NewJFrame extends javax.swing.JFrame {
                 timerCalib.stop();
                 setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                 try {
+                    byte cmdBegin = 0x50, cmdStart = CAL_START_CMD, cmdPoll = CAL_POLL_CMD;
+                    if (devName.equals("1141")) {
+                        cmdBegin = 0;
+                        cmdStart = 2;
+                        cmdPoll = 4;
+                    }
                     short[] pwValue = new short[1];
                     for (int i = 0; i < 5; i++) {
                         if (usbSmb.writeWord(0, 0x40)) {
-                            if (usbSmb.readWord(0x50, pwValue)) {
+                            if (usbSmb.readWord(cmdBegin, pwValue)) {
                                 if (pwValue[0] == 0x4C7A) {//Lz
                                     break;
                                 }
@@ -3584,23 +3632,39 @@ public class NewJFrame extends javax.swing.JFrame {
                         wCmdFlags |= CAL_TEMPEXT1_OFFSET | CAL_TEMPINT_OFFSET;
 			/* WRITE THE ACTUAL TEMPERATURE */
                         int nCalTemp = (int) (Float.parseFloat(jTextFieldTempA.getText()) * 10 + 0.5);
+                        if (devName.equals("1141")) {
+                            nCalTemp += 2731;
+                        }
                         buf[4] = (byte) nCalTemp;
                         buf[5] = (byte) (nCalTemp >> 8);
                     }
                     buf[6] = Byte.parseByte(jTextFieldCellN.getText());
-                    usbSmb.writeBlock(0x58, buf.length, buf);
-                    if (jCheckBoxVolt.isSelected()) {
-                        wCmdFlags |= CAL_VCELL_OFFSET;
-                        usbSmb.writeWord(CAL_VC1_CMD, Integer.parseInt(jTextFieldVCell1A.getText()));
-                        usbSmb.writeWord(CAL_VC2_CMD, Integer.parseInt(jTextFieldVCell2A.getText()));
-                        usbSmb.writeWord(CAL_VC3_CMD, Integer.parseInt(jTextFieldVCell3A.getText()));
-                        usbSmb.writeWord(CAL_VC4_CMD, Integer.parseInt(jTextFieldVCell4A.getText()));
+                    if (devName.equals("1141")) {
+                        if (jCheckBoxVolt.isSelected()) {
+                            wCmdFlags |= CAL_VOLTAGE;
+                        }
+                        int nVolt = Integer.parseInt(jTextFieldVCell1A.getText());
+                        buf[2] = (byte) nVolt;
+                        buf[3] = (byte) (nVolt >> 8);
+                        usbSmb.writeBytes(8, buf.length, buf);
+                    } else {
+                        if (jCheckBoxVolt.isSelected()) {
+                            wCmdFlags |= CAL_VCELL_OFFSET;
+                            usbSmb.writeWord(CAL_VC1_CMD, Integer.parseInt(jTextFieldVCell1A.getText()));
+                            usbSmb.writeWord(CAL_VC2_CMD, Integer.parseInt(jTextFieldVCell2A.getText()));
+                            usbSmb.writeWord(CAL_VC3_CMD, Integer.parseInt(jTextFieldVCell3A.getText()));
+                            usbSmb.writeWord(CAL_VC4_CMD, Integer.parseInt(jTextFieldVCell4A.getText()));
+                        }
+                        usbSmb.writeBlock(0x58, buf.length, buf);
                     }
-                    usbSmb.writeWord(CAL_START_CMD, wCmdFlags | CAL_ADC_CONT | CAL_CC_CONT);
+                    usbSmb.writeWord(cmdStart, wCmdFlags | CAL_ADC_CONT | CAL_CC_CONT);
                     for (int i = 0; i < 3; i++) {
                         sleep(1000);
-                        if (usbSmb.readWord(CAL_POLL_CMD, pwValue)) {
+                        if (usbSmb.readWord(cmdPoll, pwValue)) {
                             if ((pwValue[0] & 0xFF) == 0) {
+                                if (devName.equals("1141")) {
+                                    break;
+                                }
                                 if (usbSmb.readWord(0x53, pwValue)) {
                                     if (pwValue[0] == 0) {
                                         break;
@@ -3609,22 +3673,43 @@ public class NewJFrame extends javax.swing.JFrame {
                             }
                         }
                     }
-                    usbSmb.sendByte(CAL_DF_CMD);
-                    for (int i = 0; i < 3; i++) {
-                        sleep(1000);
-                        if (usbSmb.writeWord(0x54, 0)) {
-                            if (usbSmb.readWord(0x50, pwValue)) {
+                    if (devName.equals("1141")) {
+                        for (int i = 0; i < 3; i++) {
+                            if (usbSmb.writeWord(0x20, CAL_DF_CMD)) {
+                                break;
+                            }
+                        }
+                        for (int i = 0; i < 5; i++) {
+                            sleep(100);
+                            if (usbSmb.readWord(0, pwValue)) {
                                 if (pwValue[0] == 0x4C7A) {//Lz
                                     break;
                                 }
                             }
                         }
-                    }
-                    for (int i = 0; i < 3; i++) {
-                        if (usbSmb.sendByte(CAL_EXIT_CMD)) {
-                            if (usbSmb.readWord(0x50, pwValue)) {
-                                if (pwValue[0] == 0) {
-                                    break;
+                        for (int i = 0; i < 3; i++) {
+                            if (usbSmb.writeWord(0x20, CAL_EXIT_CMD)) {
+                                break;
+                            }
+                        }
+                    } else {
+                        usbSmb.sendByte(CAL_DF_CMD);
+                        for (int i = 0; i < 3; i++) {
+                            sleep(1000);
+                            if (usbSmb.writeWord(0x54, 0)) {
+                                if (usbSmb.readWord(0x50, pwValue)) {
+                                    if (pwValue[0] == 0x4C7A) {//Lz
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                        for (int i = 0; i < 3; i++) {
+                            if (usbSmb.sendByte(CAL_EXIT_CMD)) {
+                                if (usbSmb.readWord(0x50, pwValue)) {
+                                    if (pwValue[0] == 0) {
+                                        break;
+                                    }
                                 }
                             }
                         }
@@ -3645,10 +3730,16 @@ public class NewJFrame extends javax.swing.JFrame {
                 timerCalib.stop();
                 setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                 try {
+                    byte cmdBegin = 0x50, cmdStart = CAL_START_CMD, cmdPoll = CAL_POLL_CMD;
+                    if (devName.equals("1141")) {
+                        cmdBegin = 0;
+                        cmdStart = 2;
+                        cmdPoll = 4;
+                    }
                     short[] pwValue = new short[1];
                     for (int i = 0; i < 5; i++) {
                         if (usbSmb.writeWord(0, 0x40)) {
-                            if (usbSmb.readWord(0x50, pwValue)) {
+                            if (usbSmb.readWord(cmdBegin, pwValue)) {
                                 if (pwValue[0] == 0x4C7A) {//Lz
                                     break;
                                 }
@@ -3659,11 +3750,18 @@ public class NewJFrame extends javax.swing.JFrame {
                     int nCurr = Integer.parseInt(jTextFieldCurrA.getText());
                     buf[0] = (byte) nCurr;
                     buf[1] = (byte) (nCurr >> 8);
-                    usbSmb.writeBlock(0x58, buf.length, buf);
-                    usbSmb.writeWord(CAL_START_CMD, CAL_CURRENT | CAL_ADC_CONT | CAL_CC_CONT);
+                    if (devName.equals("1141")) {
+                        usbSmb.writeBytes(8, buf.length, buf);
+                    } else {
+                        usbSmb.writeBlock(0x58, buf.length, buf);
+                    }
+                    usbSmb.writeWord(cmdStart, CAL_CURRENT | CAL_ADC_CONT | CAL_CC_CONT);
                     for (int i = 0; i < 5; i++) {
-                        if (usbSmb.readWord(CAL_POLL_CMD, pwValue)) {
+                        if (usbSmb.readWord(cmdPoll, pwValue)) {
                             if ((pwValue[0] & 0xFF) == 0) {
+                                if (devName.equals("1141")) {
+                                    break;
+                                }
                                 if (usbSmb.readWord(0x53, pwValue)) {
                                     if (pwValue[0] == 0) {
                                         break;
@@ -3673,22 +3771,43 @@ public class NewJFrame extends javax.swing.JFrame {
                         }
                         sleep(300);
                     }
-                    usbSmb.sendByte(CAL_DF_CMD);
-                    for (int i = 0; i < 5; i++) {
-                        sleep(500);
-                        if (usbSmb.writeWord(0x54, 0)) {
-                            if (usbSmb.readWord(0x50, pwValue)) {
+                    if (devName.equals("1141")) {
+                        for (int i = 0; i < 3; i++) {
+                            if (usbSmb.writeWord(0x20, CAL_DF_CMD)) {
+                                break;
+                            }
+                        }
+                        for (int i = 0; i < 5; i++) {
+                            sleep(100);
+                            if (usbSmb.readWord(0, pwValue)) {
                                 if (pwValue[0] == 0x4C7A) {//Lz
                                     break;
                                 }
                             }
                         }
-                    }
-                    for (int i = 0; i < 3; i++) {
-                        if (usbSmb.sendByte(CAL_EXIT_CMD)) {
-                            if (usbSmb.readWord(0x50, pwValue)) {
-                                if (pwValue[0] == 0) {
-                                    break;
+                        for (int i = 0; i < 3; i++) {
+                            if (usbSmb.writeWord(0x20, CAL_EXIT_CMD)) {
+                                break;
+                            }
+                        }
+                    } else {
+                        usbSmb.sendByte(CAL_DF_CMD);
+                        for (int i = 0; i < 5; i++) {
+                            sleep(500);
+                            if (usbSmb.writeWord(0x54, 0)) {
+                                if (usbSmb.readWord(0x50, pwValue)) {
+                                    if (pwValue[0] == 0x4C7A) {//Lz
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                        for (int i = 0; i < 3; i++) {
+                            if (usbSmb.sendByte(CAL_EXIT_CMD)) {
+                                if (usbSmb.readWord(0x50, pwValue)) {
+                                    if (pwValue[0] == 0) {
+                                        break;
+                                    }
                                 }
                             }
                         }
