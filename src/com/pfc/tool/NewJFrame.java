@@ -144,19 +144,19 @@ public class NewJFrame extends javax.swing.JFrame {
         jCheckBox2.setText(checkBoxText);
         jCheckBox3.setText(checkBoxText);
 
-        if (bNewSBS) {
-            jCheckBoxPCM.setVisible(false);
-            jCheckBoxTemp2.setVisible(false);
-            jCheckBoxLenovo.setVisible(false);
-            jTextFieldCellN.setText("1");
-            jTextFieldCellN.setEnabled(false);
-        } else {
+        if (!bNewSBS) {
             jButtonReadByte.setVisible(false);
             jButtonWriteByte.setVisible(false);
         }
 
         if (devName.equals("1168")) {
             jPanel2.setVisible(false);
+        } else if (devName.equals("1141")) {
+            jCheckBoxPCM.setVisible(false);
+            jCheckBoxTemp2.setVisible(false);
+            jCheckBoxLenovo.setVisible(false);
+            jTextFieldCellN.setText("1");
+            jTextFieldCellN.setEnabled(false);
         }
 
         File file = new File("../ini/" + strEncfile);
@@ -1918,21 +1918,26 @@ public class NewJFrame extends javax.swing.JFrame {
                 setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                 int index;
                 for (index = 0; index < 8; index++) {
-                    if (bNewSBS) {
+                    if (devName.equals("1141")) {
                         for (retry_count = 0; retry_count < retry_end; retry_count++) {
-                            if (usbSmb.writeByteVerify(0x3e, index)) {
-//                            if (usbSmb.writeWordVerify(0x77, index)) {
+                            if (bNewSBS) {
+                                if (usbSmb.writeByteVerify(0x3e, index)) {
+                                    break;
+                                }
+                            } else {
+                                if (usbSmb.writeWordVerify(0x3e, index)) {
+                                    break;
+                                }
+                            }
+                            if (retry_count == retry_end) {
                                 break;
                             }
-                        }
-                        if (retry_count == retry_end) {
-                            break;
                         }
                     }
                     for (retry_count = 0; retry_count < retry_end; retry_count++) {
                         byte[] sector_buf = new byte[256];
                         boolean success;
-                        if (bNewSBS) {
+                        if (devName.equals("1141")) {
                             success = usbSmb.readDataFlashSector(bNewSBS, sector_buf);
                         } else {
                             success = ReadWriteDF.readDataFlash(0, index, sector_buf, usbSmb.isPEC());
@@ -2065,26 +2070,32 @@ public class NewJFrame extends javax.swing.JFrame {
                 setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                 int index;
                 for (index = 0; index < 8; index++) {
-                    if (bNewSBS) {
+                    if (devName.equals("1141")) {
+                        if (index == 4)
+                            continue;
                         for (retry_count = 0; retry_count < retry_end; retry_count++) {
-                            if (usbSmb.writeByteVerify(0x3e, index)) {
-//                            if (usbSmb.writeWordVerify(0x77, index)) {
+                            if (bNewSBS) {
+                                if (usbSmb.writeByteVerify(0x3e, index)) {
+                                    break;
+                                }
+                            } else {
+                                if (usbSmb.writeWordVerify(0x3e, index)) {
+                                    break;
+                                }
+                            }
+                            try {
+                                sleep(10);
+                            } catch (InterruptedException ex) {
+                            }
+                            if (retry_count == retry_end) {
                                 break;
                             }
                         }
-                        try {
-                            sleep(10);
-                        } catch (InterruptedException ex) {
-                        }
-                        if (retry_count == retry_end) {
-                            break;
-                        }
                     }
-
                     for (retry_count = 0; retry_count < retry_end; retry_count++) {
                         byte[] sector_buf = new byte[256];
                         System.arraycopy(dfBuf, index * 256, sector_buf, 0, sector_buf.length);
-                        if (bNewSBS) {
+                        if (devName.equals("1141")) {
                             if (usbSmb.writeDataFlashSector(bNewSBS, sector_buf)) {
                                 break;
                             }
@@ -3646,7 +3657,8 @@ public class NewJFrame extends javax.swing.JFrame {
                         int nVolt = Integer.parseInt(jTextFieldVCell1A.getText());
                         buf[2] = (byte) nVolt;
                         buf[3] = (byte) (nVolt >> 8);
-                        usbSmb.writeBytes(8, buf.length, buf);
+//                        usbSmb.writeBytes(8, buf.length, buf);
+                        usbSmb.writeBytes(8, 6, buf);
                     } else {
                         if (jCheckBoxVolt.isSelected()) {
                             wCmdFlags |= CAL_VCELL_OFFSET;
@@ -3751,7 +3763,8 @@ public class NewJFrame extends javax.swing.JFrame {
                     buf[0] = (byte) nCurr;
                     buf[1] = (byte) (nCurr >> 8);
                     if (devName.equals("1141")) {
-                        usbSmb.writeBytes(8, buf.length, buf);
+//                        usbSmb.writeBytes(8, buf.length, buf);
+                        usbSmb.writeBytes(8, 6, buf);
                     } else {
                         usbSmb.writeBlock(0x58, buf.length, buf);
                     }
