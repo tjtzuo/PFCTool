@@ -169,7 +169,7 @@
 <stradr>0x7632</stradr>
 <type>U2</type>
 <default>4200</default>
-<unit>mA</unit>
+<unit>mV</unit>
 <description>-</description>
 <max_value>-</max_value>
 <min_value>-</min_value>
