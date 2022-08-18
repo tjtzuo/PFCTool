@@ -329,7 +329,47 @@
 <value>-</value>
 <unit>-</unit>
 <RWbit>R</RWbit>
-<Format>Hex</Format>
+<Format>String</Format>
+</element>
+
+<element>
+<cmd>0x3c</cmd>
+<name>Cell Voltage 4</name>
+<size>2</size>
+<value>-</value>
+<unit>mV</unit>
+<RWbit>R</RWbit>
+<Format>UInt</Format>
+</element>
+
+<element>
+<cmd>0x3d</cmd>
+<name>Cell Voltage 3</name>
+<size>2</size>
+<value>-</value>
+<unit>mV</unit>
+<RWbit>R</RWbit>
+<Format>UInt</Format>
+</element>
+
+<element>
+<cmd>0x3e</cmd>
+<name>Cell Voltage 2</name>
+<size>2</size>
+<value>-</value>
+<unit>mV</unit>
+<RWbit>R</RWbit>
+<Format>UInt</Format>
+</element>
+
+<element>
+<cmd>0x3f</cmd>
+<name>Cell Voltage 1</name>
+<size>2</size>
+<value>-</value>
+<unit>mV</unit>
+<RWbit>R</RWbit>
+<Format>UInt</Format>
 </element>
 
 <element>
@@ -340,6 +380,36 @@
 <unit>%</unit>
 <RWbit>R</RWbit>
 <Format>UInt</Format>
+</element>
+
+<element>
+<cmd>0x5a</cmd>
+<name>Pack Voltage</name>
+<size>2</size>
+<value>-</value>
+<unit>mV</unit>
+<RWbit>R</RWbit>
+<Format>UInt</Format>
+</element>
+
+<element>
+<cmd>0x5e</cmd>
+<name>TS1 Temperature</name>
+<size>2</size>
+<value>-</value>
+<unit>℃</unit>
+<RWbit>R</RWbit>
+<Format>Temp</Format>
+</element>
+
+<element>
+<cmd>0x5f</cmd>
+<name>TS2 Temperature</name>
+<size>2</size>
+<value>-</value>
+<unit>℃</unit>
+<RWbit>R</RWbit>
+<Format>Temp</Format>
 </element>
 
 <element>
