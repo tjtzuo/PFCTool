@@ -345,6 +345,9 @@ public class NewJFrame extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
+        jLabel36 = new javax.swing.JLabel();
+        jTextFieldAddr = new javax.swing.JTextField();
+        jButtonAddrSet = new javax.swing.JButton();
         jPanelDataFlash = new javax.swing.JPanel();
         jTabbedPaneDataFlash = new javax.swing.JTabbedPane();
         jButtonReadAll = new javax.swing.JButton();
@@ -610,6 +613,18 @@ public class NewJFrame extends javax.swing.JFrame {
                 .addComponent(jButton6))
         );
 
+        jLabel36.setText(bundle.getString("NewJFrame.jLabel36.text")); // NOI18N
+
+        jTextFieldAddr.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
+        jTextFieldAddr.setText(bundle.getString("NewJFrame.jTextFieldAddr.text")); // NOI18N
+
+        jButtonAddrSet.setText(bundle.getString("NewJFrame.jButtonAddrSet.text")); // NOI18N
+        jButtonAddrSet.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAddrSetActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelSBSLayout = new javax.swing.GroupLayout(jPanelSBS);
         jPanelSBS.setLayout(jPanelSBSLayout);
         jPanelSBSLayout.setHorizontalGroup(
@@ -617,17 +632,22 @@ public class NewJFrame extends javax.swing.JFrame {
             .addGroup(jPanelSBSLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPaneSBS, javax.swing.GroupLayout.DEFAULT_SIZE, 391, Short.MAX_VALUE)
-                .addGroup(jPanelSBSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelSBSLayout.createSequentialGroup()
+                .addGroup(jPanelSBSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelSBSLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPaneBits, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelSBSLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jCheckBox1)
-                        .addGap(108, 108, 108))
-                    .addGroup(jPanelSBSLayout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelSBSLayout.createSequentialGroup()
                         .addGap(30, 30, 30)
                         .addGroup(jPanelSBSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanelSBSLayout.createSequentialGroup()
+                                .addGap(20, 20, 20)
+                                .addComponent(jLabel36)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextFieldAddr, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButtonAddrSet)
+                                .addGap(40, 40, 40)
+                                .addComponent(jCheckBox1))
                             .addComponent(jButtonStopLog)
                             .addGroup(jPanelSBSLayout.createSequentialGroup()
                                 .addGroup(jPanelSBSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -644,7 +664,7 @@ public class NewJFrame extends javax.swing.JFrame {
                                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jTextFieldLogFile, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelSBSLayout.createSequentialGroup()
+                    .addGroup(jPanelSBSLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabelSOC)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -658,12 +678,17 @@ public class NewJFrame extends javax.swing.JFrame {
                 .addGroup(jPanelSBSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPaneSBS, javax.swing.GroupLayout.DEFAULT_SIZE, 627, Short.MAX_VALUE)
                     .addGroup(jPanelSBSLayout.createSequentialGroup()
-                        .addComponent(jCheckBox1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanelSBSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jCheckBox1)
+                            .addComponent(jLabel36)
+                            .addComponent(jTextFieldAddr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButtonAddrSet))
+                        .addGap(18, 18, 18)
                         .addGroup(jPanelSBSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanelSBSLayout.createSequentialGroup()
                                 .addComponent(jButtonRefresh)
-                                .addGap(18, 18, 18)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jCheckBoxScan)
                                 .addGap(9, 9, 9)
                                 .addGroup(jPanelSBSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -671,8 +696,7 @@ public class NewJFrame extends javax.swing.JFrame {
                                     .addComponent(jTextFieldInterval, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel8))
                                 .addGap(19, 19, 19)
-                                .addComponent(jButtonStartLog))
-                            .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jButtonStartLog)))
                         .addGap(18, 18, 18)
                         .addComponent(jTextFieldLogFile, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -3328,6 +3352,7 @@ public class NewJFrame extends javax.swing.JFrame {
                 }
                 switch (index) {
                     case 0:
+                        jTextFieldAddr.setText(String.format("%X", usbSmb.getAddr()));
                         if (bNewSBS) {
                             jCheckBox1.setSelected(usbSmb.isHDQ());
                         } else {
@@ -3883,6 +3908,15 @@ public class NewJFrame extends javax.swing.JFrame {
         jCheckBoxTemp2.setEnabled(evt.getStateChange() == ItemEvent.SELECTED);
     }//GEN-LAST:event_jCheckBoxTempItemStateChanged
 
+    private void jButtonAddrSetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddrSetActionPerformed
+        try {
+            int addr = Integer.parseInt(jTextFieldAddr.getText().trim(), 16);
+            usbSmb.setAddr((byte) addr);
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Input Value Error !!!", "SMBus Address", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jButtonAddrSetActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -3968,6 +4002,7 @@ public class NewJFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButtonAddrSet;
     private javax.swing.JButton jButtonCalibCC1;
     private javax.swing.JButton jButtonCalibCC2;
     private javax.swing.JButton jButtonCalibVT;
@@ -4035,6 +4070,7 @@ public class NewJFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
+    private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -4076,6 +4112,7 @@ public class NewJFrame extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField jTextFieldAddr;
     private javax.swing.JTextField jTextFieldBlock;
     private javax.swing.JTextField jTextFieldByte;
     private javax.swing.JTextField jTextFieldCellN;
