@@ -65,6 +65,7 @@ public class NewJFrame extends javax.swing.JFrame {
     ChemTableModel chemTableModel;
     String devName;
     final String strEncfile = "encrypt.enc";
+    private byte lastAddr;
 
     /**
      * Creates new form NewJFrame
@@ -2473,12 +2474,14 @@ public class NewJFrame extends javax.swing.JFrame {
             jCheckBox3.setSelected(false);
             jProgressBarBL.setValue(0);
             if (devName.equals("1168")) { //NOI18N
+                lastAddr = usbSmb.getAddr();
                 setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                 new Thread() {
                     @Override
                     public void run() {
                         try {
                             if (usbSmb.writeWord(0, 0x0F00)) {
+                                usbSmb.setAddr((byte) 0x16);
                                 short pwValue[] = new short[1];
                                 for (int i = 0; i < 10; i++) {
                                     sleep(100);
@@ -2635,6 +2638,7 @@ public class NewJFrame extends javax.swing.JFrame {
                             jProgressBarBL.setValue(50);
                             sleep(250);
                             jProgressBarBL.setValue(40);
+                            usbSmb.setAddr(lastAddr);
                         } else {
                         byte[] buf = new byte[2];
                         buf[1] = 0x00;
