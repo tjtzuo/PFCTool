@@ -1965,7 +1965,7 @@ public class NewJFrame extends javax.swing.JFrame {
                         if (devName.equals("1141")) {
                             success = usbSmb.readDataFlashSector(bNewSBS, sector_buf);
                         } else {
-                            success = ReadWriteDF.readDataFlash(0, index, sector_buf, usbSmb.isPEC());
+                            success = ReadWriteDF.readDataFlash(usbSmb.getAddr(), index, sector_buf, usbSmb.isPEC());
                         }
                         if (success) {
                             System.arraycopy(sector_buf, 0, dfBuf, index * 256, sector_buf.length);
@@ -2125,7 +2125,7 @@ public class NewJFrame extends javax.swing.JFrame {
                                 break;
                             }
                         } else {
-                            if (ReadWriteDF.writeDataFlash(0, index, sector_buf, usbSmb.isPEC())) {
+                            if (ReadWriteDF.writeDataFlash(usbSmb.getAddr(), index, sector_buf, usbSmb.isPEC())) {
                                 break;
                             }
                         }
