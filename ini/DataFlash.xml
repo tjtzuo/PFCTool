@@ -1034,7 +1034,18 @@
 <element>
 <name>Mode Registors</name>
 <stradr>0x7A40</stradr>
-<type>U8</type>
+<type>U4</type>
+<default>-1</default>
+<unit>hex</unit>
+<description>-</description>
+<max_value>-</max_value>
+<min_value>-</min_value>
+</element>
+
+<element>
+<name>Mode Registors</name>
+<stradr>0x7A44</stradr>
+<type>U4</type>
 <default>-1</default>
 <unit>hex</unit>
 <description>-</description>
@@ -1993,8 +2004,8 @@
 </element>
 
 <element>
-<name>DeviceType</name>
-<stradr>0x760A</stradr>
+<name>MAccessCustom</name>
+<stradr>0x77C1</stradr>
 <type>U2</type>
 <default>0</default>
 <unit>hex</unit>
@@ -2006,6 +2017,17 @@
 <element>
 <name>DFConfigVersion</name>
 <stradr>0x7600</stradr>
+<type>U2</type>
+<default>0</default>
+<unit>hex</unit>
+<description>-</description>
+<max_value>-</max_value>
+<min_value>-</min_value>
+</element>
+
+<element>
+<name>DeviceType</name>
+<stradr>0x760A</stradr>
 <type>U2</type>
 <default>0</default>
 <unit>hex</unit>

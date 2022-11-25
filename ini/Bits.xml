@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
+<!DOCTYPE BitField SYSTEM "Bits.dtd">
 <BitField>
-
 <element>
 <cmd>0x00</cmd>
 <name>Control Status</name>
@@ -25,25 +24,25 @@
 </element>
 
 <element>
-<cmd>0x16</cmd>
+<cmd>0x0a</cmd>
 <name>Battery Status</name>
 <size>2</size>
-<bit>OCA</bit>
-<bit>TCA</bit>
+<bit>OTC</bit>
+<bit>OTD</bit>
 <bit>RSVD</bit>
-<bit>OTA</bit>
-<bit>TDA</bit>
 <bit>RSVD</bit>
-<bit>RCA</bit>
-<bit>RTA</bit>
-<bit>INI</bit>
-<bit>DSG</bit>
+<bit>CHGINH</bit>
+<bit>XCHG</bit>
 <bit>FC</bit>
-<bit>FD</bit>
+<bit>CHG</bit>
+<bit>OCVTA</bit>
 <bit>RSVD</bit>
 <bit>RSVD</bit>
-<bit>RSVD</bit>
-<bit>RSVD</bit>
+<bit>HW1</bit>
+<bit>HW0</bit>
+<bit>SOC1</bit>
+<bit>SOCF</bit>
+<bit>DSG</bit>
 </element>
 
 <element>

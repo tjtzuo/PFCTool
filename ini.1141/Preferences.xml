@@ -8,7 +8,7 @@
         <entry key="devName" value="1141"/>
         <entry key="newSbs" value="true"/>
         <entry key="socCmd" value="0x2c"/>
-        <entry key="debugLog" value="false"/>
+        <entry key="debugLog" value="true"/>
       </map>
     </node>
   </root>
